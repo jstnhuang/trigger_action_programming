@@ -22,12 +22,6 @@ class Node(object):
             DeleteStatement, self._handle_delete_statement)
         rospy.spin()
 
-    def statements(self):
-        return self._db.statements
-
-    def statement(self, id):
-        return self._db.statement(id)
-
     def _handle_add_statement(self, request):
         statement_id = self._db.add_statement(request.statement)
         return statement_id
