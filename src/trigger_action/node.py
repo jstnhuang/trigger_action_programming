@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import node_factory
 import rospy
-import statement_factory.py
+import statement_factory
 from trigger_action_programming.srv import *
 
 class Node(object):

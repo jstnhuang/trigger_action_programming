@@ -49,5 +49,5 @@ class PersonDetected(object):
     def stop(self):
         self._people_subscriber.unregister()
 
-    def set_callback(self, callback)
+    def set_callback(self, callback):
         self._callback = callback
