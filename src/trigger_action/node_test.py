@@ -35,7 +35,8 @@ class NodeTest(unittest.TestCase):
 
     def test_add_statement(self):
         statement = Statement(
-            'see_someone', '{}',
+            'unused',
+            'person_detected', '{}',
             'say_something', '{"speech": "Hello"}'
         )
         request = AddStatementRequest(statement)
@@ -49,7 +50,8 @@ class NodeTest(unittest.TestCase):
 
     def test_get_by_id(self):
         statement = Statement(
-            'see_someone', '{}',
+            'unused',
+            'person_detected', '{}',
             'say_something', '{"speech": "Hello"}'
         )
         request = AddStatementRequest(statement)
@@ -61,6 +63,7 @@ class NodeTest(unittest.TestCase):
 
     def test_update(self):
         statement = Statement(
+            'unused',
             'see_someone', '{}',
             'say_something', '{"speech": "Hello"}'
         )
@@ -72,6 +75,7 @@ class NodeTest(unittest.TestCase):
         self.assertEquals(statement, response.statement)
 
         updated_statement = Statement(
+            id_response.id,
             'see_something', '{}',
             'say_something', '{"speech": "Hi there"}'
         )
@@ -84,6 +88,7 @@ class NodeTest(unittest.TestCase):
 
     def test_delete(self):
         statement = Statement(
+            'unused',
             'see_someone', '{}',
             'say_something', '{"speech": "Hello"}'
         )
