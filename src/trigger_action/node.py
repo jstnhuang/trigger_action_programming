@@ -23,7 +23,11 @@ class Node(object):
             DeleteStatement, self._handle_delete_statement)
         # In-memory version of database with constructed Statement objects.
         self._statements = {}
+        rospy.on_shutdown(self._handle_shutdown)
         rospy.spin()
+
+    def _handle_shutdown(self):
+        self._db.close()
 
     def _handle_add_statement(self, request):
         statement_id = self._db.add_statement(request.statement)

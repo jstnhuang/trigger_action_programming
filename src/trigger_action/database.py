@@ -1,7 +1,8 @@
 #!/usr/bin/env python
+import rospy
 import shelve
 
-DATABASE_LOCATION = 'programs.db'
+DATABASE_LOCATION = '/tmp/programs.db'
 
 class ProgramDatabase(object):
     def __init__(self, path):
@@ -34,6 +35,9 @@ class ProgramDatabase(object):
     def delete_statement(self, id):
         del self._data[id]
 
+    def close(self):
+        self._data.close()
+
 class InMemoryProgramDatabase(object):
     def __init__(self):
         self._data = {}
@@ -62,3 +66,6 @@ class InMemoryProgramDatabase(object):
 
     def delete_statement(self, id):
         del self._data[id]
+
+    def close(self):
+        pass
