@@ -1,2 +1,2 @@
-uint64 id # The ID of the statement to delete.
+string id # The ID of the statement to delete.
 ---

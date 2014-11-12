@@ -17,7 +17,7 @@ class ProgramDatabase(object):
         self._data['current_id'] += 1
 
     def add_statement(self, statement_msg):
-        statement_id = self.current_id()
+        statement_id = str(self.current_id())
         self._data[statement_id] = statement_msg
         self._increment_current_id()
         return statement_id
@@ -46,7 +46,7 @@ class InMemoryProgramDatabase(object):
         self._data['current_id'] += 1
 
     def add_statement(self, statement_msg):
-        statement_id = self.current_id()
+        statement_id = str(self.current_id())
         self._data[statement_id] = statement_msg
         self._increment_current_id()
         return statement_id

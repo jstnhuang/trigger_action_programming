@@ -1,35 +1,29 @@
 #!/usr/bin/env python
 
-from people_msgs.msg import PositionMeasurement
+from people_msgs.msg import PositionMeasurementArray
 import math
 import rospy
 
 class PersonDetected(object):
     TIMEOUT = 1 # How long to remember someone for, in seconds.
-    # Meters a face can move between two messages to be considered the same
-    # person.
-    SAME_PERSON_DISTANCE = 0.1
 
     def __init__(self):
         self._last_update = None
-        self._people = []
+        self._prev_num_people = 0
         self._callback = None # The callback for this trigger.
 
     def _face_detected_callback(self, position_measurement):
         if self._last_update is not None:
             duration = position_measurement.header.stamp - self._last_update
             if duration.to_sec() > PersonDetected.TIMEOUT:
-                self._people = []
+              self._prev_num_people = 0
         self._last_update = position_measurement.header.stamp
 
-        position = position_measurement.pos
-
-        # Check if this face is far away from every previously seen face.
-        for person_pos in self._people:
-            if self._distance(position, person_pos) < PersonDetected.SAME_PERSON_DISTANCE:
-                return
-        if self._callback is not None:
-            self._callback()
+        people = position_measurement.people
+        if len(people) > self._prev_num_people:
+            if self._callback is not None:
+                self._callback()
+            self._prev_num_people = len(people)
             
     def _distance(self, pos1, pos2):
         x = pos1.x - pos2.x
@@ -39,8 +33,8 @@ class PersonDetected(object):
 
     def start(self):
         self._people_subscriber = rospy.Subscriber(
-            '/face_detector/people_tracker_measurements',
-            PositionMeasurement,
+            '/face_detector/people_tracker_measurements_array',
+            PositionMeasurementArray,
             self._face_detected_callback
         )
         self._last_update = None

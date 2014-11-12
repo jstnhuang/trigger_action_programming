@@ -1,3 +1,3 @@
-uint64 id
+string id
 ---
 trigger_action_programming/Statement statement

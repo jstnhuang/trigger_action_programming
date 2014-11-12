@@ -30,7 +30,8 @@ class Node(object):
         statement = statement_factory.build(request.statement)
         self._statements[statement_id] = statement
         statement.start()
-        return statement_id
+        response = AddStatementResponse(statement_id)
+        return response
 
     def _handle_get_all_statements(self, request):
         statements = self._db.get_all_statements()

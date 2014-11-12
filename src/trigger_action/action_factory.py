@@ -8,7 +8,7 @@ def build(action_name, action_params):
         if 'speech' not in params:
             raise ValueError('"speech" parameter required for say_something.')
         speech = params['speech']
-        trigger = person_detected.PersonDetected(speech)
+        trigger = say_something.SaySomething(speech)
         return trigger
     else:
         raise NotImplementedError
