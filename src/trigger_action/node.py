@@ -11,6 +11,8 @@ class Node(object):
 
     def start(self):
         rospy.init_node(self._name)
+        self._statements = {}
+        self._load_programs()
         self._add_service = rospy.Service('add_statement',
             AddStatement, self._handle_add_statement)
         self._get_all_service = rospy.Service('get_all_statements',
@@ -22,9 +24,15 @@ class Node(object):
         self._delete_service = rospy.Service('delete_statement',
             DeleteStatement, self._handle_delete_statement)
         # In-memory version of database with constructed Statement objects.
-        self._statements = {}
         rospy.on_shutdown(self._handle_shutdown)
         rospy.spin()
+
+    def _load_programs(self):
+        statement_msgs = self._db.get_all_statements()
+        for statement_msg in statement_msgs:
+          statement = statement_factory.build(statement_msg)
+          self._statements[statement_msg.id] = statement
+          statement.start()
 
     def _handle_shutdown(self):
         self._db.close()
