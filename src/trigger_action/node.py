@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import node_factory
 import rospy
+import statement_factory.py
 from trigger_action_programming.srv import *
 
 class Node(object):
@@ -20,10 +21,15 @@ class Node(object):
             UpdateStatement, self._handle_update_statement)
         self._delete_service = rospy.Service('delete_statement',
             DeleteStatement, self._handle_delete_statement)
+        # In-memory version of database with constructed Statement objects.
+        self._statements = {}
         rospy.spin()
 
     def _handle_add_statement(self, request):
         statement_id = self._db.add_statement(request.statement)
+        statement = statement_factory.build(request.statement)
+        self._statements[statement_id] = statement
+        statement.start()
         return statement_id
 
     def _handle_get_all_statements(self, request):
@@ -41,9 +47,14 @@ class Node(object):
 
     def _handle_update_statement(self, request):
         try:
-            statement_id = self._db.update_statement(request.id,
-                request.updated_statement)
+            self._db.update_statement(request.id, request.updated_statement)
             response = UpdateStatementResponse()
+
+            statement = statement_factory.build(request.updated_statement)
+            self._statements[statement_id].stop()
+            self._statements[statement_id] = statement
+            statement.start()
+
             return response
         except KeyError:
             raise rospy.ServiceException('No statement with ID: {}'.format(id))
