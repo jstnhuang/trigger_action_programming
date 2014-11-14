@@ -31,6 +31,7 @@ class ProgramDatabase(object):
         return self._data[id]
 
     def update_statement(self, id, statement_msg):
+        statement_msg.id = id
         self._data[id] = statement_msg
 
     def delete_statement(self, id):
@@ -63,6 +64,7 @@ class InMemoryProgramDatabase(object):
         return self._data[id]
 
     def update_statement(self, id, statement_msg):
+        statement_msg.id = id
         self._data[id] = statement_msg
 
     def delete_statement(self, id):

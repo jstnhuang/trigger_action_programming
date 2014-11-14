@@ -69,6 +69,13 @@ class NodeTest(unittest.TestCase):
         response = self._get_statement_by_id(request)
         self.assertTrue(statements_are_equal(statement, response.statement))
 
+    def test_get_bad_id(self):
+        try:
+            request = GetStatementByIdRequest('badid')
+            response = self._get_statement_by_id(request)
+        except rospy.ServiceException:
+            return
+
     def test_update(self):
         statement = Statement(
             'unused',
@@ -83,7 +90,7 @@ class NodeTest(unittest.TestCase):
         self.assertTrue(statements_are_equal(statement, response.statement))
 
         updated_statement = Statement(
-            id_response.id,
+            'unused',
             'person_detected', '{}',
             'say_something', '{"speech": "Hi there"}'
         )
@@ -93,6 +100,19 @@ class NodeTest(unittest.TestCase):
         request = GetStatementByIdRequest(id_response.id)
         response = self._get_statement_by_id(request)
         self.assertTrue(statements_are_equal(updated_statement, response.statement))
+        self.assertEquals(response.statement.id, id_response.id)
+
+    def test_update_bad_id(self):
+        try:
+            statement = Statement(
+                'unused',
+                'person_detected', '{}',
+                'say_something', '{"speech": "Hello"}'
+            )
+            request = UpdateStatementRequest('badid', statement)
+            response = self._update_statement(request)
+        except rospy.ServiceException:
+            return
 
     def test_delete(self):
         statement = Statement(
@@ -115,6 +135,13 @@ class NodeTest(unittest.TestCase):
         response = self._get_all_statements(request)
         statements = response.statements
         self.assertEquals(len(statements), 0)
+
+    def test_delete_bad_id(self):
+        try:
+            request = DeleteStatementRequest('badid')
+            response = self._delete_statement(request)
+        except rospy.ServiceException:
+            return
 
 if __name__ == '__main__':
     rostest.rosrun('trigger_action_programming', 'NodeTest', NodeTest)
