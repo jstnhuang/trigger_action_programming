@@ -9,7 +9,7 @@
     <style>
       .current-action {
         font-size: 1.5em;
-        color: #007bad;
+        color: #03A9F4;
       }
       .current-action:hover {
         text-decoration: underline;
@@ -23,6 +23,9 @@
         font-size: 1.2em;
         margin-right: 10px;
       }
+      .options {
+        margin-top: 20px;
+      }
     </style>
     <a class="current-action" on-click="{{toggle}}">{{display_names[name]}}</a>
     <core-collapse opened?="{{opened}}">
@@ -32,9 +35,11 @@
         </template>
       </div>
     </core-collapse>
-    <template if="{{name}} == 'say_something'">
-      <say-something-action-options speech="{{params['speech']}}"></say-something-action-options>
-    </template>
+    <div class="options">
+      <template if="{{name}} == 'say_something'">
+        <say-something-action-options speech="{{params['speech']}}"></say-something-action-options>
+      </template>
+    </div>
   </template>
   <script type="application/dart" src="action.dart"></script>
 </polymer-element>
