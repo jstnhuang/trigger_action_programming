@@ -7,6 +7,14 @@ from multiprocessing import Process
 from trigger_action_programming.msg import Statement
 from trigger_action_programming.srv import *
 
+def statements_are_equal(a, b):
+    return (
+        a.trigger_name == b.trigger_name
+        and a.trigger_params == b.trigger_params
+        and a.action_name == b.action_name
+        and a.action_params == b.action_params
+    )
+
 class NodeTest(unittest.TestCase):
     def setUp(self):
         def start_node():
@@ -46,7 +54,7 @@ class NodeTest(unittest.TestCase):
         response = self._get_all_statements(request)
         statements = response.statements
         self.assertEquals(len(statements), 1)
-        self.assertEquals(statements[0], statement)
+        self.assertTrue(statements_are_equal(statements[0], statement)) # Add statement comparator that ignores ID.
 
     def test_get_by_id(self):
         statement = Statement(
@@ -59,12 +67,12 @@ class NodeTest(unittest.TestCase):
 
         request = GetStatementByIdRequest(id_response.id)
         response = self._get_statement_by_id(request)
-        self.assertEquals(statement, response.statement)
+        self.assertTrue(statements_are_equal(statement, response.statement))
 
     def test_update(self):
         statement = Statement(
             'unused',
-            'see_someone', '{}',
+            'person_detected', '{}',
             'say_something', '{"speech": "Hello"}'
         )
         request = AddStatementRequest(statement)
@@ -72,11 +80,11 @@ class NodeTest(unittest.TestCase):
 
         request = GetStatementByIdRequest(id_response.id)
         response = self._get_statement_by_id(request)
-        self.assertEquals(statement, response.statement)
+        self.assertTrue(statements_are_equal(statement, response.statement))
 
         updated_statement = Statement(
             id_response.id,
-            'see_something', '{}',
+            'person_detected', '{}',
             'say_something', '{"speech": "Hi there"}'
         )
         request = UpdateStatementRequest(id_response.id, updated_statement)
@@ -84,12 +92,12 @@ class NodeTest(unittest.TestCase):
 
         request = GetStatementByIdRequest(id_response.id)
         response = self._get_statement_by_id(request)
-        self.assertEquals(updated_statement, response.statement)
+        self.assertTrue(statements_are_equal(updated_statement, response.statement))
 
     def test_delete(self):
         statement = Statement(
             'unused',
-            'see_someone', '{}',
+            'person_detected', '{}',
             'say_something', '{"speech": "Hello"}'
         )
         request = AddStatementRequest(statement)

@@ -4,4 +4,4 @@ import node
 
 def build(name, is_mock=False):
     db = database_factory.build(is_mock)
-    return node.Node(name, db)
+    return node.Node(name, db, is_mock)

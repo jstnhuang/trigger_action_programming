@@ -1,3 +1,5 @@
 <launch>
-  <test test-name="node_test" pkg="trigger_action_programming" type="node_test.py" />
+  <test test-name="node_test" pkg="trigger_action_programming" type="node_test.py">
+    <param name="~mock" type="bool" value="True" />
+  </test>
 </launch>
