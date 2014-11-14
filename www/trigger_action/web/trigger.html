@@ -1,0 +1,36 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/core_elements/core_collapse.html">
+<link rel="import" href="packages/paper_elements/paper_button.html">
+
+<polymer-element name="trigger-selector">
+  <template>
+    <style>
+      .current-trigger {
+        font-size: 1.5em;
+        color: #007bad;
+      }
+      .current-trigger:hover {
+        text-decoration: underline;
+      }
+      .trigger-list {
+        padding: 20px 0px;
+      }
+      .trigger-list paper-button {
+        background-color: #eee;
+        text-transform: none;
+        font-size: 1.2em;
+        margin-right: 10px;
+      }
+    </style>
+    <a class="current-trigger" on-click="{{toggle}}">{{display_names[name]}}</a>
+    <core-collapse opened?="{{opened}}">
+      <div class="trigger-list">
+        <template repeat="{{trigger_name in display_names.keys}}">
+          <paper-button label="{{display_names[trigger_name]}}" on-click="{{toggle}}"></paper-button>
+        </template>
+      </div>
+    </core-collapse>
+  </template>
+  <script type="application/dart" src="trigger.dart"></script>
+</polymer-element>

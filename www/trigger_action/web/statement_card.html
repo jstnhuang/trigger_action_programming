@@ -1,0 +1,39 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="trigger.html">
+<link rel="import" href="action.html">
+
+<polymer-element name="statement-card">
+  <template>
+    <style>
+      .card {
+        padding: 20px;
+        background: white;
+        box-sizing: border-box;
+        width: 100%;
+        border-radius: 2px;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
+      }
+      .ifthenheading {
+        font-size: 1.5em;
+        font-weight: normal;
+        margin-top: 0px;
+        display: inline;
+      }
+      .if-then-section + .if-then-section {
+        margin-top: 20px;
+      }
+    </style>
+    <div class="card">
+      <div class="if-then-section">
+        <h1 class="ifthenheading">If: </h1>
+        <trigger-selector name="{{trigger_name}}" params="{{trigger_params}}"></trigger-selector>
+      </div>
+      <div class="if-then-section">
+        <h1 class="ifthenheading">Then: </h1>
+        <action-element name="{{action_name}}" params="{{action_params}}"></action-element>
+      </div>
+    </div>
+  </template>
+  <script type="application/dart" src="statement_card.dart"></script>
+</polymer-element>

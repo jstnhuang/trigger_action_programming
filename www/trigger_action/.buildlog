@@ -1,0 +1,3639 @@
+---
+build.dart --machine --full
+
+build.dart finished [640 ms]
+
+---
+build.dart --machine --full
+
+build.dart finished [636 ms]
+
+---
+build.dart --machine --changed=web/index.html --removed=web/trigger_action.html
+
+build.dart finished [635 ms]
+
+---
+build.dart --machine --changed=pubspec.yaml
+
+build.dart finished [826 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [892 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [827 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [824 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [828 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [838 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [834 ms]
+
+---
+build.dart --machine --changed=web/index.html
+[{"method":"warning","params":{"file":"web/index.html","message":"definition for Polymer element with tag name \"statement-list\" not found.","line":22,"charStart":605,"charEnd":631}}]
+build.dart finished [835 ms]
+
+---
+build.dart --machine --changed=web/index.html
+[{"method":"warning","params":{"file":"web/clickcounter.html","message":"duplicate definition for custom tag \"click-counter\".","line":4,"charStart":103,"charEnd":160}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"duplicate definition for custom tag \"click-counter\"  (second definition).","line":4,"charStart":103,"charEnd":160}}]
+[{"method":"warning","params":{"file":"web/index.html","message":"definition for Polymer element with tag name \"statement-list\" not found.","line":23,"charStart":656,"charEnd":682}}]
+build.dart finished [829 ms]
+
+---
+build.dart --machine --changed=web/trigger_action.css
+[{"method":"warning","params":{"file":"web/clickcounter.html","message":"duplicate definition for custom tag \"click-counter\".","line":4,"charStart":103,"charEnd":160}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"duplicate definition for custom tag \"click-counter\"  (second definition).","line":4,"charStart":103,"charEnd":160}}]
+[{"method":"warning","params":{"file":"web/index.html","message":"definition for Polymer element with tag name \"statement-list\" not found.","line":23,"charStart":656,"charEnd":682}}]
+build.dart finished [843 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [834 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [832 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [832 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [834 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [853 ms]
+
+---
+build.dart --machine --changed=pubspec.yaml
+
+build.dart finished [683 ms]
+
+---
+build.dart --machine --clean
+
+build.dart finished [644 ms]
+
+---
+build.dart --machine --full
+
+build.dart finished [634 ms]
+
+---
+build.dart --machine --changed=pubspec.yaml
+
+build.dart finished [641 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [644 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [650 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [643 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [658 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [637 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [659 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [657 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [667 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [663 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [661 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [654 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [662 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [665 ms]
+
+---
+build.dart --machine --changed=web/index.html
+[{"method":"warning","params":{"file":"web/index.html","message":"definition for Polymer element with tag name \"statement-card\" not found.","line":23,"charStart":656,"charEnd":672}}]
+build.dart finished [650 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [672 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [653 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [659 ms]
+
+---
+build.dart --machine --changed=pubspec.yaml
+
+build.dart finished [871 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [859 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [849 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [913 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [888 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [872 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [876 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+[{"method":"warning","params":{"file":"web/statement_card.html","message":"definition for Polymer element with tag name \"paper-shadow\" not found.","line":18,"charStart":384,"charEnd":404}}]
+build.dart finished [847 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+[{"method":"warning","params":{"file":"web/statement_card.html","message":"Unexpected end tag (paper-shadow). Ignored.","line":24,"charStart":534,"charEnd":549}}]
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [853 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [854 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [847 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [880 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [866 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [894 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [872 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [848 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [850 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [877 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [863 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [851 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [848 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [848 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [876 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [865 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [898 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [870 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [880 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [880 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [893 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [867 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [850 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [878 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [872 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [891 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [899 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [862 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [876 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [879 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [881 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [862 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [857 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [888 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [1000 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [869 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [892 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [887 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [877 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [891 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [886 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [867 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [866 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [863 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [891 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [873 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [883 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [869 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [982 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [887 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [881 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [877 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [874 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [867 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [890 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [873 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [895 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [878 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [877 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [876 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [903 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [880 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [881 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [893 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [880 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [876 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [876 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [872 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [887 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [873 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [872 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [880 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [888 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [871 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [846 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [851 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [867 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [844 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [849 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [844 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [859 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [862 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [847 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [865 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [869 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [856 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [895 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [844 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [862 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [852 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [840 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [858 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [848 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [835 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [856 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [867 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [847 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [854 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [876 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [862 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [834 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [853 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [841 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [928 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [934 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [913 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [836 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [843 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [873 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [866 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [865 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [871 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [845 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [856 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [839 ms]
+
+---
+build.dart --machine --changed=web/roslibjs.dart
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [851 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [858 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [863 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [843 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [848 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [916 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [866 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [837 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [853 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [850 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [839 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [853 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [874 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [845 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [843 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [851 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [851 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [851 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [850 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [857 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"End tag (div) seen too early. Expected other end tag.","line":19,"charStart":426,"charEnd":432}}]
+build.dart finished [852 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [869 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":19,"charStart":430,"charEnd":474}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":19,"charStart":430,"charEnd":489}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected end tag (template). Ignored.","line":20,"charStart":500,"charEnd":511}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"definition for Polymer element with tag name \"statement-card\" not found.","line":19,"charStart":430,"charEnd":493}}]
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":19,"charStart":430,"charEnd":474}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":19,"charStart":430,"charEnd":489}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected end tag (template). Ignored.","line":20,"charStart":500,"charEnd":511}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"definition for Polymer element with tag name \"statement-card\" not found.","line":19,"charStart":430,"charEnd":493}}]
+build.dart finished [863 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":19,"charStart":430,"charEnd":474}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":19,"charStart":430,"charEnd":489}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected end tag (template). Ignored.","line":20,"charStart":500,"charEnd":511}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"definition for Polymer element with tag name \"statement-card\" not found.","line":19,"charStart":430,"charEnd":493}}]
+build.dart finished [877 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":19,"charStart":430,"charEnd":474}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":19,"charStart":430,"charEnd":489}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected end tag (template). Ignored.","line":20,"charStart":500,"charEnd":511}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"definition for Polymer element with tag name \"statement-card\" not found.","line":19,"charStart":430,"charEnd":493}}]
+build.dart finished [856 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":19,"charStart":430,"charEnd":474}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":19,"charStart":430,"charEnd":489}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected end tag (template). Ignored.","line":20,"charStart":500,"charEnd":511}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"definition for Polymer element with tag name \"statement-card\" not found.","line":19,"charStart":430,"charEnd":493}}]
+build.dart finished [851 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":536}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected end tag (template). Ignored.","line":21,"charStart":547,"charEnd":558}}]
+build.dart finished [849 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":536}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected end tag (template). Ignored.","line":21,"charStart":547,"charEnd":558}}]
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":536}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected end tag (template). Ignored.","line":21,"charStart":547,"charEnd":558}}]
+build.dart finished [871 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":536}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected end tag (template). Ignored.","line":21,"charStart":547,"charEnd":558}}]
+build.dart finished [865 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected end tag (template). Ignored.","line":21,"charStart":532,"charEnd":543}}]
+build.dart finished [849 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [854 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":526}}]
+build.dart finished [857 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":526}}]
+build.dart finished [854 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":526}}]
+build.dart finished [869 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":526}}]
+build.dart finished [880 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":526}}]
+build.dart finished [870 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":526}}]
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":526}}]
+build.dart finished [869 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":526}}]
+build.dart finished [853 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":526}}]
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":521}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected character in unquoted attribute","line":20,"charStart":477,"charEnd":526}}]
+build.dart finished [859 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [852 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [863 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [883 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [856 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [870 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Unexpected end tag (template--). Ignored.","line":22,"charStart":578,"charEnd":591}}]
+build.dart finished [874 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [849 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [858 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [859 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [856 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [958 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [857 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [942 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [853 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [846 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [848 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [862 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [858 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [840 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [857 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [850 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [852 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [848 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [859 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [851 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [843 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [854 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [845 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [867 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [841 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [895 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [871 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [857 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [866 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [870 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [872 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [881 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [869 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [949 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [854 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"Invalid character in attribute name","line":10,"charStart":244,"charEnd":278}}]
+build.dart finished [873 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [885 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [865 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [850 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [869 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [886 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [863 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [873 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [866 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [869 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [846 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [859 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [866 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [850 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [849 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [866 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [879 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [872 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [872 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [885 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [878 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [909 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [871 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [870 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [878 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [857 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [874 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [885 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [863 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [879 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [879 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [848 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [882 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [888 ms]
+
+---
+build.dart --machine --changed=pubspec.lock
+
+build.dart finished [890 ms]
+
+---
+build.dart --machine --changed=pubspec.lock
+
+build.dart finished [870 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [884 ms]
+
+---
+build.dart --machine --changed=web/triggers/face_detection.dart
+
+build.dart finished [881 ms]
+
+---
+build.dart --machine --changed=web/triggers/face_detection.dart
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [888 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [899 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [889 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [916 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [879 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [882 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [890 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [887 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [898 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [893 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [898 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [891 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [882 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [911 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [900 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [896 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [882 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [905 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [897 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [903 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [883 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [914 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [906 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [903 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [903 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [877 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [926 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [905 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [894 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [909 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [888 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [894 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [879 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [910 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [883 ms]
+
+---
+build.dart --machine --clean
+
+build.dart finished [859 ms]
+
+---
+build.dart --machine --full
+
+build.dart finished [879 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [862 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [872 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [878 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [883 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [873 ms]
+
+---
+build.dart --machine --changed=web/index.html
+[{"method":"warning","params":{"file":"web/index.html","message":"Unexpected end tag (statement-list). Ignored.","line":21,"charStart":595,"charEnd":612}}]
+[{"method":"warning","params":{"file":"web/index.html","message":"Unexpected end tag (body). Missing end tag (statement-list2).","line":26,"charStart":785,"charEnd":792}}]
+[{"method":"warning","params":{"file":"web/index.html","message":"definition for Polymer element with tag name \"statement-list2\" not found.","line":21,"charStart":578,"charEnd":595}}]
+build.dart finished [888 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [857 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [841 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [865 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [906 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/index.html
+[{"method":"warning","params":{"file":"web/index.html","message":"definition for Polymer element with tag name \"click-counter\" not found.","line":22,"charStart":629,"charEnd":644}}]
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [877 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [880 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [880 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [854 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"definition for Polymer element with tag name \"statement-card\" not found.","line":11,"charStart":305,"charEnd":533}}]
+build.dart finished [847 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [856 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [852 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [853 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [883 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/statement_list.dart
+
+build.dart finished [865 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [884 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [859 ms]
+
+---
+build.dart --machine --changed=web/index.html
+[{"method":"warning","params":{"file":"web/index.html","message":"definition for Polymer element with tag name \"statement-card\" not found.","line":24,"charStart":721,"charEnd":846}}]
+build.dart finished [858 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [864 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [839 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [857 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [855 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [883 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [841 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [865 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [851 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"definition for Polymer element with tag name \"statement-card\" not found.","line":11,"charStart":305,"charEnd":533}}]
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+[{"method":"warning","params":{"file":"web/statement_card.html","message":"Expected tag name. Got '>' instead.","line":23,"charStart":587,"charEnd":589}}]
+[{"method":"warning","params":{"file":"web/statement_card.html","message":"Unexpected end tag (p). Ignored.","line":23,"charStart":604,"charEnd":608}}]
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"definition for Polymer element with tag name \"statement-card\" not found.","line":11,"charStart":305,"charEnd":533}}]
+build.dart finished [856 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+[{"method":"warning","params":{"file":"web/statement_list.html","message":"definition for Polymer element with tag name \"statement-card\" not found.","line":11,"charStart":305,"charEnd":533}}]
+build.dart finished [862 ms]
+
+---
+build.dart --machine --changed=web/statement_list.html
+
+build.dart finished [874 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [861 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [856 ms]
+
+---
+build.dart --machine --changed=web/triggers/face_detection.html
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/triggers/face_detection.html
+
+build.dart finished [865 ms]
+
+---
+build.dart --machine --changed=web/triggers/face_detection.html
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/triggers/face_detection.html
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/triggers/face_detection.html
+
+build.dart finished [860 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [868 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [867 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [885 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [867 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"face-detection-options\" not found.","line":15,"charStart":381,"charEnd":405}}]
+build.dart finished [896 ms]
+
+---
+build.dart --machine --changed=web/triggers/face_detection.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"face-detection-options\" not found.","line":15,"charStart":381,"charEnd":405}}]
+build.dart finished [895 ms]
+
+---
+build.dart --machine --changed=web/triggers/face_detection.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"face-detection-options\" not found.","line":15,"charStart":381,"charEnd":405}}]
+build.dart finished [885 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [873 ms]
+
+---
+build.dart --machine --changed=web/triggers/face_detection.dart
+
+build.dart finished [898 ms]
+
+---
+build.dart --machine --changed=web/triggers/face_detection.dart
+
+build.dart finished [891 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [896 ms]
+
+---
+build.dart --machine --removed=web/triggers/face_detection.dart
+
+build.dart finished [900 ms]
+
+---
+build.dart --machine --removed=web/triggers/face_detection.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"web/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+build.dart finished [886 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"web/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+build.dart finished [900 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"web/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+build.dart finished [869 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"web/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+[{"method":"warning","params":{"file":"web/actions/say-something-action-options.html","message":"couldn't find imported asset \"web/actions/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+build.dart finished [903 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"web/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+[{"method":"warning","params":{"file":"web/actions/say-something-action-options.html","message":"couldn't find imported asset \"web/actions/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+build.dart finished [892 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"web/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+[{"method":"warning","params":{"file":"web/actions/say-something-action-options.html","message":"couldn't find imported asset \"web/actions/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+build.dart finished [874 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"web/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+build.dart finished [912 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"web/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+build.dart finished [890 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"web/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+build.dart finished [876 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"web/triggers/face_detection.html\" in package \"trigger_action\".","line":3,"charStart":102,"charEnd":157}}]
+build.dart finished [876 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [856 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [865 ms]
+
+---
+build.dart --machine --changed=web/action.dart
+
+build.dart finished [903 ms]
+
+---
+build.dart --machine --changed=web/actions.html
+
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/actions.html
+
+build.dart finished [894 ms]
+
+---
+build.dart --machine --changed=web/action.dart
+
+build.dart finished [883 ms]
+
+---
+build.dart --machine --changed=web/action.dart
+
+build.dart finished [890 ms]
+
+---
+build.dart --machine --changed=web/action.dart
+
+build.dart finished [872 ms]
+
+---
+build.dart --machine --changed=web/actions.html
+
+build.dart finished [857 ms]
+
+---
+build.dart --machine --changed=web/actions.html
+
+build.dart finished [887 ms]
+
+---
+build.dart --machine --changed=web/actions.html
+
+build.dart finished [903 ms]
+
+---
+build.dart --machine --changed=web/action.html --removed=web/actions.html
+
+build.dart finished [886 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [877 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+[{"method":"warning","params":{"file":"web/statement_card.html","message":"definition for Polymer element with tag name \"action-element\" not found.","line":23,"charStart":587,"charEnd":653}}]
+build.dart finished [875 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [881 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [896 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [886 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [887 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [876 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+[{"method":"warning","params":{"file":"web/actions/say-something-action-options.html","message":"definition for Polymer element with tag name \"paper-input\" not found.","line":12,"charStart":251,"charEnd":282}}]
+build.dart finished [892 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [976 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+
+build.dart finished [958 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+
+build.dart finished [974 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+
+build.dart finished [977 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+
+build.dart finished [969 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+
+build.dart finished [956 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+
+build.dart finished [983 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [986 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [978 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [969 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [965 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [961 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+
+build.dart finished [975 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+
+build.dart finished [977 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [967 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [961 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [963 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [979 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [966 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [970 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [984 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [976 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [967 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [963 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [975 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [988 ms]
+
+---
+build.dart --machine --changed=web/action.dart
+
+build.dart finished [983 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [984 ms]
+
+---
+build.dart --machine --changed=web/statement.dart
+
+build.dart finished [986 ms]
+
+---
+build.dart --machine --changed=web/statement_card.dart
+
+build.dart finished [980 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+
+build.dart finished [970 ms]
+
+---
+build.dart --machine --changed=web/actions/say_something_action.dart
+
+build.dart finished [981 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [971 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [985 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [962 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [1073 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [1049 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [966 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [1093 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+[{"method":"warning","params":{"file":"web/statement_card.html","message":"definition for Polymer element with tag name \"paper-shadow\" not found.","line":19,"charStart":438,"charEnd":465}}]
+build.dart finished [984 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [979 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [977 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [976 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [968 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [984 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [981 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [977 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [988 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1004 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [964 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [999 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1070 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1160 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [978 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [991 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1088 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1036 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1102 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1097 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1030 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [983 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1002 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [988 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1026 ms]
+
+---
+build.dart --machine --changed=web/index.html
+
+build.dart finished [980 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [987 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [963 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1135 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [980 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1063 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1012 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"paper-button\" not found.","line":14,"charStart":329,"charEnd":343}}]
+build.dart finished [992 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1048 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1082 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1105 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1088 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1046 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1058 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1055 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1051 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1053 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1053 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1054 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1262 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1056 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1141 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1043 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1047 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"paper-button\" not found.","line":10,"charStart":239,"charEnd":260}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"paper-button\" not found.","line":12,"charStart":311,"charEnd":332}}]
+build.dart finished [969 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"paper-button\" not found.","line":10,"charStart":239,"charEnd":260}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"paper-button\" not found.","line":12,"charStart":311,"charEnd":332}}]
+build.dart finished [984 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1049 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1050 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1046 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1222 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1058 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1051 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"lib/paper-button.html\" in package \"paper_elements\".","line":3,"charStart":102,"charEnd":170}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"paper-button\" not found.","line":20,"charStart":541,"charEnd":581}}]
+build.dart finished [969 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1033 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1171 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1025 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1056 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1065 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1218 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1046 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1075 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1169 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1140 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1054 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [985 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1052 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1080 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1124 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"paper-button\" not found.","line":16,"charStart":385,"charEnd":406}}]
+build.dart finished [1134 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid character in attribute name","line":3,"charStart":102,"charEnd":172}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected end tag (polymer-element). Ignored.","line":21,"charStart":598,"charEnd":616}}]
+[{"method":"warning","params":{"file":"web/statement_card.html","message":"definition for Polymer element with tag name \"trigger-element\" not found.","line":23,"charStart":557,"charEnd":626}}]
+build.dart finished [1054 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1048 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"paper-button\" not found.","line":9,"charStart":238,"charEnd":259}}]
+build.dart finished [1024 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [963 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1192 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+[{"method":"warning","params":{"file":"web/statement_card.html","message":"Unexpected end tag (trigger-element). Ignored.","line":23,"charStart":627,"charEnd":645}}]
+[{"method":"warning","params":{"file":"web/statement_card.html","message":"End tag (div) seen too early. Expected other end tag.","line":26,"charStart":763,"charEnd":769}}]
+[{"method":"warning","params":{"file":"web/statement_card.html","message":"definition for Polymer element with tag name \"trigger-selector\" not found.","line":23,"charStart":557,"charEnd":627}}]
+build.dart finished [968 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+[{"method":"warning","params":{"file":"web/statement_card.html","message":"definition for Polymer element with tag name \"trigger-selector\" not found.","line":23,"charStart":557,"charEnd":627}}]
+build.dart finished [975 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid character in attribute name","line":9,"charStart":239,"charEnd":248}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected character after / in tag. Expected >","line":9,"charStart":239,"charEnd":250}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected end tag (template). Ignored.","line":11,"charStart":261,"charEnd":272}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected end tag (polymer-element). Ignored.","line":13,"charStart":336,"charEnd":354}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Expected closing tag. Unexpected end of file.","line":9,"charStart":239,"charEnd":258}}]
+build.dart finished [985 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid character in attribute name","line":9,"charStart":239,"charEnd":248}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected character after / in tag. Expected >","line":9,"charStart":239,"charEnd":250}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected end tag (template). Ignored.","line":11,"charStart":261,"charEnd":272}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected end tag (polymer-element). Ignored.","line":13,"charStart":336,"charEnd":354}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Expected closing tag. Unexpected end of file.","line":9,"charStart":239,"charEnd":258}}]
+build.dart finished [991 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid character in attribute name","line":9,"charStart":239,"charEnd":248}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected character after / in tag. Expected >","line":9,"charStart":239,"charEnd":250}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected end tag (template). Ignored.","line":11,"charStart":261,"charEnd":272}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected end tag (polymer-element). Ignored.","line":13,"charStart":336,"charEnd":354}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Expected closing tag. Unexpected end of file.","line":9,"charStart":239,"charEnd":258}}]
+build.dart finished [987 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid character in attribute name","line":9,"charStart":239,"charEnd":248}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected character after / in tag. Expected >","line":9,"charStart":239,"charEnd":250}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected end tag (template). Ignored.","line":11,"charStart":261,"charEnd":272}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected end tag (polymer-element). Ignored.","line":13,"charStart":336,"charEnd":354}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Expected closing tag. Unexpected end of file.","line":9,"charStart":239,"charEnd":258}}]
+build.dart finished [982 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [973 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [968 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [972 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [962 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [973 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1110 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1096 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1115 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1039 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1093 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1129 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1077 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1099 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [994 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"core-collapse\" not found.","line":16,"charStart":424,"charEnd":439}}]
+build.dart finished [997 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"core-collapse\" not found.","line":16,"charStart":424,"charEnd":457}}]
+build.dart finished [1001 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"lib/core_collapse.html\" in package \"polymer\".","line":3,"charStart":102,"charEnd":164}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"core-collapse\" not found.","line":17,"charStart":487,"charEnd":520}}]
+build.dart finished [1002 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"lib/core_collapse.html\" in package \"polymer_elements\".","line":3,"charStart":102,"charEnd":173}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"core-collapse\" not found.","line":17,"charStart":496,"charEnd":529}}]
+build.dart finished [977 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [985 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [987 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [986 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1017 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [977 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1003 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [993 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1104 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [972 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [977 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [990 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [994 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1002 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1006 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1041 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [983 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [968 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1002 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [991 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [987 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1125 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [984 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [977 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [981 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1000 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [983 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [984 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [986 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1007 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [988 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [992 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [987 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [993 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [986 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1100 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"paper-button\" not found.","line":19,"charStart":552,"charEnd":566}}]
+build.dart finished [1017 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"couldn't find imported asset \"lib/paper_buttons.html\" in package \"paper_elements\".","line":4,"charStart":171,"charEnd":240}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"definition for Polymer element with tag name \"paper-button\" not found.","line":20,"charStart":622,"charEnd":636}}]
+build.dart finished [993 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1064 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1056 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1060 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1064 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1065 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1103 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1049 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1071 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1220 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1232 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1248 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1073 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1105 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1077 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1087 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1243 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1070 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1070 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1061 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1077 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1066 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1076 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1076 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1063 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1074 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1069 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1064 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1068 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1091 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid event handler body \"{{handleHover('time')}}\". Declare a method in your custom element \"void handlerName(event, detail, target)\" and use the form on-hover=\"{{handlerName}}\".","line":28,"charStart":889,"charEnd":923}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid event handler body \"{{handleHover('time')}}\". Declare a method in your custom element \"void handlerName(event, detail, target)\" and use the form on-hover=\"{{handlerName}}\".","line":29,"charStart":996,"charEnd":1030}}]
+build.dart finished [1087 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid event handler body \"{{handleHover('time')}}\". Declare a method in your custom element \"void handlerName(event, detail, target)\" and use the form on-hover=\"{{handlerName}}\".","line":28,"charStart":889,"charEnd":923}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid event handler body \"{{handleHover('time')}}\". Declare a method in your custom element \"void handlerName(event, detail, target)\" and use the form on-hover=\"{{handlerName}}\".","line":29,"charStart":996,"charEnd":1030}}]
+build.dart finished [1066 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid event handler body \"{{handleHover('time')}}\". Declare a method in your custom element \"void handlerName(event, detail, target)\" and use the form on-hover=\"{{handlerName}}\".","line":28,"charStart":889,"charEnd":923}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid event handler body \"{{handleHover('time')}}\". Declare a method in your custom element \"void handlerName(event, detail, target)\" and use the form on-hover=\"{{handlerName}}\".","line":29,"charStart":996,"charEnd":1030}}]
+build.dart finished [1085 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid event handler body \"{{handleHover('time')}}\". Declare a method in your custom element \"void handlerName(event, detail, target)\" and use the form on-hover=\"{{handlerName}}\".","line":28,"charStart":889,"charEnd":923}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid event handler body \"{{handleHover('time')}}\". Declare a method in your custom element \"void handlerName(event, detail, target)\" and use the form on-hover=\"{{handlerName}}\".","line":29,"charStart":996,"charEnd":1030}}]
+build.dart finished [1064 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid event handler body \"{{handleHover('time')}}\". Declare a method in your custom element \"void handlerName(event, detail, target)\" and use the form on-hover=\"{{handlerName}}\".","line":28,"charStart":889,"charEnd":923}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid event handler body \"{{handleHover('time')}}\". Declare a method in your custom element \"void handlerName(event, detail, target)\" and use the form on-hover=\"{{handlerName}}\".","line":29,"charStart":996,"charEnd":1030}}]
+build.dart finished [1092 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1078 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected character after attribute value.","line":28,"charStart":830,"charEnd":887}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid character in attribute name","line":28,"charStart":830,"charEnd":887}}]
+build.dart finished [1132 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Unexpected character after attribute value.","line":28,"charStart":830,"charEnd":885}}]
+[{"method":"warning","params":{"file":"web/trigger.html","message":"Invalid character in attribute name","line":28,"charStart":830,"charEnd":885}}]
+build.dart finished [1070 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1078 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1081 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1074 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1079 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1104 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1059 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1055 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1094 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1090 ms]
+
+---
+build.dart --machine --changed=web/trigger.html
+
+build.dart finished [1090 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1096 ms]
+
+---
+build.dart --machine --changed=web/actions/say-something-action-options.html
+
+build.dart finished [1066 ms]
+
+---
+build.dart --machine --changed=web/action.dart
+
+build.dart finished [1085 ms]
+
+---
+build.dart --machine --changed=web/action.dart
+
+build.dart finished [1102 ms]
+
+---
+build.dart --machine --changed=web/action.html
+[{"method":"warning","params":{"file":"web/action.html","message":"definition for Polymer element with tag name \"core-collapse\" not found.","line":15,"charStart":497,"charEnd":533}}]
+[{"method":"warning","params":{"file":"web/action.html","message":"definition for Polymer element with tag name \"paper-button\" not found.","line":18,"charStart":644,"charEnd":720}}]
+build.dart finished [1082 ms]
+
+---
+build.dart --machine --changed=web/action.html
+[{"method":"warning","params":{"file":"web/action.html","message":"definition for Polymer element with tag name \"core-collapse\" not found.","line":15,"charStart":496,"charEnd":532}}]
+[{"method":"warning","params":{"file":"web/action.html","message":"definition for Polymer element with tag name \"paper-button\" not found.","line":18,"charStart":642,"charEnd":718}}]
+build.dart finished [1078 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [1072 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [1073 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1101 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1155 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1119 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1149 ms]
+
+---
+build.dart --machine --changed=web/trigger.dart
+
+build.dart finished [1109 ms]
+
+---
+build.dart --machine --changed=web/action.dart
+
+build.dart finished [1101 ms]
+
+---
+build.dart --machine --changed=web/action.dart
+
+build.dart finished [1070 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1153 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1073 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1100 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1088 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1155 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [1106 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [1108 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [1076 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1088 ms]
+
+---
+build.dart --machine --changed=web/statement_card.html
+
+build.dart finished [1092 ms]
+
+---
+build.dart --machine --changed=web/action.html
+
+build.dart finished [1180 ms]
+
