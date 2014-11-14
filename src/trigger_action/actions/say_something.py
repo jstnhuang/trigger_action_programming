@@ -2,6 +2,7 @@
 import rospy
 
 from std_msgs.msg import String
+
 class SaySomething(object):
     def __init__(self, speech):
         self._speech = speech
@@ -15,3 +16,17 @@ class SaySomething(object):
 
     def stop(self):
         self._publisher.unregister()
+
+class MockSaySomething(object):
+    def __init__(self, speech):
+        self._speech = speech
+
+    def start_goal(self):
+        rospy.info('Mock say something: {}'.format(self._speech))
+
+    def start(self):
+        pass
+
+    def stop(self):
+        pass
+

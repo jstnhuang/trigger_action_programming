@@ -45,3 +45,19 @@ class PersonDetected(object):
 
     def set_callback(self, callback):
         self._callback = callback
+
+class MockPersonDetected(object):
+    def __init__(self):
+        pass
+
+    def start(self):
+        pass
+
+    def stop(self):
+        pass
+
+    def set_callback(self, callback):
+        self._callback = callback
+
+    def trigger(self):
+        self._callback()

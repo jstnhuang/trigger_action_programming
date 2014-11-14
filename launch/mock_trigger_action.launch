@@ -1,0 +1,5 @@
+<launch>
+  <node pkg="trigger_action_programming" type="node.py" name="trigger_action_programming" output="screen">
+    <param name="~mock" type="bool" value="True" />
+  </node>
+</launch>
