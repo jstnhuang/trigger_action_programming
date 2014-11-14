@@ -10,6 +10,7 @@ def build(action_name, action_params, is_mock=False):
         speech = params['speech']
         if is_mock:
             trigger = say_something.MockSaySomething(speech)
+            return trigger
         else:
             trigger = say_something.SaySomething(speech)
             return trigger

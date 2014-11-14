@@ -57,7 +57,7 @@ class Node(object):
             response = GetStatementByIdResponse(statement)
             return response
         except KeyError:
-            raise rospy.ServiceException('No statement with ID: {}'.format(id))
+            raise rospy.ServiceException('No statement with ID: {}'.format(reqest.id))
 
     def _handle_update_statement(self, request):
         try:
@@ -65,21 +65,21 @@ class Node(object):
             response = UpdateStatementResponse()
 
             statement = statement_factory.build(request.updated_statement, self._is_mock)
-            self._statements[statement_id].stop()
-            self._statements[statement_id] = statement
+            self._statements[request.id].stop()
+            self._statements[request.id] = statement
             statement.start()
 
             return response
         except KeyError:
-            raise rospy.ServiceException('No statement with ID: {}'.format(id))
+            raise rospy.ServiceException('No statement with ID: {}'.format(request.id))
 
     def _handle_delete_statement(self, request):
         try:
-            statement_id = self._db.delete_statement(request.id)
+            self._db.delete_statement(request.id)
             response = DeleteStatementResponse()
             return response
         except KeyError:
-            raise rospy.ServiceException('No statement with ID: {}'.format(id))
+            raise rospy.ServiceException('No statement with ID: {}'.format(request.id))
 
 if __name__ == '__main__':
     is_mock = rospy.get_param('~mock', False)
