@@ -1,0 +1,23 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="statement_card.html">
+
+<polymer-element name="statement-list">
+  <template>
+    <style>
+    </style>
+    <div>
+      <template repeat="{{statement in statements}}">
+        <statement-card
+          trigger_name="{{statement.trigger_name}}"
+          trigger_params="{{statement.trigger_params}}"
+          action_name="{{statement.action_name}}"
+          action_params="{{statement.action_params}}">
+        </statement-card>
+      </template>
+    </div>
+  </template>
+  <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+  <script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+  <script type="application/dart" src="statement_list.dart"></script>
+</polymer-element>

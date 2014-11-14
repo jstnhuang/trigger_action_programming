@@ -1,0 +1,9 @@
+name: trigger_action
+description: A sample Polymer application
+dependencies:
+  paper_elements: any
+  polymer: '>=0.12.0 <0.13.0'
+  polymer_elements: any
+transformers:
+- polymer:
+    entry_points: web/index.html
