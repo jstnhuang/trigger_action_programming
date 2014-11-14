@@ -23,6 +23,17 @@
       .if-then-section + .if-then-section {
         margin-top: 20px;
       }
+      paper-button {
+        color: #fff;
+        background-color: #01579B;
+        text-transform: none;
+      }
+      paper-button + paper-button {
+        margin-left: 20px;
+      }
+      .delete {
+        background-color: #B71C1C; 
+      }
     </style>
     <div class="card">
       <div class="if-then-section">
@@ -32,6 +43,10 @@
       <div class="if-then-section">
         <h1 class="ifthenheading">Then: </h1>
         <action-element name="{{action_name}}" params="{{action_params}}"></action-element>
+      </div>
+      <div class="buttons">
+        <paper-button label="Update"></paper-button>
+        <paper-button class="delete" label="Delete"></paper-button>
       </div>
     </div>
   </template>
