@@ -77,6 +77,8 @@ class Node(object):
         try:
             self._db.delete_statement(request.id)
             response = DeleteStatementResponse()
+            self._statements[request.id].stop()
+            del self._statements[request.id]
             return response
         except KeyError:
             raise rospy.ServiceException('No statement with ID: {}'.format(request.id))
