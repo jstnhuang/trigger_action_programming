@@ -3,6 +3,7 @@ import "roslibjs.dart";
 import "statement.dart";
 import "dart:async";
 import "dart:js";
+import "dart:html";
 
 @CustomTag('statement-list')
 class StatementList extends PolymerElement {
@@ -14,7 +15,7 @@ class StatementList extends PolymerElement {
   }
 
   void attached() {
-    this._ros = new Ros("ws://c1.cs.washington.edu:9999");
+    this._ros = new Ros(robotWebsocketUrl);
     this._getStatementsClient = new Service(this._ros, "/get_all_statements", "trigger_action_programming/GetAllStatements");
     var request = new ServiceRequest({});
     Future future = this._getStatementsClient.call(request);
@@ -24,5 +25,12 @@ class StatementList extends PolymerElement {
         this.statements.add(new Statement.fromJs(jsStatement));
       }
     });
+  }
+  
+  void createRule(MouseEvent event) {
+    var list = shadowRoot.querySelector('#rulelist');
+    Element blankStatement = new Element.tag('statement-card');
+    blankStatement.attributes['isNew'] = 'true';
+    list.append(blankStatement);
   }
 }

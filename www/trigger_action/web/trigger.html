@@ -9,6 +9,7 @@
       .current-trigger {
         font-size: 1.5em;
         color: #03A9F4;
+        cursor: pointer;
       }
       .current-trigger:hover {
         text-decoration: underline;
@@ -23,14 +24,21 @@
         margin-right: 10px;
       }
       .options {
-        margin-top: 20px;
+        margin-top: 10px;
       }
     </style>
-    <a class="current-trigger" on-click="{{toggle}}">{{display_names[name]}}</a>
+    <a class="current-trigger" on-click="{{toggle}}">
+      <template if="{{name != ''}}">
+        {{display_names[name]}}
+      </template>
+      <template if="{{name == ''}}">
+        Choose a trigger
+      </template>
+    </a>
     <core-collapse opened?="{{opened}}">
       <div class="trigger-list">
         <template repeat="{{trigger_name in display_names.keys}}">
-          <paper-button label="{{display_names[trigger_name]}}" on-click="{{toggle}}"></paper-button>
+          <paper-button label="{{display_names[trigger_name]}}" on-click="{{triggerSelected}}" data-name="{{trigger_name}}"></paper-button>
         </template>
       </div>
     </core-collapse>

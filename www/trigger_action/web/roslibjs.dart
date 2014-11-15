@@ -3,6 +3,9 @@ library roslibjs;
 import "dart:async";
 import "dart:js";
 
+String robotWebsocketUrl = 'ws://c1:9999';
+String localWebsocketUrl = 'ws://localhost:9090';
+
 class Ros {
   var jsRos;
   

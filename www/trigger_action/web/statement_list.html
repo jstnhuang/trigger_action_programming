@@ -5,16 +5,41 @@
 <polymer-element name="statement-list">
   <template>
     <style>
+      .uncreated-card {
+        margin-top: 20px;
+        padding: 20px;
+        background: white;
+        box-sizing: border-box;
+        width: 100%;
+        border-radius: 2px;
+        border: 5px dashed grey;
+        text-align: center;
+        font-size: 1.5em;
+      }
+      .uncreated-card a {
+        color: #03A9F4;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .uncreated-card a:hover {
+        text-decoration: underline;
+      }
     </style>
     <div>
-      <template repeat="{{statement in statements}}">
-        <statement-card
-          trigger_name="{{statement.trigger_name}}"
-          trigger_params="{{statement.trigger_params}}"
-          action_name="{{statement.action_name}}"
-          action_params="{{statement.action_params}}">
-        </statement-card>
-      </template>
+      <div id="rulelist">
+        <template repeat="{{statement in statements}}">
+          <statement-card
+            id="{{statement.id}}"
+            trigger_name="{{statement.trigger_name}}"
+            trigger_params="{{statement.trigger_params}}"
+            action_name="{{statement.action_name}}"
+            action_params="{{statement.action_params}}">
+          </statement-card>
+        </template>
+      </div>
+      <div class="uncreated-card">
+        <a on-click="{{createRule}}">Create a new rule</a>
+      </div>
     </div>
   </template>
   <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
