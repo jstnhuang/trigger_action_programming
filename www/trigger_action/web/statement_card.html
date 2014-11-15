@@ -37,7 +37,6 @@
       }
     </style>
     <div class="card">
-      <p>ID: {{id}}</p>
       <div class="if-then-section">
         <h1 class="ifthenheading">If: </h1>
         <trigger-selector name="{{trigger_name}}" params="{{trigger_params}}"></trigger-selector>
@@ -47,7 +46,7 @@
         <action-selector name="{{action_name}}" params="{{action_params}}"></action-selector>
       </div>
       <div class="buttons">
-        <paper-button id="saveButton" label="Save" disabled?="{{trigger_name == '' || action_name == ''}}" on-click="{{save}}"></paper-button>
+        <paper-button id="saveButton" label="{{saveLabel}}" disabled?="{{trigger_name == '' || action_name == ''}}" on-click="{{save}}"></paper-button>
         <paper-button id="deleteButton" label="Delete" on-click="{{delete}}"></paper-button>
       </div>
     </div>
