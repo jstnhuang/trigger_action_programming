@@ -1,0 +1,17 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_input.html">
+
+<polymer-element name="say-something-action-options">
+  <template>
+    <style>
+      h1 {
+        color: #555;
+      }
+    </style>
+    <div>
+      <paper-input label="What to say" value="{{speech}}" floatingLabel></paper-input>
+    </div>
+  </template>
+  <script type="application/dart" src="say_something_action.dart"></script>
+</polymer-element>
