@@ -53,6 +53,7 @@ class InMemoryProgramDatabase(object):
 
     def add_statement(self, statement_msg):
         statement_id = str(self.current_id())
+        statement_msg.id = statement_id
         self._data[statement_id] = statement_msg
         self._increment_current_id()
         return statement_id

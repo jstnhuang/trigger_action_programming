@@ -55,6 +55,7 @@ class NodeTest(unittest.TestCase):
         statements = response.statements
         self.assertEquals(len(statements), 1)
         self.assertTrue(statements_are_equal(statements[0], statement)) # Add statement comparator that ignores ID.
+        self.assertEquals(statements[0].id, '0')
 
     def test_get_by_id(self):
         statement = Statement(
