@@ -82,6 +82,6 @@ class Node(object):
             raise rospy.ServiceException('No statement with ID: {}'.format(request.id))
 
 if __name__ == '__main__':
-    is_mock = rospy.get_param('~mock', False)
+    is_mock = rospy.get_param('trigger_action_programming/mock')
     main_node = node_factory.build('trigger_action_programming', is_mock)
     main_node.start()
