@@ -1,7 +1,8 @@
 import 'package:polymer/polymer.dart';
+import 'dart:html';
 
-@CustomTag('action-element')
-class ActionElement extends PolymerElement {
+@CustomTag('action-selector')
+class ActionSelectorElement extends PolymerElement {
   @published String name;
   @published Map<String, String> params;
   @published bool opened = false;
@@ -10,10 +11,15 @@ class ActionElement extends PolymerElement {
     'say_something': 'Say something'
   };
   
-  ActionElement.created() : super.created() {
+  ActionSelectorElement.created() : super.created() {
   }
   
   void toggle() {
     opened = !opened;
+  }
+  
+  void actionSelected(Event event, Object detail, Element sender) {
+    toggle();
+    name = sender.attributes['data-name'];
   }
 }

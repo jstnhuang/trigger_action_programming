@@ -8,6 +8,7 @@
     <style>
       .card {
         padding: 20px;
+        margin-bottom: 20px;
         background: white;
         box-sizing: border-box;
         width: 100%;
@@ -29,24 +30,25 @@
         text-transform: none;
       }
       paper-button + paper-button {
-        margin-left: 20px;
+        margin-left: 10px;
       }
-      .delete {
+      #deleteButton {
         background-color: #B71C1C; 
       }
     </style>
     <div class="card">
+      <p>ID: {{id}}</p>
       <div class="if-then-section">
         <h1 class="ifthenheading">If: </h1>
         <trigger-selector name="{{trigger_name}}" params="{{trigger_params}}"></trigger-selector>
       </div>
       <div class="if-then-section">
         <h1 class="ifthenheading">Then: </h1>
-        <action-element name="{{action_name}}" params="{{action_params}}"></action-element>
+        <action-selector name="{{action_name}}" params="{{action_params}}"></action-selector>
       </div>
       <div class="buttons">
-        <paper-button label="Update"></paper-button>
-        <paper-button class="delete" label="Delete"></paper-button>
+        <paper-button id="saveButton" label="Save" disabled?="{{trigger_name == '' || action_name == ''}}" on-click="{{save}}"></paper-button>
+        <paper-button id="deleteButton" label="Delete" on-click="{{delete}}"></paper-button>
       </div>
     </div>
   </template>

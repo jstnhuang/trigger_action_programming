@@ -1,4 +1,5 @@
 import 'package:polymer/polymer.dart';
+import 'dart:html';
 
 @CustomTag('trigger-selector')
 class TriggerSelectorElement extends PolymerElement {
@@ -8,7 +9,6 @@ class TriggerSelectorElement extends PolymerElement {
   
   Map<String, String> display_names = {
     'person_detected': 'Person detected',
-    'time': 'Time is'
   };
   
   TriggerSelectorElement.created() : super.created() {
@@ -16,5 +16,10 @@ class TriggerSelectorElement extends PolymerElement {
   
   void toggle() {
     opened = !opened;
+  }
+  
+  void triggerSelected(Event event, Object detail, Element sender) {
+    toggle();
+    name = sender.attributes['data-name'];
   }
 }

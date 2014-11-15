@@ -2,14 +2,16 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="actions/say-something-action-options.html">
 <link rel="import" href="packages/core_elements/core_collapse.html">
+<link rel="import" href="packages/core_elements/core_selector.html">
 <link rel="import" href="packages/paper_elements/paper_button.html">
 
-<polymer-element name="action-element">
+<polymer-element name="action-selector">
   <template>
     <style>
       .current-action {
         font-size: 1.5em;
         color: #03A9F4;
+        cursor: pointer;
       }
       .current-action:hover {
         text-decoration: underline;
@@ -24,19 +26,26 @@
         margin-right: 10px;
       }
       .options {
-        margin-top: 20px;
+        margin-top: 10px;
       }
     </style>
-    <a class="current-action" on-click="{{toggle}}">{{display_names[name]}}</a>
+    <a class="current-action" on-click="{{toggle}}">
+      <template if="{{name != ''}}">
+        {{display_names[name]}}
+      </template>
+      <template if="{{name == ''}}">
+        Choose an action
+      </template>
+    </a>
     <core-collapse opened?="{{opened}}">
       <div class="action-list">
         <template repeat="{{action_name in display_names.keys}}">
-          <paper-button label="{{display_names[action_name]}}" on-click="{{toggle}}"></paper-button>
+          <paper-button label="{{display_names[action_name]}}" on-click="{{actionSelected}}" data-name="{{action_name}}"></paper-button>
         </template>
       </div>
     </core-collapse>
     <div class="options">
-      <template if="{{name}} == 'say_something'">
+      <template if="{{name == 'say_something'}}">
         <say-something-action-options speech="{{params['speech']}}"></say-something-action-options>
       </template>
     </div>
