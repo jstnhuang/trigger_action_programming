@@ -1,3 +1,4 @@
 *.db
 *.pyc
 www/trigger_action/.buildlog
+www/trigger_action/build/
