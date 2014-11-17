@@ -1,5 +1,5 @@
 body {
-  background-color: #F8F8F8;
+  background-color: #fff;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
   font-weight: normal;
@@ -7,6 +7,6 @@ body {
   margin: 15px;
 }
 
-h1, p {
+body /deep/ h1 , p {
   color: #333;
 }
