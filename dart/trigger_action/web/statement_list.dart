@@ -7,8 +7,8 @@ import "dart:html";
 
 @CustomTag('statement-list')
 class StatementList extends PolymerElement {
-  var _ros;
-  var _getStatementsClient;
+  Ros _ros;
+  Service _getStatementsClient;
   List<Statement> statements = toObservable([]);
 
   StatementList.created() : super.created() {
@@ -21,6 +21,7 @@ class StatementList extends PolymerElement {
     Future future = this._getStatementsClient.call(request);
     future.then((JsObject results) {
       this.statements.clear();
+      print(results);
       for (JsObject jsStatement in results['statements']) {
         this.statements.add(new Statement.fromJs(jsStatement));
       }
