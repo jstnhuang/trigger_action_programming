@@ -16,7 +16,6 @@ class StatementCard extends PolymerElement {
   @published String saveLabel = '';
   
   @published Ros ros;
-  @published String test;
   Service _addStatementClient;
   Service _updateStatementClient;
   Service _deleteStatementClient;
