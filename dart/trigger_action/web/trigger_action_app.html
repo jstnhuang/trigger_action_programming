@@ -1,0 +1,18 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="statement_list.html">
+
+<polymer-element name="trigger-action-app">
+  <template>
+      <template if="{{!isConnected}}">
+        <h1>Can't connect to robot.</h1>
+        <p>If you have just opened this app for the first time in a while, you may just need to refresh in a few seconds.</p>
+      </template>
+      <template if="{{isConnected}}">
+        <statement-list ros="{{ros}}"></statement-list>
+      </template>
+  </template>
+  <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+  <script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+  <script type="application/dart" src="trigger_action_app.dart"></script>
+</polymer-element>

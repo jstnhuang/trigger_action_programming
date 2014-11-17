@@ -15,7 +15,8 @@ class StatementCard extends PolymerElement {
   @published bool isNew = false;
   @published String saveLabel = '';
   
-  Ros _ros;
+  @published Ros ros;
+  @published String test;
   Service _addStatementClient;
   Service _updateStatementClient;
   Service _deleteStatementClient;
@@ -24,14 +25,13 @@ class StatementCard extends PolymerElement {
   Element _deleteButton;
   
   StatementCard.created() : super.created() {
-    this._ros = new Ros(robotWebsocketUrl);
-    this._addStatementClient = new Service(this._ros, '/add_statement', 'trigger_action_programming/AddStatement');
-    this._updateStatementClient = new Service(this._ros, '/update_statement', 'trigger_action_programming/UpdateStatement');
-    this._deleteStatementClient = new Service(this._ros, '/delete_statement', 'trigger_action_programming/DeleteStatement');
     updateSaveButton();
   }
   
   void attached() {
+    this._addStatementClient = new Service(this.ros, '/add_statement', 'trigger_action_programming/AddStatement');
+    this._updateStatementClient = new Service(this.ros, '/update_statement', 'trigger_action_programming/UpdateStatement');
+    this._deleteStatementClient = new Service(this.ros, '/delete_statement', 'trigger_action_programming/DeleteStatement');
     updateSaveButton();
   }
   

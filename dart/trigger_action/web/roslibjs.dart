@@ -7,10 +7,24 @@ String robotWebsocketUrl = 'ws://c1:9999';
 String localWebsocketUrl = 'ws://localhost:9090';
 
 class Ros {
-  var jsRos;
+  JsObject params;
+  JsObject jsRos;
   
-  Ros(var url) {
-    var params = new JsObject.jsify({"url": url});
+  Ros(String url) {
+    params = new JsObject.jsify({"url": url});
+  }
+  
+  Future connect() {
+    Completer completer = new Completer();
+    void _handleConnection(jsThis, event) {
+      completer.complete(event);
+    }
+    void _handleError(jsThis, error) {
+      completer.completeError(error);
+    }
+    void _handleClose(jsThis, event) {
+      print("Connection to websocket server closed.");
+    }
     this.jsRos = new JsObject(context['ROSLIB']['Ros'], [params]);
     var connectionCallback = new JsFunction.withThis(_handleConnection);
     this.jsRos.callMethod("on", ["connection", connectionCallback]);
@@ -18,18 +32,7 @@ class Ros {
     this.jsRos.callMethod("on", ["error", errorCallback]);
     var closeCallback = new JsFunction.withThis(_handleClose);
     this.jsRos.callMethod("on", ["close", closeCallback]);
-  }
-    
-  void _handleConnection(jsThis, event) {
-    print("Connected to websocket server.");
-  }
-  
-  void _handleError(jsThis, error) {
-    print("Error connecting to websocket server: $error");
-  }
-  
-  void _handleClose(jsThis, event) {
-    print("Connection to websocket server closed.");
+    return completer.future;
   }
 }
 

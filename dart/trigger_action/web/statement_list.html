@@ -1,5 +1,6 @@
 <!-- import polymer-element's definition -->
 <link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_dialog.html">
 <link rel="import" href="statement_card.html">
 
 <polymer-element name="statement-list">
@@ -26,9 +27,12 @@
       }
     </style>
     <div>
+      <h1>Current rules</h1>
       <div id="rulelist">
         <template repeat="{{statement in statements}}">
           <statement-card
+            ros="{{ros}}"
+            isNew="{{statement.isNew}}"
             id="{{statement.id}}"
             trigger_name="{{statement.trigger_name}}"
             trigger_params="{{statement.trigger_params}}"
@@ -42,7 +46,5 @@
       </div>
     </div>
   </template>
-  <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-  <script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
   <script type="application/dart" src="statement_list.dart"></script>
 </polymer-element>

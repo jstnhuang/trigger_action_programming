@@ -7,7 +7,8 @@ class Statement {
   Map<String, String> trigger_params;
   String action_name;
   Map<String, String> action_params;
-  Statement(this.id, this.trigger_name, this.trigger_params, this.action_name, this.action_params);
+  bool isNew = false;
+  Statement(this.id, this.trigger_name, this.trigger_params, this.action_name, this.action_params, this.isNew);
   Statement.fromJs(JsObject jsStatement)
     : id = jsStatement['id'],
       trigger_name = jsStatement['trigger_name'],
