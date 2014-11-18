@@ -2,20 +2,22 @@
 import rospy
 
 from std_msgs.msg import String
+from sound_play.msg import SoundRequest
+from sound_play.libsoundplay import SoundClient
 
 class SaySomething(object):
     def __init__(self, speech):
         self._speech = speech
+        self._client = SoundClient()
 
     def start_goal(self):
-        msg = String(self._speech)
-        self._publisher.publish(msg)
+        self._client.say(self._speech, 'voice_us1_mbrola')
 
     def start(self):
-        self._publisher = rospy.Publisher('/google_tts', String)
+        pass
 
     def stop(self):
-        self._publisher.unregister()
+        pass
 
 class MockSaySomething(object):
     def __init__(self, speech):

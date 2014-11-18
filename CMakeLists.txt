@@ -8,6 +8,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   message_generation
   people_msgs
+  sound_play
 )
 
 ## System dependencies are found with CMake's conventions
@@ -71,6 +72,7 @@ generate_messages(
   DEPENDENCIES
   std_msgs
   people_msgs
+  sound_play
 )
 
 ###################################
@@ -90,6 +92,7 @@ catkin_package(
     message_runtime
     std_msgs
     people_msgs
+    sound_play
 #  DEPENDS system_lib
 )
 
