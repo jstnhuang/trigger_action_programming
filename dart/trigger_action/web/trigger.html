@@ -2,6 +2,7 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="packages/core_elements/core_collapse.html">
 <link rel="import" href="packages/paper_elements/paper_button.html">
+<link rel="import" href="triggers/time_of_day_trigger_options.html">
 
 <polymer-element name="trigger-selector">
   <template>
@@ -25,6 +26,8 @@
       }
       .options {
         margin-top: 10px;
+        border-left: 1px solid rgba(0, 0, 0, 0.12);
+        padding-left: 20px;
       }
     </style>
     <a class="current-trigger" on-click="{{toggle}}">
@@ -42,6 +45,15 @@
         </template>
       </div>
     </core-collapse>
+    <div class="options">
+      <template if="{{name == 'time_of_day'}}">
+        <time-of-day-trigger-options
+          hour="{{params['hour']}}"
+          minute="{{params['minute']}}"
+          days="{{params['days']}}">
+        </time-of-day-trigger-options>
+      </template>
+    </div>
   </template>
   <script type="application/dart" src="trigger.dart"></script>
 </polymer-element>

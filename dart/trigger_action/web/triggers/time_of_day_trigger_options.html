@@ -1,0 +1,66 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_input.html">
+<link rel="import" href="packages/paper_elements/paper_checkbox.html">
+
+<polymer-element name="time-of-day-trigger-options">
+  <template>
+    <style>
+      .label {
+        font-size: 1.25em;
+        color: #555;
+      }
+      paper-input[type="time"] {
+        font-size: 1.25em;
+        height: 2em;
+        padding-top: 0;
+        width: 10em;
+      }
+      .day + .day {
+        margin-left: 10px;
+      }
+      .day paper-checkbox {
+        margin-bottom: 10px;
+      }
+    </style>
+    <div>
+      <span class="label">Time (HH:MM AM/PM)</span>
+      <paper-input id="timeSelector" type="time" value="{{timeString}}"
+        data-hour="{{hour}}"
+        data-minute="{{minute}}"
+        on-change="{{handleTimeChange}}">
+      </paper-input>
+      <div horizontal layout class="days" data-days="{{days}}">
+        <div vertical center layout class="day">
+          <paper-checkbox checked?="{{sunday}}" on-change="{{toggleDay}}" id="sunday"></paper-checkbox>
+          Sunday
+        </div>
+        <div vertical center layout class="day">
+          <paper-checkbox checked?="{{monday}}" on-change="{{toggleDay}}" id="monday"></paper-checkbox>
+          Monday
+        </div>
+        <div vertical center layout class="day">
+          <paper-checkbox checked?="{{tuesday}}" on-change="{{toggleDay}}" id="tuesday"></paper-checkbox>
+          Tuesday
+        </div>
+        <div vertical center layout class="day">
+          <paper-checkbox checked?="{{wednesday}}" on-change="{{toggleDay}}" id="wednesday"></paper-checkbox>
+          Wednesday
+        </div>
+        <div vertical center layout class="day">
+          <paper-checkbox checked?="{{thursday}}" on-change="{{toggleDay}}" id="thursday"></paper-checkbox>
+          Thursday
+        </div>
+        <div vertical center layout class="day">
+          <paper-checkbox checked?="{{friday}}" on-change="{{toggleDay}}" id="friday"></paper-checkbox>
+          Friday
+        </div>
+        <div vertical center layout class="day">
+          <paper-checkbox checked?="{{saturday}}" on-change="{{toggleDay}}" id="saturday"></paper-checkbox>
+          Saturday
+        </div>
+      </div>
+    </div>
+  </template>
+  <script type="application/dart" src="time_of_day_trigger.dart"></script>
+</polymer-element>
