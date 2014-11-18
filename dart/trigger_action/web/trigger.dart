@@ -9,6 +9,7 @@ class TriggerSelectorElement extends PolymerElement {
   
   Map<String, String> display_names = {
     'person_detected': 'Person detected',
+    'time_of_day': 'Time of day'
   };
   
   TriggerSelectorElement.created() : super.created() {
