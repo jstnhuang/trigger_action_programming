@@ -27,7 +27,11 @@ class TimeOfDayTriggerOptions extends PolymerElement {
     thursday = days.contains('thursday');
     friday = days.contains('friday');
     saturday = days.contains('saturday');
-    timeString = '$hour:$minute';
+    if (minute < 10) {
+      timeString = '$hour:0$minute';
+    } else {
+      timeString = '$hour:$minute';
+    }
   }
   
   void handleTimeChange(Event event, Object detail, Element sender) {
