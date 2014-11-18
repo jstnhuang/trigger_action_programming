@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="google_tts" type="speak.py" name="google_tts" />
+  <node pkg="sound_play" type="soundplay_node.py" name="sound_play" />
   <include file="$(find face_detector)/launch/face_detector.wide.launch" />
   <node pkg="trigger_action_programming" type="node.py" name="trigger_action_programming">
     <param name="mock" type="bool" value="False" />

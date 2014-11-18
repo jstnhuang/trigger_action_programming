@@ -4,4 +4,7 @@
   <node pkg="trigger_action_programming" type="node.py" name="trigger_action_programming">
     <param name="mock" type="bool" value="False" />
   </node>
+  <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch">
+    <arg name="port" value="9999" />
+  </include>
 </launch>
