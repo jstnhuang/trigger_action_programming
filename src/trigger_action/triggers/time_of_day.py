@@ -6,6 +6,13 @@ import time as timemod
 
 class TimeOfDay(object):
     def __init__(self, hour, minute, days):
+        """Instantiate a new TimeOfDayTrigger
+
+        Args:
+          hour: The hour to trigger, in the range [0, 23]
+          minute: The minute to trigger, in the range [0, 59]
+          days: A list of lowercase weekday names for which this should trigger.
+        """
         self._callback = None # The callback for this trigger.
         self._hour = hour
         self._minute = minute
@@ -21,14 +28,20 @@ class TimeOfDay(object):
 
     def _clock_callback(self, time_msg):
         current_time = time_msg.data.to_sec()
-        time_struct = timemod.localtime(current_time)
-        in_state = (
-            self._hour == time_struct.tm_hour
-            and self._minute == time_struct.tm_min
-        )
+        in_state = self._check_time(current_time)
         if not self._in_trigger_state and in_state:
             self._callback()
         self._in_trigger_state = in_state
+
+    def _check_time(self, current_time):
+        time_struct = timemod.localtime(current_time)
+        days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+        day = days[time_struct.tm_wday]
+        return (
+            self._hour == time_struct.tm_hour
+            and self._minute == time_struct.tm_min
+            and day in self._days
+        )
 
     def stop(self):
         self._clock_subscriber.unregister()
