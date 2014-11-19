@@ -2,4 +2,5 @@
   <test test-name="node_test" pkg="trigger_action_programming" type="node_test.py">
     <param name="~mock" type="bool" value="True" />
   </test>
+  <test test-name="time_of_day_trigger_test" pkg="trigger_action_programming" type="time_of_day_test.py" />
 </launch>
