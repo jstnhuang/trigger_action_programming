@@ -57,7 +57,7 @@ class Node(object):
             response = GetStatementByIdResponse(statement)
             return response
         except KeyError:
-            raise rospy.ServiceException('No statement with ID: {}'.format(reqest.id))
+            raise rospy.ServiceException('No statement with ID: {}'.format(request.id))
 
     def _handle_update_statement(self, request):
         try:
