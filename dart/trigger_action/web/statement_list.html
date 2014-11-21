@@ -1,5 +1,6 @@
 <!-- import polymer-element's definition -->
 <link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_toast.html">
 <link rel="import" href="statement_card.html">
 
 <polymer-element name="statement-list">
@@ -41,6 +42,7 @@
             action_name="{{statement.action_name}}"
             action_params="{{statement.action_params}}">
           </statement-card>
+          <paper-toast id="toast" text="Updated rule"></paper-toast>
         </template>
       </div>
       <div class="uncreated-card">

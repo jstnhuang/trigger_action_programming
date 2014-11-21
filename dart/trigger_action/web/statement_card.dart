@@ -14,32 +14,29 @@ class StatementCard extends PolymerElement {
   @published Map<String, String> action_params = {};
   @published bool isNew = false;
   @published String saveLabel = '';
-  
+
   @published Ros ros;
   Service _addStatementClient;
   Service _updateStatementClient;
   Service _deleteStatementClient;
-  
-  Element _saveButton;
-  Element _deleteButton;
-  
+
   StatementCard.created() : super.created() {
     updateSaveButton();
   }
-  
+
   void attached() {
     this._addStatementClient = new Service(this.ros, '/add_statement', 'trigger_action_programming/AddStatement');
     this._updateStatementClient = new Service(this.ros, '/update_statement', 'trigger_action_programming/UpdateStatement');
     this._deleteStatementClient = new Service(this.ros, '/delete_statement', 'trigger_action_programming/DeleteStatement');
     updateSaveButton();
   }
-  
+
   void toast(String text) {
-    String oldLabel = saveLabel;
-    saveLabel = text;
-    Timer timer = new Timer(new Duration(seconds: 3), () {updateSaveButton();});
+    Element t = document.querySelector('body /deep/ #toast');
+    t.attributes['text'] = text;
+    t.show();
   }
-  
+
   void updateSaveButton() {
     if (isNew) {
       saveLabel = 'Add rule';
@@ -47,7 +44,7 @@ class StatementCard extends PolymerElement {
       saveLabel = 'Update rule';
     }
   }
-  
+
   void save(Event event, Object detail, Element sender) {
     var statementObject = {
       'id': id,
@@ -62,6 +59,7 @@ class StatementCard extends PolymerElement {
       future.then((JsObject results) {
         id = results['id'];
         isNew = false;
+        saveLabel = 'Update rule';
         toast('Added new rule.');
       });
     } else {
@@ -77,7 +75,7 @@ class StatementCard extends PolymerElement {
       });
     }
   }
-  
+
   void delete(Event event, Object detail, Element sender) {
     if (isNew) {
       this.remove();
@@ -85,6 +83,7 @@ class StatementCard extends PolymerElement {
       var request = new ServiceRequest({'id': id});
       Future future = this._deleteStatementClient.call(request);
       future.then((JsObject results) {
+        toast('Deleted rule.');
         this.remove();
       });
     }
