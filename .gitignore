@@ -4,3 +4,10 @@ dart/trigger_action/.buildlog
 dart/trigger_action/build/
 dart/trigger_action/.pub
 dart/trigger_action/packages
+
+packages
+
+*.dart.js
+*.js_
+*.js.deps
+*.js.map
