@@ -1,6 +1,6 @@
 <!-- import polymer-element's definition -->
 <link rel="import" href="packages/polymer/polymer.html">
-<link rel="import" href="packages/paper_elements/paper_toast.html">
+<link rel="import" href="packages/paper_elements/paper_shadow.html">
 <link rel="import" href="trigger.html">
 <link rel="import" href="action.html">
 
@@ -14,7 +14,6 @@
         box-sizing: border-box;
         width: 100%;
         border-radius: 2px;
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
       }
       .ifthenheading {
         font-size: 1.5em;
@@ -50,9 +49,10 @@
         <action-selector name="{{action_name}}" params="{{action_params}}"></action-selector>
       </div>
       <div class="buttons">
-        <paper-button id="saveButton" label="{{saveLabel}}" disabled?="{{trigger_name == '' || action_name == ''}}" on-click="{{save}}"></paper-button>
-        <paper-button id="deleteButton" label="Delete" on-click="{{delete}}"></paper-button>
+        <paper-button id="saveButton" disabled?="{{trigger_name == '' || action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
+        <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
       </div>
+      <paper-shadow z="1"></paper-shadow>
     </div>
     
   </template>

@@ -14,6 +14,7 @@ class StatementCard extends PolymerElement {
   @published Map<String, String> action_params = {};
   @published bool isNew = false;
   @published String saveLabel = '';
+  @published String deleteLabel = '';
 
   @published Ros ros;
   Service _addStatementClient;
@@ -21,14 +22,14 @@ class StatementCard extends PolymerElement {
   Service _deleteStatementClient;
 
   StatementCard.created() : super.created() {
-    updateSaveButton();
+    updateButtons();
   }
 
   void attached() {
     this._addStatementClient = new Service(this.ros, '/add_statement', 'trigger_action_programming/AddStatement');
     this._updateStatementClient = new Service(this.ros, '/update_statement', 'trigger_action_programming/UpdateStatement');
     this._deleteStatementClient = new Service(this.ros, '/delete_statement', 'trigger_action_programming/DeleteStatement');
-    updateSaveButton();
+    updateButtons();
   }
 
   void toast(String text) {
@@ -37,11 +38,13 @@ class StatementCard extends PolymerElement {
     t.show();
   }
 
-  void updateSaveButton() {
+  void updateButtons() {
     if (isNew) {
       saveLabel = 'Add rule';
+      deleteLabel = 'Cancel';
     } else {
       saveLabel = 'Update rule';
+      deleteLabel = 'Delete';
     }
   }
 
@@ -59,7 +62,7 @@ class StatementCard extends PolymerElement {
       future.then((JsObject results) {
         id = results['id'];
         isNew = false;
-        saveLabel = 'Update rule';
+        updateButtons();
         toast('Added new rule.');
       });
     } else {
