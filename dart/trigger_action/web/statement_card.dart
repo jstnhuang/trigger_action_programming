@@ -88,6 +88,7 @@ class StatementCard extends PolymerElement {
       future.then((JsObject results) {
         toast('Deleted rule.');
         this.remove();
+        // TODO(jstn): does not delete from statement list's internal list.
       });
     }
   }
