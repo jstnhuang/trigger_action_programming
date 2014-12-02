@@ -8,9 +8,11 @@
 <polymer-element name="statement-card">
   <template>
     <style>
+      .wrapper {
+        margin-bottom: 20px;
+      }
       .card {
         padding: 20px;
-        margin-bottom: 20px;
         background: white;
         box-sizing: border-box;
         width: 100%;
@@ -41,24 +43,24 @@
         margin-top: 20px;
       }
     </style>
-    <div>
-    <paper-shadow z="1"></paper-shadow>
-    <core-collapse opened="{{opened}}" duration="0.3">
-      <div class="card">
-        <div class="if-then-section">
-          <h1 class="ifthenheading">If: </h1>
-          <trigger-selector name="{{trigger_name}}" params="{{trigger_params}}"></trigger-selector>
+    <div class="wrapper">
+      <paper-shadow z="1"></paper-shadow>
+      <core-collapse opened="{{opened}}" duration="0.3">
+        <div class="card">
+          <div class="if-then-section">
+            <h1 class="ifthenheading">If: </h1>
+            <trigger-selector name="{{trigger_name}}" params="{{trigger_params}}"></trigger-selector>
+          </div>
+          <div class="if-then-section">
+            <h1 class="ifthenheading">Then: </h1>
+            <action-selector name="{{action_name}}" params="{{action_params}}"></action-selector>
+          </div>
+          <div class="buttons">
+            <paper-button id="saveButton" disabled?="{{trigger_name == '' || action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
+            <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
+          </div>
         </div>
-        <div class="if-then-section">
-          <h1 class="ifthenheading">Then: </h1>
-          <action-selector name="{{action_name}}" params="{{action_params}}"></action-selector>
-        </div>
-        <div class="buttons">
-          <paper-button id="saveButton" disabled?="{{trigger_name == '' || action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
-          <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
-        </div>
-      </div>
-    </core-collapse>
+      </core-collapse>
     </div>
    
   </template>
