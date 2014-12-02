@@ -41,7 +41,7 @@
     <core-collapse opened?="{{opened}}">
       <div class="trigger-list">
         <template repeat="{{trigger_name in display_names.keys}}">
-          <paper-button label="{{display_names[trigger_name]}}" on-click="{{triggerSelected}}" data-name="{{trigger_name}}"></paper-button>
+          <paper-button on-click="{{triggerSelected}}" data-name="{{trigger_name}}">{{display_names[trigger_name]}}</paper-button>
         </template>
       </div>
     </core-collapse>

@@ -42,7 +42,7 @@
     <core-collapse opened?="{{opened}}">
       <div class="action-list">
         <template repeat="{{action_name in display_names.keys}}">
-          <paper-button label="{{display_names[action_name]}}" on-click="{{actionSelected}}" data-name="{{action_name}}"></paper-button>
+          <paper-button on-click="{{actionSelected}}" data-name="{{action_name}}">{{display_names[action_name]}}</paper-button>
         </template>
       </div>
     </core-collapse>
