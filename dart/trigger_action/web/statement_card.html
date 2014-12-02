@@ -1,5 +1,6 @@
 <!-- import polymer-element's definition -->
 <link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/core_elements/core_collapse.html">
 <link rel="import" href="packages/paper_elements/paper_shadow.html">
 <link rel="import" href="trigger.html">
 <link rel="import" href="action.html">
@@ -14,6 +15,7 @@
         box-sizing: border-box;
         width: 100%;
         border-radius: 2px;
+        overflow: auto;
       }
       .ifthenheading {
         font-size: 1.5em;
@@ -39,22 +41,26 @@
         margin-top: 20px;
       }
     </style>
-    <div class="card">
-      <div class="if-then-section">
-        <h1 class="ifthenheading">If: </h1>
-        <trigger-selector name="{{trigger_name}}" params="{{trigger_params}}"></trigger-selector>
+    <div>
+    <paper-shadow z="1"></paper-shadow>
+    <core-collapse opened="{{opened}}" duration="0.3">
+      <div class="card">
+        <div class="if-then-section">
+          <h1 class="ifthenheading">If: </h1>
+          <trigger-selector name="{{trigger_name}}" params="{{trigger_params}}"></trigger-selector>
+        </div>
+        <div class="if-then-section">
+          <h1 class="ifthenheading">Then: </h1>
+          <action-selector name="{{action_name}}" params="{{action_params}}"></action-selector>
+        </div>
+        <div class="buttons">
+          <paper-button id="saveButton" disabled?="{{trigger_name == '' || action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
+          <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
+        </div>
       </div>
-      <div class="if-then-section">
-        <h1 class="ifthenheading">Then: </h1>
-        <action-selector name="{{action_name}}" params="{{action_params}}"></action-selector>
-      </div>
-      <div class="buttons">
-        <paper-button id="saveButton" disabled?="{{trigger_name == '' || action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
-        <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
-      </div>
-      <paper-shadow z="1"></paper-shadow>
+    </core-collapse>
     </div>
-    
+   
   </template>
   <script type="application/dart" src="statement_card.dart"></script>
 </polymer-element>

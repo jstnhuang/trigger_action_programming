@@ -37,17 +37,19 @@
             ros="{{ros}}"
             isNew="{{statement.isNew}}"
             id="{{statement.id}}"
+            parentList="{{statements}}"
             trigger_name="{{statement.trigger_name}}"
             trigger_params="{{statement.trigger_params}}"
             action_name="{{statement.action_name}}"
-            action_params="{{statement.action_params}}">
+            action_params="{{statement.action_params}}"
+            opened="{{!statement.isNew}}">
           </statement-card>
-          <paper-toast id="toast" text="Updated rule"></paper-toast>
         </template>
       </div>
       <div class="uncreated-card">
         <a on-click="{{createRule}}">Create a new rule</a>
       </div>
+      <paper-toast id="toast" text="Updated rule"></paper-toast>
     </div>
   </template>
   <script type="application/dart" src="statement_list.dart"></script>

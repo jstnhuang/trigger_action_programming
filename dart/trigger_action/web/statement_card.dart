@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:html';
 import 'dart:js';
 import 'roslibjs.dart';
+import 'statement.dart';
 
 @CustomTag('statement-card')
 class StatementCard extends PolymerElement {
@@ -15,6 +16,8 @@ class StatementCard extends PolymerElement {
   @published bool isNew = false;
   @published String saveLabel = '';
   @published String deleteLabel = '';
+  @published List<Statement> parentList;
+  @published bool opened = false;
 
   @published Ros ros;
   Service _addStatementClient;
@@ -30,6 +33,9 @@ class StatementCard extends PolymerElement {
     this._updateStatementClient = new Service(this.ros, '/update_statement', 'trigger_action_programming/UpdateStatement');
     this._deleteStatementClient = new Service(this.ros, '/delete_statement', 'trigger_action_programming/DeleteStatement');
     updateButtons();
+    Timer timer = new Timer(new Duration(milliseconds: 50), () {
+      opened = true;
+    });
   }
 
   void toast(String text) {
@@ -81,14 +87,21 @@ class StatementCard extends PolymerElement {
 
   void delete(Event event, Object detail, Element sender) {
     if (isNew) {
-      this.remove();
+      opened=false;
+      Timer timer = new Timer(new Duration(milliseconds: 333), () {
+        this.remove();
+      });
     } else {
       var request = new ServiceRequest({'id': id});
       Future future = this._deleteStatementClient.call(request);
       future.then((JsObject results) {
         toast('Deleted rule.');
-        this.remove();
-        // TODO(jstn): does not delete from statement list's internal list.
+        opened=false;
+        Timer timer = new Timer(new Duration(milliseconds: 333), () {
+          parentList.removeWhere((Statement card) {
+            return card.id == this.id;
+          });
+        });
       });
     }
   }
