@@ -61,10 +61,6 @@ packages:
     description: polymer
     source: hosted
     version: "0.15.1+5"
-  polymer_elements:
-    description: polymer_elements
-    source: hosted
-    version: "0.0.2"
   polymer_expressions:
     description: polymer_expressions
     source: hosted
@@ -88,7 +84,7 @@ packages:
   source_span:
     description: source_span
     source: hosted
-    version: "1.0.0"
+    version: "1.0.2"
   stack_trace:
     description: stack_trace
     source: hosted
