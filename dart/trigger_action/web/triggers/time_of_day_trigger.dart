@@ -14,6 +14,7 @@ class TimeOfDayTriggerOptions extends PolymerElement {
   @published bool thursday = false;
   @published bool friday = false;
   @published bool saturday = false;
+  @published String beforeOrAfter = 'Choose before or after';
   
   TimeOfDayTriggerOptions.created() : super.created() {
   }

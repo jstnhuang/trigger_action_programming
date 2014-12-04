@@ -2,6 +2,8 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="packages/paper_elements/paper_input.html">
 <link rel="import" href="packages/paper_elements/paper_checkbox.html">
+<link rel="import" href="packages/paper_elements/paper_dropdown_menu.html">
+<link rel="import" href="packages/paper_elements/paper_item.html">
 
 <polymer-element name="time-of-day-trigger-options">
   <template>
@@ -9,12 +11,30 @@
       .label {
         font-size: 1.25em;
         color: #555;
+        margin-right: 0.5em;
+        padding-top: 0.75em;
       }
       paper-input[type="time"] {
         font-size: 1.25em;
         height: 2em;
-        padding-top: 0;
+        padding: 0;
         width: 10em;
+        color: #03A9F4;
+      }
+      paper-input[type="time"] /deep/ #input {
+        color: #03A9F4;
+      }
+      paper-dropdown-menu {
+        margin-top: 3px;
+        padding: 0;
+        margin-right: 0.5em;
+        font-size: 1.25em;
+      }
+      paper-dropdown-menu /deep/ #control > div {
+        color: #03A9F4;
+      }
+      .time-options {
+        margin-bottom: 10px;
       }
       .day + .day {
         margin-left: 10px;
@@ -24,12 +44,19 @@
       }
     </style>
     <div>
-      <span class="label">Time (HH:MM AM/PM)</span>
-      <paper-input id="timeSelector" type="time" value="{{timeString}}"
-        data-hour="{{hour}}"
-        data-minute="{{minute}}"
-        on-change="{{handleTimeChange}}">
-      </paper-input>
+      <div layout horizontal class="time-options">
+        <span class="label">Time</span>
+        <paper-dropdown-menu valueattr="label" selected="{{beforeOrAfter}}">
+          <paper-item label="is"></paper-item>
+          <paper-item label="is before"></paper-item>
+          <paper-item label="is after"></paper-item>
+        </paper-dropdown-menu>
+        <paper-input id="timeSelector" type="time" value="{{timeString}}"
+          data-hour="{{hour}}"
+          data-minute="{{minute}}"
+          on-change="{{handleTimeChange}}">
+        </paper-input>
+      </div>
       <div horizontal layout class="days" data-days="{{days}}">
         <div vertical center layout class="day">
           <paper-checkbox checked?="{{sunday}}" on-change="{{toggleDay}}" id="sunday"></paper-checkbox>

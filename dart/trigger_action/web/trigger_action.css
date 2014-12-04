@@ -10,3 +10,7 @@ body {
 body /deep/ h1 , p {
   color: #333;
 }
+
+.changeable {
+  color: #03A9F4;
+}
