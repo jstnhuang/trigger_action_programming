@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-class Statement(object):
+class rule(object):
     def __init__(self, trigger, action):
         self._trigger = trigger
         self._action = action

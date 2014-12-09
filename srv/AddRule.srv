@@ -1,0 +1,3 @@
+trigger_action_programming/Rule rule # The rule to add to the program.
+---
+string id # Unique ID for the newly added rule.

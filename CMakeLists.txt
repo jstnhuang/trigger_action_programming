@@ -48,17 +48,17 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 add_message_files(
   FILES
-  Statement.msg
+  Rule.msg
 )
 
 ## Generate services in the 'srv' folder
 add_service_files(
   FILES
-  AddStatement.srv
-  DeleteStatement.srv
-  GetAllStatements.srv
-  GetStatementById.srv
-  UpdateStatement.srv
+  AddRule.srv
+  DeleteRule.srv
+  GetAllRules.srv
+  GetRuleById.srv
+  UpdateRule.srv
 )
 
 ## Generate actions in the 'action' folder

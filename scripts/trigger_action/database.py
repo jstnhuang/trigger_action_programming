@@ -17,24 +17,24 @@ class ProgramDatabase(object):
     def _increment_current_id(self):
         self._data['current_id'] += 1
 
-    def add_statement(self, statement_msg):
-        statement_id = str(self.current_id())
-        statement_msg.id = statement_id
-        self._data[statement_id] = statement_msg
+    def add_rule(self, rule_msg):
+        rule_id = str(self.current_id())
+        rule_msg.id = rule_id
+        self._data[rule_id] = rule_msg
         self._increment_current_id()
-        return statement_id
+        return rule_id
 
-    def get_all_statements(self):
+    def get_all_rules(self):
         return [v for k, v in self._data.items() if k != 'current_id']
 
-    def get_statement_by_id(self, id):
+    def get_rule_by_id(self, id):
         return self._data[id]
 
-    def update_statement(self, id, statement_msg):
-        statement_msg.id = id
-        self._data[id] = statement_msg
+    def update_rule(self, id, rule_msg):
+        rule_msg.id = id
+        self._data[id] = rule_msg
 
-    def delete_statement(self, id):
+    def delete_rule(self, id):
         del self._data[id]
 
     def close(self):
@@ -51,24 +51,24 @@ class InMemoryProgramDatabase(object):
     def _increment_current_id(self):
         self._data['current_id'] += 1
 
-    def add_statement(self, statement_msg):
-        statement_id = str(self.current_id())
-        statement_msg.id = statement_id
-        self._data[statement_id] = statement_msg
+    def add_rule(self, rule_msg):
+        rule_id = str(self.current_id())
+        rule_msg.id = rule_id
+        self._data[rule_id] = rule_msg
         self._increment_current_id()
-        return statement_id
+        return rule_id
 
-    def get_all_statements(self):
+    def get_all_rules(self):
         return [v for k, v in self._data.items() if k != 'current_id']
 
-    def get_statement_by_id(self, id):
+    def get_rule_by_id(self, id):
         return self._data[id]
 
-    def update_statement(self, id, statement_msg):
-        statement_msg.id = id
-        self._data[id] = statement_msg
+    def update_rule(self, id, rule_msg):
+        rule_msg.id = id
+        self._data[id] = rule_msg
 
-    def delete_statement(self, id):
+    def delete_rule(self, id):
         del self._data[id]
 
     def close(self):
