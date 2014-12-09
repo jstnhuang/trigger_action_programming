@@ -1,7 +1,7 @@
 <!-- import polymer-element's definition -->
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="packages/paper_elements/paper_toast.html">
-<link rel="import" href="statement_card.html">
+<link rel="import" href="statement.html">
 
 <polymer-element name="statement-list">
   <template>
@@ -38,8 +38,7 @@
             isNew="{{statement.isNew}}"
             id="{{statement.id}}"
             parentList="{{statements}}"
-            trigger_name="{{statement.trigger_name}}"
-            trigger_params="{{statement.trigger_params}}"
+            triggers="{{statement.triggers}}"
             action_name="{{statement.action_name}}"
             action_params="{{statement.action_params}}"
             opened="{{!statement.isNew}}">

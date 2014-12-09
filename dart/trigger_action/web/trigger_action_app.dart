@@ -8,7 +8,7 @@ class TriggerActionAppElement extends PolymerElement {
   @published bool isConnected;
 
   TriggerActionAppElement.created() : super.created() {
-    ros = new Ros(robotWebsocketUrl);
+    ros = new Ros(localWebsocketUrl);
   }
 
   void attached() {

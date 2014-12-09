@@ -1,0 +1,33 @@
+<!-- import polymer-element's definition -->
+<link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="trigger.html">
+
+<polymer-element name="trigger-list">
+  <template>
+    <style>
+      .uncreated-trigger a {
+        color: #03A9F4;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .uncreated-trigger a:hover {
+        text-decoration: underline;
+      }
+      .uncreated-trigger {
+        margin-top: 10px;
+      }
+    </style>
+    <template if="{{triggers.length > 0}}">
+      <template repeat="{{trigger in triggers}}">
+        <trigger-selector name="{{trigger.name}}" params="{{trigger.params}}" isFirst="{{trigger.isFirst}}" parentList="{{triggers}}"></trigger-selector>
+      </template>
+    </template>
+    <template if="{{triggers.length > 0}}">
+    {{triggers.length}}
+      <div class="uncreated-trigger">
+        <a on-click="{{createTrigger}}">+ Add another condition</a>
+      </div>
+    </template>
+  </template>
+  <script type="application/dart" src="trigger_list.dart"></script>
+</polymer-element>

@@ -29,7 +29,15 @@
         border-left: 1px solid rgba(0, 0, 0, 0.12);
         padding-left: 20px;
       }
+      .and {
+        font-size: 1.5em;
+        margin: 10px 0px;
+      }
     </style>
+    <template if="{{!isFirst}}">
+      <br />
+      <span class="and">and:</span>
+    </template>
     <a class="current-trigger" on-click="{{toggle}}">
       <template if="{{name != ''}}">
         {{display_names[name]}}

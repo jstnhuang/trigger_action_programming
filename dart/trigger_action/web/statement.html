@@ -2,8 +2,9 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="packages/core_elements/core_collapse.html">
 <link rel="import" href="packages/paper_elements/paper_shadow.html">
-<link rel="import" href="trigger.html">
+<!--link rel="import" href="trigger_list.html"-->
 <link rel="import" href="action.html">
+<link rel="import" href="trigger.html">
 
 <polymer-element name="statement-card">
   <template>
@@ -42,6 +43,17 @@
       .buttons {
         margin-top: 20px;
       }
+      .uncreated-trigger a {
+        color: #03A9F4;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .uncreated-trigger a:hover {
+        text-decoration: underline;
+      }
+      .uncreated-trigger {
+        margin-top: 10px;
+      }
     </style>
     <div class="wrapper">
       <paper-shadow z="1"></paper-shadow>
@@ -49,14 +61,23 @@
         <div class="card">
           <div class="if-then-section">
             <h1 class="ifthenheading">If: </h1>
-            <trigger-selector name="{{trigger_name}}" params="{{trigger_params}}"></trigger-selector>
+            <template if="{{triggers.length > 0}}">
+              <template repeat="{{trigger in triggers}}">
+                <trigger-selector name="{{trigger.name}}" params="{{trigger.params}}" isFirst="{{trigger.isFirst}}" parentList="{{triggers}}"></trigger-selector>
+              </template>
+            </template>
+            <template if="{{triggers.length > 0}}">
+              <div class="uncreated-trigger">
+                <a on-click="{{createTrigger}}">+ Add another condition</a>
+              </div>
+            </template>
           </div>
           <div class="if-then-section">
             <h1 class="ifthenheading">Then: </h1>
             <action-selector name="{{action_name}}" params="{{action_params}}"></action-selector>
           </div>
           <div class="buttons">
-            <paper-button id="saveButton" disabled?="{{trigger_name == '' || action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
+            <paper-button id="saveButton" disabled?="{{triggers.length == 0 || action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
             <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
           </div>
         </div>
@@ -64,5 +85,5 @@
     </div>
    
   </template>
-  <script type="application/dart" src="statement_card.dart"></script>
+  <script type="application/dart" src="statement.dart"></script>
 </polymer-element>

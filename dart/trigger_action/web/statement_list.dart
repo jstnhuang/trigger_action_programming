@@ -12,7 +12,7 @@ class NullTreeSanitizer implements NodeTreeSanitizer {
 class StatementList extends PolymerElement {
   @published Ros ros;
   Service _getStatementsClient;
-  List<Statement> statements = toObservable([]);
+  List<StatementModel> statements = toObservable([]);
 
   StatementList.created() : super.created() {
   }
@@ -25,7 +25,7 @@ class StatementList extends PolymerElement {
     .then((JsObject results) {
       this.statements.clear();
       for (JsObject jsStatement in results['statements']) {
-        this.statements.add(new Statement.fromJs(jsStatement));
+        this.statements.add(new StatementModel.fromJs(jsStatement));
       }
     })
     .catchError((Event error) {
@@ -34,7 +34,7 @@ class StatementList extends PolymerElement {
   }
 
   void createRule(MouseEvent event) {
-    Statement statement = new Statement('unknown', '', {}, '', {}, true);
+    StatementModel statement = new StatementModel('unknown', [], '', {}, true);
     statements.add(statement);
   }
 }
