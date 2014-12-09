@@ -4,16 +4,23 @@ import rospy
 import rostest
 import unittest
 from multiprocessing import Process
-from trigger_action_programming.msg import Rule
+from trigger_action_programming.msg import *
 from trigger_action_programming.srv import *
 
+def triggers_are_equal(a, b):
+    return a.name == b.name and a.params == b.params
+
+def actions_are_equal(a, b):
+    return a.name == b.name and a.params == b.params
+
 def rules_are_equal(a, b):
-    return (
-        a.trigger_name == b.trigger_name
-        and a.trigger_params == b.trigger_params
-        and a.action_name == b.action_name
-        and a.action_params == b.action_params
-    )
+    for ta, tb in zip(sorted(a.triggers), sorted(b.triggers)):
+        if not triggers_are_equal(ta, tb):
+            return False
+    for aa, ab in zip(sorted(a.actions), sorted(b.actions)):
+        if not actions_are_equal(aa, ab):
+            return False
+    return True
 
 class NodeTest(unittest.TestCase):
     def setUp(self):
@@ -44,8 +51,8 @@ class NodeTest(unittest.TestCase):
     def test_add_rule(self):
         rule = Rule(
             'unused',
-            'person_detected', '{}',
-            'say_something', '{"speech": "Hello"}'
+            [Trigger('person_detected', '{}')],
+            [Action('say_something', '{"speech": "Hello"}')]
         )
         request = AddRuleRequest(rule)
         response = self._add_rule(request)
@@ -54,14 +61,14 @@ class NodeTest(unittest.TestCase):
         response = self._get_all_rules(request)
         rules = response.rules
         self.assertEquals(len(rules), 1)
-        self.assertTrue(rules_are_equal(rules[0], rule)) # Add rule comparator that ignores ID.
+        self.assertTrue(rules_are_equal(rules[0], rule))
         self.assertEquals(rules[0].id, '0')
 
     def test_get_by_id(self):
         rule = Rule(
             'unused',
-            'person_detected', '{}',
-            'say_something', '{"speech": "Hello"}'
+            [Trigger('person_detected', '{}')],
+            [Action('say_something', '{"speech": "Hello"}')]
         )
         request = AddRuleRequest(rule)
         id_response = self._add_rule(request)
@@ -80,8 +87,8 @@ class NodeTest(unittest.TestCase):
     def test_update(self):
         rule = Rule(
             'unused',
-            'person_detected', '{}',
-            'say_something', '{"speech": "Hello"}'
+            [Trigger('person_detected', '{}')],
+            [Action('say_something', '{"speech": "Hello"}')]
         )
         request = AddRuleRequest(rule)
         id_response = self._add_rule(request)
@@ -92,8 +99,8 @@ class NodeTest(unittest.TestCase):
 
         updated_rule = Rule(
             'unused',
-            'person_detected', '{}',
-            'say_something', '{"speech": "Hi there"}'
+            [Trigger('person_detected', '{}')],
+            [Action('say_something', '{"speech": "Hi there"}')]
         )
         request = UpdateRuleRequest(id_response.id, updated_rule)
         self._update_rule(request)
@@ -107,8 +114,8 @@ class NodeTest(unittest.TestCase):
         try:
             rule = Rule(
                 'unused',
-                'person_detected', '{}',
-                'say_something', '{"speech": "Hello"}'
+                [Trigger('person_detected', '{}')],
+                [Action('say_something', '{"speech": "Hello"}')]
             )
             request = UpdateRuleRequest('badid', rule)
             response = self._update_rule(request)
@@ -118,8 +125,8 @@ class NodeTest(unittest.TestCase):
     def test_delete(self):
         rule = Rule(
             'unused',
-            'person_detected', '{}',
-            'say_something', '{"speech": "Hello"}'
+            [Trigger('person_detected', '{}')],
+            [Action('say_something', '{"speech": "Hello"}')]
         )
         request = AddRuleRequest(rule)
         id_response = self._add_rule(request)

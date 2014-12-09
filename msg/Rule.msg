@@ -1,5 +1,4 @@
+# Represents a rule in the trigger-action programming system.
 string id # A unique ID for this rule, for persistance purposes. Ignored when adding a new rule.
-string trigger_name
-string trigger_params # A JSON object with key-value pairs.
-string action_name
-string action_params
+Trigger[] triggers
+Action[] actions

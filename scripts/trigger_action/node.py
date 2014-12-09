@@ -61,10 +61,10 @@ class Node(object):
 
     def _handle_update_rule(self, request):
         try:
-            self._db.update_rule(request.id, request.updated_rule)
+            self._db.update_rule(request.id, request.rule)
             response = UpdateRuleResponse()
 
-            rule = rule_factory.build(request.updated_rule, self._is_mock)
+            rule = rule_factory.build(request.rule, self._is_mock)
             self._rules[request.id].stop()
             self._rules[request.id] = rule
             rule.start()

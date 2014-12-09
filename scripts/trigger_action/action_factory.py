@@ -2,9 +2,11 @@
 import json
 from actions import say_something
 
-def build(action_name, action_params, is_mock=False):
-    if action_name == 'say_something':
-        params = json.loads(action_params)
+def build(action_msg, is_mock=False):
+    name = action_msg.name
+    json_params = action_msg.params
+    if name == 'say_something':
+        params = json.loads(json_params)
         if 'speech' not in params:
             raise ValueError('"speech" parameter required for say_something.')
         speech = params['speech']

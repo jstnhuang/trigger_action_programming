@@ -1,15 +1,26 @@
 #!/usr/bin/env python
 
 class rule(object):
-    def __init__(self, trigger, action):
-        self._trigger = trigger
-        self._action = action
+    def __init__(self, triggers, actions):
+        self._triggers = triggers
+        self._actions = actions
 
     def start(self):
-        self._trigger.set_callback(self._action.start_goal)
-        self._trigger.start()
-        self._action.start()
+        # TODO(jstn): implement multiple triggers 
+        self._triggers[0].set_callback(self._execute_actions)
+        for trigger in self._triggers:
+            trigger.start()
+        for action in self._actions:
+            action.start()
+
+    def _execute_actions(self):
+        # TODO(jstn): implement multiple actions.
+        action = self.actions[0]
+        action.start_goal
+        pass
 
     def stop(self):
-        self._trigger.stop()
-        self._action.stop()
+        for trigger in self._triggers:
+            trigger.stop()
+        for action in self._actions:
+            action.stop()

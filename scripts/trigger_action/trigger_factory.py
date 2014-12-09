@@ -4,16 +4,18 @@ import rospy
 from triggers import person_detected
 from triggers import time_of_day
 
-def build(trigger_name, trigger_params, is_mock=False):
-    params = json.loads(trigger_params)
-    if trigger_name == 'person_detected':
+def build(trigger_msg, is_mock=False):
+    name = trigger_msg.name
+    json_params = trigger_msg.params
+    params = json.loads(json_params)
+    if name == 'person_detected':
         if is_mock:
             trigger = person_detected.MockPersonDetected()
             return trigger
         else:
             trigger = person_detected.PersonDetected()
             return trigger
-    elif trigger_name == 'time_of_day':
+    elif name == 'time_of_day':
         if 'hour' not in params or 'minute' not in params or 'days' not in params:
             raise ValueError('"hour", "minute", and/or "days" parameter(s) missing.')
         hour = int(params['hour'])
