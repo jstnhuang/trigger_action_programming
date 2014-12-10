@@ -63,7 +63,7 @@
             <h1 class="ifthenheading">If: </h1>
               <template repeat="{{trigger in triggers | enumerate}}">
                 <span on-delete-trigger="{{deleteTrigger}}" data-index="{{trigger.index}}">
-                  <trigger-selector model="{{trigger.value}}" isFirst="{{trigger.index == 0}}"></trigger-selector>
+                  <trigger-selector model="{{trigger.value}}" isFirst="{{trigger.index == 0}}" isOnly="{{triggers.length == 1}}"></trigger-selector>
                 </span>
               </template>
             <template if="{{triggers.length > 0}}">

@@ -8,6 +8,7 @@ class TriggerSelectorElement extends PolymerElement {
   @published Trigger model;
   @observable bool opened = false;
   @published bool isFirst = false;
+  @published bool isOnly = false;
   @observable bool animationStart = false;
   
   Map<String, String> display_names = {
