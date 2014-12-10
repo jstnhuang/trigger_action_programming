@@ -1,7 +1,7 @@
 <!-- import polymer-element's definition -->
 <link rel="import" href="packages/polymer/polymer.html">
-<link rel="import" href="packages/core_elements/core_animation.html">
 <link rel="import" href="packages/core_elements/core_collapse.html">
+<link rel="import" href="packages/core_elements/core_icon.html">
 <link rel="import" href="packages/paper_elements/paper_button.html">
 <link rel="import" href="triggers/time_of_day_trigger_options.html">
 
@@ -34,6 +34,18 @@
         font-size: 1.5em;
         margin: 10px 0px;
       }
+      .cancel-button {
+        height: 15px;
+        width: 15px;
+        fill: #BDBDBD;
+        position: relative;
+        top: -1em;
+        left: -0.4em;
+        cursor: pointer;
+      }
+      .cancel-button:hover {
+        fill: #B71C1C;
+      }
     </style>
     <core-collapse opened="{{animationStart}}" id="animation" duration="0.33">
     <span id="trigger">
@@ -49,6 +61,7 @@
         Choose a trigger
       </template>
     </a>
+    <a on-click="{{delete}}"><core-icon class="cancel-button" icon="cancel"></core-icon></a>
     <core-collapse opened?="{{opened}}">
       <div class="trigger-list">
         <template repeat="{{trigger_name in display_names.keys}}">

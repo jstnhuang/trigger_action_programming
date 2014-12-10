@@ -33,4 +33,11 @@ class TriggerSelectorElement extends PolymerElement {
     toggle();
     model.name = sender.attributes['data-name'];
   }
+  
+  void delete() {
+    dispatchEvent(new CustomEvent(
+      'delete-trigger',
+      detail: {'element': this}
+    ));
+  }
 }

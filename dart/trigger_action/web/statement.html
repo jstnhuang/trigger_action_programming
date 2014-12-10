@@ -61,9 +61,11 @@
         <div class="card">
           <div class="if-then-section">
             <h1 class="ifthenheading">If: </h1>
-            <template repeat="{{trigger in triggers}}">
-              <trigger-selector model="{{trigger}}"></trigger-selector>
-            </template>
+              <template repeat="{{trigger in triggers | enumerate}}">
+                <span on-delete-trigger="{{deleteTrigger}}" data-index="{{trigger.index}}">
+                  <trigger-selector model="{{trigger.value}}"></trigger-selector>
+                </span>
+              </template>
             <template if="{{triggers.length > 0}}">
               <div class="uncreated-trigger">
                 <a on-click="{{createTrigger}}">+ Add another condition</a>

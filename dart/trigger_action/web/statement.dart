@@ -81,5 +81,13 @@ class StatementElement extends PolymerElement {
       opened = false;
     }
   }
+  
+  void deleteTrigger(Event, var detail, Element sender) {
+    detail['element'].animationStart = false;
+    new Timer(new Duration(milliseconds: 300), () {
+      triggers.removeAt(int.parse(sender.attributes['data-index']));
+    });
+    
+  }
 }
 
