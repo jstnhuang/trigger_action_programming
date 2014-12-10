@@ -58,6 +58,7 @@ class StatementElement extends PolymerElement {
   }
 
   void save(Event event, Object detail, Element sender) {
+    event.preventDefault();
     if (model.isNew) {
       model.triggers = triggers;
       dispatchEvent(
@@ -81,7 +82,6 @@ class StatementElement extends PolymerElement {
 
   void delete(Event event, Object detail, Element sender) {
     event.preventDefault();
-    
     if (model.isNew) {
       opened=false;
       Timer timer = new Timer(new Duration(milliseconds: 333), () {
