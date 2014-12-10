@@ -83,11 +83,15 @@ class StatementElement extends PolymerElement {
   }
   
   void deleteTrigger(Event, var detail, Element sender) {
+    detail['element'].shadowRoot.querySelector('#animation').style.overflow = 'hidden';
     detail['element'].animationStart = false;
-    new Timer(new Duration(milliseconds: 300), () {
+    if (detail['element'].isFirst) {
       triggers.removeAt(int.parse(sender.attributes['data-index']));
-    });
-    
+    } else {
+      new Timer(new Duration(milliseconds: 300), () {
+        triggers.removeAt(int.parse(sender.attributes['data-index']));
+      });
+    }
   }
 }
 

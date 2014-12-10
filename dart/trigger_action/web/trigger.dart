@@ -21,9 +21,16 @@ class TriggerSelectorElement extends PolymerElement {
   void attached() {
     opened = model.name == '';
     if (isFirst) {
-      shadowRoot.querySelector('#animation').setAttribute('style', 'display: inline');
+      shadowRoot.querySelector('#animation').style.display = 'inline';
     }
-    new Timer(new Duration(milliseconds: 50), () {animationStart = true;});
+    new Timer(new Duration(milliseconds: 50), () {
+      animationStart = true;
+    });
+    // core-overlay changes itself to overflow: hidden, so we flip it back
+    // to visible once it's done.
+    new Timer(new Duration(milliseconds: 250), () {
+      shadowRoot.querySelector('#animation').style.overflow = 'visible';
+    });
   }
   
   void toggle() {
