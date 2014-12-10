@@ -7,6 +7,7 @@ import 'package:polymer/polymer.dart';
 class TriggerSelectorElement extends PolymerElement {
   @published Trigger model;
   @observable bool opened = false;
+  @published bool isFirst = false;
   @observable bool animationStart = false;
   
   Map<String, String> display_names = {
@@ -19,7 +20,7 @@ class TriggerSelectorElement extends PolymerElement {
   
   void attached() {
     opened = model.name == '';
-    if (model.isFirst) {
+    if (isFirst) {
       shadowRoot.querySelector('#animation').setAttribute('style', 'display: inline');
     }
     new Timer(new Duration(milliseconds: 50), () {animationStart = true;});

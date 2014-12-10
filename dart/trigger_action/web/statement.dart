@@ -21,7 +21,7 @@ class StatementElement extends PolymerElement {
       opened = true;
     });
     if (triggers.length == 0) {
-      Trigger trigger = new Trigger('', {}, true);
+      Trigger trigger = new Trigger('', {});
       triggers.add(trigger);
     }
   }
@@ -37,7 +37,7 @@ class StatementElement extends PolymerElement {
   }
   
   void createTrigger(MouseEvent event) {
-    Trigger trigger = new Trigger('', {}, false);
+    Trigger trigger = new Trigger('', {});
     triggers.add(trigger);
   }
 

@@ -23,14 +23,10 @@ class Statement extends Observable {
       triggers = [],
       action_name = jsStatement['actions'][0]['name'],
       action_params =  JSON.decode(jsStatement['actions'][0]['params']) {
-    bool first = true;
     for (JsObject obj in jsStatement['triggers']) {
       String name = obj['name'];
       Map<String, String> params = JSON.decode(obj['params']);
-      Trigger trigger = new Trigger(name, params, first);
-      if (first) {
-        first = false;
-      }
+      Trigger trigger = new Trigger(name, params);
       triggers.add(trigger);
     }
   }
@@ -39,8 +35,7 @@ class Statement extends Observable {
 class Trigger extends Observable {
   @observable String name;
   @observable Map<String, String> params;
-  @observable bool isFirst = false;
-  Trigger(this.name, this.params, this.isFirst);
+  Trigger(this.name, this.params);
   Trigger.fromJs(JsObject obj)
     : name = obj['name'],
       params = JSON.decode(obj['params']) {
