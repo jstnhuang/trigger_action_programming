@@ -1,5 +1,6 @@
 <!-- import polymer-element's definition -->
 <link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/core_elements/core_animation.html">
 <link rel="import" href="packages/core_elements/core_collapse.html">
 <link rel="import" href="packages/paper_elements/paper_button.html">
 <link rel="import" href="triggers/time_of_day_trigger_options.html">
@@ -16,7 +17,7 @@
         text-decoration: underline;
       }
       .trigger-list {
-        padding: 20px 0px;
+        padding-top: 10px;
       }
       .trigger-list paper-button {
         background-color: #eee;
@@ -34,6 +35,8 @@
         margin: 10px 0px;
       }
     </style>
+    <core-collapse opened="{{animationStart}}" id="animation" duration="0.33">
+    <span id="trigger">
     <template if="{{!model.isFirst}}">
       <br />
       <span class="and">and:</span>
@@ -63,6 +66,8 @@
         </time-of-day-trigger-options>
       </template>
     </div>
+    </span>
+    </core-collapse>
   </template>
   <script type="application/dart" src="trigger.dart"></script>
 </polymer-element>

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 import 'model.dart';
 import 'package:polymer/polymer.dart';
@@ -5,7 +6,8 @@ import 'package:polymer/polymer.dart';
 @CustomTag('trigger-selector')
 class TriggerSelectorElement extends PolymerElement {
   @published Trigger model;
-  @observable bool opened = true;
+  @observable bool opened = false;
+  @observable bool animationStart = false;
   
   Map<String, String> display_names = {
     'person_detected': 'Person detected',
@@ -17,6 +19,10 @@ class TriggerSelectorElement extends PolymerElement {
   
   void attached() {
     opened = model.name == '';
+    if (model.isFirst) {
+      shadowRoot.querySelector('#animation').setAttribute('style', 'display: inline');
+    }
+    new Timer(new Duration(milliseconds: 50), () {animationStart = true;});
   }
   
   void toggle() {
