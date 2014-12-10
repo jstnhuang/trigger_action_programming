@@ -10,18 +10,14 @@ class TriggerList extends PolymerElement {
   }
 
   void attached() {
-    print(triggers.length);
     if (triggers.length == 0) {
       TriggerModel trigger = new TriggerModel('', {}, true);
       triggers.add(trigger);
-      print(triggers.length);
     }
   }
 
   void createTrigger(MouseEvent event) {
-    print('created trigger');
     TriggerModel trigger = new TriggerModel('', {}, false);
     triggers.add(trigger);
-    print(triggers.length);
   }
 }

@@ -32,21 +32,14 @@
     <div>
       <h1>Current rules</h1>
       <div id="rulelist">
-        <template repeat="{{statement in statements}}">
-          <statement-card
-            ros="{{ros}}"
-            isNew="{{statement.isNew}}"
-            id="{{statement.id}}"
-            parentList="{{statements}}"
-            triggers="{{statement.triggers}}"
-            action_name="{{statement.action_name}}"
-            action_params="{{statement.action_params}}"
-            opened="{{!statement.isNew}}">
-          </statement-card>
-        </template>
+        <div on-delete-rule="{{deleteRule}}" on-add-rule="{{addRule}}" on-update-rule="{{updateRule}}">
+          <template repeat="{{statement in model.statements}}">
+            <statement-card model="{{statement}}"></statement-card>
+          </template>
+        </div>
       </div>
       <div class="uncreated-card">
-        <a on-click="{{createRule}}">Create a new rule</a>
+        <a on-click="{{createBlankRule}}">Create a new rule</a>
       </div>
       <paper-toast id="toast" text="Updated rule"></paper-toast>
     </div>

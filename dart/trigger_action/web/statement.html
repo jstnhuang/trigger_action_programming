@@ -61,10 +61,8 @@
         <div class="card">
           <div class="if-then-section">
             <h1 class="ifthenheading">If: </h1>
-            <template if="{{triggers.length > 0}}">
-              <template repeat="{{trigger in triggers}}">
-                <trigger-selector name="{{trigger.name}}" params="{{trigger.params}}" isFirst="{{trigger.isFirst}}" parentList="{{triggers}}"></trigger-selector>
-              </template>
+            <template repeat="{{trigger in triggers}}">
+              <trigger-selector model="{{trigger}}"></trigger-selector>
             </template>
             <template if="{{triggers.length > 0}}">
               <div class="uncreated-trigger">
@@ -74,16 +72,15 @@
           </div>
           <div class="if-then-section">
             <h1 class="ifthenheading">Then: </h1>
-            <action-selector name="{{action_name}}" params="{{action_params}}"></action-selector>
+            <action-selector name="{{model.action_name}}" params="{{model.action_params}}"></action-selector>
           </div>
           <div class="buttons">
-            <paper-button id="saveButton" disabled?="{{triggers.length == 0 || action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
+            <paper-button id="saveButton" disabled?="{{triggers.length == 0 || model.action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
             <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
           </div>
         </div>
       </core-collapse>
     </div>
-   
   </template>
   <script type="application/dart" src="statement.dart"></script>
 </polymer-element>

@@ -34,15 +34,15 @@
         margin: 10px 0px;
       }
     </style>
-    <template if="{{!isFirst}}">
+    <template if="{{!model.isFirst}}">
       <br />
       <span class="and">and:</span>
     </template>
     <a class="current-trigger" on-click="{{toggle}}">
-      <template if="{{name != ''}}">
-        {{display_names[name]}}
+      <template if="{{model.name != ''}}">
+        {{display_names[model.name]}}
       </template>
-      <template if="{{name == ''}}">
+      <template if="{{model.name == ''}}">
         Choose a trigger
       </template>
     </a>
@@ -54,12 +54,12 @@
       </div>
     </core-collapse>
     <div class="options">
-      <template if="{{name == 'time_of_day'}}">
+      <template if="{{model.name == 'time_of_day'}}">
         <time-of-day-trigger-options
-          hour="{{params['hour']}}"
-          minute="{{params['minute']}}"
-          days="{{params['days']}}"
-          beforeOrAfter="{{params['before_or_after']}}">
+          hour="{{model.params['hour']}}"
+          minute="{{model.params['minute']}}"
+          days="{{model.params['days']}}"
+          beforeOrAfter="{{model.params['before_or_after']}}">
         </time-of-day-trigger-options>
       </template>
     </div>

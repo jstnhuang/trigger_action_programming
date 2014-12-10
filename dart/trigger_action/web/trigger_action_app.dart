@@ -1,14 +1,17 @@
-import "package:polymer/polymer.dart";
-import "roslibjs.dart";
-import "dart:html";
+import 'dart:html';
+import 'model.dart';
+import 'package:polymer/polymer.dart';
+import 'roslibjs.dart';
 
 @CustomTag('trigger-action-app')
 class TriggerActionAppElement extends PolymerElement {
-  @published Ros ros;
-  @published bool isConnected;
+  Ros ros;
+  @observable bool isConnected;
+  StatementList statementList;
 
   TriggerActionAppElement.created() : super.created() {
     ros = new Ros(localWebsocketUrl);
+    statementList = new StatementList(ros);
   }
 
   void attached() {
