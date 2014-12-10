@@ -5,11 +5,7 @@ import 'package:polymer/polymer.dart';
 @CustomTag('trigger-selector')
 class TriggerSelectorElement extends PolymerElement {
   @published Trigger model;
-//  @published String name;
-//  @published Map<String, String> params;
-//  @published bool isFirst = false;
   @observable bool opened = true;
-//  @published List<Trigger> parentList;
   
   Map<String, String> display_names = {
     'person_detected': 'Person detected',
