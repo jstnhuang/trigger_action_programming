@@ -4,11 +4,36 @@ import 'dart:convert';
 import 'dart:js';
 import 'package:polymer/polymer.dart';
 import 'roslibjs.dart';
+import 'rule_db.dart';
+
+class TriggerActionApp extends Observable {
+  RuleDb ruleDb;
+  @observable bool isConnected;
+  StatementList statementList;
+  TriggerActionApp.fromDependencies(this.ruleDb, this.statementList);
+  factory TriggerActionApp(String type) {
+    if (type == 'local_robot') {
+      // Construct a trigger action app for a local robot.
+      Ros ros = new Ros('ws://walle.cs.washington.edu:9999');
+      RuleDb ruleDb = new RosRuleDb(ros);
+      StatementList list = new StatementList(ruleDb);
+      return new TriggerActionApp.fromDependencies(ruleDb, list);
+    } else if (type == 'real_robot') {
+      // Construct a trigger action app for a real robot.
+      Ros ros = new Ros(robotWebsocketUrl);
+      RuleDb ruleDb = new RosRuleDb(ros);
+      StatementList list = new StatementList(ruleDb);
+      return new TriggerActionApp.fromDependencies(ruleDb, list);
+    } else {
+      throw new ArgumentError.value(type, 'type', 'Unknown TriggerActionApp type');
+    }
+  }
+}
 
 class StatementList extends Observable {
   @observable List<Statement> statements = toObservable([]);
-  Ros ros;
-  StatementList(this.ros);
+  RuleDb ruleDb;
+  StatementList(this.ruleDb);
 }
 
 class Statement extends Observable {

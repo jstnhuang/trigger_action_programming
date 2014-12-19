@@ -4,13 +4,13 @@
 
 <polymer-element name="trigger-action-app">
   <template>
-      <template if="{{!isConnected}}">
-        <h1>Can't connect to robot.</h1>
-        <p>If you have just opened this app for the first time in a while, you may just need to refresh in a few seconds.</p>
-      </template>
-      <template if="{{isConnected}}">
-        <statement-list model="{{statementList}}"></statement-list>
-      </template>
+    <template if="{{!model.isConnected}}">
+      <h1>Can't connect to robot.</h1>
+      <p>Check that your robot is on and can connect to the internet.</p>
+    </template>
+    <template if="{{model.isConnected}}">
+      <statement-list model="{{model.statementList}}"></statement-list>
+    </template>
   </template>
   <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
   <script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>

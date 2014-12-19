@@ -1,7 +1,8 @@
 library roslibjs;
 
-import "dart:async";
-import "dart:js";
+import 'dart:async';
+import 'dart:html';
+import 'dart:js';
 
 String robotWebsocketUrl = 'ws://c1.cs.washington.edu:9999';
 String localWebsocketUrl = 'ws://localhost:9999';
@@ -9,11 +10,11 @@ String localWebsocketUrl = 'ws://localhost:9999';
 class Ros {
   JsObject params;
   JsObject jsRos;
-  
+
   Ros(String url) {
     params = new JsObject.jsify({"url": url});
   }
-  
+
   Future connect() {
     Completer completer = new Completer();
     void _handleConnection(jsThis, event) {
@@ -45,13 +46,20 @@ class Service {
     this._ros = ros;
     this._name = name;
     this._type = type;
+  }
+
+  void connect() {
+    if (_ros.jsRos == null) {
+      print('Error: ROS not initialized before calling connect().');
+    }
     var params = new JsObject.jsify({
-      "ros": ros.jsRos,
-      "name": name,
-      "type": type
+      "ros": _ros.jsRos,
+      "name": _name,
+      "type": _type
     });
     this._service = new JsObject(context["ROSLIB"]["Service"], [params]);
   }
+
   Future call(ServiceRequest request) {
     Completer completer = new Completer();
     void handleResult(jsThis, result) {
