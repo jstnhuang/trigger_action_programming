@@ -6,4 +6,4 @@ dependencies:
   polymer: '>=0.15.1+5 <0.16.0'
 transformers:
 - polymer:
-    entry_points: web/index.html
+    entry_points: [web/index.html, web/local_index.html]
