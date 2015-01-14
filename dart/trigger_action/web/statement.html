@@ -63,10 +63,10 @@
               <h1 class="ifthenheading">If: </h1>
               <template repeat="{{trigger in triggers | enumerate}}">
                 <span on-delete-trigger="{{deleteTrigger}}" data-index="{{trigger.index}}">
-                  <trigger-selector model="{{trigger.value}}" isFirst="{{trigger.index == 0}}" isOnly="{{triggers.length == 1}}"></trigger-selector>
+                  <trigger-selector model="{{trigger.value}}" isFirst="{{trigger.index == 0}}" isOnly="{{triggers.length == 1}}" readOnly="{{readOnly}}"></trigger-selector>
                 </span>
               </template>
-              <template if="{{triggers.length > 0}}">
+              <template if="{{triggers.length > 0 && !readOnly}}">
                 <div class="uncreated-trigger">
                   <a on-click="{{createTrigger}}">+ Add another condition</a>
                 </div>
@@ -74,13 +74,15 @@
             </div>
             <div class="if-then-section">
               <h1 class="ifthenheading">Then: </h1>
-              <action-selector name="{{model.action_name}}" params="{{model.action_params}}"></action-selector>
+              <action-selector name="{{model.action_name}}" params="{{model.action_params}}" readOnly="{{readOnly}}"></action-selector>
             </div>
             <div class="buttons">
-              <template if="{{!model.webstudy}}">
+              <template if="{{!webstudy || !readOnly}}">
                 <paper-button id="saveButton" disabled?="{{triggers.length == 0 || model.action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
               </template>
-              <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
+              <template if="{{!readOnly}}">
+                <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
+              </template>
             </div>
           </div>
         </core-collapse>

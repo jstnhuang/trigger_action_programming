@@ -7,6 +7,7 @@ import 'package:polymer/polymer.dart';
 class StatementElement extends PolymerElement {
   @published Statement model;
   @published bool webstudy = false;
+  @published bool readOnly = false;
   @observable List<Trigger> triggers = toObservable([]);
   @observable String saveLabel = '';
   @observable String deleteLabel = '';
@@ -27,10 +28,6 @@ class StatementElement extends PolymerElement {
     }
   }
   
-  void webstudyChanged() {
-    model.webstudy = webstudy;
-  }
-
   void updateButtons() {
     if (model.isNew) {
       saveLabel = 'Add rule';

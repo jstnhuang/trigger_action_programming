@@ -11,11 +11,12 @@ class TriggerActionApp extends Observable {
   @observable bool isConnected;
   String websocketUrl;
   bool webstudy;
-  TriggerActionApp.fromDependencies(this.websocketUrl, this.ruleDb, this.webstudy);
-  factory TriggerActionApp(String websocketUrl, bool webstudy) {
+  bool readOnly;
+  TriggerActionApp.fromDependencies(this.websocketUrl, this.ruleDb, this.webstudy, this.readOnly);
+  factory TriggerActionApp(String websocketUrl, bool webstudy, bool readOnly) {
     Ros ros = new Ros(websocketUrl);
     RuleDb ruleDb = new RosRuleDb(ros);
-    return new TriggerActionApp.fromDependencies(websocketUrl, ruleDb, webstudy);
+    return new TriggerActionApp.fromDependencies(websocketUrl, ruleDb, webstudy, readOnly);
   }
 }
 
@@ -23,11 +24,12 @@ class StatementList extends Observable {
   @observable List<Statement> statements = toObservable([]);
   RuleDb ruleDb;
   bool webstudy;
-  StatementList.fromDependencies(this.ruleDb, this.webstudy);
-  factory StatementList(String websocketUrl, bool webstudy) {
+  bool readOnly;
+  StatementList.fromDependencies(this.ruleDb, this.webstudy, this.readOnly);
+  factory StatementList(String websocketUrl, bool webstudy, bool readOnly) {
     Ros ros = new Ros(websocketUrl);
     RuleDb ruleDb = new RosRuleDb(ros);
-    return new StatementList.fromDependencies(ruleDb, webstudy);
+    return new StatementList.fromDependencies(ruleDb, webstudy, readOnly);
   }
 }
 
@@ -37,7 +39,6 @@ class Statement extends Observable {
   @observable String action_name;
   @observable Map<String, String> action_params;
   @observable bool isNew = false;
-  bool webstudy;
   Statement(this.id, this.triggers, this.action_name, this.action_params, this.isNew);
   Statement.fromJs(JsObject jsStatement)
     : id = jsStatement['id'],

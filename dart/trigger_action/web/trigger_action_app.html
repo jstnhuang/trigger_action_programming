@@ -9,7 +9,7 @@
       <p>Check that your robot is on and can connect to the internet.</p>
     </template>
     <template if="{{model.isConnected}}">
-      <statement-list websocketUrl="{{model.websocketUrl}}" webstudy="{{model.webstudy}}"></statement-list>
+      <statement-list websocketUrl="{{model.websocketUrl}}" webstudy="{{model.webstudy}}" readOnly="{{model.readOnly}}"></statement-list>
     </template>
   </template>
   <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>

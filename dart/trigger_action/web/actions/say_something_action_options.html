@@ -8,9 +8,12 @@
       h1 {
         color: #555;
       }
+      paper-input[disabled] /deep/ paper-input-decorator /deep/ .underline .unfocused-underline {
+        visibility: visible;
+      }
     </style>
     <div>
-      <paper-input label="What to say" value="{{speech}}"></paper-input>
+      <paper-input label="What to say" value="{{speech}}" disabled="{{readOnly}}"></paper-input>
     </div>
   </template>
   <script type="application/dart" src="say_something_action.dart"></script>

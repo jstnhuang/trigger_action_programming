@@ -47,11 +47,17 @@
       .day paper-checkbox {
         margin-bottom: 10px;
       }
+      paper-checkbox[disabled] /deep/ #checkboxContainer > #checkbox {
+        opacity: 1;
+      }
+      paper-checkbox[checked] /deep/ #checkboxContainer > #checkbox {
+        border-color: #0f9d58;
+      }
     </style>
     <div>
       <div layout horizontal class="time-options">
         <span class="label">Time</span>
-        <paper-dropdown-menu>
+        <paper-dropdown-menu disabled="{{readOnly}}">
           <paper-dropdown class="dropdown" transition="">
             <core-selector valueattr="label" selected="{{beforeOrAfter}}" class="menu">
               <paper-item label="is">is</paper-item>
@@ -61,39 +67,49 @@
           </paper-dropdown>
         </paper-dropdown-menu>
         <paper-input-decorator>
-          <input id="timeInput" is="core-input" type="time" value="{{timeString}}"
-          data-hour="{{hour}}"
-          data-minute="{{minute}}"
-          on-change="{{handleTimeChange}}">
+          <!-- Weird bug where the time input is disabled even disabled="false" -->
+          <template if="{{readOnly}}">
+            <input id="timeInput" is="core-input" type="time" value="{{timeString}}"
+              data-hour="{{hour}}"
+              data-minute="{{minute}}"
+              on-change="{{handleTimeChange}}"
+              disabled="{{readOnly}}">
+          </template>
+          <template if="{{!readOnly}}">
+            <input id="timeInput" is="core-input" type="time" value="{{timeString}}"
+              data-hour="{{hour}}"
+              data-minute="{{minute}}"
+              on-change="{{handleTimeChange}}">
+          </template>
         </paper-input-decorator>
       </div>
       <div horizontal layout class="days" data-days="{{days}}">
         <div vertical center layout class="day">
-          <paper-checkbox checked?="{{sunday}}" on-change="{{toggleDay}}" id="sunday"></paper-checkbox>
+          <paper-checkbox checked?="{{sunday}}" on-change="{{toggleDay}}" id="sunday" disabled="{{readOnly}}"></paper-checkbox>
           Sunday
         </div>
         <div vertical center layout class="day">
-          <paper-checkbox checked?="{{monday}}" on-change="{{toggleDay}}" id="monday"></paper-checkbox>
+          <paper-checkbox checked?="{{monday}}" on-change="{{toggleDay}}" id="monday" disabled="{{readOnly}}"></paper-checkbox>
           Monday
         </div>
         <div vertical center layout class="day">
-          <paper-checkbox checked?="{{tuesday}}" on-change="{{toggleDay}}" id="tuesday"></paper-checkbox>
+          <paper-checkbox checked?="{{tuesday}}" on-change="{{toggleDay}}" id="tuesday" disabled="{{readOnly}}"></paper-checkbox>
           Tuesday
         </div>
         <div vertical center layout class="day">
-          <paper-checkbox checked?="{{wednesday}}" on-change="{{toggleDay}}" id="wednesday"></paper-checkbox>
+          <paper-checkbox checked?="{{wednesday}}" on-change="{{toggleDay}}" id="wednesday" disabled="{{readOnly}}"></paper-checkbox>
           Wednesday
         </div>
         <div vertical center layout class="day">
-          <paper-checkbox checked?="{{thursday}}" on-change="{{toggleDay}}" id="thursday"></paper-checkbox>
+          <paper-checkbox checked?="{{thursday}}" on-change="{{toggleDay}}" id="thursday" disabled="{{readOnly}}"></paper-checkbox>
           Thursday
         </div>
         <div vertical center layout class="day">
-          <paper-checkbox checked?="{{friday}}" on-change="{{toggleDay}}" id="friday"></paper-checkbox>
+          <paper-checkbox checked?="{{friday}}" on-change="{{toggleDay}}" id="friday" disabled="{{readOnly}}"></paper-checkbox>
           Friday
         </div>
         <div vertical center layout class="day">
-          <paper-checkbox checked?="{{saturday}}" on-change="{{toggleDay}}" id="saturday"></paper-checkbox>
+          <paper-checkbox checked?="{{saturday}}" on-change="{{toggleDay}}" id="saturday" disabled="{{readOnly}}"></paper-checkbox>
           Saturday
         </div>
       </div>

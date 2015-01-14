@@ -59,10 +59,10 @@
           Choose a trigger
         </template>
       </a>
-      <template if="{{!isOnly}}">
-        <!--a on-click="{{delete}}"--><core-icon on-click="{{delete}}" class="cancel-button" icon="cancel"></core-icon><!--/a-->
+      <template if="{{!isOnly && !readOnly}}">
+        <core-icon on-click="{{delete}}" class="cancel-button" icon="cancel"></core-icon>
       </template>
-      <core-collapse opened?="{{opened}}">
+      <core-collapse opened?="{{opened && !readOnly}}">
         <div class="trigger-list">
           <template repeat="{{trigger_name in display_names.keys}}">
             <paper-button on-click="{{triggerSelected}}" data-name="{{trigger_name}}">{{display_names[trigger_name]}}</paper-button>
@@ -75,7 +75,8 @@
             hour="{{model.params['hour']}}"
             minute="{{model.params['minute']}}"
             days="{{model.params['days']}}"
-            beforeOrAfter="{{model.params['before_or_after']}}">
+            beforeOrAfter="{{model.params['before_or_after']}}"
+            readOnly="{{readOnly}}">
           </time-of-day-trigger-options>
         </template>
       </div>

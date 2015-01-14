@@ -6,6 +6,7 @@ class ActionSelectorElement extends PolymerElement {
   @published String name;
   @published Map<String, String> params;
   @published bool opened = false;
+  @published bool readOnly = false;
   
   Map<String, String> display_names = {
     'say_something': 'Say something'

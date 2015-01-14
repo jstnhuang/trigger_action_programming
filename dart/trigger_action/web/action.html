@@ -39,7 +39,7 @@
         Choose an action
       </template>
     </a>
-    <core-collapse opened?="{{opened}}">
+    <core-collapse opened?="{{opened && !readOnly}}">
       <div class="action-list">
         <template repeat="{{action_name in display_names.keys}}">
           <paper-button on-click="{{actionSelected}}" data-name="{{action_name}}">{{display_names[action_name]}}</paper-button>
@@ -48,7 +48,7 @@
     </core-collapse>
     <div class="options">
       <template if="{{name == 'say_something'}}">
-        <say-something-action-options speech="{{params['speech']}}"></say-something-action-options>
+        <say-something-action-options speech="{{params['speech']}}" readOnly="{{readOnly}}"></say-something-action-options>
       </template>
     </div>
   </template>

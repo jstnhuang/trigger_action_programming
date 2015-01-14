@@ -34,13 +34,15 @@
       <div id="rulelist">
         <div on-delete-rule="{{deleteRule}}" on-add-rule="{{addRule}}" on-update-rule="{{updateRule}}">
           <template repeat="{{statement in model.statements}}">
-            <statement-card model="{{statement}}" webstudy="{{model.webstudy}}"></statement-card>
+            <statement-card model="{{statement}}" webstudy="{{model.webstudy}}" readOnly="{{model.readOnly}}"></statement-card>
           </template>
         </div>
       </div>
+      <template if="{{!model.readOnly}}">
       <div class="uncreated-card">
         <a on-click="{{createBlankRule}}">Create a new rule</a>
       </div>
+      </template>
       <paper-toast id="toast" text="Updated rule"></paper-toast>
     </div>
   </template>

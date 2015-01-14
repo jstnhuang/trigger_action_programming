@@ -8,14 +8,13 @@ import 'package:polymer/polymer.dart';
 class StatementListElement extends PolymerElement {
   @observable StatementList model;
   @published String websocketUrl = "";
-  bool websocketUrlInit = false;
   @published bool webstudy = false;
+  @published bool readOnly = false;
 
   StatementListElement.created() : super.created() {
   }
   
   void websocketUrlChanged() {
-    websocketUrlInit = true;
     if (checkInit()) {
       init();
     }
@@ -27,13 +26,19 @@ class StatementListElement extends PolymerElement {
     }
   }
   
+  void readOnlyChanged() {
+    if (checkInit()) {
+      init();
+    }
+  }
+  
   // Initialize only once the websocket URL has been changed at least once.
   bool checkInit() {
-    return websocketUrlInit;
+    return websocketUrl != "";
   }
   
   void init() {
-    model = new StatementList(websocketUrl, webstudy);
+    model = new StatementList(websocketUrl, webstudy, readOnly);
     model.ruleDb.connect().then((Event event) {
       model.ruleDb.getAllRules().then((List<Statement> results) {
         model.statements = toObservable(results);
