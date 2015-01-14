@@ -4,7 +4,7 @@ import 'package:polymer/polymer.dart';
 
 @CustomTag('trigger-action-app')
 class TriggerActionAppElement extends PolymerElement {
-  @published TriggerActionApp model;
+  @observable TriggerActionApp model;
   @observable bool isConnected;
   @published String type;
 

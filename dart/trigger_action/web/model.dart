@@ -9,21 +9,19 @@ import 'rule_db.dart';
 class TriggerActionApp extends Observable {
   RuleDb ruleDb;
   @observable bool isConnected;
-  StatementList statementList;
-  TriggerActionApp.fromDependencies(this.ruleDb, this.statementList);
+  String type;
+  TriggerActionApp.fromDependencies(this.type, this.ruleDb);
   factory TriggerActionApp(String type) {
     if (type == 'local_robot') {
       // Construct a trigger action app for a local robot.
       Ros ros = new Ros('ws://walle.cs.washington.edu:9999');
       RuleDb ruleDb = new RosRuleDb(ros);
-      StatementList list = new StatementList(ruleDb);
-      return new TriggerActionApp.fromDependencies(ruleDb, list);
+      return new TriggerActionApp.fromDependencies(type, ruleDb);
     } else if (type == 'real_robot') {
       // Construct a trigger action app for a real robot.
       Ros ros = new Ros(robotWebsocketUrl);
       RuleDb ruleDb = new RosRuleDb(ros);
-      StatementList list = new StatementList(ruleDb);
-      return new TriggerActionApp.fromDependencies(ruleDb, list);
+      return new TriggerActionApp.fromDependencies(type, ruleDb);
     } else {
       throw new ArgumentError.value(type, 'type', 'Unknown TriggerActionApp type');
     }
@@ -33,7 +31,22 @@ class TriggerActionApp extends Observable {
 class StatementList extends Observable {
   @observable List<Statement> statements = toObservable([]);
   RuleDb ruleDb;
-  StatementList(this.ruleDb);
+  StatementList.fromDependencies(this.ruleDb);
+  factory StatementList(String type) {
+    if (type == 'local_robot') {
+      // Construct a trigger action app for a local robot.
+      Ros ros = new Ros('ws://walle.cs.washington.edu:9999');
+      RuleDb ruleDb = new RosRuleDb(ros);
+      return new StatementList.fromDependencies(ruleDb);
+    } else if (type == 'real_robot') {
+      // Construct a trigger action app for a real robot.
+      Ros ros = new Ros(robotWebsocketUrl);
+      RuleDb ruleDb = new RosRuleDb(ros);
+      return new StatementList.fromDependencies(ruleDb);
+    } else {
+      throw new ArgumentError.value(type, 'type', 'Unknown StatementList type');
+    }
+  }
 }
 
 class Statement extends Observable {

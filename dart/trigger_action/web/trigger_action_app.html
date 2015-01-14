@@ -9,7 +9,7 @@
       <p>Check that your robot is on and can connect to the internet.</p>
     </template>
     <template if="{{model.isConnected}}">
-      <statement-list model="{{model.statementList}}"></statement-list>
+      <statement-list type="{{model.type}}"></statement-list>
     </template>
   </template>
   <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>

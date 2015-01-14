@@ -6,19 +6,30 @@ import 'package:polymer/polymer.dart';
 
 @CustomTag('statement-list')
 class StatementListElement extends PolymerElement {
-  @published StatementList model;
+  @observable StatementList model;
+  @published String type;
 
   StatementListElement.created() : super.created() {
   }
+  
+  void typeChanged() {
+    model = new StatementList(type);
+    model.ruleDb.connect().then((Event event) {
+      model.ruleDb.getAllRules().then((List<Statement> results) {
+        model.statements = toObservable(results);
+      })
+      .catchError((var error) {
+        print('Failed to call /get_all_rules service: $error');
+      });
+    })
+    .catchError((Event error) {
+      print('Connection error: $error');
+    });
+    
+  }
 
   void attached() {
-    model.ruleDb.getAllRules()
-    .then((List<Statement> results) {
-      model.statements = toObservable(results);
-    })
-    .catchError((var error) {
-      print('Failed to call /get_all_rules service: $error');
-    });
+    
   }
 
   void toast(String text) {

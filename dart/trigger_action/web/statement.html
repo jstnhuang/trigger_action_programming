@@ -56,32 +56,33 @@
       }
     </style>
     <div class="wrapper">
-      <paper-shadow z="1"></paper-shadow>
-      <core-collapse opened="{{opened}}" duration="0.3">
-        <div class="card">
-          <div class="if-then-section">
-            <h1 class="ifthenheading">If: </h1>
+      <paper-shadow z="1">
+        <core-collapse opened="{{opened}}" duration="0.3">
+          <div class="card">
+            <div class="if-then-section">
+              <h1 class="ifthenheading">If: </h1>
               <template repeat="{{trigger in triggers | enumerate}}">
                 <span on-delete-trigger="{{deleteTrigger}}" data-index="{{trigger.index}}">
                   <trigger-selector model="{{trigger.value}}" isFirst="{{trigger.index == 0}}" isOnly="{{triggers.length == 1}}"></trigger-selector>
                 </span>
               </template>
-            <template if="{{triggers.length > 0}}">
-              <div class="uncreated-trigger">
-                <a on-click="{{createTrigger}}">+ Add another condition</a>
-              </div>
-            </template>
+              <template if="{{triggers.length > 0}}">
+                <div class="uncreated-trigger">
+                  <a on-click="{{createTrigger}}">+ Add another condition</a>
+                </div>
+              </template>
+            </div>
+            <div class="if-then-section">
+              <h1 class="ifthenheading">Then: </h1>
+              <action-selector name="{{model.action_name}}" params="{{model.action_params}}"></action-selector>
+            </div>
+            <div class="buttons">
+              <paper-button id="saveButton" disabled?="{{triggers.length == 0 || model.action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
+              <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
+            </div>
           </div>
-          <div class="if-then-section">
-            <h1 class="ifthenheading">Then: </h1>
-            <action-selector name="{{model.action_name}}" params="{{model.action_params}}"></action-selector>
-          </div>
-          <div class="buttons">
-            <paper-button id="saveButton" disabled?="{{triggers.length == 0 || model.action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
-            <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
-          </div>
-        </div>
-      </core-collapse>
+        </core-collapse>
+      </paper-shadow>
     </div>
   </template>
   <script type="application/dart" src="statement.dart"></script>
