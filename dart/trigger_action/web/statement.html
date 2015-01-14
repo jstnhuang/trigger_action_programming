@@ -77,7 +77,9 @@
               <action-selector name="{{model.action_name}}" params="{{model.action_params}}"></action-selector>
             </div>
             <div class="buttons">
-              <paper-button id="saveButton" disabled?="{{triggers.length == 0 || model.action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
+              <template if="{{!model.webstudy}}">
+                <paper-button id="saveButton" disabled?="{{triggers.length == 0 || model.action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
+              </template>
               <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
             </div>
           </div>

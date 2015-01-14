@@ -10,22 +10,24 @@ class TriggerActionApp extends Observable {
   RuleDb ruleDb;
   @observable bool isConnected;
   String websocketUrl;
-  TriggerActionApp.fromDependencies(this.websocketUrl, this.ruleDb);
-  factory TriggerActionApp(String websocketUrl) {
+  bool webstudy;
+  TriggerActionApp.fromDependencies(this.websocketUrl, this.ruleDb, this.webstudy);
+  factory TriggerActionApp(String websocketUrl, bool webstudy) {
     Ros ros = new Ros(websocketUrl);
     RuleDb ruleDb = new RosRuleDb(ros);
-    return new TriggerActionApp.fromDependencies(websocketUrl, ruleDb);
+    return new TriggerActionApp.fromDependencies(websocketUrl, ruleDb, webstudy);
   }
 }
 
 class StatementList extends Observable {
   @observable List<Statement> statements = toObservable([]);
   RuleDb ruleDb;
-  StatementList.fromDependencies(this.ruleDb);
-  factory StatementList(String websocketUrl) {
+  bool webstudy;
+  StatementList.fromDependencies(this.ruleDb, this.webstudy);
+  factory StatementList(String websocketUrl, bool webstudy) {
     Ros ros = new Ros(websocketUrl);
     RuleDb ruleDb = new RosRuleDb(ros);
-    return new StatementList.fromDependencies(ruleDb);
+    return new StatementList.fromDependencies(ruleDb, webstudy);
   }
 }
 
@@ -35,6 +37,7 @@ class Statement extends Observable {
   @observable String action_name;
   @observable Map<String, String> action_params;
   @observable bool isNew = false;
+  bool webstudy;
   Statement(this.id, this.triggers, this.action_name, this.action_params, this.isNew);
   Statement.fromJs(JsObject jsStatement)
     : id = jsStatement['id'],

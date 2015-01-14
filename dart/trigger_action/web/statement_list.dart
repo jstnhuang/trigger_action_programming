@@ -8,12 +8,32 @@ import 'package:polymer/polymer.dart';
 class StatementListElement extends PolymerElement {
   @observable StatementList model;
   @published String websocketUrl = "";
+  bool websocketUrlInit = false;
+  @published bool webstudy = false;
 
   StatementListElement.created() : super.created() {
   }
   
   void websocketUrlChanged() {
-    model = new StatementList(websocketUrl);
+    websocketUrlInit = true;
+    if (checkInit()) {
+      init();
+    }
+  }
+  
+  void webstudyChanged() {
+    if (checkInit()) {
+      init();
+    }
+  }
+  
+  // Initialize only once the websocket URL has been changed at least once.
+  bool checkInit() {
+    return websocketUrlInit;
+  }
+  
+  void init() {
+    model = new StatementList(websocketUrl, webstudy);
     model.ruleDb.connect().then((Event event) {
       model.ruleDb.getAllRules().then((List<Statement> results) {
         model.statements = toObservable(results);
@@ -22,8 +42,8 @@ class StatementListElement extends PolymerElement {
         print('Failed to call /get_all_rules service: $error');
       });
     })
-    .catchError((Event error) {
-      print('Connection error: $error');
+    .catchError((var error) {
+      print('Connection error (possibly temporary): $error');
     });
   }
 

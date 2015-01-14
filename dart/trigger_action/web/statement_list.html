@@ -34,7 +34,7 @@
       <div id="rulelist">
         <div on-delete-rule="{{deleteRule}}" on-add-rule="{{addRule}}" on-update-rule="{{updateRule}}">
           <template repeat="{{statement in model.statements}}">
-            <statement-card model="{{statement}}"></statement-card>
+            <statement-card model="{{statement}}" webstudy="{{model.webstudy}}"></statement-card>
           </template>
         </div>
       </div>

@@ -6,6 +6,7 @@ import 'package:polymer/polymer.dart';
 @CustomTag('statement-card')
 class StatementElement extends PolymerElement {
   @published Statement model;
+  @published bool webstudy = false;
   @observable List<Trigger> triggers = toObservable([]);
   @observable String saveLabel = '';
   @observable String deleteLabel = '';
@@ -24,6 +25,10 @@ class StatementElement extends PolymerElement {
       Trigger trigger = new Trigger('', {});
       triggers.add(trigger);
     }
+  }
+  
+  void webstudyChanged() {
+    model.webstudy = webstudy;
   }
 
   void updateButtons() {

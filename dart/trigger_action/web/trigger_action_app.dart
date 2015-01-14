@@ -7,9 +7,10 @@ class TriggerActionAppElement extends PolymerElement {
   @observable TriggerActionApp model;
   @observable bool isConnected;
   @published String websocketUrl;
+  @published bool webstudy = false; // Whether this is part of webstudy or not.
 
   TriggerActionAppElement.created() : super.created() {
-    model = new TriggerActionApp(websocketUrl);
+    model = new TriggerActionApp(websocketUrl, webstudy);
     model.ruleDb.connect().then((Event event) {
       model.isConnected = true;
       print('Connected to websocket server.');
