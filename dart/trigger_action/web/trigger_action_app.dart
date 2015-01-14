@@ -6,10 +6,10 @@ import 'package:polymer/polymer.dart';
 class TriggerActionAppElement extends PolymerElement {
   @observable TriggerActionApp model;
   @observable bool isConnected;
-  @published String type;
+  @published String websocketUrl;
 
   TriggerActionAppElement.created() : super.created() {
-    model = new TriggerActionApp(type);
+    model = new TriggerActionApp(websocketUrl);
     model.ruleDb.connect().then((Event event) {
       model.isConnected = true;
       print('Connected to websocket server.');

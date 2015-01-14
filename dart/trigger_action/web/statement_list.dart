@@ -7,13 +7,13 @@ import 'package:polymer/polymer.dart';
 @CustomTag('statement-list')
 class StatementListElement extends PolymerElement {
   @observable StatementList model;
-  @published String type;
+  @published String websocketUrl = "";
 
   StatementListElement.created() : super.created() {
   }
   
-  void typeChanged() {
-    model = new StatementList(type);
+  void websocketUrlChanged() {
+    model = new StatementList(websocketUrl);
     model.ruleDb.connect().then((Event event) {
       model.ruleDb.getAllRules().then((List<Statement> results) {
         model.statements = toObservable(results);
@@ -25,7 +25,6 @@ class StatementListElement extends PolymerElement {
     .catchError((Event error) {
       print('Connection error: $error');
     });
-    
   }
 
   void attached() {

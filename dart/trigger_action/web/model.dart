@@ -9,22 +9,12 @@ import 'rule_db.dart';
 class TriggerActionApp extends Observable {
   RuleDb ruleDb;
   @observable bool isConnected;
-  String type;
-  TriggerActionApp.fromDependencies(this.type, this.ruleDb);
-  factory TriggerActionApp(String type) {
-    if (type == 'local_robot') {
-      // Construct a trigger action app for a local robot.
-      Ros ros = new Ros('ws://walle.cs.washington.edu:9999');
-      RuleDb ruleDb = new RosRuleDb(ros);
-      return new TriggerActionApp.fromDependencies(type, ruleDb);
-    } else if (type == 'real_robot') {
-      // Construct a trigger action app for a real robot.
-      Ros ros = new Ros(robotWebsocketUrl);
-      RuleDb ruleDb = new RosRuleDb(ros);
-      return new TriggerActionApp.fromDependencies(type, ruleDb);
-    } else {
-      throw new ArgumentError.value(type, 'type', 'Unknown TriggerActionApp type');
-    }
+  String websocketUrl;
+  TriggerActionApp.fromDependencies(this.websocketUrl, this.ruleDb);
+  factory TriggerActionApp(String websocketUrl) {
+    Ros ros = new Ros(websocketUrl);
+    RuleDb ruleDb = new RosRuleDb(ros);
+    return new TriggerActionApp.fromDependencies(websocketUrl, ruleDb);
   }
 }
 
@@ -32,20 +22,10 @@ class StatementList extends Observable {
   @observable List<Statement> statements = toObservable([]);
   RuleDb ruleDb;
   StatementList.fromDependencies(this.ruleDb);
-  factory StatementList(String type) {
-    if (type == 'local_robot') {
-      // Construct a trigger action app for a local robot.
-      Ros ros = new Ros('ws://walle.cs.washington.edu:9999');
-      RuleDb ruleDb = new RosRuleDb(ros);
-      return new StatementList.fromDependencies(ruleDb);
-    } else if (type == 'real_robot') {
-      // Construct a trigger action app for a real robot.
-      Ros ros = new Ros(robotWebsocketUrl);
-      RuleDb ruleDb = new RosRuleDb(ros);
-      return new StatementList.fromDependencies(ruleDb);
-    } else {
-      throw new ArgumentError.value(type, 'type', 'Unknown StatementList type');
-    }
+  factory StatementList(String websocketUrl) {
+    Ros ros = new Ros(websocketUrl);
+    RuleDb ruleDb = new RosRuleDb(ros);
+    return new StatementList.fromDependencies(ruleDb);
   }
 }
 
