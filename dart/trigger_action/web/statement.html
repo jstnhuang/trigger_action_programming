@@ -77,7 +77,7 @@
               <action-selector name="{{model.action_name}}" params="{{model.action_params}}" readOnly="{{readOnly}}"></action-selector>
             </div>
             <div class="buttons">
-              <template if="{{!webstudy || !readOnly}}">
+              <template if="{{!webstudy && !readOnly}}">
                 <paper-button id="saveButton" disabled?="{{triggers.length == 0 || model.action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
               </template>
               <template if="{{!readOnly}}">
