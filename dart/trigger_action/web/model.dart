@@ -14,9 +14,14 @@ class TriggerActionApp extends Observable {
   bool readOnly;
   TriggerActionApp.fromDependencies(this.websocketUrl, this.ruleDb, this.webstudy, this.readOnly);
   factory TriggerActionApp(String websocketUrl, bool webstudy, bool readOnly) {
-    Ros ros = new Ros(websocketUrl);
-    RuleDb ruleDb = new RosRuleDb(ros);
-    return new TriggerActionApp.fromDependencies(websocketUrl, ruleDb, webstudy, readOnly);
+    if (webstudy) {
+      RuleDb ruleDb = new WebStudyRuleDb();
+      return new TriggerActionApp.fromDependencies('none', ruleDb, webstudy, readOnly);
+    } else {
+      Ros ros = new Ros(websocketUrl);
+      RuleDb ruleDb = new RosRuleDb(ros);
+      return new TriggerActionApp.fromDependencies(websocketUrl, ruleDb, webstudy, readOnly);
+    }
   }
 }
 
@@ -27,9 +32,14 @@ class StatementList extends Observable {
   bool readOnly;
   StatementList.fromDependencies(this.ruleDb, this.webstudy, this.readOnly);
   factory StatementList(String websocketUrl, bool webstudy, bool readOnly) {
-    Ros ros = new Ros(websocketUrl);
-    RuleDb ruleDb = new RosRuleDb(ros);
-    return new StatementList.fromDependencies(ruleDb, webstudy, readOnly);
+    if (webstudy) {
+      RuleDb ruleDb = new WebStudyRuleDb();
+      return new StatementList.fromDependencies(ruleDb, webstudy, readOnly);
+    } else {
+      Ros ros = new Ros(websocketUrl);
+      RuleDb ruleDb = new RosRuleDb(ros);
+      return new StatementList.fromDependencies(ruleDb, webstudy, readOnly);
+    }
   }
 }
 

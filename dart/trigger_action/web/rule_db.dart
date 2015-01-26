@@ -90,3 +90,26 @@ class RosRuleDb implements RuleDb {
     return this._deleteRuleClient.call(request);
   }
 }
+
+// WebStudy has no rule DB. Instead, the rules are read off when the participant
+// moves to the next page.
+class WebStudyRuleDb implements RuleDb {
+  WebStudyRuleDb() {
+  }
+  
+  Future connect() {
+    return new Future(() {});
+  }
+  Future getAllRules() {
+    return new Future(() {});
+  }
+  Future addRule(Statement rule) {
+    return new Future(() {});
+  }
+  Future updateRule(String id, Statement rule) {
+    return new Future(() {});
+  }
+  Future deleteRule(String id) {
+    return new Future(() {});
+  }
+}

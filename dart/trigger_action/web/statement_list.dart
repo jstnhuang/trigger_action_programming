@@ -41,7 +41,9 @@ class StatementListElement extends PolymerElement {
     model = new StatementList(websocketUrl, webstudy, readOnly);
     model.ruleDb.connect().then((Event event) {
       model.ruleDb.getAllRules().then((List<Statement> results) {
-        model.statements = toObservable(results);
+        if (results != null) {
+          model.statements = toObservable(results);
+        }
       })
       .catchError((var error) {
         print('Failed to call /get_all_rules service: $error');
