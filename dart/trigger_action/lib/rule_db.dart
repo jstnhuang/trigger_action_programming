@@ -89,7 +89,7 @@ class RosRuleDb implements RuleDb {
 
 // WebStudy has no rule DB. Instead, the rules are read off when the participant
 // moves to the next page.
-class WebStudyRuleDb implements RuleDb {
+class NullRuleDb implements RuleDb {
   WebStudyRuleDb() {
   }
   
