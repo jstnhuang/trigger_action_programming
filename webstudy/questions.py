@@ -1,3 +1,5 @@
+# List of questions to ask in the web study.
+# Question text separated by newlines will automatically become paragraphs.
 SYNTHESIS = [
     {
         'question': (
