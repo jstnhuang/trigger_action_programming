@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Robot web study</title>
+    <link rel="import" href="question.html">
     <link rel="import" href="trigger_action_app.html">
     <link rel="import" href="packages/core_elements/core_scaffold.html">
     <link rel="import" href="packages/core_elements/core_header_panel.html">
@@ -28,9 +29,7 @@
       html /deep/ #mainContainer {
         background-color: #fff;
       }
-      .question {
-        padding: 0px 10px;
-      }
+      
       .content {
         padding: 0px 15px;
       }
@@ -41,11 +40,7 @@
     <core-scaffold drawerWidth="300px">
       <core-header-panel navigation flex mode="seamed">
         <core-toolbar id="navheader">Robot web study</core-toolbar>
-        <div class="question">
-          <p>
-            Question text.
-          </p>
-        </div>
+        <webstudy-question></webstudy-question>
       </core-header-panel>
       <div tool>Page 1 of 10</div>
       <div class="content">
