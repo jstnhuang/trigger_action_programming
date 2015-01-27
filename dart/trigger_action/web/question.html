@@ -6,13 +6,16 @@
       :host {
         font-size: 1.25em;
       }
-      #text {
+      .text {
+        line-height: 125%;
         padding: 0px 10px;
       }
     </style>
-    <p id="text">
-      Question text
-    </p>
+    <template repeat="{{paragraph in questionParagraphs}}">
+      <p class="text">
+        {{paragraph}}
+      </p>
+    </template>
   </template>
   <script type="application/dart" src="question.dart"></script>
 </polymer-element>
