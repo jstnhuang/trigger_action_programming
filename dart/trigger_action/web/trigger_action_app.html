@@ -12,7 +12,9 @@
       <statement-list websocketUrl="{{model.websocketUrl}}" webstudy="{{model.webstudy}}" readOnly="{{model.readOnly}}"></statement-list>
     </template>
   </template>
-  <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
-  <script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+  <template if="{{!model.webstudy}}">
+    <script type="text/javascript" src="http://cdn.robotwebtools.org/EventEmitter2/current/eventemitter2.min.js"></script>
+    <script type="text/javascript" src="http://cdn.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+  </template>
   <script type="application/dart" src="trigger_action_app.dart"></script>
 </polymer-element>
