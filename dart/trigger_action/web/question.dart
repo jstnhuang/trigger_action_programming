@@ -21,6 +21,4 @@ class WebstudyQuestionElement extends PolymerElement {
     var question = JSON.decode(response);
     questionParagraphs = question['question'].split('\n');
   }
-  
-  
 }
