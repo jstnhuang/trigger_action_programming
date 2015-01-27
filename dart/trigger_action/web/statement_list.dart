@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:html';
 import 'dart:js';
-import 'model.dart';
 import 'package:polymer/polymer.dart';
+import 'package:trigger_action/model.dart';
 
 @CustomTag('statement-list')
 class StatementListElement extends PolymerElement {

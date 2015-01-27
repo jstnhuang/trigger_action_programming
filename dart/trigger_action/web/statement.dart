@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:html';
-import 'model.dart';
 import 'package:polymer/polymer.dart';
+import 'package:trigger_action/model.dart';
 
 @CustomTag('statement-card')
 class StatementElement extends PolymerElement {

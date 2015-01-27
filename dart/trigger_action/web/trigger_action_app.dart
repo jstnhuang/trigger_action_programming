@@ -1,6 +1,6 @@
 import 'dart:html';
-import 'model.dart';
 import 'package:polymer/polymer.dart';
+import 'package:trigger_action/model.dart';
 
 @CustomTag('trigger-action-app')
 class TriggerActionAppElement extends PolymerElement {

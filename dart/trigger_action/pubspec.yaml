@@ -1,9 +1,11 @@
 name: trigger_action
-description: A sample Polymer application
+description: Trigger-action programming interface
 dependencies:
   core_elements: '>=0.6.0+2 <0.7.0'
   paper_elements: '>=0.6.0+4 <0.7.0'
   polymer: '>=0.15.5 <0.16.0'
+dev_dependencies:
+  unittest: '>=0.11.0'
 transformers:
 - polymer:
     entry_points: [web/index.html, web/local_index.html, web/webstudy.html]

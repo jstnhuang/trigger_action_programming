@@ -1,4 +1,4 @@
-library trigger_action.web.models;
+library trigger_action_model;
 
 import 'dart:convert';
 import 'dart:js';
@@ -41,6 +41,11 @@ class StatementList extends Observable {
       return new StatementList.fromDependencies(ruleDb, webstudy, readOnly);
     }
   }
+  toJson() {
+    return {
+      'rules': JSON.encode(this.statements)
+    };
+  }
 }
 
 class Statement extends Observable {
@@ -61,6 +66,13 @@ class Statement extends Observable {
       Trigger trigger = new Trigger(name, params);
       triggers.add(trigger);
     }
+  }
+  toJson() {
+    return {
+      'id': this.id,
+      'triggers': this.triggers.map((trigger) => trigger.toJson()),
+      'actions': [{'name': this.action_name, 'params': JSON.encode(this.action_params)}]
+    };
   }
 }
 

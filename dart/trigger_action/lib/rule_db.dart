@@ -1,3 +1,5 @@
+library rule_db;
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:js';
@@ -42,7 +44,6 @@ class RosRuleDb implements RuleDb {
   }
 
   Future getAllRules() {
-
     var request = new ServiceRequest({});
     return _getRulesClient.call(request).then(
       (JsObject results) {
@@ -56,12 +57,7 @@ class RosRuleDb implements RuleDb {
   }
 
   Future addRule(Statement rule) {
-    var statementObject = {
-      'id': rule.id,
-      'triggers': rule.triggers.map((trigger) => trigger.toJson()),
-      'actions': [{'name': rule.action_name, 'params': JSON.encode(rule.action_params)}]
-    };
-    var request = new ServiceRequest({'rule': statementObject});
+    var request = new ServiceRequest({'rule': rule.toJson()});
     Future future = this._addRuleClient.call(request);
     return future.then(
       (JsObject results) {
