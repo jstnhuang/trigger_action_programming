@@ -15,7 +15,7 @@ class TriggerActionApp extends Observable {
   TriggerActionApp.fromDependencies(this.websocketUrl, this.ruleDb, this.webstudy, this.readOnly);
   factory TriggerActionApp(String websocketUrl, bool webstudy, bool readOnly) {
     if (webstudy) {
-      RuleDb ruleDb = new WebStudyRuleDb();
+      RuleDb ruleDb = new NullRuleDb();
       return new TriggerActionApp.fromDependencies('none', ruleDb, webstudy, readOnly);
     } else {
       Ros ros = new Ros(websocketUrl);
@@ -33,7 +33,7 @@ class StatementList extends Observable {
   StatementList.fromDependencies(this.ruleDb, this.webstudy, this.readOnly);
   factory StatementList(String websocketUrl, bool webstudy, bool readOnly) {
     if (webstudy) {
-      RuleDb ruleDb = new WebStudyRuleDb();
+      RuleDb ruleDb = new NullRuleDb();
       return new StatementList.fromDependencies(ruleDb, webstudy, readOnly);
     } else {
       Ros ros = new Ros(websocketUrl);
@@ -43,7 +43,7 @@ class StatementList extends Observable {
   }
   toJson() {
     return {
-      'rules': JSON.encode(this.statements)
+      'rules': this.statements
     };
   }
 }
@@ -70,8 +70,8 @@ class Statement extends Observable {
   toJson() {
     return {
       'id': this.id,
-      'triggers': this.triggers.map((trigger) => trigger.toJson()),
-      'actions': [{'name': this.action_name, 'params': JSON.encode(this.action_params)}]
+      'triggers': triggers,
+      'actions': [{'name': this.action_name, 'params': this.action_params}]
     };
   }
 }
@@ -87,7 +87,7 @@ class Trigger extends Observable {
   toJson() {
     return {
       'name': name,
-      'params': JSON.encode(params)
+      'params': params
     };
   }
 }
@@ -95,8 +95,7 @@ class Trigger extends Observable {
 class Action extends Observable {
   @observable String name;
   @observable Map<String, String> params;
-  @observable bool isFirst = false;
-  Action(this.name, this.params, this.isFirst);
+  Action(this.name, this.params);
   Action.fromJs(JsObject obj)
     : name = obj['name'],
       params = JSON.decode(obj['params']) {
@@ -104,7 +103,7 @@ class Action extends Observable {
   toJson() {
     return {
       'name': name,
-      'params': JSON.encode(params)
+      'params': params
     };
   }
 }
