@@ -59,7 +59,7 @@ class StatementListElement extends PolymerElement {
   }
 
   void toast(String text) {
-    Element t = this.shadowRoot.querySelector('#toast');
+    var t = this.shadowRoot.querySelector('#toast');
     t.attributes['text'] = text;
     t.show();
   }
