@@ -1,21 +1,32 @@
 <link rel="import" href="packages/polymer/polymer.html">
+<link rel="import" href="packages/paper_elements/paper_button.html">
 
 <polymer-element name="webstudy-question">
   <template>
     <style>
-      :host {
+      .wrapper {
         font-size: 1.25em;
+        margin: 0px;
+        padding: 10px;
       }
       .text {
         line-height: 125%;
-        padding: 0px 10px;
+      }
+      paper-button {
+        color: #fff;
+        background-color: #4CAF50;
+        text-transform: none;
+        margin: 0px;
       }
     </style>
-    <template repeat="{{paragraph in questionParagraphs}}">
-      <p class="text">
-        {{paragraph}}
-      </p>
-    </template>
+    <div class="wrapper">
+      <template repeat="{{paragraph in questionParagraphs}}">
+        <p class="text">
+          {{paragraph}}
+        </p>
+      </template>
+      <paper-button on-click="{{onNext}}">Next</paper-button>
+    </div>
   </template>
   <script type="application/dart" src="question.dart"></script>
 </polymer-element>
