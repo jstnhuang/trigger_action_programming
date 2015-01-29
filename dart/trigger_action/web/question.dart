@@ -5,6 +5,7 @@ import 'dart:html';
 
 @CustomTag('webstudy-question')
 class WebstudyQuestionElement extends PolymerElement {
+  @published String api=''; // Default API host is same origin.
   String participantId;
   String questionId;
   @observable List<String> questionParagraphs;
@@ -15,7 +16,7 @@ class WebstudyQuestionElement extends PolymerElement {
     Uri uri = Uri.parse(location.href);
     this.participantId = uri.queryParameters['p'];
     this.questionId = uri.queryParameters['q'];
-    HttpRequest.getString('/question/$participantId/$questionId').then(onQuestionLoaded);
+    HttpRequest.getString('$api/question/$participantId/$questionId').then(onQuestionLoaded);
   }
   
   void onQuestionLoaded(String response) {
@@ -30,7 +31,7 @@ class WebstudyQuestionElement extends PolymerElement {
     request = new HttpRequest();
     request.onReadyStateChange.listen(onData);
 
-    var url = '/next';
+    var url = '$api/next';
     request.open('POST', url);
     request.send(JSON.encode({
       'p': participantId,
