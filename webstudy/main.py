@@ -63,7 +63,6 @@ def next():
             # redirect to an error page.
             return '/txg/webstudy-end.html'
         question_id += 1
-        print rules
         response = Response(parent=experiment_key(DEFAULT_EXPERIMENT))
         response.participant_id = participant_id
         response.question_id = question_id
