@@ -3,7 +3,7 @@
 SYNTHESIS = [
     {
         'question': (
-            'Suppose you want your robot to wake you up at 8:00 AM every day.',
+            'Suppose you want your robot to wake you up at 8:00 AM every day.'
             '\nAdd one or more rules to program this behavior.'
         ),
         'response': {
