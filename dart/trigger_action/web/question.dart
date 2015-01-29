@@ -9,7 +9,10 @@ class WebstudyQuestionElement extends PolymerElement {
   String participantId;
   String questionId;
   @observable List<String> questionParagraphs;
+  @observable String questionType;
   HttpRequest request;
+  List<String> multipleChoiceOptions;
+  @observable String selectedOption = "";
   
   WebstudyQuestionElement.created() : super.created() {
     Location location = document.window.location;
@@ -19,12 +22,16 @@ class WebstudyQuestionElement extends PolymerElement {
     HttpRequest.getString('$api/question/$participantId/$questionId').then(onQuestionLoaded);
   }
   
-  void onQuestionLoaded(String response) {
-    var question = JSON.decode(response);
-    questionParagraphs = question['question'].split('\n');
+  void onQuestionLoaded(String questionJson) {
+    var question = JSON.decode(questionJson);
+    questionType = question['type'];
+    questionParagraphs = question['text'].split('\n');
+    if (questionType == 'understanding') {
+      multipleChoiceOptions = question['options'];
+    }
   }
   
-  void onNext(Event e) {
+  void saveRules(Event e) {
     e.preventDefault();
     var app = querySelector('trigger-action-app');
     var list = app.shadowRoot.querySelector('statement-list');
@@ -37,6 +44,21 @@ class WebstudyQuestionElement extends PolymerElement {
       'p': participantId,
       'q': questionId,
       'rules': list.jsonRules()
+    }));
+  }
+  
+  void saveMultipleChoice(Event e) {
+    e.preventDefault();
+    var app = querySelector('trigger-action-app');
+    request = new HttpRequest();
+    request.onReadyStateChange.listen(onData);
+
+    var url = '$api/next';
+    request.open('POST', url);
+    request.send(JSON.encode({
+      'p': participantId,
+      'q': questionId,
+      'selected': selectedOption
     }));
   }
   

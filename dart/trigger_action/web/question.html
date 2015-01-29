@@ -1,5 +1,7 @@
 <link rel="import" href="packages/polymer/polymer.html">
 <link rel="import" href="packages/paper_elements/paper_button.html">
+<link rel="import" href="packages/paper_elements/paper_radio_button.html">
+<link rel="import" href="packages/paper_elements/paper_radio_group.html">
 
 <polymer-element name="webstudy-question">
   <template>
@@ -11,13 +13,22 @@
       }
       .text {
         line-height: 125%;
-        margin-top: 0px;
+        margin: 0px;
+      }
+      .text + .text {
+        margin-top: 10px;
       }
       paper-button {
         color: #fff;
         background-color: #4CAF50;
         text-transform: none;
         margin: 0px;
+      }
+      paper-radio-button {
+        line-height: 125%;
+      }
+      .next {
+        margin-top: 10px;
       }
     </style>
     <div class="wrapper">
@@ -26,7 +37,17 @@
           {{paragraph}}
         </p>
       </template>
-      <paper-button on-click="{{onNext}}">Next question</paper-button>
+      <template if="{{questionType == 'synthesis'}}">
+        <paper-button on-click="{{saveRules}}" class="next">Next question</paper-button>
+      </template>
+      <template if="{{questionType == 'understanding'}}">
+        <paper-radio-group selected="{{selectedOption}}">
+          <template repeat="{{option in multipleChoiceOptions}}">
+            <paper-radio-button name="{{option}}" label="{{option}}"></paper-radio-button>
+          </template>
+        </paper-radio-group>
+        <paper-button on-click="{{saveMultipleChoice}}" class="next">Next question</paper-button>
+      </template>
     </div>
   </template>
   <script type="application/dart" src="question.dart"></script>

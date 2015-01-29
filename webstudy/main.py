@@ -24,6 +24,7 @@ class Response(ndb.Model):
     participant_id = ndb.IntegerProperty()
     question_id = ndb.IntegerProperty()
     rules = ndb.JsonProperty()
+    selected = ndb.StringProperty()
 
 
 def allow_localhost(f):
@@ -56,11 +57,13 @@ def next():
         data = json.loads(request.data)
         participant_id = int(data['p'])
         question_id = int(data['q'])
-        rules = data['rules']
+        rules = data['rules'] if 'rules' in data else ''
+        selected = data['selected'] if 'selected' in data else ''
         response = Response(parent=experiment_key(DEFAULT_EXPERIMENT))
         response.participant_id = participant_id
         response.question_id = question_id
         response.rules = rules
+        response.selected = selected
         response.put()
 
         if question_id == len(questions.DEFAULT) - 1:
