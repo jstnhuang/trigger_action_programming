@@ -5,11 +5,25 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from functools import wraps
+from google.appengine.ext import ndb
 import json
 import questions
 import random
 
 app = Flask(__name__)
+
+
+DEFAULT_EXPERIMENT = 'default_experiment'
+
+
+def experiment_key(experiment_id):
+    return ndb.Key('Experiment', experiment_id)
+
+
+class Response(ndb.Model):
+    participant_id = ndb.IntegerProperty()
+    question_id = ndb.IntegerProperty()
+    rules = ndb.JsonProperty()
 
 
 def allow_localhost(f):
@@ -49,8 +63,13 @@ def next():
             # redirect to an error page.
             return '/txg/webstudy-end.html'
         question_id += 1
-        # TODO: Save data to datastore
         print rules
+        response = Response(parent=experiment_key(DEFAULT_EXPERIMENT))
+        response.participant_id = participant_id
+        response.question_id = question_id
+        response.rules = rules
+        response.put()
+
         return '/txg/webstudy.html?p={}&q={}'.format(
             participant_id, question_id)
     except ValueError:
