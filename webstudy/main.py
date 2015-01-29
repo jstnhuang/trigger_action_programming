@@ -38,13 +38,12 @@ def allow_localhost(f):
 
 @app.route('/')
 def home():
-    participant_id = random.randint(0, 100000)
-    return redirect('/txg/webstudy.html?p={}&q=0'.format(participant_id))
+    return render_template('start.html')
 
 
 @app.route('/question/<int:participant_id>/<int:question_id>')
 def question(participant_id, question_id):
-    response = make_response(json.dumps(questions.SYNTHESIS[question_id]))
+    response = make_response(json.dumps(questions.DEFAULT[question_id]))
     response.headers['Access-Control-Allow-Origin'] = (
         'http://localhost:8080')
     return response
@@ -58,19 +57,31 @@ def next():
         participant_id = int(data['p'])
         question_id = int(data['q'])
         rules = data['rules']
-        if question_id == len(questions.SYNTHESIS) - 1:
-            # TODO: Check if all questions have actually been answered. If not,
-            # redirect to an error page.
-            return '/txg/webstudy-end.html'
-        question_id += 1
         response = Response(parent=experiment_key(DEFAULT_EXPERIMENT))
         response.participant_id = participant_id
         response.question_id = question_id
         response.rules = rules
         response.put()
 
+        if question_id == len(questions.DEFAULT) - 1:
+            # TODO: Check if all questions have actually been answered. If not,
+            # redirect to an error page.
+            return redirect(url_for('end'))
+
+        question_id += 1
         return '/txg/webstudy.html?p={}&q={}'.format(
             participant_id, question_id)
     except ValueError:
         # TODO: redirect to an error page
         return '/'
+
+
+@app.route('/start')
+def start():
+    participant_id = random.randint(0, 100000)
+    return redirect('/txg/webstudy.html?p={}&q=0'.format(participant_id))
+
+
+@app.route('/end')
+def end():
+    return render_template('end.html')
