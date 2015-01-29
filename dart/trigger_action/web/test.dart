@@ -10,7 +10,7 @@ void main() {
       Statement s1 = new Statement('test id', [t1, t2], 'say_something', {'speech': 'hello world'}, false);
       Trigger t3 = new Trigger('person_detected', {});
       Statement s2 = new Statement('test id', [t3], 'say_something', {'speech': 'hello world'}, false);
-      StatementList list = new StatementList.fromDependencies(new NullRuleDb(), false, false);
+      StatementList list = new StatementList.fromDependencies(new MockRuleDb(), false, false);
       list.statements = [s1, s2];
       Object expected = {
         'rules': [s1, s2]

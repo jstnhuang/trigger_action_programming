@@ -16,7 +16,11 @@ DEFAULT = [
             'What does this program do?'
             '\nChoose the answer that best explains what the program does.'
         ),
-        'rules': '[]',
+        'rules': (
+            '[{"id":"unknown",'
+            '"triggers":[{"name":"person_detected","params":{}}],'
+            '"actions":[{"name":"say_something","params":{"speech":"Hello"}}]}]'
+        ),
         'options': [
             'Greets a person at 3:00 PM',
             'Greets a person any time between 3:00 - 4:00 PM',

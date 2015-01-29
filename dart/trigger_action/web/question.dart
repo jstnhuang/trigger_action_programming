@@ -26,8 +26,14 @@ class WebstudyQuestionElement extends PolymerElement {
     var question = JSON.decode(questionJson);
     questionType = question['type'];
     questionParagraphs = question['text'].split('\n');
+    
     if (questionType == 'understanding') {
       multipleChoiceOptions = question['options'];
+      var jsonRules = question['rules'];
+      var app = querySelector('trigger-action-app');
+      var list = app.shadowRoot.querySelector('statement-list');
+      list.model.ruleDb.jsonRules = jsonRules;
+      list.reloadRules();
     }
   }
   

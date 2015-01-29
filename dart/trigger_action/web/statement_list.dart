@@ -32,6 +32,18 @@ class StatementListElement extends PolymerElement {
     }
   }
   
+  // Used by webstudy to load rules from the MockDb.
+  void reloadRules() {
+    model.ruleDb.getAllRules().then((List<Statement> results) {
+      if (results != null) {
+        model.statements = toObservable(results);
+      }
+    })
+    .catchError((var error) {
+      print('(reloadRules) Failed to call /get_all_rules service: $error');
+    });
+  }
+  
   // Initialize only once the websocket URL has been changed at least once.
   bool checkInit() {
     return websocketUrl != "";

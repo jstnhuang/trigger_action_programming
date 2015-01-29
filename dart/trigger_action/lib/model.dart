@@ -15,7 +15,7 @@ class TriggerActionApp extends Observable {
   TriggerActionApp.fromDependencies(this.websocketUrl, this.ruleDb, this.webstudy, this.readOnly);
   factory TriggerActionApp(String websocketUrl, bool webstudy, bool readOnly) {
     if (webstudy) {
-      RuleDb ruleDb = new NullRuleDb();
+      RuleDb ruleDb = new MockRuleDb();
       return new TriggerActionApp.fromDependencies('none', ruleDb, webstudy, readOnly);
     } else {
       Ros ros = new Ros(websocketUrl);
@@ -33,7 +33,7 @@ class StatementList extends Observable {
   StatementList.fromDependencies(this.ruleDb, this.webstudy, this.readOnly);
   factory StatementList(String websocketUrl, bool webstudy, bool readOnly) {
     if (webstudy) {
-      RuleDb ruleDb = new NullRuleDb();
+      RuleDb ruleDb = new MockRuleDb();
       return new StatementList.fromDependencies(ruleDb, webstudy, readOnly);
     } else {
       Ros ros = new Ros(websocketUrl);
@@ -60,9 +60,21 @@ class Statement extends Observable {
       triggers = [],
       action_name = jsStatement['actions'][0]['name'],
       action_params =  JSON.decode(jsStatement['actions'][0]['params']) {
-    for (JsObject obj in jsStatement['triggers']) {
+    for (var obj in jsStatement['triggers']) {
       String name = obj['name'];
       Map<String, String> params = JSON.decode(obj['params']);
+      Trigger trigger = new Trigger(name, params);
+      triggers.add(trigger);
+    }
+  }
+  Statement.fromDecodedJson(var json)
+    : id = json['id'],
+      triggers = [],
+      action_name = json['actions'][0]['name'],
+      action_params = json['actions'][0]['params'] {
+    for (var obj in json['triggers']) {
+      String name = obj['name'];
+      Map<String, String> params = json['params'];
       Trigger trigger = new Trigger(name, params);
       triggers.add(trigger);
     }
@@ -70,7 +82,7 @@ class Statement extends Observable {
   toJson() {
     return {
       'id': this.id,
-      'triggers': triggers,
+      'triggers': this.triggers,
       'actions': [{'name': this.action_name, 'params': this.action_params}]
     };
   }
