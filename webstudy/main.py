@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import make_response
 from flask import redirect
 from flask import render_template
 from flask import url_for
@@ -17,4 +18,6 @@ def home():
 
 @app.route('/question/<int:participant_id>/<int:question_id>')
 def question(participant_id, question_id):
-    return json.dumps(questions.SYNTHESIS[question_id])
+    response = make_response(json.dumps(questions.SYNTHESIS[question_id]))
+    response.headers['Access-Control-Allow-Origin'] = 'http://localhost:8080'
+    return response
