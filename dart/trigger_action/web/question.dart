@@ -8,6 +8,7 @@ class WebstudyQuestionElement extends PolymerElement {
   String participantId;
   String questionId;
   @observable List<String> questionParagraphs;
+  HttpRequest request;
   
   WebstudyQuestionElement.created() : super.created() {
     Location location = document.window.location;
@@ -22,7 +23,30 @@ class WebstudyQuestionElement extends PolymerElement {
     questionParagraphs = question['question'].split('\n');
   }
   
-  void onNext() {
-    
+  void onNext(Event e) {
+    e.preventDefault();
+    var app = querySelector('trigger-action-app');
+    var list = app.shadowRoot.querySelector('statement-list');
+    request = new HttpRequest();
+    request.onReadyStateChange.listen(onData);
+
+    var url = '/next';
+    request.open('POST', url);
+    request.send(JSON.encode({
+      'p': participantId,
+      'q': questionId,
+      'rules': list.jsonRules()
+    }));
+  }
+  
+  void onData(_) {
+    if (request.readyState == HttpRequest.DONE &&
+        request.status == 200) {
+      window.location.href = request.responseText;
+    } else if (request.readyState == HttpRequest.DONE &&
+        request.status == 0) {
+      // TODO: create an error page and redirect to it.
+      print('No server');
+    }
   }
 }

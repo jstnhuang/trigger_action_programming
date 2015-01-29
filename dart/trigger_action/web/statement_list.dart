@@ -53,6 +53,10 @@ class StatementListElement extends PolymerElement {
       print('Connection error (possibly temporary): $error');
     });
   }
+  
+  Object jsonRules() {
+    return model.toJson();
+  }
 
   void attached() {
     
