@@ -45,10 +45,14 @@ def next():
         question_id = int(data['q'])
         rules = data['rules']
         if question_id == len(questions.SYNTHESIS) - 1:
+            # TODO: Check if all questions have actually been answered. If not,
+            # redirect to an error page.
             return '/txg/webstudy-end.html'
         question_id += 1
+        # TODO: Save data to datastore
         print rules
         return '/txg/webstudy.html?p={}&q={}'.format(
             participant_id, question_id)
     except ValueError:
+        # TODO: redirect to an error page
         return '/'
