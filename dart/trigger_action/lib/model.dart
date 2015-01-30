@@ -29,7 +29,7 @@ class StatementList extends Observable {
   @observable List<Statement> statements = toObservable([]);
   RuleDb ruleDb;
   bool webstudy;
-  bool readOnly;
+  @observable bool readOnly;
   StatementList.fromDependencies(this.ruleDb, this.webstudy, this.readOnly);
   factory StatementList(String websocketUrl, bool webstudy, bool readOnly) {
     if (webstudy) {
