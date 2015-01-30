@@ -16,6 +16,9 @@
         color: #555;
         margin-right: 0.5em;
       }
+      paper-dropdown-menu #label {
+        color: #03A9F4;
+      }
       paper-dropdown-menu /deep/ #label {
         color: #03A9F4;
       }
@@ -47,8 +50,14 @@
       .day paper-checkbox {
         margin-bottom: 10px;
       }
+      paper-checkbox[disabled] #checkboxContainer > #checkbox {
+        opacity: 1;
+      }
       paper-checkbox[disabled] /deep/ #checkboxContainer > #checkbox {
         opacity: 1;
+      }
+      paper-checkbox[checked] #checkboxContainer > #checkbox {
+        border-color: #0f9d58;
       }
       paper-checkbox[checked] /deep/ #checkboxContainer > #checkbox {
         border-color: #0f9d58;
