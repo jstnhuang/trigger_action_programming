@@ -42,9 +42,7 @@ class StatementList extends Observable {
     }
   }
   toJson() {
-    return {
-      'rules': this.statements
-    };
+    return this.statements;
   }
 }
 
