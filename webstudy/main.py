@@ -69,7 +69,7 @@ def next():
         if question_id == len(questions.DEFAULT) - 1:
             # TODO: Check if all questions have actually been answered. If not,
             # redirect to an error page.
-            return redirect(url_for('end'))
+            return url_for('end')
 
         question_id += 1
         return '/txg/webstudy.html?p={}&q={}'.format(
