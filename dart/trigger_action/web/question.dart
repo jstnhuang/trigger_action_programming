@@ -34,6 +34,7 @@ class WebstudyQuestionElement extends PolymerElement {
       var list = app.shadowRoot.querySelector('statement-list');
       list.model.ruleDb.jsonRules = jsonRules;
       list.reloadRules();
+      list.model.readOnly = true;
     }
   }
   
