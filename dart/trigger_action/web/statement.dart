@@ -25,6 +25,7 @@ class StatementElement extends PolymerElement {
     if (triggers.length == 0) {
       Trigger trigger = new Trigger('', {});
       triggers.add(trigger);
+      model.triggers = triggers;
     }
   }
   
