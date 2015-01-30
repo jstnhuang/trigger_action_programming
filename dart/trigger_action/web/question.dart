@@ -1,4 +1,5 @@
 import 'package:polymer/polymer.dart';
+import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
 import 'dart:html';
@@ -33,10 +34,18 @@ class WebstudyQuestionElement extends PolymerElement {
       multipleChoiceOptions = question['options'];
       var jsonRules = question['rules'];
       var app = querySelector('trigger-action-app');
-      var list = app.shadowRoot.querySelector('statement-list');
-      list.model.ruleDb.jsonRules = jsonRules;
-      list.reloadRules();
-      list.model.readOnly = true;
+      // Wait for list to be available. It might be null.
+      new Future(() {
+        var list = app.shadowRoot.querySelector('statement-list');
+        while (list == null) {
+          list = app.shadowRoot.querySelector('statement-list');
+        }
+        return list;
+      }).then((var list) {
+        list.model.ruleDb.jsonRules = jsonRules;
+        list.reloadRules();
+        list.model.readOnly = true;
+      });
     }
   }
   
