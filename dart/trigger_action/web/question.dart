@@ -19,6 +19,8 @@ class WebstudyQuestionElement extends PolymerElement {
     Uri uri = Uri.parse(location.href);
     this.participantId = uri.queryParameters['p'];
     this.questionId = uri.queryParameters['q'];
+    int pageNum = int.parse(questionId) + 1;
+    querySelector("#questionNum").innerHtml = '$pageNum';
     HttpRequest.getString('$api/question/$participantId/$questionId').then(onQuestionLoaded);
   }
   
