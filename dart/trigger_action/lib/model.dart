@@ -42,7 +42,8 @@ class StatementList extends Observable {
     }
   }
   toJson() {
-    return this.statements;
+    List ss = new List.from(this.statements.map((e) => e.toJson()));
+    return ss;
   }
 }
 
@@ -78,9 +79,10 @@ class Statement extends Observable {
     }
   }
   toJson() {
+    List ts = new List.from(triggers.map((trigger) => trigger.toJson()));
     return {
       'id': this.id,
-      'triggers': triggers.map((trigger) => trigger.toJson()),
+      'triggers': ts,
       'actions': [{'name': this.action_name, 'params': JSON.encode(this.action_params)}]
     };
   }
