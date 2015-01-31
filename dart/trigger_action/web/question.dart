@@ -20,8 +20,17 @@ class WebstudyQuestionElement extends PolymerElement {
     Uri uri = Uri.parse(location.href);
     this.participantId = uri.queryParameters['p'];
     this.questionId = uri.queryParameters['q'];
-    int pageNum = int.parse(questionId) + 1;
-    querySelector("#questionNum").innerHtml = '$pageNum';
+    try {
+      int pageNum = int.parse(questionId) + 1;
+      querySelector("#questionNum").innerHtml = '$pageNum';
+      if (pageNum < 0 || pageNum > 5) {
+        String msg = 'The question number was out of range.';
+        window.location.href = Uri.encodeFull('/error/$msg');
+      }
+    } catch(e) {
+      String msg = 'The question number was invalid.';
+      window.location.href = Uri.encodeFull('/error/$msg');
+    }
     HttpRequest.getString('$api/question/$participantId/$questionId').then(onQuestionLoaded);
   }
   
@@ -87,8 +96,7 @@ class WebstudyQuestionElement extends PolymerElement {
       window.location.href = request.responseText;
     } else if (request.readyState == HttpRequest.DONE &&
         request.status == 0) {
-      // TODO: create an error page and redirect to it.
-      print('No server');
+      window.location.href = '/error';
     }
   }
 }
