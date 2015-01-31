@@ -32,7 +32,7 @@ class WebstudyQuestionElement extends PolymerElement {
     
     if (questionType == 'understanding') {
       multipleChoiceOptions = question['options'];
-      var jsonRules = question['rules'];
+      var rules = question['rules'];
       var app = querySelector('trigger-action-app');
       // Wait for list to be available. It might be null.
       new Future(() {
@@ -42,7 +42,7 @@ class WebstudyQuestionElement extends PolymerElement {
         }
         return list;
       }).then((var list) {
-        list.model.ruleDb.jsonRules = jsonRules;
+        list.model.ruleDb.rules = rules;
         list.reloadRules();
         list.model.readOnly = true;
       });
