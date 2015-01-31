@@ -1,3 +1,5 @@
+import json
+
 # List of questions to ask in the web study.
 # Question text separated by newlines will automatically become paragraphs.
 DEFAULT = [
@@ -16,11 +18,32 @@ DEFAULT = [
             'What does this program do?'
             '\nChoose the answer that best explains what the program does.'
         ),
-        'rules': (
-            '[{"id":"unknown",'
-            '"triggers":[{"name":"person_detected","params":{}}],'
-            '"actions":[{"name":"say_something","params":{"speech":"Hello"}}]}]'
-        ),
+        'rules': [
+            {
+                'id': 'unknown',
+                'triggers': [
+                    {
+                        'name': 'person_detected',
+                        'params': json.dumps({})
+                    },
+                    {
+                        'name': 'time_of_day',
+                        'params': json.dumps({
+                            'hour': 15,
+                            'minute': 00,
+                            'days': ['sunday', 'monday'],
+                            'before_or_after': 'is'
+                        })
+                    }
+                ],
+                'actions': [
+                    {
+                        'name': 'say_something',
+                        'params': json.dumps({'speech': 'Hello'})
+                    }
+                ]
+            }
+        ],
         'options': [
             'Greets a person at 3:00 PM',
             'Greets a person any time between 3:00 - 4:00 PM',
