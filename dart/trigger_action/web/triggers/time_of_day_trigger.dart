@@ -6,7 +6,6 @@ class TimeOfDayTriggerOptions extends PolymerElement {
   @published int hour = 12;
   @published int minute = 30;
   @published List days = [];
-  @published String timeString = "";
   @published bool sunday = false;
   @published bool monday = false;
   @published bool tuesday = false;
@@ -28,21 +27,6 @@ class TimeOfDayTriggerOptions extends PolymerElement {
     thursday = days.contains('thursday');
     friday = days.contains('friday');
     saturday = days.contains('saturday');
-    String minuteString = '$minute';
-    if (minute < 10) {
-      minuteString = '0$minute';
-    }
-    String hourString = '$hour';
-    if (hour < 10) {
-      hourString = '0$hour';
-    }
-    timeString = '$hourString:$minuteString';
-  }
-  
-  void handleTimeChange(Event event, Object detail, Element sender) {
-    List<String> parts = timeString.split(':');
-    hour = int.parse(parts[0]);
-    minute = int.parse(parts[1]);
   }
   
   void toggleDay(Event event, Object detail, Element sender) {
