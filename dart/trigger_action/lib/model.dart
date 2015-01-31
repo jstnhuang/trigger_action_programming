@@ -72,7 +72,7 @@ class Statement extends Observable {
       action_params = JSON.decode(json['actions'][0]['params']) {
     for (var obj in json['triggers']) {
       String name = obj['name'];
-      Map<String, String> params = JSON.decode(json['params']);
+      Map<String, String> params = JSON.decode(obj['params']);
       Trigger trigger = new Trigger(name, params);
       triggers.add(trigger);
     }
