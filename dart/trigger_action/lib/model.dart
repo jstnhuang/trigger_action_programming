@@ -69,10 +69,10 @@ class Statement extends Observable {
     : id = json['id'],
       triggers = [],
       action_name = json['actions'][0]['name'],
-      action_params = json['actions'][0]['params'] {
+      action_params = JSON.decode(json['actions'][0]['params']) {
     for (var obj in json['triggers']) {
       String name = obj['name'];
-      Map<String, String> params = json['params'];
+      Map<String, String> params = JSON.decode(json['params']);
       Trigger trigger = new Trigger(name, params);
       triggers.add(trigger);
     }
@@ -80,8 +80,8 @@ class Statement extends Observable {
   toJson() {
     return {
       'id': this.id,
-      'triggers': this.triggers,
-      'actions': [{'name': this.action_name, 'params': this.action_params}]
+      'triggers': triggers.map((trigger) => trigger.toJson()),
+      'actions': [{'name': this.action_name, 'params': JSON.encode(this.action_params)}]
     };
   }
 }
@@ -97,7 +97,7 @@ class Trigger extends Observable {
   toJson() {
     return {
       'name': name,
-      'params': params
+      'params': JSON.encode(params)
     };
   }
 }
@@ -113,7 +113,7 @@ class Action extends Observable {
   toJson() {
     return {
       'name': name,
-      'params': params
+      'params': JSON.encode(params)
     };
   }
 }
