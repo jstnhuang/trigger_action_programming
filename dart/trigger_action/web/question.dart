@@ -56,12 +56,13 @@ class WebstudyQuestionElement extends PolymerElement {
     request = new HttpRequest();
     request.onReadyStateChange.listen(onData);
 
+    print(list.model.toJson());
     var url = '$api/next';
     request.open('POST', url);
     request.send(JSON.encode({
       'p': participantId,
       'q': questionId,
-      'rules': list.jsonRules()
+      'rules': list.model
     }));
   }
   

@@ -66,10 +66,6 @@ class StatementListElement extends PolymerElement {
     });
   }
   
-  Object jsonRules() {
-    return model.toJson();
-  }
-
   void attached() {
     
   }
