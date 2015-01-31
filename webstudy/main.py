@@ -119,10 +119,10 @@ def next():
 
         return '/txg/webstudy.html?p={}&q={}'.format(
             participant_key.urlsafe(), question_id + 1)
-    except ValueError:
+    except ValueError as e:
         return url_for(
             'error', msg='The wrong data was sent to the application.')
-    except KeyError:
+    except KeyError as e:
         return url_for('error', msg='The response was incomplete.')
     except Exception as e:
         return url_for('error', msg='An unknown error occurred.')
