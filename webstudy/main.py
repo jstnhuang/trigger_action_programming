@@ -75,8 +75,7 @@ def next():
         return '/txg/webstudy.html?p={}&q={}'.format(
             participant_id, question_id)
     except ValueError:
-        # TODO: redirect to an error page
-        return '/'
+        return url_for('error')
 
 
 @app.route('/start')
