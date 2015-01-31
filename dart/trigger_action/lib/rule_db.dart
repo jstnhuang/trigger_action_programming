@@ -90,7 +90,7 @@ class RosRuleDb implements RuleDb {
 // WebStudy has no rule DB. Instead, the rules are read off when the participant
 // moves to the next page.
 class MockRuleDb implements RuleDb {
-  String jsonRules;
+  List rules;
   
   MockRuleDb() {
   }
@@ -100,11 +100,10 @@ class MockRuleDb implements RuleDb {
   }
   Future getAllRules() {
     return new Future(() {
-      if (jsonRules == null) {
+      if (rules == null) {
         return [];
       }
       List<Statement> statement_list = [];
-      var rules = JSON.decode(jsonRules);
       for (var rule in rules) {
         Statement s = new Statement.fromDecodedJson(rule);
         statement_list.add(s);
