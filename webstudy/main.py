@@ -85,10 +85,10 @@ def next():
         participant_key = ndb.Key(urlsafe=data['p'])
         participant = participant_key.get()
         if participant is None:
-            return url_for('error')  # Unknown participant
+            return url_for('error', msg='Unknown participant.')
         question_id = int(data['q'])
         if question_id < 0 or question_id > len(questions.DEFAULT) - 1:
-            return url_for('error')  # Unknown question
+            return url_for('error', msg='Unknown question.')
         rules = data['rules'] if 'rules' in data else ''
         selected = data['selected'] if 'selected' in data else ''
 
