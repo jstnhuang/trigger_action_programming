@@ -88,3 +88,8 @@ def start():
 @app.route('/end')
 def end():
     return render_template('end.html')
+
+
+@app.route('/error')
+def error():
+    return render_template('error.html')

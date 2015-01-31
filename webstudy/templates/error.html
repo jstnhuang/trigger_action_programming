@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error.</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="/bower_components/font-roboto/roboto.html">
+    <style>
+      body {
+        color: rgba(0, 0, 0, 0.87);
+        font-family: 'Roboto', sans-serif;
+        margin: 0px auto;
+        max-width: 900px;
+      }
+    </style>
+  </head>
+ 
+  <body>   
+    <p>Sorry, there was an error with the study. You can try <a href="{{ url_for('home') }}">starting over</a>.</p>
+    <p>We apologize for the inconvenience.</p>
+  </body>
+</html>
