@@ -115,7 +115,7 @@ def next():
                     participant.put()
                 return url_for('end', code=code)
             else:
-                return url_for('error')
+                return url_for('error', msg='The responses were incomplete.')
 
         return '/txg/webstudy.html?p={}&q={}'.format(
             participant_key.urlsafe(), question_id + 1)
