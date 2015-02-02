@@ -6,13 +6,13 @@ class TimeOfDayTriggerOptions extends PolymerElement {
   @published int hour = 12;
   @published int minute = 30;
   @published List days = [];
-  @published bool sunday = false;
-  @published bool monday = false;
-  @published bool tuesday = false;
-  @published bool wednesday = false;
-  @published bool thursday = false;
-  @published bool friday = false;
-  @published bool saturday = false;
+  @observable bool sunday = false;
+  @observable bool monday = false;
+  @observable bool tuesday = false;
+  @observable bool wednesday = false;
+  @observable bool thursday = false;
+  @observable bool friday = false;
+  @observable bool saturday = false;
   @published String beforeOrAfter = 'Choose before or after';
   @published bool readOnly = false;
   
@@ -20,6 +20,9 @@ class TimeOfDayTriggerOptions extends PolymerElement {
   }
   
   void attached() {
+    if (days.isEmpty) {
+      days.addAll(['monday', 'tuesday', 'wednesday', 'thursday', 'friday']);
+    }
     sunday = days.contains('sunday');
     monday = days.contains('monday');
     tuesday = days.contains('tuesday');
