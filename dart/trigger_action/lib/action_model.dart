@@ -10,7 +10,7 @@ class SaySomethingAction extends Observable {
   SaySomethingAction(this.speech);
   
   ValidationResult validate() {
-    return new ValidationResult(speech != '', message: 'Say something: text can\'t be empty.');
+    return new ValidationResult(speech != '', 'Say something: text can\'t be empty.');
   }
   
   Object toJson() {

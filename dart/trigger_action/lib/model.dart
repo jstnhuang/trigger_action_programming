@@ -13,7 +13,7 @@ class ValidationResult {
   bool isValid = false;
   String message = '';
   
-  ValidationResult(this.isValid, {this.message: ''});
+  ValidationResult(this.isValid, [this.message='']);
 }
 
 class TriggerActionApp extends Observable {
@@ -60,7 +60,7 @@ class StatementList extends Observable {
   ValidationResult validate() {
     // For the webstudy, a response is required.
     if (webstudy && statements.isEmpty) {
-      return new ValidationResult(false, message: 'There must be at least one rule.');
+      return new ValidationResult(false, 'There must be at least one rule.');
     }
     for (Statement statement in statements) {
       ValidationResult vr = statement.validate();
@@ -78,7 +78,7 @@ class Statement extends Observable {
   @observable Action action;
   @observable bool isNew = false;
   Statement(this.id, this.triggers, this.action, this.isNew);
-  Statement.fromJs(JsObject jsStatement)
+  Statement.fromJs(var jsStatement)
     : id = jsStatement['id'],
       triggers = toObservable([]) {
     String action_name = jsStatement['actions'][0]['name'];
@@ -91,21 +91,7 @@ class Statement extends Observable {
       triggers.add(trigger);
     }
   }
-//  Statement.fromDecodedJson(var json)
-//    : id = json['id'],
-//      triggers = [],
-//      action_name = json['actions'][0]['name'],
-//      action_params = JSON.decode(json['actions'][0]['params']) {
-//    action_name = json['actions'][0]['name'];
-//    action_params = JSON.decode(json['actions'][0]['params']);
-//    this.action = new Action(action_name, action_params);
-//    for (var obj in json['triggers']) {
-//      String name = obj['name'];
-//      Map<String, String> params = JSON.decode(obj['params']);
-//      Trigger trigger = new Trigger(name, params);
-//      triggers.add(trigger);
-//    }
-//  }
+
   toJson() {
     List ts = new List.from(triggers.map((trigger) => trigger.toJson()));
     return {
@@ -117,7 +103,7 @@ class Statement extends Observable {
   
   ValidationResult validate() {
     if (triggers.length == 0) {
-      return new ValidationResult(false, message: 'Rule needs at least one trigger.');
+      return new ValidationResult(false, 'Rule needs at least one trigger.');
     }
     for (Trigger trigger in triggers) {
       ValidationResult vr = trigger.validate();
@@ -149,6 +135,9 @@ class Trigger extends Observable {
   }
   
   ValidationResult validate() {
+    if (currentTrigger == null) {
+      return new ValidationResult(false, 'A trigger has not been selected for one of the rules.');
+    }
     return currentTrigger.validate();
   }
 }
@@ -182,6 +171,9 @@ class Action extends Observable {
     return currentAction.toJson();
   }
   ValidationResult validate() {
+    if (currentAction == null) {
+      return new ValidationResult(false, 'An action has not been selected for one of the rules.');
+    }
     return currentAction.validate();
   }
 }

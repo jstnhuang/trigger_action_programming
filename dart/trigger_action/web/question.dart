@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:core';
 import 'dart:html';
+import 'package:trigger_action/model.dart';
 
 @CustomTag('webstudy-question')
 class WebstudyQuestionElement extends PolymerElement {
@@ -65,14 +66,24 @@ class WebstudyQuestionElement extends PolymerElement {
     request = new HttpRequest();
     request.onReadyStateChange.listen(onData);
 
-    print(list.model.toJson());
-    var url = '$api/next';
-    request.open('POST', url);
-    request.send(JSON.encode({
-      'p': participantId,
-      'q': questionId,
-      'rules': list.model
-    }));
+    if (list.model.statements.isEmpty) {
+      window.alert('There must be at least one rule.');
+      return;
+    }
+    
+    ValidationResult vr = list.model.validate();
+    if (vr.isValid) {
+      var url = '$api/next';
+      request.open('POST', url);
+      request.send(JSON.encode({
+        'p': participantId,
+        'q': questionId,
+        'rules': list.model
+      }));
+    } else {
+      window.alert(vr.message);
+      return;
+    }
   }
   
   void saveMultipleChoice(Event e) {
@@ -80,6 +91,11 @@ class WebstudyQuestionElement extends PolymerElement {
     var app = querySelector('trigger-action-app');
     request = new HttpRequest();
     request.onReadyStateChange.listen(onData);
+    
+    if (selectedOption == "") {
+      window.alert('An option must be selected.');
+      return;
+    }
 
     var url = '$api/next';
     request.open('POST', url);
