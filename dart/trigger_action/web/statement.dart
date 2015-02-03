@@ -58,12 +58,17 @@ class StatementElement extends PolymerElement {
       updateButtons();
     } else {
       model.triggers = triggers;
-      dispatchEvent(
-        new CustomEvent(
-          'update-rule',
-          detail: {'rule': model}
-        )
-      );
+      ValidationResult vr = model.validate();
+      if (vr.isValid) {
+        dispatchEvent(
+          new CustomEvent(
+            'update-rule',
+            detail: {'rule': model}
+          )
+        );
+      } else {
+        window.alert(vr.message);
+      }
     }
   }
 

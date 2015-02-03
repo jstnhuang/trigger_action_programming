@@ -3,9 +3,17 @@ library trigger_action_model;
 import 'dart:convert';
 import 'dart:js';
 import 'package:polymer/polymer.dart';
+import 'package:trigger_action/action_model.dart';
 import 'roslibjs.dart';
 import 'rule_db.dart';
-import 'package:trigger_action/action_model.dart';
+
+// A result to return from validate.
+class ValidationResult {
+  bool isValid = false;
+  String message = '';
+  
+  ValidationResult(this.isValid, {this.message: ''});
+}
 
 class TriggerActionApp extends Observable {
   RuleDb ruleDb;
@@ -48,17 +56,18 @@ class StatementList extends Observable {
   }
   
   // Return whether the statement list is valid.
-  bool isValid() {
+  ValidationResult validate() {
     // For the webstudy, a response is required.
     if (webstudy && statements.isEmpty) {
-      return false;
+      return new ValidationResult(false, message: 'There must be at least one rule.');
     }
     for (Statement statement in statements) {
-      if (!statement.isValid()) {
-        return false;
+      ValidationResult vr = statement.validate();
+      if (!vr.isValid) {
+        return vr;
       }
     }
-    return true;
+    return new ValidationResult(true);
   }
 }
 
@@ -107,8 +116,8 @@ class Statement extends Observable {
     };
   }
   
-  bool isValid() {
-    return action.isValid();
+  ValidationResult validate() {
+    return action.validate();
   }
 }
 
@@ -146,8 +155,8 @@ class Action extends Observable {
       'params': JSON.encode(params)
     };
   }
-  bool isValid() {
-    return currentAction.isValid();
+  ValidationResult validate() {
+    return currentAction.validate();
   }
 }
 
