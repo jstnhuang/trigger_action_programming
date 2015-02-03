@@ -2,7 +2,7 @@ import 'package:polymer/polymer.dart';
 import 'dart:html';
 
 @CustomTag('time-of-day-trigger-options')
-class TimeOfDayTriggerOptions extends PolymerElement {
+class TimeOfDayTriggerOptionsElement extends PolymerElement {
   @published int hour = 12;
   @published int minute = 30;
   @published List days = [];
@@ -16,7 +16,7 @@ class TimeOfDayTriggerOptions extends PolymerElement {
   @published String beforeOrAfter = 'Choose before or after';
   @published bool readOnly = false;
   
-  TimeOfDayTriggerOptions.created() : super.created() {
+  TimeOfDayTriggerOptionsElement.created() : super.created() {
   }
   
   void attached() {
