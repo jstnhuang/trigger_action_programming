@@ -112,11 +112,14 @@ class Statement extends Observable {
     return {
       'id': this.id,
       'triggers': ts,
-      'actions': [{'name': this.action_name, 'params': JSON.encode(this.action_params)}]
+      'actions': [action.toJson()]
     };
   }
   
   ValidationResult validate() {
+    if (triggers.length == 0) {
+      return new ValidationResult(false, message: 'Rule needs at least one trigger.');
+    }
     return action.validate();
   }
 }
