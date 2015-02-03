@@ -1,10 +1,10 @@
 import 'package:polymer/polymer.dart';
+import 'package:trigger_action/model.dart';
 import 'dart:html';
 
 @CustomTag('action-selector')
 class ActionSelectorElement extends PolymerElement {
-  @published String name;
-  @published Map<String, String> params;
+  @published Action model;
   @published bool opened = false;
   @published bool readOnly = false;
   
@@ -21,6 +21,7 @@ class ActionSelectorElement extends PolymerElement {
   
   void actionSelected(Event event, Object detail, Element sender) {
     toggle();
-    name = sender.attributes['data-name'];
+    model.name = sender.attributes['data-name'];
+    model.currentAction = actionFactory(model.name, model.params);
   }
 }

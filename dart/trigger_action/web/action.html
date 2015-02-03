@@ -32,10 +32,10 @@
       }
     </style>
     <a class="current-action" on-click="{{toggle}}">
-      <template if="{{name != ''}}">
-        {{display_names[name]}}
+      <template if="{{model.name != ''}}">
+        {{display_names[model.name]}}
       </template>
-      <template if="{{name == ''}}">
+      <template if="{{model.name == ''}}">
         Choose an action
       </template>
     </a>
@@ -47,8 +47,8 @@
       </div>
     </core-collapse>
     <div class="options">
-      <template if="{{name == 'say_something'}}">
-        <say-something-action-options speech="{{params['speech']}}" readOnly="{{readOnly}}"></say-something-action-options>
+      <template if="{{model.name == 'say_something'}}">
+        <say-something-action-options model="{{model.currentAction}}" readOnly="{{readOnly}}"></say-something-action-options>
       </template>
     </div>
   </template>
