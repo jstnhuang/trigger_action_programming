@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:js';
 import 'package:polymer/polymer.dart';
 import 'package:trigger_action/action_model.dart';
+import 'package:trigger_action/trigger_model.dart';
 import 'roslibjs.dart';
 import 'rule_db.dart';
 
@@ -75,15 +76,13 @@ class Statement extends Observable {
   @observable String id;
   @observable List<Trigger> triggers = toObservable([]);
   @observable Action action;
-  @observable String action_name;
-  @observable Map<String, String> action_params;
   @observable bool isNew = false;
-  Statement(this.id, this.triggers, this.action_name, this.action_params, this.isNew);
+  Statement(this.id, this.triggers, this.action, this.isNew);
   Statement.fromJs(JsObject jsStatement)
     : id = jsStatement['id'],
-      triggers = [] {
-    action_name = jsStatement['actions'][0]['name'];
-    action_params =  JSON.decode(jsStatement['actions'][0]['params']);
+      triggers = toObservable([]) {
+    String action_name = jsStatement['actions'][0]['name'];
+    var action_params =  JSON.decode(jsStatement['actions'][0]['params']);
     this.action = new Action(action_name, action_params);
     for (var obj in jsStatement['triggers']) {
       String name = obj['name'];
@@ -92,21 +91,21 @@ class Statement extends Observable {
       triggers.add(trigger);
     }
   }
-  Statement.fromDecodedJson(var json)
-    : id = json['id'],
-      triggers = [],
-      action_name = json['actions'][0]['name'],
-      action_params = JSON.decode(json['actions'][0]['params']) {
-    action_name = json['actions'][0]['name'];
-    action_params = JSON.decode(json['actions'][0]['params']);
-    this.action = new Action(action_name, action_params);
-    for (var obj in json['triggers']) {
-      String name = obj['name'];
-      Map<String, String> params = JSON.decode(obj['params']);
-      Trigger trigger = new Trigger(name, params);
-      triggers.add(trigger);
-    }
-  }
+//  Statement.fromDecodedJson(var json)
+//    : id = json['id'],
+//      triggers = [],
+//      action_name = json['actions'][0]['name'],
+//      action_params = JSON.decode(json['actions'][0]['params']) {
+//    action_name = json['actions'][0]['name'];
+//    action_params = JSON.decode(json['actions'][0]['params']);
+//    this.action = new Action(action_name, action_params);
+//    for (var obj in json['triggers']) {
+//      String name = obj['name'];
+//      Map<String, String> params = JSON.decode(obj['params']);
+//      Trigger trigger = new Trigger(name, params);
+//      triggers.add(trigger);
+//    }
+//  }
   toJson() {
     List ts = new List.from(triggers.map((trigger) => trigger.toJson()));
     return {
@@ -126,23 +125,37 @@ class Statement extends Observable {
 
 class Trigger extends Observable {
   @observable String name;
-  @observable Map<String, String> params;
-  Trigger(this.name, this.params);
-  Trigger.fromJs(JsObject obj)
-    : name = obj['name'],
-      params = JSON.decode(obj['params']) {
+  @observable var params;
+  @observable var currentTrigger; // Trigger model, which can vary at runtime.
+  Trigger(this.name, this.params) {
+    this.currentTrigger = triggerFactory(this.name, this.params);
+  }
+  Trigger.fromJs(JsObject obj) {
+    name = obj['name'];
+    params = JSON.decode(obj['params']);
+    currentTrigger = triggerFactory(name, params);
   }
   toJson() {
-    return {
-      'name': name,
-      'params': JSON.encode(params)
-    };
+    return currentTrigger.toJson();
   }
+}
+
+Object triggerFactory(String name, var params) {
+  if(name == 'time_of_day') {
+    int hour = params['hour'];
+    int minute = params['minute'];
+    List days = toObservable(params['days']);
+    String beforeOrAfter = params['before_or_after'];
+    return new TimeOfDayTrigger(hour, minute, days, beforeOrAfter);
+  } else if (name == 'person_detected') {
+    return new PersonDetectedTrigger();
+  }
+  return null;
 }
 
 class Action extends Observable {
   @observable String name;
-  @observable Map<String, String> params;
+  @observable var params;
   @observable var currentAction;
   Action(this.name, this.params) {
     this.currentAction = actionFactory(name, params);
@@ -150,13 +163,10 @@ class Action extends Observable {
   Action.fromJs(JsObject obj) {
     name = obj['name'];
     params = JSON.decode(obj['params']);
-    currentAction = actionFactory(name, params);
+    this.currentAction = actionFactory(name, params);
   }
   toJson() {
-    return {
-      'name': name,
-      'params': JSON.encode(params)
-    };
+    return currentAction.toJson();
   }
   ValidationResult validate() {
     return currentAction.validate();

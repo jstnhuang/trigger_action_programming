@@ -47,17 +47,20 @@ class StatementElement extends PolymerElement {
   void save(Event event, Object detail, Element sender) {
     event.preventDefault();
     if (model.isNew) {
-      model.triggers = triggers;
-      dispatchEvent(
-        new CustomEvent(
-          'add-rule',
-          detail: {'rule': model}
-        )
-      );
-      model.isNew = false;
-      updateButtons();
+      ValidationResult vr = model.validate();
+      if (vr.isValid) {
+        dispatchEvent(
+          new CustomEvent(
+            'add-rule',
+            detail: {'rule': model}
+          )
+        );
+        model.isNew = false;
+        updateButtons();
+      } else {
+        window.alert(vr.message);
+      }
     } else {
-      model.triggers = triggers;
       ValidationResult vr = model.validate();
       if (vr.isValid) {
         dispatchEvent(

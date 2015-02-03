@@ -70,7 +70,7 @@ class RosRuleDb implements RuleDb {
     var statementObject = {
       'id': rule.id,
       'triggers': rule.triggers.map((trigger) => trigger.toJson()),
-      'actions': [{'name': rule.action_name, 'params': JSON.encode(rule.action_params)}]
+      'actions': [rule.action.toJson()]
     };
     var request = new ServiceRequest(
       {
@@ -105,7 +105,7 @@ class MockRuleDb implements RuleDb {
       }
       List<Statement> statement_list = [];
       for (var rule in rules) {
-        Statement s = new Statement.fromDecodedJson(rule);
+        Statement s = new Statement.fromJs(rule);
         statement_list.add(s);
       }
       return statement_list;

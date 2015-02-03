@@ -1,11 +1,13 @@
 import 'package:polymer/polymer.dart';
+import 'package:trigger_action/trigger_model.dart';
 import 'dart:html';
 
 @CustomTag('time-of-day-trigger-options')
 class TimeOfDayTriggerOptionsElement extends PolymerElement {
-  @published int hour = 12;
-  @published int minute = 30;
-  @published List days = [];
+  @published TimeOfDayTrigger model;
+//  @published int hour = 12;
+//  @published int minute = 30;
+//  @published List days = [];
   @observable bool sunday = false;
   @observable bool monday = false;
   @observable bool tuesday = false;
@@ -13,68 +15,68 @@ class TimeOfDayTriggerOptionsElement extends PolymerElement {
   @observable bool thursday = false;
   @observable bool friday = false;
   @observable bool saturday = false;
-  @published String beforeOrAfter = 'Choose before or after';
+//  @published String beforeOrAfter = 'Choose before or after';
   @published bool readOnly = false;
   
   TimeOfDayTriggerOptionsElement.created() : super.created() {
   }
   
   void attached() {
-    if (days.isEmpty) {
-      days.addAll(['monday', 'tuesday', 'wednesday', 'thursday', 'friday']);
+    if (model.days.isEmpty) {
+      model.days.addAll(['monday', 'tuesday', 'wednesday', 'thursday', 'friday']);
     }
-    sunday = days.contains('sunday');
-    monday = days.contains('monday');
-    tuesday = days.contains('tuesday');
-    wednesday = days.contains('wednesday');
-    thursday = days.contains('thursday');
-    friday = days.contains('friday');
-    saturday = days.contains('saturday');
+    sunday = model.days.contains('sunday');
+    monday = model.days.contains('monday');
+    tuesday = model.days.contains('tuesday');
+    wednesday = model.days.contains('wednesday');
+    thursday = model.days.contains('thursday');
+    friday = model.days.contains('friday');
+    saturday = model.days.contains('saturday');
   }
   
   void toggleDay(Event event, Object detail, Element sender) {
     var day = sender.attributes['id'];
     if (day == 'sunday') {
       sunday = !sunday;
-      days.remove('sunday');
+      model.days.remove('sunday');
       if (sunday) {
-        days.add('sunday');
+        model.days.add('sunday');
       }
     } else if (day == 'monday') {
       monday = !monday;
-      days.remove('monday');
+      model.days.remove('monday');
       if (monday) {
-        days.add('monday');
+        model.days.add('monday');
       }
     } else if (day == 'tuesday') {
       tuesday = !tuesday;
-      days.remove('tuesday');
+      model.days.remove('tuesday');
       if (tuesday) {
-        days.add('tuesday');
+        model.days.add('tuesday');
       }
     } else if (day == 'wednesday') {
       wednesday = !wednesday;
-      days.remove('wednesday');
+      model.days.remove('wednesday');
       if (wednesday) {
-        days.add('wednesday');
+        model.days.add('wednesday');
       }
     } else if (day == 'thursday') {
       thursday = !thursday;
-      days.remove('thursday');
+      model.days.remove('thursday');
       if (thursday) {
-        days.add('thursday');
+        model.days.add('thursday');
       }
     } else if (day == 'friday') {
       friday = !friday;
-      days.remove('friday');
+      model.days.remove('friday');
       if (friday) {
-        days.add('friday');
+        model.days.add('friday');
       }
     } else {
       saturday = !saturday;
-      days.remove('saturday');
+      model.days.remove('saturday');
       if (saturday) {
-        days.add('saturday');
+        model.days.add('saturday');
       }
     }
   }

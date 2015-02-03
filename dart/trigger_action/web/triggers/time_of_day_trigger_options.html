@@ -63,7 +63,7 @@
         <span class="label">Time</span>
         <paper-dropdown-menu disabled="{{readOnly}}">
           <paper-dropdown class="dropdown" duration="200">
-            <core-selector valueattr="label" selected="{{beforeOrAfter}}" class="menu">
+            <core-selector valueattr="label" selected="{{model.beforeOrAfter}}" class="menu">
               <paper-item label="is">is</paper-item>
               <paper-item label="is before">is before</paper-item>
               <paper-item label="is after">is after</paper-item>
@@ -87,9 +87,9 @@
               on-change="{{handleTimeChange}}">
           </template>
         </paper-input-decorator-->
-        <time-picker id="timePicker" hour="{{hour}}" minute="{{minute}}" disabled="{{readOnly}}"></time-picker>
+        <time-picker id="timePicker" hour="{{model.hour}}" minute="{{model.minute}}" disabled="{{readOnly}}"></time-picker>
       </div>
-      <div horizontal layout class="days" data-days="{{days}}">
+      <div horizontal layout class="days" data-days="{{model.days}}">
         <div vertical center layout class="day">
           <paper-checkbox checked?="{{sunday}}" on-change="{{toggleDay}}" id="sunday" disabled="{{readOnly}}"></paper-checkbox>
           Sunday

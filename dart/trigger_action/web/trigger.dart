@@ -37,6 +37,7 @@ class TriggerSelectorElement extends PolymerElement {
   void triggerSelected(Event event, Object detail, Element sender) {
     toggle();
     model.name = sender.attributes['data-name'];
+    model.currentTrigger = triggerFactory(model.name, model.params);
   }
   
   void delete() {

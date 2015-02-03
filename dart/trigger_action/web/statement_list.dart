@@ -78,7 +78,7 @@ class StatementListElement extends PolymerElement {
 
   // Creates a blank rule to be filled in.
   void createBlankRule(MouseEvent event) {
-    Statement statement = new Statement('unknown', [], '', {}, true);
+    Statement statement = new Statement('unknown', [], new Action('', {}), true);
     model.statements.add(statement);
   }
 

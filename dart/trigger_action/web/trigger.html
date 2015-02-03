@@ -72,10 +72,7 @@
       <div class="options">
         <template if="{{model.name == 'time_of_day'}}">
           <time-of-day-trigger-options
-            hour="{{model.params['hour']}}"
-            minute="{{model.params['minute']}}"
-            days="{{model.params['days']}}"
-            beforeOrAfter="{{model.params['before_or_after']}}"
+            model="{{model.currentTrigger}}"
             readOnly="{{readOnly}}">
           </time-of-day-trigger-options>
         </template>

@@ -81,7 +81,7 @@
             </div>
             <div class="buttons">
               <template if="{{!webstudy && !readOnly}}">
-                <paper-button id="saveButton" disabled?="{{model.triggers.length == 0 || model.action_name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
+                <paper-button id="saveButton" disabled?="{{model.triggers.length == 0 || model.action.name == ''}}" on-click="{{save}}">{{saveLabel}}</paper-button>
               </template>
               <template if="{{!readOnly}}">
                 <paper-button id="deleteButton" on-click="{{delete}}">{{deleteLabel}}</paper-button>
