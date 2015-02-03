@@ -9,7 +9,7 @@ class TimeOfDayTriggerOptions extends PolymerElement {
   @observable String hourView = ''; // How the hour is displayed.
   @observable String minuteView = '';
   @observable String amPmView = '';
-  @observable bool isValid = true;
+  @published bool isValid = true;
   @observable String value = '';
   @observable String errorMsg = '';
   bool isFocused = false;

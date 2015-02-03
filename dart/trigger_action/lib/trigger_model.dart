@@ -9,6 +9,7 @@ class TimeOfDayTrigger extends Observable {
   @observable int minute = 30;
   @observable List days;
   @observable String beforeOrAfter = 'Choose before or after';
+  @observable bool timeIsValid = true;
   TimeOfDayTrigger(this.hour, this.minute, this.days, this.beforeOrAfter) {
     if (hour == null) {
       this.hour = 9;
@@ -31,6 +32,19 @@ class TimeOfDayTrigger extends Observable {
         'before_or_after': beforeOrAfter
       })
     };
+  }
+  
+  ValidationResult validate() {
+    if (!timeIsValid) {
+      return new ValidationResult(false, message: 'Time of day: invalid time.');
+    }
+    if (beforeOrAfter != 'is' && beforeOrAfter != 'is before' && beforeOrAfter != 'is after') {
+      return new ValidationResult(false, message: 'Time of day: choose "is", "is before," or "is after."');
+    }
+    if (days.isEmpty) {
+      return new ValidationResult(false, message: 'Time of day: pick at least one day of the week.');
+    }
+    return new ValidationResult(true);
   }
 }
 

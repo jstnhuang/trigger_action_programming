@@ -87,7 +87,7 @@
               on-change="{{handleTimeChange}}">
           </template>
         </paper-input-decorator-->
-        <time-picker id="timePicker" hour="{{model.hour}}" minute="{{model.minute}}" disabled="{{readOnly}}"></time-picker>
+        <time-picker id="timePicker" hour="{{model.hour}}" minute="{{model.minute}}" disabled="{{readOnly}}" isValid="{{model.timeIsValid}}"></time-picker>
       </div>
       <div horizontal layout class="days" data-days="{{model.days}}">
         <div vertical center layout class="day">

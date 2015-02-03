@@ -119,6 +119,12 @@ class Statement extends Observable {
     if (triggers.length == 0) {
       return new ValidationResult(false, message: 'Rule needs at least one trigger.');
     }
+    for (Trigger trigger in triggers) {
+      ValidationResult vr = trigger.validate();
+      if (!vr.isValid) {
+        return vr;
+      }
+    }
     return action.validate();
   }
 }
@@ -127,16 +133,23 @@ class Trigger extends Observable {
   @observable String name;
   @observable var params;
   @observable var currentTrigger; // Trigger model, which can vary at runtime.
+  
   Trigger(this.name, this.params) {
     this.currentTrigger = triggerFactory(this.name, this.params);
   }
+  
   Trigger.fromJs(JsObject obj) {
     name = obj['name'];
     params = JSON.decode(obj['params']);
     currentTrigger = triggerFactory(name, params);
   }
+  
   toJson() {
     return currentTrigger.toJson();
+  }
+  
+  ValidationResult validate() {
+    return currentTrigger.validate();
   }
 }
 
