@@ -1,6 +1,5 @@
 import 'package:polymer/polymer.dart';
 import 'package:trigger_action/model.dart';
-import 'dart:async';
 import 'dart:html';
 
 @CustomTag('action-selector')
@@ -14,12 +13,6 @@ class ActionSelectorElement extends PolymerElement {
   };
   
   ActionSelectorElement.created() : super.created() {
-    // TODO: Not sure if this is the right way to wait for the model to be ready.
-    Future future = new Future(() {
-      while (model == null) {
-      }
-    });
-    future.timeout(new Duration(milliseconds: 500));
   }
   
   void toggle() {
