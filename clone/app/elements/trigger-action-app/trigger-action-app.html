@@ -1,0 +1,20 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../rule-list/rule-list.html">
+
+<polymer-element name="trigger-action-app" attributes="">
+  <template>
+    <link rel="stylesheet" href="style.css">
+    <h1>Trigger-action programming</h1>
+    <paper-button raised class="createButton">Create a rule</paper-button>
+    <rule-list></rule-list>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        ready: function () {
+        }
+      });
+    })();
+  </script>
+</polymer-element>

@@ -1,0 +1,22 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="rule-list" attributes="">
+  <template>
+    <link rel="stylesheet" href="style.css">
+    <template if="{{ rules.length == 0 }}">
+      <p class="noRules">No rules have been created yet.</p>
+    </template>
+    <template id="greeting" repeat="{{ rule in rules }}">
+      {{ rule }}
+    </template>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        ready: function () {
+          this.rules = [];
+        }
+      });
+    })();
+  </script>
+</polymer-element>
