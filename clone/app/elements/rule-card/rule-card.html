@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="rule-card" attributes="triggers action">
+  <template>
+    <link rel="stylesheet" href="style.css">
+    <div class="ruleDesc">
+      <template repeat="{{trigger, index in triggers}}">
+        <span class="ifThenSection">
+          <template if="{{index == 0}}">
+            If
+          </template>
+          <template if="{{index != 0}}">
+            and
+          </template>
+          <span class="taChip">{{trigger}}</span>
+        </span>
+      </template>
+      <span class="ifThenSection">
+        then <span class="taChip">{{action}}</span>
+      </span>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+      });
+    })();
+  </script>
+</polymer-element>
