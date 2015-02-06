@@ -4,7 +4,10 @@
 }
 
 .noRules {
-  font-size: 1.5em;
+  text-align: center;
+  padding: 10px;
+  font-size: 2.5em;
+  margin: 0;
 }
 
 rule-card + rule-card {
