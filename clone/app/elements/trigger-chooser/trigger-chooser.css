@@ -6,3 +6,8 @@
 paper-button {
   text-transform: none;
 }
+
+paper-button[active] {
+  color: #fff;
+  background-color: #03a9f4;
+}

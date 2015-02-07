@@ -1,4 +1,5 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../step-count/step-count.html">
 
@@ -8,17 +9,34 @@
     <link rel="stylesheet" href="../creator.css">
     <step-count current="1" total="6"></step-count>
     <p class="instructions">Select a trigger type below.</p>
-    <paper-button raised z="1" data-label="daily_time" on-click="{{select}}">Daily time</paper-button>
-    <paper-button raised z="1" data-label="weekly_event" on-click="{{select}}">Weekly event</paper-button>
-    <paper-button raised z="1" data-label="one_time_event" on-click="{{select}}">One-time event</paper-button>
-    <paper-button raised z="1" data-label="doorbell_rings" on-click="{{select}}">Doorbell rings</paper-button>
+    <core-selector valueattr="data-label">
+    <paper-button raised z="1" data-label="daily_time" data-summary="Daily time allows you to set a time or a range of times for your rule to repeat every day." on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Daily time</paper-button>
+    <paper-button raised z="1" data-summary="Weekly event allows you to set a time or range of times for your rule to repeat every week." data-label="weekly_event" on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Weekly event</paper-button>
+    <paper-button raised z="1" data-summary="One-time event allows you to set a specific date and time for your rule to occur." data-label="one_time_event" on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">One-time event</paper-button>
+    <paper-button raised z="1" data-summary="Causes the trigger to occur when the doorbell rings in your house." data-label="doorbell_rings" on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Doorbell rings</paper-button>
+    </core-selector>
+    <p>
+      <template if="{{summary == ''}}">
+        <br />
+      </template>
+      <template if="{{summary != ''}}">
+        {{summary}}
+      </template>
+    </p>
   </template>
   <script>
     (function () {
       Polymer({
+        summary: '',
         select: function(evt, detail, sender) {
           this.fire('trigger-selected', sender.dataset['label']);
-        }
+        },
+        mouseover: function(evt, detail, sender) {
+          this.summary = sender.dataset['summary'];
+        },
+        mouseout: function(evt, detail, sender) {
+          this.summary = '';
+        },
       });
     })();
   </script>
