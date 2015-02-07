@@ -9,11 +9,11 @@
     <link rel="stylesheet" href="../creator.css">
     <step-count current="1" total="6"></step-count>
     <p class="instructions">Select a trigger type below.</p>
-    <core-selector valueattr="data-label">
-    <paper-button raised z="1" data-label="daily_time" data-summary="Daily time allows you to set a time or a range of times for your rule to repeat every day." on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Daily time</paper-button>
-    <paper-button raised z="1" data-summary="Weekly event allows you to set a time or range of times for your rule to repeat every week." data-label="weekly_event" on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Weekly event</paper-button>
-    <paper-button raised z="1" data-summary="One-time event allows you to set a specific date and time for your rule to occur." data-label="one_time_event" on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">One-time event</paper-button>
-    <paper-button raised z="1" data-summary="Causes the trigger to occur when the doorbell rings in your house." data-label="doorbell_rings" on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Doorbell rings</paper-button>
+    <core-selector valueattr="data-label" selected="{{selected}}">
+      <paper-button raised z="1" data-label="daily_time" data-summary="Daily time allows you to set a time or a range of times for your rule to repeat every day." on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Daily time</paper-button>
+      <paper-button raised z="1" data-summary="Weekly event allows you to set a time or range of times for your rule to repeat every week." data-label="weekly_event" on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Weekly event</paper-button>
+      <paper-button raised z="1" data-summary="One-time event allows you to set a specific date and time for your rule to occur." data-label="one_time_event" on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">One-time event</paper-button>
+      <paper-button raised z="1" data-summary="Causes the trigger to occur when the doorbell rings in your house." data-label="doorbell_rings" on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Doorbell rings</paper-button>
     </core-selector>
     <p>
       <template if="{{summary == ''}}">
@@ -27,9 +27,11 @@
   <script>
     (function () {
       Polymer({
+        selected: '',
         summary: '',
         select: function(evt, detail, sender) {
-          this.fire('trigger-selected', sender.dataset['label']);
+          this.selected = sender.dataset['label'];
+          this.fire('trigger-selected', this.selected);
         },
         mouseover: function(evt, detail, sender) {
           this.summary = sender.dataset['summary'];
