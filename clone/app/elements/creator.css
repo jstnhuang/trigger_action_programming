@@ -6,3 +6,7 @@ a.changeable {
 .changeable {
   color: #03a9f4
 }
+
+.instructions {
+  margin-top: 0;
+}
