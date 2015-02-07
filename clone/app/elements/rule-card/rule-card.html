@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-up.html">
 <link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
 <link rel="import" href="../trigger-chooser/trigger-chooser.html">
+<link rel="import" href="../daily-time-trigger/daily-time-trigger.html">
 
 <polymer-element name="rule-card" attributes="triggers action mode">
   <template>
@@ -14,7 +15,12 @@
           <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}">this</a> then that</span>
         </div>
         <core-collapse id="chooseTrigger">
-          <trigger-chooser></trigger-chooser>
+          <trigger-chooser on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
+        </core-collapse>
+        <core-collapse id="triggerOptions">
+          <template if="{{selectedTrigger == 'daily_time'}}">
+            <daily-time-trigger></daily-time-trigger>
+          </template>
         </core-collapse>
       </core-collapse>
     </template>
@@ -41,6 +47,7 @@
     (function () {
       Polymer({
         mode: 'summary',
+        selectedTrigger: '',
         ready: function() {
         },
         modeChanged: function() {
@@ -51,6 +58,12 @@
         chooseTrigger: function() {
           this.async(function() {
             this.$.chooseTrigger.toggle();
+          }, null, 50);
+        },
+        customizeTrigger: function(e, detail) {
+          this.selectedTrigger = detail;
+          this.async(function() {
+            this.$.triggerOptions.toggle();
           }, null, 50);
         }
       });
