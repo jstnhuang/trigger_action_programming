@@ -1,13 +1,11 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/core-selector/core-selector.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../step-count/step-count.html">
 
 <polymer-element name="trigger-chooser" attributes="triggers action mode">
   <template>
     <link rel="stylesheet" href="trigger-chooser.css">
     <link rel="stylesheet" href="../creator.css">
-    <step-count current="1" total="6"></step-count>
     <p class="instructions">Select a trigger type below.</p>
     <core-selector valueattr="data-label" selected="{{selected}}">
       <paper-button raised data-label="daily_time" data-summary="Daily time allows you to set a time or a range of times for your rule to repeat every day." on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Daily time</paper-button>
