@@ -57,13 +57,13 @@
         },
         chooseTrigger: function() {
           this.async(function() {
-            this.$.chooseTrigger.toggle();
+            this.$.chooseTrigger.opened = true;
           }, null, 50);
         },
         customizeTrigger: function(e, detail) {
           this.selectedTrigger = detail;
           this.async(function() {
-            this.$.triggerOptions.toggle();
+            this.$.triggerOptions.opened = true;
           }, null, 50);
         }
       });
