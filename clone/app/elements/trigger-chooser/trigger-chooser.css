@@ -1,0 +1,8 @@
+:host {
+  display: block;
+  padding: 10px;
+}
+
+paper-button {
+  text-transform: none;
+}

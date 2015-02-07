@@ -3,15 +3,32 @@
 <link rel="import" href="../rule-list/rule-list.html">
 
 <polymer-element name="trigger-action-app" attributes="">
+  <style>
+    paper-action-dialog {
+      width: 100%;
+    }
+  </style>
   <template>
-    <link rel="stylesheet" href="style.css">
-    <paper-button raised class="createButton">Create a rule</paper-button>
-    <rule-list></rule-list>
+    <link rel="stylesheet" href="trigger-action-app.css">
+    <paper-button raised id="createButton" on-click="{{createRule}}">Create a rule</paper-button>
+    <rule-list id="ruleList" rules="{{rules}}"></rule-list>
   </template>
   <script>
     (function () {
       Polymer({
         ready: function () {
+          this.rules = [{
+            'triggers': ['Weekly time', 'Temperature'],
+            'action': 'Send email'
+          },
+          {
+            'triggers': ['Daily time'],
+            'action': 'Brew coffee'
+          }];
+        },              
+        createRule: function() {
+          this.$.ruleList.newRule();
+          this.$.createButton.disabled = true;
         }
       });
     })();

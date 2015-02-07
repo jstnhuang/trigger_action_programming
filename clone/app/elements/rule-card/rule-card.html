@@ -1,28 +1,58 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-up.html">
+<link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
+<link rel="import" href="../trigger-chooser/trigger-chooser.html">
 
-<polymer-element name="rule-card" attributes="triggers action">
+<polymer-element name="rule-card" attributes="triggers action mode">
   <template>
-    <link rel="stylesheet" href="style.css">
-    <div class="ruleDesc">
-      <template repeat="{{trigger, index in triggers}}">
+    <link rel="stylesheet" href="rule-card.css">
+    <link rel="stylesheet" href="../creator.css">
+    <template if="{{mode == 'update'}}">
+      <core-collapse id="updateCollapse">
+        <div id="update">
+          <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}">this</a> then that</span>
+        </div>
+        <core-collapse id="chooseTrigger">
+          <trigger-chooser></trigger-chooser>
+        </core-collapse>
+      </core-collapse>
+    </template>
+    <template if="{{mode == 'summary'}}">
+      <div class="ruleDesc">
+        <template repeat="{{trigger, index in triggers}}">
+          <span class="ifThenSection">
+            <template if="{{index == 0}}">
+              If
+            </template>
+            <template if="{{index != 0}}">
+              and
+            </template>
+            <span class="taChip">{{trigger}}</span>
+          </span>
+        </template>
         <span class="ifThenSection">
-          <template if="{{index == 0}}">
-            If
-          </template>
-          <template if="{{index != 0}}">
-            and
-          </template>
-          <span class="taChip">{{trigger}}</span>
+          then <span class="taChip">{{action}}</span>
         </span>
-      </template>
-      <span class="ifThenSection">
-        then <span class="taChip">{{action}}</span>
-      </span>
-    </div>
+      </div>
+    </template>
   </template>
   <script>
     (function () {
       Polymer({
+        mode: 'summary',
+        ready: function() {
+        },
+        modeChanged: function() {
+          this.async(function() {
+            this.$.updateCollapse.toggle();
+          }, null, 50);
+        },
+        chooseTrigger: function() {
+          this.async(function() {
+            this.$.chooseTrigger.toggle();
+          }, null, 50);
+        }
       });
     })();
   </script>

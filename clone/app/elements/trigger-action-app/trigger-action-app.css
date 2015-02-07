@@ -3,7 +3,7 @@ paper-button {
   background-color: #03a9f4;
 }
 
-.createButton {
+#createButton {
   margin: 0;
   margin-top: 10px;
 }

@@ -1,0 +1,8 @@
+a.changeable {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.changeable {
+  color: #03a9f4
+}

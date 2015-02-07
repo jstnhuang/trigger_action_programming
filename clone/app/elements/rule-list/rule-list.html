@@ -1,15 +1,15 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-shadow/paper-shadow.html">
 
-<polymer-element name="rule-list" attributes="">
+<polymer-element name="rule-list" attributes="rules">
   <template>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="rule-list.css">
     <paper-shadow z="1" class="listContainer">
       <template if="{{ rules.length == 0 }}">
         <p class="noRules">No rules have been created yet.</p>
       </template>
       <template id="greeting" repeat="{{ rule in rules }}">
-        <rule-card triggers="{{rule.triggers}}" action="{{rule.action}}"></rule-card>
+        <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}"></rule-card>
       </template>
     </paper-shadow>
   </template>
@@ -17,14 +17,14 @@
     (function () {
       Polymer({
         ready: function () {
-          this.rules = [{
-            'triggers': ['Weekly time', 'Temperature'],
-            'action': 'Send email'
-          },
-          {
-            'triggers': ['Daily time'],
-            'action': 'Brew coffee'
-          }];
+        },
+        newRule: function() {
+          var newRule = {
+            'triggers': [],
+            'action': '',
+            mode: 'update'
+          };
+          this.rules.unshift(newRule);
         }
       });
     })();
