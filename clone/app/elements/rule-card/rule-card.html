@@ -36,7 +36,12 @@
           <core-collapse id="actionOptions">
             <step-count current="4" total="5"></step-count>
             <p>Action options</p>
-            <paper-button raised on-click="{{chooseAction}}">Next step</paper-button>
+            <paper-button raised on-click="{{confirmRule}}">Next step</paper-button>
+          </core-collapse>
+          <core-collapse id="ruleConfirmation">
+            <step-count current="5" total="5"></step-count>
+            <p>You can go back to previous steps to make changes. Otherwise, click "Finish" to make this rule.</p>
+            <paper-button raised on-click="{{saveRule}}">Finish</paper-button>
           </core-collapse>
         </div>
       </core-collapse>
@@ -75,6 +80,7 @@
           this.changeCollapseStyle(this.$.chooseTrigger);
           this.changeCollapseStyle(this.$.triggerOptions);
           this.changeCollapseStyle(this.$.chooseAction);
+          this.changeCollapseStyle(this.$.ruleConfirmation);
         },
 
         // Sets the given core-collapse's style to overflow: visible after it has finished opening.
@@ -118,6 +124,12 @@
             this.$.actionOptions.opened = true;
           }, null, 50);
         },
+
+        confirmRule: function() {
+          this.async(function() {
+            this.$.ruleConfirmation.opened = true;
+          }, null, 50);
+        }
       });
     })();
   </script>
