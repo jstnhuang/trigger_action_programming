@@ -31,7 +31,12 @@
           </core-collapse>
           <core-collapse id="chooseAction">
             <step-count current="3" total="5"></step-count>
-            <action-chooser></action-chooser>
+            <action-chooser on-action-selected="{{customizeAction}}"></action-chooser>
+          </core-collapse>
+          <core-collapse id="actionOptions">
+            <step-count current="4" total="5"></step-count>
+            <p>Action options</p>
+            <paper-button raised on-click="{{chooseAction}}">Next step</paper-button>
           </core-collapse>
         </div>
       </core-collapse>
@@ -60,6 +65,7 @@
       Polymer({
         mode: 'summary',
         selectedTrigger: '',
+        selectedAction: '',
 
         ready: function() {
           // Core-collapse dynamically sets its overflow value to hidden. This interferes with
@@ -104,7 +110,14 @@
           this.async(function() {
             this.$.chooseAction.opened = true;
           }, null, 50);
-        }
+        },
+
+        customizeAction: function(e, detail) {
+          this.selectedAction = detail;
+          this.async(function() {
+            this.$.actionOptions.opened = true;
+          }, null, 50);
+        },
       });
     })();
   </script>

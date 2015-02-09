@@ -1,3 +1,12 @@
 :host {
   display: block;
 }
+
+paper-button {
+  text-transform: none;
+}
+
+.core-selected {
+  color: #fff;
+  background-color: #03a9f4;
+}
