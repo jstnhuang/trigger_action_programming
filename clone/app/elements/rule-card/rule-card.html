@@ -140,6 +140,12 @@
         },
 
         confirmRule: function() {
+          var action = this.$.actionOptionsCollapse.querySelector('#actionOptions')
+          var vr = action.validate();
+          if (!vr.isValid) {
+            alert(vr.message);
+            return;
+          }
           this.async(function() {
             this.$.ruleConfirmationCollapse.opened = true;
           }, null, 50);
