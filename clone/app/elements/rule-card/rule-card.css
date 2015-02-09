@@ -25,3 +25,10 @@
 .preview {
   font-size: 2.5em;
 }
+
+paper-button {
+  background-color: #03a9f4;
+  color: #fff;
+  margin-left: 0px;
+  text-transform: none;
+}

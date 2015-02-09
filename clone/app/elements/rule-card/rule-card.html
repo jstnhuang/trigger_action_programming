@@ -2,6 +2,7 @@
 <link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-up.html">
 <link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../daily-time-trigger/daily-time-trigger.html">
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../trigger-chooser/trigger-chooser.html">
@@ -23,6 +24,7 @@
             <template if="{{selectedTrigger == 'daily_time'}}">
               <daily-time-trigger></daily-time-trigger>
             </template>
+            <paper-button raised>Next step</paper-button>
           </core-collapse>
         </div>
       </core-collapse>
