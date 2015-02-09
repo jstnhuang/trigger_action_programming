@@ -4,6 +4,11 @@
 
 paper-button {
   text-transform: none;
+  margin: 0;
+}
+
+paper-button + paper-button {
+  margin-left: 0.58em;
 }
 
 .core-selected {
