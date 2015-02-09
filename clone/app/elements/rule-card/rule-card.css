@@ -31,3 +31,7 @@ paper-button {
   margin-left: 0px;
   text-transform: none;
 }
+
+core-collapse + core-collapse {
+  margin-top: 20px;
+}
