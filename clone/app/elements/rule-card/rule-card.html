@@ -19,7 +19,7 @@
         <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}">this</a> then that</span>
         <core-collapse id="chooseTrigger">
           <step-count current="1" total="5"></step-count>
-          <trigger-chooser on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
+          <trigger-chooser triggers="{{TRIGGER_MODELS}}" on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
         </core-collapse>
         <core-collapse id="triggerOptions">
           <step-count current="2" total="5"></step-count>
@@ -135,7 +135,30 @@
           this.async(function() {
             this.$.ruleConfirmation.opened = true;
           }, null, 50);
-        }
+        },
+
+        TRIGGER_MODELS: [
+          {
+            key: 'daily_time',
+            display_name: 'Daily time',
+            description: 'Makes your rule run every day at a certain time, or between two times.'
+          },
+          {
+            key: 'weather',
+            display_name: 'Weather',
+            description: 'Makes your rule run when the outside temperature is in some range, or if some condition like rain occurs.'
+          },
+          {
+            key: 'doorbell_rings',
+            display_name: 'Doorbell rings',
+            description: 'Makes your rule run when the doorbell rings in your house.'
+          },
+          {
+            key: 'my_location',
+            display_name: 'My location',
+            description: 'Makes your rule run when you arrive, leave, or are currently at home or work.'
+          },
+        ],
       });
     })();
   </script>
