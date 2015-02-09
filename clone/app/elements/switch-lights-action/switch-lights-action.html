@@ -25,6 +25,7 @@
     (function () {
       Polymer({
         onOrOff: 'Choose on/off',
+
         validate: function() {
           if (this.onOrOff != 'on' && this.onOrOff != 'off') {
             return {
@@ -36,6 +37,12 @@
               isValid: true
             }
           }
+        },
+
+        toJsonObject: function() {
+          return {
+            onOrOff: this.onOrOff
+          };
         }
       });
     })();

@@ -65,6 +65,16 @@
           return {
             isValid: true
           };
+        },
+
+        toJsonObject: function() {
+          return {
+            isOrBetween: this.isOrBetween,
+            startHour: this.startHour,
+            startMinute: this.startMinute,
+            endHour: this.endHour,
+            endMinute: this.endMinute
+          };
         }
       });
     })();

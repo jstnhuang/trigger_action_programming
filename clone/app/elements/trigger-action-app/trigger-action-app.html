@@ -17,15 +17,43 @@
     (function () {
       Polymer({
         ready: function () {
-          this.rules = [{
-            'triggers': ['Weekly time', 'Temperature'],
-            'action': 'Send email'
-          },
-          {
-            'triggers': ['Daily time'],
-            'action': 'Brew coffee'
-          }];
-        },              
+          this.rules = [
+            {
+              triggers: [
+                {
+                  key: 'daily_time',
+                  displayName: 'Daily time',
+                  params: {}
+                },
+                {
+                  key: 'weather',
+                  displayName: 'Weather',
+                  params: {}
+                }
+              ],
+              action: {
+                key: 'send_email',
+                displayName: 'Send email',
+                params: {}
+              }
+            },
+            {
+              triggers: [
+                {
+                  key: 'daily_time',
+                  displayName: 'Daily time',
+                  params: {}
+                }
+              ],
+              action: {
+                key: 'brew_coffee',
+                displayName: 'Brew coffee',
+                params: {}
+              }
+            }              
+          ];
+        },
+
         createRule: function() {
           this.$.ruleList.newRule();
           this.$.createButton.disabled = true;

@@ -24,7 +24,7 @@
         </core-collapse>
         <core-collapse id="triggerOptionsCollapse">
           <step-count current="2" total="5"></step-count>
-          <template if="{{selectedTrigger == 'daily_time'}}">
+          <template if="{{selectedTriggerKey == 'daily_time'}}">
             <daily-time-trigger id="triggerOptions"></daily-time-trigger>
           </template>
           <paper-button raised on-click="{{chooseAction}}">Next step</paper-button>
@@ -35,7 +35,7 @@
         </core-collapse>
         <core-collapse id="actionOptionsCollapse">
           <step-count current="4" total="5"></step-count>
-          <template if="{{action == 'switch_lights'}}">
+          <template if="{{actionKey == 'switch_lights'}}">
             <switch-lights-action id="actionOptions"></switch-lights-action>
           </template>
           <paper-button raised on-click="{{confirmRule}}">Next step</paper-button>
@@ -65,11 +65,11 @@
             <template if="{{index != 0}}">
               and
             </template>
-            <span class="taChip">{{trigger}}</span>
+            <span class="taChip">{{trigger.displayName}}</span>
           </span>
         </template>
         <span class="ifThenSection">
-          then <span class="taChip">{{action}}</span>
+          then <span class="taChip">{{action.displayName}}</span>
         </span>
       </div>
     </template>
@@ -78,9 +78,11 @@
     (function () {
       Polymer({
         mode: 'summary',
-        selectedTrigger: '', // The currently selected trigger in the update interface.
+        triggers: [], // A list of trigger models for this rule, as JSON objects.
+        action: {}, // The action as a JSON object.
+        selectedTriggerKey: '', // The key of the currently selected trigger in the update interface.
         selectedTriggerDisplay: '', // The currently selected trigger in the update interface.
-        action: '',
+        actionKey: '',
         actionDisplay: '',
 
         ready: function() {
@@ -118,7 +120,7 @@
         },
 
         customizeTrigger: function(e, detail) {
-          this.selectedTrigger = detail['key'];
+          this.selectedTriggerKey = detail['key'];
           this.selectedTriggerDisplay = detail['displayName'];
           this.async(function() {
             this.$.triggerOptionsCollapse.opened = true;
@@ -135,7 +137,7 @@
         },
 
         customizeAction: function(e, detail) {
-          this.action = detail['key'];
+          this.actionKey = detail['key'];
           this.actionDisplay = detail['displayName'];
           this.async(function() {
             this.$.actionOptionsCollapse.opened = true;
@@ -158,6 +160,40 @@
           if (!this.validateAction()) {
             return;
           }
+          var triggerOptions = this.$.triggerOptionsCollapse.querySelector('#triggerOptions');
+          this.triggers = [{
+            key: this.selectedTriggerKey,
+            displayName: this.selectedTriggerDisplay,
+            params: triggerOptions.toJsonObject()
+          }];
+          var actionOptions = this.$.actionOptionsCollapse.querySelector('#actionOptions');
+          this.action = {
+            key: this.actionKey,
+            displayName: this.actionDisplay,
+            params: actionOptions.toJsonObject()
+          };
+          console.log(this.toJsonObject());
+        },
+
+        // Returns the representation of this rule in a JSON-serializable format.
+        // Format:
+        // {
+        //   triggers: [
+        //     {
+        //       name: 'daily_time',
+        //       params: { ... }
+        //     }
+        //   ],
+        //   action: {
+        //     name: 'switch_lights',
+        //     params: { ... }
+        //   }
+        // }
+        toJsonObject: function() {
+          return {
+            triggers: this.triggers,
+            action: this.action
+          };
         },
 
         validateTrigger: function() {
