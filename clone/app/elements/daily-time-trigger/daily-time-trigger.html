@@ -1,10 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../time-picker/time_picker.html">
 
 <polymer-element name="daily-time-trigger" attributes="">
   <template>
     <link rel="stylesheet" href="daily-time-trigger.css">
     <link rel="stylesheet" href="../creator.css">
     <p class="instructions">This trigger fires at a set time every day. If you add both a start and end time, then the trigger will fire as soon as all conditions are true.</p>
+    Time: <time-picker hour="8" minute="0"></time-picker>
   </template>
   <script>
     (function () {
