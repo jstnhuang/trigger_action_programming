@@ -168,6 +168,10 @@
         
         valueChanged: function() {
           this.isValid = this.validate(this.value);
+        },
+
+        isValid: function() {
+          return this.isValid;
         }
       });
     })();
