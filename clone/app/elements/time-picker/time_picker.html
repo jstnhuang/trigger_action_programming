@@ -1,0 +1,175 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+
+<polymer-element name="time-picker" attributes="hour minute disabled">
+  <template>
+    <style>
+      #timeDecorator {
+        font-size: 1.25em;
+        margin: 0px;
+        margin-bottom: 10px;
+        padding: 0px;
+      }
+      #timeInput {
+        height: 1.35em;
+        margin-top: 1px;
+        margin-bottom: 2px;
+      }
+    </style>
+      <paper-input-decorator id="timeDecorator" error="{{errorMsg}}" isInvalid="{{!isValid}}">
+        <template if="{{disabled}}">
+          <input id="timeInput" is="core-input" value="{{value}}" on-blur="{{canonicalize}}" on-focus="{{setFocus}}" disabled>
+        </template>
+       <template if="{{!disabled}}">
+          <input id="timeInput" is="core-input" value="{{value}}" on-blur="{{canonicalize}}" on-focus="{{setFocus}}">
+        </template>
+      </paper-input-decorator>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        hour: 9, // The hour, from [0, 23]
+        minute: 30,
+        disabled: false,
+        hourView: '', // How the hour is displayed.
+        minuteView: '',
+        amPmView: '',
+        value: '', // The string shown in the input field.
+        isValid: true,
+        errorMsg: '', // The error message, if any.
+        isFocused: false, // Whether the input field has focus.
+
+        hourChanged: function() {
+          if (this.hour == 0) {
+            this.hourView = '12';
+            this.amPmView = 'AM';
+          } else if (this.hour < 10) {
+            this.hourView = '0' + this.hour;
+            this.amPmView = 'AM';
+          } else if (this.hour < 12) {
+            this.hourView = '' + hour;
+            this.amPmView = 'AM';
+          } else if (this.hour == 12) {
+            this.hourView = '' + this.hour;
+            this.amPmView = 'PM';
+          } else {
+            var hourMod = this.hour % 12;
+            if (hourMod < 10) {
+              this.hourView = '0' + hourMod;
+            } else {
+              this.hourView = '' + hourMod;
+            }
+            this.amPmView = 'PM';
+          }
+          if (!this.isFocused) {
+            this.value = this.hourView + ':' + this.minuteView + ' ' + this.amPmView;
+          }
+        },
+        
+        minuteChanged: function() {
+          if (this.minute < 10) {
+            this.minuteView = '0' + this.minute;
+          } else {
+            this.minuteView = '' + this.minute;
+          }
+          if (!this.isFocused) {
+            this.value = this.hourView + ':' + this.minuteView + ' ' + this.amPmView;
+          }
+        },
+        
+        setFocus: function() {
+          this.isFocused = true;
+        },
+        
+        canonicalize: function() {
+          this.isFocused = false;
+          if (this.validate(this.value)) {
+            this.value = this.hourView + ':' + this.minuteView + ' ' + this.amPmView;
+          }
+        },
+
+        // A stricter version of parseInt, from MDN.
+        filterInt: function(value) {
+          if(/^(\-|\+)?([0-9]+|Infinity)$/.test(value)) {
+            return Number(value);
+          }
+          return NaN;
+        },
+        
+        validate: function(value) {
+          var exp = /^(\d?\d):(\d\d)\s?([pPaA][mM]?){0,1}$/;
+          var matches = value.match(exp);
+          if (matches == null) {
+            this.errorMsg = 'Time must be in this format: 11:30 PM';
+            return false;
+          }
+          var hourMatch = matches[1];
+          var minuteMatch = matches[2];
+          
+          var hourVal = 0;
+          var minuteVal = 0;
+          hourVal = this.filterInt(hourMatch);
+          if (hourVal == NaN) {
+            this.errorMsg = 'Hour must be a number.';
+            return false;
+          }
+          minuteVal = this.filterInt(minuteMatch);
+          if (minuteVal == NaN) {
+            this.errorMsg = 'Minute must be a number.';
+            return false;
+          }
+          
+          if (hourVal < 1 || hourVal > 23) {
+            this.errorMsg = 'Hour must be between 1 and 23';
+            return false;
+          }
+          if (minuteVal < 0 || minuteVal > 59) {
+            this.errorMsg = 'Minute must be between 00 and 59';
+            return false;
+          }
+          
+          var amPmVal = '';
+          if (matches[3] === undefined) {
+            if (hourVal < 13) {
+              this.errorMsg = 'Must specify AM or PM';
+              return false;
+            } else {
+              amPmVal = 'PM';
+            }
+          } else {
+            amPmVal = matches[3].toUpperCase();
+            if (amPmVal != 'AM' && amPmVal != 'PM' && amPmVal != 'A' && amPmVal != 'P') {
+              // The regex should actually prevent this case.
+              this.errorMsg = 'AM / PM was not spelled correctly';
+              return false;
+            }
+            if (amPmVal[amPmVal.length - 1] !== 'M') {
+              amPmVal += 'M';
+            }
+            if (amPmVal == 'AM' && hourVal > 12) {
+              this.errorMsg = 'The hour is too late to be an AM time';
+              return false;
+            }
+          }
+          
+          if (hourVal < 12 && amPmVal == 'PM') {
+            this.hour = hourVal + 12;
+          } else if (hourVal == 12 && amPmVal == 'AM') {
+            this.hour = 0;
+          } else {
+            this.hour = hourVal;
+          }
+          
+          this.minute = minuteVal;
+          this.amPmView = amPmVal;
+          return true;
+        },
+        
+        valueChanged: function() {
+          this.isValid = this.validate(this.value);
+        }
+      });
+    })();
+  </script>
+</polymer-element>
