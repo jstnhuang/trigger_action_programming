@@ -10,3 +10,38 @@ a.changeable {
 .instructions {
   margin-top: 0;
 }
+
+.label {
+  font-size: 1.25em;
+  line-height: 1.5em;
+  margin-right: 10px;
+}
+paper-dropdown-menu {
+  font-size: 1.25em;
+  height: 1.5em;
+  margin: 0px;
+  padding: 0px;
+  margin-right: 0.5em;
+}
+time-picker {
+  width: 150px;
+  margin-right: 10px;
+}
+.day + .day {
+  margin-left: 10px;
+}
+.day paper-checkbox {
+  margin-bottom: 10px;
+}
+paper-checkbox[disabled] #checkboxContainer > #checkbox {
+  opacity: 1;
+}
+paper-checkbox[disabled] /deep/ #checkboxContainer > #checkbox {
+  opacity: 1;
+}
+paper-checkbox[checked] #checkboxContainer > #checkbox {
+  border-color: #0f9d58;
+}
+paper-checkbox[checked] /deep/ #checkboxContainer > #checkbox {
+  border-color: #0f9d58;
+}

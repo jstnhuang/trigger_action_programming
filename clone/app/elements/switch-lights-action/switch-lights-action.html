@@ -1,0 +1,31 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
+<polymer-element name="switch-lights-action" attributes="">
+  <template>
+    <link rel="stylesheet" href="switch-lights-action.css">
+    <link rel="stylesheet" href="../creator.css">
+    <p class="instructions">This action will turn all the lights in your house on or off.</p>
+    <div layout horizontal>
+    <span class="label">Switch lights</span>
+      <paper-dropdown-menu label="Choose on/off" disabled="{{readOnly}}">
+        <paper-dropdown class="dropdown" duration="200">
+          <core-selector valueattr="label" selected="{{onOrOff}}" class="menu">
+            <paper-item label="on">on</paper-item>
+            <paper-item label="off">off</paper-item>
+          </core-selector>
+        </paper-dropdown>
+      </paper-dropdown-menu>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        onOrOff: 'Choose on/off'
+      });
+    })();
+  </script>
+</polymer-element>

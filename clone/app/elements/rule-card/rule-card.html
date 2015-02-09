@@ -8,6 +8,7 @@
 <link rel="import" href="../action-chooser/action-chooser.html">
 <link rel="import" href="../daily-time-trigger/daily-time-trigger.html">
 <link rel="import" href="../step-count/step-count.html">
+<link rel="import" href="../switch-lights-action/switch-lights-action.html">
 <link rel="import" href="../trigger-chooser/trigger-chooser.html">
 
 <polymer-element name="rule-card" attributes="triggers action mode">
@@ -34,7 +35,9 @@
         </core-collapse>
         <core-collapse id="actionOptions">
           <step-count current="4" total="5"></step-count>
-          <p>Action options</p>
+          <template if="{{action == 'switch_lights'}}">
+            <switch-lights-action></switch-lights-action>
+          </template>
           <paper-button raised on-click="{{confirmRule}}">Next step</paper-button>
         </core-collapse>
         <core-collapse id="ruleConfirmation">
@@ -88,6 +91,7 @@
           this.changeCollapseStyle(this.$.chooseTrigger);
           this.changeCollapseStyle(this.$.triggerOptions);
           this.changeCollapseStyle(this.$.chooseAction);
+          this.changeCollapseStyle(this.$.actionOptions);
           this.changeCollapseStyle(this.$.ruleConfirmation);
         },
 
