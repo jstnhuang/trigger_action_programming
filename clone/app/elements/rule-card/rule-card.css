@@ -30,5 +30,5 @@ paper-button {
 }
 
 core-collapse + core-collapse {
-  margin-top: 20px;
+  margin-top: 40px;
 }
