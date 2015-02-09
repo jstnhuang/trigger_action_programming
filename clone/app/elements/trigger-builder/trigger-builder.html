@@ -1,0 +1,157 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../daily-time-trigger/daily-time-trigger.html">
+<link rel="import" href="../step-count/step-count.html">
+<link rel="import" href="../trigger-chooser/trigger-chooser.html">
+
+<!--
+trigger-builder has a complicated contract with rule-card. trigger-builder represents
+the steps where the user chooses a trigger, sets its parameters, and decides whether to
+add another trigger or to move on. There is one trigger-builder for each trigger.
+
+rule-card sends trigger-builder the entire list of triggers so far, because
+trigger-builder needs the entire list to render the last step. rule-card makes a copy
+of this list so it doesn't mutate it in rule-card.
+
+If the user decides to add another trigger, then trigger-builder passes the entire list
+back to rule-card. rule-card makes a copy of it so it doesn't mutate the list in
+trigger-builder. Then rule-card adds a blank trigger to its trigger list, causing
+another trigger-builder to be created.
+
+If the user decides to choose an action, then trigger-builder still passes the entire
+list back to rule-card, for the same reason as above.
+-->
+<polymer-element name="trigger-builder" attributes="TRIGGERMODELS trigger currentTriggers">
+  <template>
+    <link rel="stylesheet" href="trigger-builder.css">
+    <link rel="stylesheet" href="../creator.css">
+    <core-collapse class="stepCollapse" id="triggerChooserCollapse">
+      <step-count current="1" total="5"></step-count>
+      <trigger-chooser triggers="{{TRIGGERMODELS}}" on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
+    </core-collapse>
+    <core-collapse class="stepCollapse" id="triggerOptionsCollapse">
+      <step-count current="2" total="5"></step-count>
+      <template if="{{selectedTriggerKey == 'daily_time'}}">
+        <daily-time-trigger id="triggerOptions"></daily-time-trigger>
+      </template>
+      <paper-button raised on-click="{{checkAddTrigger}}">Next step</paper-button>
+    </core-collapse>
+    <core-collapse class="stepCollapse" id="addTriggerCollapse">
+      <step-count current="2" total="5"></step-count>
+      <p>
+        If you are done selecting triggers, choose the first option.
+        To add another trigger, choose the second option.
+      </p>
+      <span class="preview">
+        <template repeat="{{trigger, index in triggers}}">
+          <span class="ifThenSection">
+            <template if="{{index == 0}}">
+              If
+            </template>
+            <template if="{{index != 0}}">
+              and
+            </template>
+            <span class="taChip">{{trigger.displayName}}</span>
+          </span>
+        </template>
+        <span class="ifThenSection">
+          then <a class="changeable" on-click="{{chooseAction}}">that</a>
+        </span>
+      </span>
+      <p>- OR -</p>
+      <span class="preview">
+        <template repeat="{{trigger, index in triggers}}">
+          <span class="ifThenSection">
+            <template if="{{index == 0}}">
+              If
+            </template>
+            <template if="{{index != 0}}">
+              and
+            </template>
+            <span class="taChip">{{trigger.displayName}}</span>
+          </span>
+        </template>
+        <span class="ifThenSection">
+          and <a class="changeable" on-click="{{addTrigger}}">this</a>
+        </span>
+        <span class="ifThenSection">
+          then that
+        </span>
+      </span>
+    </core-collapse>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        selectedTriggerKey: '',
+        selectedTriggerDisplay: '',
+        triggers: [],
+
+        ready: function() {
+          this.triggers = this.currentTriggers.slice();
+          this.changeCollapseStyle(this.$.triggerChooserCollapse);
+          this.changeCollapseStyle(this.$.triggerOptionsCollapse);
+          this.changeCollapseStyle(this.$.addTriggerCollapse);
+        },
+
+        // Sets the given core-collapse's style to overflow: visible after it has finished opening.
+        changeCollapseStyle: function(collapse) {
+          if (collapse === undefined) {
+            return;
+          }
+          collapse.addEventListener('core-resize', function() {
+            collapse.style.overflow = 'visible';
+          });
+        },
+
+        chooseTrigger: function() {
+          this.async(function() {
+            this.$.triggerChooserCollapse.opened = true;
+          }, null, 50);
+        },
+
+        customizeTrigger: function(e, detail) {
+          this.selectedTriggerKey = detail['key'];
+          this.selectedTriggerDisplay = detail['displayName'];
+          var lastTrigger = this.triggers[this.triggers.length-1];
+          lastTrigger.key = this.selectedTriggerKey;
+          lastTrigger.displayName = this.selectedTriggerDisplay;
+          this.async(function() {
+            this.$.triggerOptionsCollapse.opened = true;
+          }, null, 50);
+        },
+
+        checkAddTrigger: function() {
+          var vr = this.validate();
+          if (!vr.isValid) {
+            alert(vr.message);
+            return;
+          }
+          var lastTrigger = this.triggers[this.triggers.length-1];
+          var options = this.$.triggerOptionsCollapse.querySelector('#triggerOptions');
+          lastTrigger.params = options.toJsonObject();
+          this.async(function() {
+            this.$.addTriggerCollapse.opened = true;
+          }, null, 50);
+        },
+
+        addTrigger: function() {
+          this.fire('add-trigger', this.triggers);
+        },
+
+        chooseAction: function() {
+          this.fire('choose-action', this.triggers);
+        },
+
+        validate: function() {
+          var trigger = this.$.triggerOptionsCollapse.querySelector('#triggerOptions');
+          return trigger.validate();
+        }
+
+      });
+    })();
+  </script>
+</polymer-element>

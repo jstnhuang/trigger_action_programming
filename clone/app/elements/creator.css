@@ -4,8 +4,7 @@ a.changeable {
 }
 
 .changeable {
-  color: #03a9f4
-}
+  color: #03a9f4 }
 
 .instructions {
   margin-top: 0;
@@ -44,4 +43,23 @@ paper-checkbox[checked] #checkboxContainer > #checkbox {
 }
 paper-checkbox[checked] /deep/ #checkboxContainer > #checkbox {
   border-color: #0f9d58;
+}
+
+.stepCollapse {
+  margin-top: 40px;
+}
+
+/* Rule preview */
+.preview {
+  font-size: 2.5em;
+}
+
+.taChip {
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  padding: 0em 0.125em;
+}
+
+.ifThenSection {
+  white-space: nowrap;
 }
