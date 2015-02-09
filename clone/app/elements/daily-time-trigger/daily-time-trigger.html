@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="daily-time-trigger.css">
     <link rel="stylesheet" href="../creator.css">
     <p class="instructions">This trigger fires at a set time every day. If you add both a start and end time, then the trigger will fire as soon as all conditions are true.</p>
-    <div layout horizontal wrap>
+    <div layout horizontal wrap id="wrapper">
       <span class="label">Time</span>
       <paper-dropdown-menu label="Choose is/is between" disabled="{{readOnly}}">
         <paper-dropdown class="dropdown" duration="200">
@@ -20,10 +20,10 @@
           </core-selector>
         </paper-dropdown>
       </paper-dropdown-menu>
-      <time-picker hour="{{startHour}}" minute="{{startMinute}}"></time-picker>
+      <time-picker id="startTimePicker" hour="{{startHour}}" minute="{{startMinute}}"></time-picker>
       <template if="{{isOrBetween == 'is between'}}">
         <span class="label">and</span>
-        <time-picker hour="{{endHour}}" minute="{{endMinute}}"></time-picker>
+        <time-picker id="endTimePicker" hour="{{endHour}}" minute="{{endMinute}}"></time-picker>
       </template>
     </div>
   </template>
@@ -34,7 +34,38 @@
         startHour: 8,
         startMinute: 0,
         endHour: 17,
-        endMinute: 0
+        endMinute: 0,
+
+        validate: function() {
+          if (this.isOrBetween != 'is' && this.isOrBetween != 'is between') {
+            return {
+              isValid: false,
+              message: 'Daily time: choose "is" or "is between"'
+            };
+          }
+          var vr = this.$.startTimePicker.validate();
+          if (!vr.isValid) {
+            vr.message = 'Start time: ' + vr.message;
+            return vr;
+          }
+          if (this.isOrBetween === 'is between') {
+            vr = this.$.wrapper.querySelector('#endTimePicker').validate();
+            if (!vr.isValid) {
+              vr.message = 'End time: ' + vr.message;
+              return vr;
+            }
+            if (this.startHour > this.endHour
+                || (this.startHour === this.endHour && this.startMinute > this.endMinute)) {
+              return {
+                isValid: false,
+                message: 'Daily time: start time must be before end time'
+              }
+            }
+          }
+          return {
+            isValid: true
+          };
+        }
       });
     })();
   </script>

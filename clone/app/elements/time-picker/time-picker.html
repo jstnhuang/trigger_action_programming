@@ -84,7 +84,7 @@
         
         canonicalize: function() {
           this.isFocused = false;
-          if (this.validate(this.value)) {
+          if (this.validateInternal(this.value)) {
             this.value = this.hourView + ':' + this.minuteView + ' ' + this.amPmView;
           }
         },
@@ -97,7 +97,8 @@
           return NaN;
         },
         
-        validate: function(value) {
+        // Internal validation method that performs validation logic.
+        validateInternal: function(value) {
           var exp = /^(\d?\d):(\d\d)\s?([pPaA][mM]?){0,1}$/;
           var matches = value.match(exp);
           if (matches == null) {
@@ -167,11 +168,24 @@
         },
         
         valueChanged: function() {
-          this.isValid = this.validate(this.value);
+          this.isValid = this.validateInternal(this.value);
+          console.log(this.isValid);
         },
 
-        isValid: function() {
-          return this.isValid;
+        // Public validate method. Outside elements should call this to get a validation
+        // result.
+        validate: function() {
+          this.validateInternal(this.value);
+          if (this.isValid) {
+            return {
+              isValid: true
+            };
+          } else {
+            return {
+              isValid: false,
+              message: this.errorMsg
+            };
+          }
         }
       });
     })();

@@ -25,7 +25,7 @@
         <core-collapse id="triggerOptionsCollapse">
           <step-count current="2" total="5"></step-count>
           <template if="{{selectedTrigger == 'daily_time'}}">
-            <daily-time-trigger></daily-time-trigger>
+            <daily-time-trigger id="triggerOptions"></daily-time-trigger>
           </template>
           <paper-button raised on-click="{{chooseAction}}">Next step</paper-button>
         </core-collapse>
@@ -126,6 +126,12 @@
         },
 
         chooseAction: function() {
+          var trigger = this.$.triggerOptionsCollapse.querySelector('#triggerOptions');
+          var vr = trigger.validate();
+          if (!vr.isValid) {
+            alert(vr.message);
+            return;
+          }
           this.async(function() {
             this.$.chooseActionCollapse.opened = true;
           }, null, 50);
@@ -140,7 +146,7 @@
         },
 
         confirmRule: function() {
-          var action = this.$.actionOptionsCollapse.querySelector('#actionOptions')
+          var action = this.$.actionOptionsCollapse.querySelector('#actionOptions');
           var vr = action.validate();
           if (!vr.isValid) {
             alert(vr.message);
