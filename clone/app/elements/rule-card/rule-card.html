@@ -126,10 +126,7 @@
         },
 
         chooseAction: function() {
-          var trigger = this.$.triggerOptionsCollapse.querySelector('#triggerOptions');
-          var vr = trigger.validate();
-          if (!vr.isValid) {
-            alert(vr.message);
+          if (!this.validateTrigger()) {
             return;
           }
           this.async(function() {
@@ -146,15 +143,41 @@
         },
 
         confirmRule: function() {
-          var action = this.$.actionOptionsCollapse.querySelector('#actionOptions');
-          var vr = action.validate();
-          if (!vr.isValid) {
-            alert(vr.message);
+          if (!this.validateAction()) {
             return;
           }
           this.async(function() {
             this.$.ruleConfirmationCollapse.opened = true;
           }, null, 50);
+        },
+
+        saveRule: function() {
+          if (!this.validateTrigger()) {
+            return;
+          }
+          if (!this.validateAction()) {
+            return;
+          }
+        },
+
+        validateTrigger: function() {
+          var trigger = this.$.triggerOptionsCollapse.querySelector('#triggerOptions');
+          var vr = trigger.validate();
+          if (!vr.isValid) {
+            alert(vr.message);
+            return false;
+          }
+          return true;
+        },
+
+        validateAction: function() {
+          var action = this.$.actionOptionsCollapse.querySelector('#actionOptions');
+          var vr = action.validate();
+          if (!vr.isValid) {
+            alert(vr.message);
+            return false;
+          }
+          return true;
         },
 
         TRIGGER_MODELS: [
