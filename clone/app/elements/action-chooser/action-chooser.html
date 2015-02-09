@@ -2,42 +2,37 @@
 <link rel="import" href="../../bower_components/core-selector/core-selector.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
-<polymer-element name="action-chooser" attributes="">
+<polymer-element name="action-chooser" attributes="actions">
   <template>
     <link rel="stylesheet" href="action-chooser.css">
     <link rel="stylesheet" href="../creator.css">
-    <p class="instructions">Select an action type below.</p>
-    <p>
-      <template if="{{summary == ''}}">
-        Hover over an action to learn more about it.
-      </template>
-      <template if="{{summary != ''}}">
-        {{summary}}
-      </template>
+    <p class="instructions">
+      Select an action type below.
+      Hover over an action to learn more about it.
     </p>
-
     <core-selector valueattr="data-label" selected="{{selected}}">
-      <paper-button raised data-label="switch_lights" data-summary="Switches the lights on or off." on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Switch lights</paper-button>
-      <paper-button raised data-label="brew_coffee" data-summary="Brews one or more pots of coffee." on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Brew coffee</paper-button>
-      <paper-button raised data-label="set_thermostat" data-summary="Sets the thermostat to some temperature." on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Set thermostat</paper-button>
-      <paper-button raised data-label="send_email" data-summary="Sends an email notification to yourself." on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">Send email</paper-button>
+      <template repeat="{{action in actions}}">
+        <paper-button raised
+            data-label="{{action.key}}"
+            data-displayname="{{action.displayName}}"
+            title="{{action.description}}"
+            on-click="{{select}}">
+          {{action.displayName}}
+        </paper-button>
+      </template>
     </core-selector>
   </template>
   <script>
     (function () {
       Polymer({
         selected: '',
-        summary: '',
         select: function(evt, detail, sender) {
-          this.selected = sender.dataset['label'];
-          this.fire('action-selected', this.selected);
-        },
-        mouseover: function(evt, detail, sender) {
-          this.summary = sender.dataset['summary'];
-        },
-        mouseout: function(evt, detail, sender) {
-          this.summary = '';
-        },
+          this.selected = sender.dataset['action'];
+          this.fire('action-selected', {
+            key: sender.dataset['label'],
+            displayName: sender.dataset['displayname']
+          });
+        }
       });
     })();
   </script>

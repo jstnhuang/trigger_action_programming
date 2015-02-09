@@ -14,9 +14,10 @@
       <template repeat="{{trigger in triggers}}">
         <paper-button raised
             data-label="{{trigger.key}}"
+            data-displayname="{{trigger.displayName}}"
             title="{{trigger.description}}"
-            on-click="{{select}}" on-mouseover="{{mouseover}}" on-mouseout="{{mouseout}}">
-          {{trigger.display_name}}
+            on-click="{{select}}">
+          {{trigger.displayName}}
         </paper-button>
       </template>
     </core-selector>
@@ -25,17 +26,13 @@
     (function () {
       Polymer({
         selected: '',
-        description: '',
         select: function(evt, detail, sender) {
           this.selected = sender.dataset['label'];
-          this.fire('trigger-selected', this.selected);
-        },
-        mouseover: function(evt, detail, sender) {
-          this.description = sender.dataset['description'];
-        },
-        mouseout: function(evt, detail, sender) {
-          this.description = '';
-        },
+          this.fire('trigger-selected', {
+            key: sender.dataset['label'],
+            displayName: sender.dataset['displayname']
+          });
+        }
       });
     })();
   </script>

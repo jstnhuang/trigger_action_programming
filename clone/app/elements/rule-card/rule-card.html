@@ -30,7 +30,7 @@
         </core-collapse>
         <core-collapse id="chooseAction">
           <step-count current="3" total="5"></step-count>
-          <action-chooser on-action-selected="{{customizeAction}}"></action-chooser>
+          <action-chooser actions="{{ACTION_MODELS}}" on-action-selected="{{customizeAction}}"></action-chooser>
         </core-collapse>
         <core-collapse id="actionOptions">
           <step-count current="4" total="5"></step-count>
@@ -41,10 +41,10 @@
           <step-count current="5" total="5"></step-count>
           <div class="ruleDesc">
           <span class="ifThenSection">
-            If <span class="taChip">{{selectedTrigger}}</span>
+            If <span class="taChip">{{selectedTriggerDisplay}}</span>
           </span>
           <span class="ifThenSection">
-            then <span class="taChip">{{action}}</span>
+            then <span class="taChip">{{actionDisplay}}</span>
           </span>
           </div>
           <p>You can go back to previous steps to make changes. Otherwise, click "Finish" to make this rule.</p>
@@ -76,7 +76,9 @@
       Polymer({
         mode: 'summary',
         selectedTrigger: '', // The currently selected trigger in the update interface.
+        selectedTriggerDisplay: '', // The currently selected trigger in the update interface.
         action: '',
+        actionDisplay: '',
 
         ready: function() {
           // Core-collapse dynamically sets its overflow value to hidden. This interferes with
@@ -112,7 +114,8 @@
         },
 
         customizeTrigger: function(e, detail) {
-          this.selectedTrigger = detail;
+          this.selectedTrigger = detail['key'];
+          this.selectedTriggerDisplay = detail['displayName'];
           this.async(function() {
             this.$.triggerOptions.opened = true;
           }, null, 50);
@@ -125,7 +128,8 @@
         },
 
         customizeAction: function(e, detail) {
-          this.action = detail;
+          this.action = detail['key'];
+          this.actionDisplay = detail['displayName'];
           this.async(function() {
             this.$.actionOptions.opened = true;
           }, null, 50);
@@ -140,25 +144,47 @@
         TRIGGER_MODELS: [
           {
             key: 'daily_time',
-            display_name: 'Daily time',
+            displayName: 'Daily time',
             description: 'Makes your rule run every day at a certain time, or between two times.'
           },
           {
             key: 'weather',
-            display_name: 'Weather',
+            displayName: 'Weather',
             description: 'Makes your rule run when the outside temperature is in some range, or if some condition like rain occurs.'
           },
           {
             key: 'doorbell_rings',
-            display_name: 'Doorbell rings',
+            displayName: 'Doorbell rings',
             description: 'Makes your rule run when the doorbell rings in your house.'
           },
           {
             key: 'my_location',
-            display_name: 'My location',
+            displayName: 'My location',
             description: 'Makes your rule run when you arrive, leave, or are currently at home or work.'
           },
         ],
+        ACTION_MODELS: [
+          {
+            key: 'switch_lights',
+            displayName: 'Switch lights',
+            description: 'Switches the lights in your house on or off.'
+          },
+          {
+            key: 'brew_coffee',
+            displayName: 'Brew coffee',
+            description: 'Brews one or more pots of coffee.'
+          },
+          {
+            key: 'set_thermostat',
+            displayName: 'Set thermostat',
+            description: 'Sets the thermostat to some temperature.'
+          },
+          {
+            key: 'send_email',
+            displayName: 'Send email',
+            description: 'Sends an email notification to yourself.'
+          },
+        ]
       });
     })();
   </script>
