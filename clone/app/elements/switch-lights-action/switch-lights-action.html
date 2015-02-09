@@ -24,7 +24,19 @@
   <script>
     (function () {
       Polymer({
-        onOrOff: 'Choose on/off'
+        onOrOff: 'Choose on/off',
+        validate: function() {
+          if (this.onOrOff != 'on' && this.onOrOff != 'off') {
+            return {
+              isValid: false,
+              message: 'Switch lights: choose on or off'
+            };
+          } else {
+            return {
+              isValid: true
+            }
+          }
+        }
       });
     })();
   </script>

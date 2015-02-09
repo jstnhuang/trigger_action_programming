@@ -18,29 +18,29 @@
     <template if="{{mode == 'update'}}">
       <core-collapse id="updateCollapse">
         <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}">this</a> then that</span>
-        <core-collapse id="chooseTrigger">
+        <core-collapse id="triggerChooserCollapse">
           <step-count current="1" total="5"></step-count>
           <trigger-chooser triggers="{{TRIGGER_MODELS}}" on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
         </core-collapse>
-        <core-collapse id="triggerOptions">
+        <core-collapse id="triggerOptionsCollapse">
           <step-count current="2" total="5"></step-count>
           <template if="{{selectedTrigger == 'daily_time'}}">
             <daily-time-trigger></daily-time-trigger>
           </template>
           <paper-button raised on-click="{{chooseAction}}">Next step</paper-button>
         </core-collapse>
-        <core-collapse id="chooseAction">
+        <core-collapse id="chooseActionCollapse">
           <step-count current="3" total="5"></step-count>
           <action-chooser actions="{{ACTION_MODELS}}" on-action-selected="{{customizeAction}}"></action-chooser>
         </core-collapse>
-        <core-collapse id="actionOptions">
+        <core-collapse id="actionOptionsCollapse">
           <step-count current="4" total="5"></step-count>
           <template if="{{action == 'switch_lights'}}">
-            <switch-lights-action></switch-lights-action>
+            <switch-lights-action id="actionOptions"></switch-lights-action>
           </template>
           <paper-button raised on-click="{{confirmRule}}">Next step</paper-button>
         </core-collapse>
-        <core-collapse id="ruleConfirmation">
+        <core-collapse id="ruleConfirmationCollapse">
           <step-count current="5" total="5"></step-count>
           <div class="ruleDesc">
           <span class="ifThenSection">
@@ -88,11 +88,11 @@
           // paper-dropdown, so we dynamically set the overflow to visible after the animation
           // for every core-collapse in the element.
           this.changeCollapseStyle(this.$.updateCollapse);
-          this.changeCollapseStyle(this.$.chooseTrigger);
-          this.changeCollapseStyle(this.$.triggerOptions);
-          this.changeCollapseStyle(this.$.chooseAction);
-          this.changeCollapseStyle(this.$.actionOptions);
-          this.changeCollapseStyle(this.$.ruleConfirmation);
+          this.changeCollapseStyle(this.$.triggerChooserCollapse);
+          this.changeCollapseStyle(this.$.triggerOptionsCollapse);
+          this.changeCollapseStyle(this.$.chooseActionCollapse);
+          this.changeCollapseStyle(this.$.actionOptionsCollapse);
+          this.changeCollapseStyle(this.$.ruleConfirmationCollapse);
         },
 
         // Sets the given core-collapse's style to overflow: visible after it has finished opening.
@@ -113,7 +113,7 @@
 
         chooseTrigger: function() {
           this.async(function() {
-            this.$.chooseTrigger.opened = true;
+            this.$.triggerChooserCollapse.opened = true;
           }, null, 50);
         },
 
@@ -121,13 +121,13 @@
           this.selectedTrigger = detail['key'];
           this.selectedTriggerDisplay = detail['displayName'];
           this.async(function() {
-            this.$.triggerOptions.opened = true;
+            this.$.triggerOptionsCollapse.opened = true;
           }, null, 50);
         },
 
         chooseAction: function() {
           this.async(function() {
-            this.$.chooseAction.opened = true;
+            this.$.chooseActionCollapse.opened = true;
           }, null, 50);
         },
 
@@ -135,13 +135,13 @@
           this.action = detail['key'];
           this.actionDisplay = detail['displayName'];
           this.async(function() {
-            this.$.actionOptions.opened = true;
+            this.$.actionOptionsCollapse.opened = true;
           }, null, 50);
         },
 
         confirmRule: function() {
           this.async(function() {
-            this.$.ruleConfirmation.opened = true;
+            this.$.ruleConfirmationCollapse.opened = true;
           }, null, 50);
         },
 
