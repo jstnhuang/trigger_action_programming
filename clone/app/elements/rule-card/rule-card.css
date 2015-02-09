@@ -1,10 +1,11 @@
 :host {
   display: block;
+  padding: 10px;
 }
 
 .ruleDesc {
   font-size: 2.5em;
-  line-height: 150%; padding: 10px;
+  line-height: 150%;
 }
 
 .taChip {
@@ -15,10 +16,6 @@
 
 .ifThenSection {
   white-space: nowrap;
-}
-
-#update {
-  padding: 10px;
 }
 
 .preview {

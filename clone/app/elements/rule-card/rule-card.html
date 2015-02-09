@@ -16,34 +16,40 @@
     <link rel="stylesheet" href="../creator.css">
     <template if="{{mode == 'update'}}">
       <core-collapse id="updateCollapse">
-        <div id="update">
-          <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}">this</a> then that</span>
-          <core-collapse id="chooseTrigger">
-            <step-count current="1" total="5"></step-count>
-            <trigger-chooser on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
-          </core-collapse>
-          <core-collapse id="triggerOptions">
-            <step-count current="2" total="5"></step-count>
-            <template if="{{selectedTrigger == 'daily_time'}}">
-              <daily-time-trigger></daily-time-trigger>
-            </template>
-            <paper-button raised on-click="{{chooseAction}}">Next step</paper-button>
-          </core-collapse>
-          <core-collapse id="chooseAction">
-            <step-count current="3" total="5"></step-count>
-            <action-chooser on-action-selected="{{customizeAction}}"></action-chooser>
-          </core-collapse>
-          <core-collapse id="actionOptions">
-            <step-count current="4" total="5"></step-count>
-            <p>Action options</p>
-            <paper-button raised on-click="{{confirmRule}}">Next step</paper-button>
-          </core-collapse>
-          <core-collapse id="ruleConfirmation">
-            <step-count current="5" total="5"></step-count>
-            <p>You can go back to previous steps to make changes. Otherwise, click "Finish" to make this rule.</p>
-            <paper-button raised on-click="{{saveRule}}">Finish</paper-button>
-          </core-collapse>
-        </div>
+        <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}">this</a> then that</span>
+        <core-collapse id="chooseTrigger">
+          <step-count current="1" total="5"></step-count>
+          <trigger-chooser on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
+        </core-collapse>
+        <core-collapse id="triggerOptions">
+          <step-count current="2" total="5"></step-count>
+          <template if="{{selectedTrigger == 'daily_time'}}">
+            <daily-time-trigger></daily-time-trigger>
+          </template>
+          <paper-button raised on-click="{{chooseAction}}">Next step</paper-button>
+        </core-collapse>
+        <core-collapse id="chooseAction">
+          <step-count current="3" total="5"></step-count>
+          <action-chooser on-action-selected="{{customizeAction}}"></action-chooser>
+        </core-collapse>
+        <core-collapse id="actionOptions">
+          <step-count current="4" total="5"></step-count>
+          <p>Action options</p>
+          <paper-button raised on-click="{{confirmRule}}">Next step</paper-button>
+        </core-collapse>
+        <core-collapse id="ruleConfirmation">
+          <step-count current="5" total="5"></step-count>
+          <div class="ruleDesc">
+          <span class="ifThenSection">
+            If <span class="taChip">{{selectedTrigger}}</span>
+          </span>
+          <span class="ifThenSection">
+            then <span class="taChip">{{action}}</span>
+          </span>
+          </div>
+          <p>You can go back to previous steps to make changes. Otherwise, click "Finish" to make this rule.</p>
+          <paper-button raised on-click="{{saveRule}}">Finish</paper-button>
+        </core-collapse>
       </core-collapse>
     </template>
     <template if="{{mode == 'summary'}}">
@@ -69,8 +75,8 @@
     (function () {
       Polymer({
         mode: 'summary',
-        selectedTrigger: '',
-        selectedAction: '',
+        selectedTrigger: '', // The currently selected trigger in the update interface.
+        action: '',
 
         ready: function() {
           // Core-collapse dynamically sets its overflow value to hidden. This interferes with
@@ -119,7 +125,7 @@
         },
 
         customizeAction: function(e, detail) {
-          this.selectedAction = detail;
+          this.action = detail;
           this.async(function() {
             this.$.actionOptions.opened = true;
           }, null, 50);
