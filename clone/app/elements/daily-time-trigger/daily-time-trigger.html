@@ -1,4 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../time-picker/time-picker.html">
 
 <polymer-element name="daily-time-trigger" attributes="">
@@ -6,12 +10,31 @@
     <link rel="stylesheet" href="daily-time-trigger.css">
     <link rel="stylesheet" href="../creator.css">
     <p class="instructions">This trigger fires at a set time every day. If you add both a start and end time, then the trigger will fire as soon as all conditions are true.</p>
-    Time: <time-picker hour="8" minute="0"></time-picker>
+    <div layout horizontal>
+      <span class="label">Time</span>
+      <paper-dropdown-menu label="Choose is/is between" disabled="{{readOnly}}">
+        <paper-dropdown class="dropdown" duration="200">
+          <core-selector valueattr="label" selected="{{isOrBetween}}" class="menu">
+            <paper-item label="is">is</paper-item>
+            <paper-item label="is between">is between</paper-item>
+          </core-selector>
+        </paper-dropdown>
+      </paper-dropdown-menu>
+      <time-picker hour="{{startHour}}" minute="{{startMinute}}"></time-picker>
+      <template if="{{isOrBetween == 'is between'}}">
+        <span class="label">and</span>
+        <time-picker hour="{{endHour}}" minute="{{endMinute}}"></time-picker>
+      </template>
+    </div>
   </template>
   <script>
     (function () {
       Polymer({
-        // define element prototype here
+        isOrBetween: 'Choose is/is between',
+        startHour: 8,
+        startMinute: 0,
+        endHour: 17,
+        endMinute: 0
       });
     })();
   </script>

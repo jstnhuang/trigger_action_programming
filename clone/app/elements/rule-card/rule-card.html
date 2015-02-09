@@ -54,6 +54,21 @@
         mode: 'summary',
         selectedTrigger: '',
         ready: function() {
+          // Core-collapse dynamically sets its overflow value to hidden. This interferes with
+          // paper-dropdown, so we dynamically set the overflow to visible after the animation
+          // for every core-collapse in the element.
+          this.changeCollapseStyle(this.$.updateCollapse);
+          this.changeCollapseStyle(this.$.chooseTrigger);
+          this.changeCollapseStyle(this.$.triggerOptions);
+        },
+        // Sets the given core-collapse's style to overflow: visible after it has finished opening.
+        changeCollapseStyle: function(collapse) {
+          if (collapse === undefined) {
+            return;
+          }
+          collapse.addEventListener('core-resize', function() {
+            collapse.style.overflow = 'visible';
+          });
         },
         modeChanged: function() {
           this.async(function() {
