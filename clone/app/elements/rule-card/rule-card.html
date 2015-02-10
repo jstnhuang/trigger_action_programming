@@ -17,7 +17,7 @@
     <!-- Display a create/update interface -->
     <template if="{{mode == 'create' || mode == 'update'}}">
       <core-collapse id="updateCollapse">
-        <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}">this</a> then that</span>
+        <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}" title="Click to start making the rule.">this</a> then that</span>
         <!-- Choose one or more triggers -->
         <div id="triggerBuilders">
           <template repeat="{{trigger, index in triggers}}">
@@ -33,11 +33,12 @@
           <template if="{{actionKey == 'switch_lights'}}">
             <switch-lights-action id="actionOptions"></switch-lights-action>
           </template>
-          <paper-button class="next" raised on-click="{{confirmRule}}">Next step</paper-button>
+          <paper-button class="next" raised on-click="{{confirmRule}}" title="You will have a chance to confirm your rule in the next step.">Next step</paper-button>
         </core-collapse>
         <!-- Confirm and save rule -->
         <core-collapse class="stepCollapse" id="ruleConfirmationCollapse">
           <step-count current="{{3 * triggers.length + 3}}" total="{{3 * triggers.length + 3}}"></step-count>
+          <p>This is a preview of your rule. You can go back to previous steps if you want to make changes. Otherwise, click "Finish" to save this rule.</p>
           <div class="ruleDesc">
             <template repeat="{{trigger, index in triggers}}">
               <span class="ifThenSection">
@@ -54,16 +55,15 @@
               then <span class="taChip">{{actionDisplay}}</span>
             </span>
           </div>
-          <p>You can go back to previous steps to make changes. Otherwise, click "Finish" to make this rule.</p>
-          <paper-button class="next" raised on-click="{{saveRule}}">Finish</paper-button>
+          <paper-button class="next" raised on-click="{{saveRule}}" title="Click to save your rule.">Finish</paper-button>
         </core-collapse>
         <div layout horizontal end-justified>
-          <paper-button raised class="delete" on-click="{{delete}}">
+          <paper-button raised class="delete" on-click="{{delete}}" title="Click to delete this rule immediately.">
             <template if="{{mode == 'create'}}">
-              Cancel
+              Cancel rule
             </template>
             <template if="{{mode == 'update'}}">
-              Delete
+              Delete rule
             </template>
           </paper-button>
         </div>

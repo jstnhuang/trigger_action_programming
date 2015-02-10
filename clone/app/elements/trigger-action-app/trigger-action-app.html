@@ -10,7 +10,7 @@
   </style>
   <template>
     <link rel="stylesheet" href="trigger-action-app.css">
-    <paper-button raised id="createButton" on-click="{{createRule}}">Create a rule</paper-button>
+    <paper-button raised id="createButton" on-click="{{createRule}}" title="Click to create a rule.">Create a rule</paper-button>
     <rule-list id="ruleList" rules="{{rules}}" on-delete-rule="{{ruleDeleted}}"></rule-list>
   </template>
   <script>

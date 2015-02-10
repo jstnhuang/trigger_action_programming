@@ -37,12 +37,12 @@ list back to rule-card, for the same reason as above.
       <template if="{{selectedTriggerKey == 'daily_time'}}">
         <daily-time-trigger id="triggerOptions"></daily-time-trigger>
       </template>
-      <paper-button raised on-click="{{checkAddTrigger}}">Next step</paper-button>
+      <paper-button raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
     </core-collapse>
     <core-collapse class="stepCollapse" id="addTriggerCollapse">
       <step-count current="{{3 * triggerIndex + 3}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
       <p>
-        If you are done selecting triggers, choose the first option.
+        If you are done selecting triggers, and would like to add an action, choose the first option.
         To add another trigger, choose the second option.
       </p>
       <core-selector valueattr="id" selected="">
@@ -59,7 +59,7 @@ list back to rule-card, for the same reason as above.
             </span>
           </template>
           <span class="ifThenSection">
-            then <a class="changeable" on-click="{{chooseAction}}" title="Choose an action for this rule.">that</a>
+            then <a class="changeable" on-click="{{chooseAction}}" title="Click if you are done making triggers, and would like to add an action.">that</a>
           </span>
         </span>
         <div layout horizontal center-justified>
@@ -78,7 +78,7 @@ list back to rule-card, for the same reason as above.
             </span>
           </template>
           <span class="ifThenSection">
-            and <a class="changeable" on-click="{{addTrigger}}">this</a>
+            and <a class="changeable" on-click="{{addTrigger}}" title="Click to add another trigger.">this</a>
           </span>
           <span class="ifThenSection">
             then that
