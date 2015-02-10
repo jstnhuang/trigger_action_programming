@@ -9,7 +9,14 @@
         <p class="noRules">No rules have been created yet.</p>
       </template>
       <template id="greeting" repeat="{{ rule in rules }}">
-        <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}"></rule-card>
+        <template if="{{rule.mode == 'update'}}">
+          <paper-shadow z="2">
+            <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}"></rule-card>
+          </paper-shadow>
+        </template>
+        <template if="{{rule.mode != 'update'}}">
+          <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}"></rule-card>
+        </template>
       </template>
     </paper-shadow>
   </template>
