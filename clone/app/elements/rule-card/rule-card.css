@@ -18,3 +18,8 @@
 .updateTitle {
   font-size: 1.5em;
 }
+
+.nameInput {
+  display: block;
+  width: 100%;
+}

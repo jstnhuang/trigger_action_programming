@@ -4,13 +4,16 @@
 <link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-up.html">
 <link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-autogrow-textarea.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
 
 <link rel="import" href="../action-chooser/action-chooser.html">
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../switch-lights-action/switch-lights-action.html">
 <link rel="import" href="../trigger-builder/trigger-builder.html">
 
-<polymer-element name="rule-card" attributes="triggers action mode index">
+<polymer-element name="rule-card" attributes="triggers action mode index name">
   <template>
     <link rel="stylesheet" href="rule-card.css">
     <link rel="stylesheet" href="../creator.css">
@@ -76,6 +79,12 @@
               then <span class="taChip">{{action.displayName}}</span>
             </span>
           </div>
+          <paper-input-decorator label="Enter a name for this rule" floatingLabel class="nameInput">
+            <paper-autogrow-textarea id="nameArea">
+              <textarea id="nameInput" value="{{name}}"></textarea>
+            </paper-autogrow-textarea>
+          </paper-input-decorator>
+          <!--paper-input floatingLabel class="nameInput" label="Enter a name for this rule" value="{{name}}"></paper-input-->
           <paper-button class="next" raised on-click="{{saveRule}}" title="Click to save your rule.">Finish</paper-button>
         </core-collapse>
         <div layout horizontal end-justified>
@@ -108,6 +117,7 @@
           then <span class="taChip">{{action.displayName}}</span>
         </span>
       </div>
+      <p>{{name}}</p>
     </template>
   </template>
   <script>
@@ -131,6 +141,7 @@
             this.async(function() {
               this.$.ruleConfirmationCollapse.opened = true;
             }, null, 100);
+            this.$.nameArea.update(this.$.nameInput);
           }
           // Core-collapse dynamically sets its overflow value to hidden. This interferes with
           // paper-dropdown, so we dynamically set the overflow to visible after the animation
@@ -213,8 +224,10 @@
           if (!this.validateAction()) {
             return;
           }
+          this.name = this.generateDescription();
           this.async(function() {
             this.$.ruleConfirmationCollapse.opened = true;
+            this.$.nameArea.update(this.$.nameInput);
           }, null, 50);
         },
 
@@ -223,6 +236,10 @@
             return;
           }
           if (!this.validateAction()) {
+            return;
+          }
+          if (this.name == '') {
+            alert('Enter a name for this rule.');
             return;
           }
           this.action.params = this.$.actionOptionsCollapse.querySelector('#actionOptions').toJsonObject();
@@ -249,6 +266,24 @@
             triggers: this.triggers,
             action: this.action
           };
+        },
+
+        // Generates the human-readable description of this rule.
+        generateDescription: function() {
+          var result = '';
+          var builders = this.$.triggerBuilders.querySelectorAll('trigger-builder');
+          for (var i=0; i<builders.length; ++i) {
+            if (i == 0) {
+              result += 'If ';
+            } else {
+              result += ' and ';
+            }
+            result += builders[i].generateDescription();
+          }
+          result += ', then ';
+          var actionOptions = this.$.actionOptionsCollapse.querySelector('#actionOptions');
+          result += actionOptions.generateDescription();
+          return result;
         },
 
         validateTriggers: function() {

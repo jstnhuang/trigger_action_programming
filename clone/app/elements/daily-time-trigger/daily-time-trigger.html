@@ -85,6 +85,17 @@
             endHour: this.endHour,
             endMinute: this.endMinute
           };
+        },
+
+        generateDescription: function() {
+          var result = 'the time ' + this.isOrBetween + ' ';
+          result += this.$.startTimePicker.generateDescription();
+
+          if (this.isOrBetween == 'is between') {
+            var end = this.$.wrapper.querySelector('#endTimePicker');
+            result += ' and ' + end.generateDescription();
+          }
+          return result;
         }
       });
     })();

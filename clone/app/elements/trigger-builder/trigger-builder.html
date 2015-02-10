@@ -196,6 +196,11 @@ list back to rule-card, for the same reason as above.
 
         selectAddAction: function() {
           this.$.addTriggerSelector.selected = 'addActionPreview';
+        },
+
+        generateDescription: function() {
+          var options = this.$.triggerOptionsCollapse.querySelector('#triggerOptions');
+          return options.generateDescription();
         }
       });
     })();
