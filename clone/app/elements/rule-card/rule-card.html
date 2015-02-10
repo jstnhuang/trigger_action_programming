@@ -21,9 +21,10 @@
         <!-- Choose one or more triggers -->
         <div id="triggerBuilders">
           <template repeat="{{trigger, index in triggers}}">
-          <trigger-builder TRIGGERMODELS="{{TRIGGER_MODELS}}" trigger="{{trigger}}" triggerIndex="{{index}}" currentTriggers="{{triggers}}" on-add-trigger="{{addTrigger}}" on-choose-action="{{chooseAction}}"></trigger-builder>
+          <trigger-builder TRIGGERMODELS="{{TRIGGER_MODELS}}" trigger="{{trigger}}" triggerIndex="{{index}}" currentTriggers="{{triggers}}" on-add-trigger="{{addTrigger}}" on-choose-action="{{chooseAction}}" on-delete-trigger="{{deleteTrigger}}"></trigger-builder>
           </template>
-        </div> <!-- Choose an action -->
+        </div>
+        <!-- Choose an action -->
         <core-collapse class="stepCollapse" id="chooseActionCollapse">
         <step-count current="{{3 * triggers.length + 1}}" total="{{3 * triggers.length + 3}}"></step-count>
           <action-chooser actions="{{ACTION_MODELS}}" on-action-selected="{{customizeAction}}"></action-chooser>
@@ -58,7 +59,7 @@
           <paper-button class="next" raised on-click="{{saveRule}}" title="Click to save your rule.">Finish</paper-button>
         </core-collapse>
         <div layout horizontal end-justified>
-          <paper-button raised class="delete" on-click="{{delete}}" title="Click to delete this rule immediately.">
+          <paper-button raised class="deleteButton" on-click="{{delete}}" title="Click to delete this rule immediately.">
             <template if="{{mode == 'create'}}">
               Cancel rule
             </template>
@@ -140,6 +141,16 @@
           this.onMutation(this.$.triggerBuilders, function() {
             this.chooseTrigger();
           });
+        },
+
+        deleteTrigger: function(e, detail, sender) {
+          var builders = this.$.triggerBuilders.querySelectorAll('trigger-builder');
+          // If there is no next trigger, reset the selected state of the previous
+          // trigger.
+          if (detail.index == this.triggers.length - 1 && detail.index - 1 >= 0) {
+            builders[detail.index - 1].unselect();
+          }
+          this.triggers.splice(detail.index, 1);
         },
 
         chooseAction: function(e, triggers) {

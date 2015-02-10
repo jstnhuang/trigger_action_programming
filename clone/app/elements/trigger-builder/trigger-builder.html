@@ -37,7 +37,7 @@ list back to rule-card, for the same reason as above.
       <template if="{{selectedTriggerKey == 'daily_time'}}">
         <daily-time-trigger id="triggerOptions"></daily-time-trigger>
       </template>
-      <paper-button raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
+      <paper-button class="next" raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
     </core-collapse>
     <core-collapse class="stepCollapse" id="addTriggerCollapse">
       <step-count current="{{3 * triggerIndex + 3}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
@@ -45,7 +45,7 @@ list back to rule-card, for the same reason as above.
         If you are done selecting triggers, and would like to add an action, choose the first option.
         To add another trigger, choose the second option.
       </p>
-      <core-selector valueattr="id" selected="">
+      <core-selector valueattr="id" selected="" id="addTriggerSelector">
         <span class="preview" id="addActionPreview">
           <template repeat="{{trigger, index in triggers}}">
             <span class="ifThenSection">
@@ -86,6 +86,13 @@ list back to rule-card, for the same reason as above.
         </span>
       </core-selector>
     </core-collapse>
+    <template if="{{triggerIndex > 0}}">
+    <div layout horizontal end-justified>
+      <paper-button raised class="deleteButton" style="margin-bottom: 10px;" on-click="{{deleteTrigger}}" title="Click to delete this trigger (steps {{3*triggerIndex + 1}}-{{3*triggerIndex + 3}}) immediately.">
+          Delete trigger
+      </paper-button>
+    </div>
+    </template>
   </template>
   <script>
     (function () {
@@ -160,6 +167,14 @@ list back to rule-card, for the same reason as above.
           }
           return trigger.validate();
         },
+
+        deleteTrigger: function() {
+          this.fire('delete-trigger', {index: this.triggerIndex});
+        },
+
+        unselect: function() {
+          this.$.addTriggerSelector.selected = '';
+        }
       });
     })();
   </script>

@@ -63,3 +63,13 @@ paper-checkbox[checked] /deep/ #checkboxContainer > #checkbox {
 .ifThenSection {
   white-space: nowrap;
 }
+
+.deleteButton {
+  text-transform: none
+}
+
+.deleteButton:hover {
+  color: #fff;
+  background-color: #ff5722;
+  transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+}
