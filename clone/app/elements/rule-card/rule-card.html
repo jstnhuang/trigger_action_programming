@@ -148,7 +148,12 @@
           // If there is no next trigger, reset the selected state of the previous
           // trigger.
           if (detail.index == this.triggers.length - 1 && detail.index - 1 >= 0) {
-            builders[detail.index - 1].unselect();
+            // If the action chooser is already open, then select the "that" option.
+            if (this.$.chooseActionCollapse.opened) {
+              builders[detail.index - 1].selectAddAction();
+            } else {
+              builders[detail.index - 1].unselect();
+            }
           }
           this.triggers.splice(detail.index, 1);
         },

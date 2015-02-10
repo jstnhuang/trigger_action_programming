@@ -162,7 +162,7 @@ list back to rule-card, for the same reason as above.
           if (trigger === null) {
             return {
               isValid: false,
-              message: 'Trigger #' + (this.triggerIndex + 1) + ' not finished.'
+              message: 'Trigger #' + (this.triggerIndex + 1) + ' (steps ' + (3*this.triggerIndex + 1) + '-' + (3*this.triggerIndex + 3) + ') not finished.'
             }
           }
           return trigger.validate();
@@ -174,6 +174,10 @@ list back to rule-card, for the same reason as above.
 
         unselect: function() {
           this.$.addTriggerSelector.selected = '';
+        },
+
+        selectAddAction: function() {
+          this.$.addTriggerSelector.selected = 'addActionPreview';
         }
       });
     })();
