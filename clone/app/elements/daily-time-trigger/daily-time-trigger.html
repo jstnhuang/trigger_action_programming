@@ -5,7 +5,7 @@
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../time-picker/time-picker.html">
 
-<polymer-element name="daily-time-trigger" attributes="">
+<polymer-element name="daily-time-trigger" attributes="params">
   <template>
     <link rel="stylesheet" href="daily-time-trigger.css">
     <link rel="stylesheet" href="../creator.css">
@@ -35,6 +35,16 @@
         startMinute: 0,
         endHour: 17,
         endMinute: 0,
+
+        ready: function() {
+          if(this.params) {
+            this.isOrBetween = this.params.isOrBetween;
+            this.startHour = this.params.startHour;
+            this.startMinute = this.params.startMinute;
+            this.endHour = this.params.endHour;
+            this.endMinute = this.params.endMinute;
+          }
+        },
 
         validate: function() {
           if (this.isOrBetween != 'is' && this.isOrBetween != 'is between') {

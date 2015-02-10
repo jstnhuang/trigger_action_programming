@@ -10,29 +10,49 @@
 <link rel="import" href="../switch-lights-action/switch-lights-action.html">
 <link rel="import" href="../trigger-builder/trigger-builder.html">
 
-<polymer-element name="rule-card" attributes="triggers action mode">
+<polymer-element name="rule-card" attributes="triggers action mode index">
   <template>
     <link rel="stylesheet" href="rule-card.css">
     <link rel="stylesheet" href="../creator.css">
     <!-- Display a create/update interface -->
     <template if="{{mode == 'create' || mode == 'update'}}">
       <core-collapse id="updateCollapse">
-        <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}" title="Click to start making the rule.">this</a> then that</span>
+        <template if="{{mode == 'create'}}">
+          <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}" title="Click to start making the rule.">this</a> then that</span>
+        </template>
+        <template if="{{mode == 'update'}}">
+          <div class="ruleDesc">
+            <template repeat="{{trigger, index in triggers}}">
+              <span class="ifThenSection">
+                <template if="{{index == 0}}">
+                  If
+                </template>
+                <template if="{{index != 0}}">
+                  and
+                </template>
+                <span class="taChip">{{trigger.displayName}}</span>
+              </span>
+            </template>
+            <span class="ifThenSection">
+              then <span class="taChip">{{action.displayName}}</span>
+            </span>
+          </div>
+        </template>
         <!-- Choose one or more triggers -->
         <div id="triggerBuilders">
           <template repeat="{{trigger, index in triggers}}">
-          <trigger-builder TRIGGERMODELS="{{TRIGGER_MODELS}}" trigger="{{trigger}}" triggerIndex="{{index}}" currentTriggers="{{triggers}}" on-add-trigger="{{addTrigger}}" on-choose-action="{{chooseAction}}" on-delete-trigger="{{deleteTrigger}}"></trigger-builder>
+            <trigger-builder mode="{{mode}}" TRIGGERMODELS="{{TRIGGER_MODELS}}" trigger="{{trigger}}" triggerIndex="{{index}}" currentTriggers="{{triggers}}" on-add-trigger="{{addTrigger}}" on-choose-action="{{chooseAction}}" on-delete-trigger="{{deleteTrigger}}"></trigger-builder>
           </template>
         </div>
         <!-- Choose an action -->
         <core-collapse class="stepCollapse" id="chooseActionCollapse">
-        <step-count current="{{3 * triggers.length + 1}}" total="{{3 * triggers.length + 3}}"></step-count>
-          <action-chooser actions="{{ACTION_MODELS}}" on-action-selected="{{customizeAction}}"></action-chooser>
+          <step-count current="{{3 * triggers.length + 1}}" total="{{3 * triggers.length + 3}}"></step-count>
+          <action-chooser selected="{{action.key}}" actions="{{ACTION_MODELS}}" on-action-selected="{{customizeAction}}"></action-chooser>
         </core-collapse>
         <core-collapse class="stepCollapse" id="actionOptionsCollapse">
           <step-count current="{{3 * triggers.length + 2}}" total="{{3 * triggers.length + 3}}"></step-count>
-          <template if="{{actionKey == 'switch_lights'}}">
-            <switch-lights-action id="actionOptions"></switch-lights-action>
+          <template if="{{action.key == 'switch_lights'}}">
+            <switch-lights-action id="actionOptions" params="{{action.params}}"></switch-lights-action>
           </template>
           <paper-button class="next" raised on-click="{{confirmRule}}" title="You will have a chance to confirm your rule in the next step.">Next step</paper-button>
         </core-collapse>
@@ -53,7 +73,7 @@
               </span>
             </template>
             <span class="ifThenSection">
-              then <span class="taChip">{{actionDisplay}}</span>
+              then <span class="taChip">{{action.displayName}}</span>
             </span>
           </div>
           <paper-button class="next" raised on-click="{{saveRule}}" title="Click to save your rule.">Finish</paper-button>
@@ -96,15 +116,26 @@
         mode: 'summary',
         triggers: [], // A list of trigger models for this rule, as JSON objects.
         action: {}, // The action as a JSON object.
-        selectedTriggerKey: '', // The key of the currently selected trigger in the update interface.
-        selectedTriggerDisplay: '', // The currently selected trigger in the update interface.
-        actionKey: '',
-        actionDisplay: '',
 
         ready: function() {
+          if (this.mode == 'update') {
+            this.async(this.$.updateCollapse, function() {
+              this.$.updateCollapse.opened = true;
+            }, null, 100);
+            this.async(function() {
+              this.$.chooseActionCollapse.opened = true;
+            }, null, 100);
+            this.async(function() {
+              this.$.actionOptionsCollapse.opened = true;
+            }, null, 100);
+            this.async(function() {
+              this.$.ruleConfirmationCollapse.opened = true;
+            }, null, 100);
+          }
           // Core-collapse dynamically sets its overflow value to hidden. This interferes with
           // paper-dropdown, so we dynamically set the overflow to visible after the animation
           // for every core-collapse in the element.
+          
           this.changeCollapseStyle(this.$.updateCollapse);
           this.changeCollapseStyle(this.$.chooseActionCollapse);
           this.changeCollapseStyle(this.$.actionOptionsCollapse);
@@ -122,9 +153,11 @@
         },
 
         modeChanged: function() {
-          this.async(function() {
-            this.$.updateCollapse.toggle();
-          }, null, 50);
+          if (this.$.updateCollapse !== null) {
+            this.async(function() {
+              this.$.updateCollapse.toggle();
+            }, null, 50);
+          }
         },
 
         chooseTrigger: function() {
@@ -169,8 +202,8 @@
         },
 
         customizeAction: function(e, detail) {
-          this.actionKey = detail['key'];
-          this.actionDisplay = detail['displayName'];
+          this.action.key = detail['key'];
+          this.action.displayName = detail['displayName'];
           this.async(function() {
             this.$.actionOptionsCollapse.opened = true;
           }, null, 50);
@@ -192,12 +225,7 @@
           if (!this.validateAction()) {
             return;
           }
-          var actionOptions = this.$.actionOptionsCollapse.querySelector('#actionOptions');
-          this.action = {
-            key: this.actionKey,
-            displayName: this.actionDisplay,
-            params: actionOptions.toJsonObject()
-          };
+          this.action.params = this.$.actionOptionsCollapse.querySelector('#actionOptions').toJsonObject();
           console.log(this.toJsonObject());
           this.mode = 'summary';
         },
@@ -247,7 +275,7 @@
         },
 
         delete: function() {
-          this.fire('delete-rule');
+          this.fire('delete-rule', {index: this.index});
         },
 
         TRIGGER_MODELS: [

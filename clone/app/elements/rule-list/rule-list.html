@@ -8,14 +8,14 @@
       <template if="{{ rules.length == 0 }}">
         <p class="noRules">No rules have been created yet.</p>
       </template>
-      <template repeat="{{ rule in rules }}">
+      <template repeat="{{ rule, index in rules }}">
         <template if="{{rule.mode == 'update' || rule.mode == 'create'}}">
           <paper-shadow z="2">
             <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" on-delete-rule="{{deleteRule}}"></rule-card>
           </paper-shadow>
         </template>
         <template if="{{rule.mode != 'update' && rule.mode != 'create'}}">
-          <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}"></rule-card>
+          <rule-card class="summary" index="{{index}}" mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" on-click="{{updateRule}}"></rule-card>
         </template>
       </template>
     </paper-shadow>
@@ -34,9 +34,10 @@
           this.rules.unshift(newRule);
         },
         deleteRule: function(e, detail, sender) {
-          sender.id = 'delete';
-          var parent = sender.parentNode;
-          parent.removeChild(sender);
+          this.rules.splice(detail.index, 1);
+        },
+        updateRule: function(e, detail, sender) {
+          sender.mode = 'update';
         }
       });
     })();

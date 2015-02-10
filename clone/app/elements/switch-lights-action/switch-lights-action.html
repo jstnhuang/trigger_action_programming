@@ -4,7 +4,7 @@
 <link rel="import" href="../../bower_components/paper-dropdown/paper-dropdown.html">
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 
-<polymer-element name="switch-lights-action" attributes="">
+<polymer-element name="switch-lights-action" attributes="params">
   <template>
     <link rel="stylesheet" href="switch-lights-action.css">
     <link rel="stylesheet" href="../creator.css">
@@ -25,6 +25,12 @@
     (function () {
       Polymer({
         onOrOff: 'Choose on/off',
+
+        ready: function() {
+          if (this.params) {
+            this.onOrOff = this.params.onOrOff;
+          }
+        },
 
         validate: function() {
           if (this.onOrOff != 'on' && this.onOrOff != 'off') {

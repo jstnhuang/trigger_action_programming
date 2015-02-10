@@ -23,32 +23,21 @@
                 {
                   key: 'daily_time',
                   displayName: 'Daily time',
-                  params: {}
-                },
-                {
-                  key: 'weather',
-                  displayName: 'Weather',
-                  params: {}
+                  params: {
+                    endHour: 17,
+                    endMinute: 0,
+                    isOrBetween: "is",
+                    startHour: 8,
+                    startMinute: 0
+                  }
                 }
               ],
               action: {
-                key: 'send_email',
-                displayName: 'Send email',
-                params: {}
-              }
-            },
-            {
-              triggers: [
-                {
-                  key: 'daily_time',
-                  displayName: 'Daily time',
-                  params: {}
+                key: 'switch_lights',
+                displayName: 'Switch lights',
+                params: {
+                  onOrOff: "on"
                 }
-              ],
-              action: {
-                key: 'brew_coffee',
-                displayName: 'Brew coffee',
-                params: {}
               }
             }              
           ];

@@ -24,18 +24,18 @@ another trigger-builder to be created.
 If the user decides to choose an action, then trigger-builder still passes the entire
 list back to rule-card, for the same reason as above.
 -->
-<polymer-element name="trigger-builder" attributes="TRIGGERMODELS trigger currentTriggers triggerIndex">
+<polymer-element name="trigger-builder" attributes="mode TRIGGERMODELS trigger currentTriggers triggerIndex">
   <template>
     <link rel="stylesheet" href="trigger-builder.css">
     <link rel="stylesheet" href="../creator.css">
     <core-collapse class="stepCollapse" id="triggerChooserCollapse">
-    <step-count current="{{3 * triggerIndex + 1}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
-      <trigger-chooser triggers="{{TRIGGERMODELS}}" on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
+      <step-count current="{{3 * triggerIndex + 1}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
+      <trigger-chooser triggers="{{TRIGGERMODELS}}" selected="{{trigger.key}}" on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
     </core-collapse>
     <core-collapse class="stepCollapse" id="triggerOptionsCollapse">
-    <step-count current="{{3 * triggerIndex + 2}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
-      <template if="{{selectedTriggerKey == 'daily_time'}}">
-        <daily-time-trigger id="triggerOptions"></daily-time-trigger>
+      <step-count current="{{3 * triggerIndex + 2}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
+      <template if="{{trigger.key == 'daily_time'}}">
+        <daily-time-trigger id="triggerOptions" params="{{trigger.params}}"></daily-time-trigger>
       </template>
       <paper-button class="next" raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
     </core-collapse>
@@ -97,12 +97,30 @@ list back to rule-card, for the same reason as above.
   <script>
     (function () {
       Polymer({
-        selectedTriggerKey: '',
-        selectedTriggerDisplay: '',
+        trigger: {},
         triggers: [],
 
-        ready: function() {
+        domReady: function() {
           this.triggers = this.currentTriggers.slice();
+          if (this.mode == 'update') {
+            this.async(function() {
+              this.$.triggerChooserCollapse.opened = true;
+            }, null, 100);
+            this.async(function() {
+              this.$.triggerOptionsCollapse.opened = true;
+            }, null, 100);
+            this.async(function() {
+              this.$.addTriggerCollapse.opened = true;
+            }, null, 100);
+
+            // If this is the last trigger, then set the selector to "that".
+            // Otherwise set it to "then".
+            if (this.triggerIndex == this.triggers.length - 1) {
+              this.$.addTriggerSelector.selected = 'addActionPreview';
+            } else {
+              this.$.addTriggerSelector.selected = 'addTriggerPreview';
+            }
+          }
           this.changeCollapseStyle(this.$.triggerChooserCollapse);
           this.changeCollapseStyle(this.$.triggerOptionsCollapse);
           this.changeCollapseStyle(this.$.addTriggerCollapse);
@@ -125,11 +143,11 @@ list back to rule-card, for the same reason as above.
         },
 
         customizeTrigger: function(e, detail) {
-          this.selectedTriggerKey = detail['key'];
-          this.selectedTriggerDisplay = detail['displayName'];
+          this.trigger.key = detail['key'];
+          this.trigger.displayName = detail['displayName'];
           var lastTrigger = this.triggers[this.triggers.length-1];
-          lastTrigger.key = this.selectedTriggerKey;
-          lastTrigger.displayName = this.selectedTriggerDisplay;
+          lastTrigger.key = this.trigger.key;
+          lastTrigger.displayName = this.trigger.displayName;
           this.async(function() {
             this.$.triggerOptionsCollapse.opened = true;
           }, null, 50);
