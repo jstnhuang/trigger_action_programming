@@ -46,48 +46,44 @@ list back to rule-card, for the same reason as above.
         To add another trigger, choose the second option.
       </p>
       <core-selector valueattr="id" selected="" id="addTriggerSelector" notap>
-        <span layout horizontal>
-          <span class="preview" id="addActionPreview" flex>
-            <template repeat="{{trigger, index in triggers}}">
-              <span class="ifThenSection">
-                <template if="{{index == 0}}">
-                  If
-                </template>
-                <template if="{{index != 0}}">
-                  and
-                </template>
-                <span class="taChip">{{trigger.displayName}}</span>
-              </span>
-            </template>
+        <div class="preview" id="addActionPreview" flex>
+          <template repeat="{{trigger, index in triggers}}">
             <span class="ifThenSection">
-              then <a class="changeable" on-click="{{chooseAction}}" title="Click if you are done making triggers, and would like to add an action.">that</a>
+              <template if="{{index == 0}}">
+                If
+              </template>
+              <template if="{{index != 0}}">
+                and
+              </template>
+              <span class="taChip">{{trigger.displayName}}</span>
             </span>
+          </template>
+          <span class="ifThenSection">
+            then <a class="changeable" on-click="{{chooseAction}}" title="Click if you are done making triggers, and would like to add an action.">that</a>
           </span>
-        </span>
+        </div>
         <div layout horizontal center-justified>
           <p class="or">OR</p>
         </div>
-        <span layout horizontal>
-          <span class="preview" id="addTriggerPreview" flex>
-            <template repeat="{{trigger, index in triggers}}">
-              <span class="ifThenSection">
-                <template if="{{index == 0}}">
-                  If
-                </template>
-                <template if="{{index != 0}}">
-                  and
-                </template>
-                <span class="taChip">{{trigger.displayName}}</span>
-              </span>
-            </template>
+        <div class="preview" id="addTriggerPreview" flex>
+          <template repeat="{{trigger, index in triggers}}">
             <span class="ifThenSection">
-              and <a class="changeable" on-click="{{addTrigger}}" title="Click to add another trigger.">this</a>
+              <template if="{{index == 0}}">
+                If
+              </template>
+              <template if="{{index != 0}}">
+                and
+              </template>
+              <span class="taChip">{{trigger.displayName}}</span>
             </span>
-            <span class="ifThenSection">
-              then that
-            </span>
+          </template>
+          <span class="ifThenSection">
+            and <a class="changeable" on-click="{{addTrigger}}" title="Click to add another trigger.">this</a>
           </span>
-        </span>
+          <span class="ifThenSection">
+            then that
+          </span>
+        </div>
       </core-selector>
     </core-collapse>
     <template if="{{triggerIndex > 0}}">
