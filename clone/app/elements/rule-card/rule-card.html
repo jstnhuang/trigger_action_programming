@@ -13,7 +13,7 @@
 <link rel="import" href="../switch-lights-action/switch-lights-action.html">
 <link rel="import" href="../trigger-builder/trigger-builder.html">
 
-<polymer-element name="rule-card" attributes="triggers action mode index name">
+<polymer-element name="rule-card" attributes="triggers action mode index name readOnly">
   <template>
     <link rel="stylesheet" href="rule-card.css">
     <link rel="stylesheet" href="../creator.css">
@@ -44,18 +44,18 @@
         <!-- Choose one or more triggers -->
         <div id="triggerBuilders">
           <template repeat="{{trigger, index in triggers}}">
-            <trigger-builder mode="{{trigger.mode || mode}}" TRIGGERMODELS="{{TRIGGER_MODELS}}" trigger="{{trigger}}" triggerIndex="{{index}}" currentTriggers="{{triggers}}" on-add-trigger="{{addTrigger}}" on-choose-action="{{chooseAction}}" on-delete-trigger="{{deleteTrigger}}"></trigger-builder>
+          <trigger-builder readOnly="{{readOnly}}" mode="{{trigger.mode || mode}}" TRIGGERMODELS="{{TRIGGER_MODELS}}" trigger="{{trigger}}" triggerIndex="{{index}}" currentTriggers="{{triggers}}" on-add-trigger="{{addTrigger}}" on-choose-action="{{chooseAction}}" on-delete-trigger="{{deleteTrigger}}"></trigger-builder>
           </template>
         </div>
         <!-- Choose an action -->
         <core-collapse class="stepCollapse" id="chooseActionCollapse">
           <step-count current="{{3 * triggers.length + 1}}" total="{{3 * triggers.length + 3}}"></step-count>
-          <action-chooser selected="{{action.key}}" actions="{{ACTION_MODELS}}" on-action-selected="{{customizeAction}}"></action-chooser>
+          <action-chooser selected="{{action.key}}" actions="{{ACTION_MODELS}}" on-action-selected="{{customizeAction}}" readOnly="{{readOnly}}"></action-chooser>
         </core-collapse>
         <core-collapse class="stepCollapse" id="actionOptionsCollapse">
           <step-count current="{{3 * triggers.length + 2}}" total="{{3 * triggers.length + 3}}"></step-count>
           <template if="{{action.key == 'switch_lights'}}">
-            <switch-lights-action id="actionOptions" params="{{action.params}}"></switch-lights-action>
+          <switch-lights-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></switch-lights-action>
           </template>
           <paper-button class="next" raised on-click="{{confirmRule}}" title="You will have a chance to confirm your rule in the next step.">Next step</paper-button>
         </core-collapse>
@@ -80,8 +80,8 @@
             </span>
           </div>
           <paper-input-decorator label="Enter a name for this rule" floatingLabel class="nameInput">
-            <paper-autogrow-textarea id="nameArea">
-              <textarea id="nameInput" value="{{name}}"></textarea>
+          <paper-autogrow-textarea id="nameArea">
+          <textarea id="nameInput" value="{{name}}" disabled="{{readOnly}}"></textarea>
             </paper-autogrow-textarea>
           </paper-input-decorator>
           <!--paper-input floatingLabel class="nameInput" label="Enter a name for this rule" value="{{name}}"></paper-input-->
@@ -126,6 +126,7 @@
         mode: 'summary',
         triggers: [], // A list of trigger models for this rule, as JSON objects.
         action: {}, // The action as a JSON object.
+        readOnly: false, // Whether the contents should be read only in update mode.
 
         ready: function() {
           if (this.mode == 'update') {

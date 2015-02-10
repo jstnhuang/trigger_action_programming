@@ -2,7 +2,7 @@
 <link rel="import" href="../../bower_components/core-selector/core-selector.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
-<polymer-element name="trigger-chooser" attributes="triggers selected">
+<polymer-element name="trigger-chooser" attributes="triggers selected readOnly">
   <template>
     <link rel="stylesheet" href="trigger-chooser.css">
     <link rel="stylesheet" href="../creator.css">
@@ -10,7 +10,7 @@
       Select a trigger type below.
       Hover over a trigger to learn more about it.
     </p>
-    <core-selector valueattr="data-label" selected="{{selected}}">
+    <core-selector valueattr="data-label" selected="{{selected}}" notap>
       <template repeat="{{trigger in triggers}}">
         <paper-button raised
             data-label="{{trigger.key}}"
@@ -27,6 +27,9 @@
       Polymer({
         selected: '',
         select: function(evt, detail, sender) {
+          if (this.readOnly) {
+            return;
+          }
           this.selected = sender.dataset['label'];
           this.fire('trigger-selected', {
             key: sender.dataset['label'],

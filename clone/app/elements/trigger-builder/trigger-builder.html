@@ -24,18 +24,18 @@ another trigger-builder to be created.
 If the user decides to choose an action, then trigger-builder still passes the entire
 list back to rule-card, for the same reason as above.
 -->
-<polymer-element name="trigger-builder" attributes="mode TRIGGERMODELS trigger currentTriggers triggerIndex">
+<polymer-element name="trigger-builder" attributes="mode TRIGGERMODELS trigger currentTriggers triggerIndex readOnly">
   <template>
     <link rel="stylesheet" href="trigger-builder.css">
     <link rel="stylesheet" href="../creator.css">
     <core-collapse class="stepCollapse" id="triggerChooserCollapse">
       <step-count current="{{3 * triggerIndex + 1}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
-      <trigger-chooser triggers="{{TRIGGERMODELS}}" selected="{{trigger.key}}" on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
+      <trigger-chooser readOnly="{{readOnly}}" triggers="{{TRIGGERMODELS}}" selected="{{trigger.key}}" on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
     </core-collapse>
     <core-collapse class="stepCollapse" id="triggerOptionsCollapse">
       <step-count current="{{3 * triggerIndex + 2}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
       <template if="{{trigger.key == 'daily_time'}}">
-        <daily-time-trigger id="triggerOptions" params="{{trigger.params}}"></daily-time-trigger>
+        <daily-time-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></daily-time-trigger>
       </template>
       <paper-button class="next" raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
     </core-collapse>
@@ -45,7 +45,7 @@ list back to rule-card, for the same reason as above.
         If you are done selecting triggers, and would like to add an action, choose the first option.
         To add another trigger, choose the second option.
       </p>
-      <core-selector valueattr="id" selected="" id="addTriggerSelector">
+      <core-selector valueattr="id" selected="" id="addTriggerSelector" notap>
         <span class="preview" id="addActionPreview">
           <template repeat="{{trigger, index in triggers}}">
             <span class="ifThenSection">
@@ -168,10 +168,18 @@ list back to rule-card, for the same reason as above.
         },
 
         addTrigger: function() {
+          if (this.readOnly) {
+            return;
+          }
+          this.$.addTriggerSelector.selected = 'addTriggerPreview';
           this.fire('add-trigger', this.triggers);
         },
 
         chooseAction: function() {
+          if (this.readOnly) {
+            return;
+          }
+          this.$.addTriggerSelector.selected = 'addActionPreview';
           this.fire('choose-action', this.triggers);
         },
 

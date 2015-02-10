@@ -2,7 +2,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../rule-list/rule-list.html">
 
-<polymer-element name="trigger-action-app" attributes="">
+<polymer-element name="trigger-action-app" attributes="readOnly">
   <style>
     paper-action-dialog {
       width: 100%;
@@ -10,8 +10,10 @@
   </style>
   <template>
     <link rel="stylesheet" href="trigger-action-app.css">
-    <paper-button raised id="createButton" on-click="{{createRule}}" title="Click to create a rule.">Create a rule</paper-button>
-    <rule-list id="ruleList" rules="{{rules}}" on-delete-rule="{{ruleDeleted}}"></rule-list>
+    <template if="{{!readOnly}}">
+      <paper-button raised id="createButton" on-click="{{createRule}}" title="Click to create a rule.">Create a rule</paper-button>
+    </template>
+    <rule-list id="ruleList" readOnly="{{readOnly}}" rules="{{rules}}" on-delete-rule="{{ruleDeleted}}"></rule-list>
   </template>
   <script>
     (function () {
@@ -26,7 +28,7 @@
                   params: {
                     endHour: 17,
                     endMinute: 0,
-                    isOrBetween: "is between",
+                    isOrBetween: "is",
                     startHour: 8,
                     startMinute: 0
                   }

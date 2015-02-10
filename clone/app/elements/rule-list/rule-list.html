@@ -1,7 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-shadow/paper-shadow.html">
 
-<polymer-element name="rule-list" attributes="rules">
+<polymer-element name="rule-list" attributes="rules readOnly">
   <template>
     <link rel="stylesheet" href="rule-list.css">
     <paper-shadow class="listContainer">
@@ -11,11 +11,11 @@
       <template repeat="{{ rule, index in rules }}">
         <template if="{{rule.mode == 'update' || rule.mode == 'create'}}">
           <paper-shadow z="2">
-            <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" name="{{rule.name}}" on-delete-rule="{{deleteRule}}"></rule-card>
+          <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" name="{{rule.name}}" on-delete-rule="{{deleteRule}}" readOnly="{{readOnly}}"></rule-card>
           </paper-shadow>
         </template>
         <template if="{{rule.mode != 'update' && rule.mode != 'create'}}">
-        <rule-card class="summary" index="{{index}}" mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" name="{{rule.name}}" on-click="{{updateRule}}"></rule-card>
+        <rule-card class="summary" index="{{index}}" mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" name="{{rule.name}}" on-click="{{updateRule}}" readOnly="{{readOnly}}"></rule-card>
         </template>
       </template>
     </paper-shadow>

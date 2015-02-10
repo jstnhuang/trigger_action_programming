@@ -5,7 +5,7 @@
 <link rel="import" href="../../bower_components/paper-item/paper-item.html">
 <link rel="import" href="../time-picker/time-picker.html">
 
-<polymer-element name="daily-time-trigger" attributes="params">
+<polymer-element name="daily-time-trigger" attributes="params readOnly">
   <template>
     <link rel="stylesheet" href="daily-time-trigger.css">
     <link rel="stylesheet" href="../creator.css">
@@ -20,10 +20,10 @@
           </core-selector>
         </paper-dropdown>
       </paper-dropdown-menu>
-      <time-picker id="startTimePicker" hour="{{startHour}}" minute="{{startMinute}}"></time-picker>
+      <time-picker id="startTimePicker" hour="{{startHour}}" minute="{{startMinute}}" disabled="{{readOnly}}"></time-picker>
       <template if="{{isOrBetween == 'is between'}}">
         <span class="label">and</span>
-        <time-picker id="endTimePicker" hour="{{endHour}}" minute="{{endMinute}}"></time-picker>
+        <time-picker id="endTimePicker" hour="{{endHour}}" minute="{{endMinute}}" disabled="{{readOnly}}"></time-picker>
       </template>
     </div>
   </template>
