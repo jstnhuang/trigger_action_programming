@@ -1,0 +1,52 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="rule-preview" attributes="triggers action makeTrigger makeAction">
+  <template>
+    <link rel="stylesheet" href="rule-preview.css">
+    <link rel="stylesheet" href="../creator.css">
+    <div class="ruleDesc">
+      <template repeat="{{trigger, index in triggers}}">
+        <span class="ifThenSection">
+          <template if="{{index == 0}}">
+            If
+          </template>
+          <template if="{{index != 0}}">
+            and
+          </template>
+          <template if="{{makeTrigger}}">
+            <a class="changeable" on-click="{{addTrigger}}" title="Click to add a trigger.">this</a>
+          </template>
+          <template if="{{trigger.displayName && trigger.displayName != ''}}">
+            <span class="taChip">{{trigger.displayName}}</span>
+          </template>
+        </span>
+      </template>
+      <span class="ifThenSection">
+        then
+        <template if="{{(action.displayName || '') == ''}}">
+          <template if="{{makeAction}}">
+            <a class="changeable" on-click="{{chooseAction}}" title="Click to add an action.">that</a>
+          </template>
+          <template if="{{!makeAction}}">
+            that
+          </template>
+        </template>
+        <template if="{{action.displayName && action.displayName != ''}}">
+          <span class="taChip">{{action.displayName}}</span>
+        </template>
+      </span>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        addTrigger: function() {
+          this.fire('add-trigger');
+        },
+        chooseAction: function() {
+          this.fire('choose-action');
+        }
+      });
+    })();
+  </script>
+</polymer-element>

@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
 <link rel="import" href="../daily-time-trigger/daily-time-trigger.html">
+<link rel="import" href="../rule-preview/rule-preview.html">
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../trigger-chooser/trigger-chooser.html">
 
@@ -46,7 +47,7 @@ list back to rule-card, for the same reason as above.
         To add another trigger, choose the second option.
       </p>
       <core-selector valueattr="id" selected="" id="addTriggerSelector" notap>
-        <div class="preview" id="addActionPreview" flex>
+        <div class="preview ruleDesc" id="addActionPreview" flex>
           <template repeat="{{trigger, index in triggers}}">
             <span class="ifThenSection">
               <template if="{{index == 0}}">

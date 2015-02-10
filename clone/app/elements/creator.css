@@ -49,11 +49,6 @@ paper-checkbox[checked] /deep/ #checkboxContainer > #checkbox {
   margin-top: 40px;
 }
 
-/* Rule preview */
-.preview {
-  font-size: 2.5em;
-}
-
 .taChip {
   background-color: #e0e0e0;
   border-radius: 5px;
@@ -72,4 +67,9 @@ paper-checkbox[checked] /deep/ #checkboxContainer > #checkbox {
   color: #fff;
   background-color: #ff5722;
   transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
+}
+
+.ruleDesc {
+  font-size: 2.5em;
+  line-height: 150%;
 }

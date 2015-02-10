@@ -9,6 +9,7 @@
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 
 <link rel="import" href="../action-chooser/action-chooser.html">
+<link rel="import" href="../rule-preview/rule-preview.html">
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../switch-lights-action/switch-lights-action.html">
 <link rel="import" href="../trigger-builder/trigger-builder.html">
@@ -21,25 +22,10 @@
     <template if="{{mode == 'create' || mode == 'update'}}">
       <core-collapse id="updateCollapse">
         <template if="{{mode == 'create'}}">
-          <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}" title="Click to start making the rule.">this</a> then that</span>
+        <rule-preview triggers="{{[{}]}}" action="{{{}}}" makeTrigger="true" on-add-trigger="{{chooseTrigger}}"></rule-preview>
         </template>
         <template if="{{mode == 'update'}}">
-          <div class="ruleDesc">
-            <template repeat="{{trigger, index in triggers}}">
-              <span class="ifThenSection">
-                <template if="{{index == 0}}">
-                  If
-                </template>
-                <template if="{{index != 0}}">
-                  and
-                </template>
-                <span class="taChip">{{trigger.displayName}}</span>
-              </span>
-            </template>
-            <span class="ifThenSection">
-              then <span class="taChip">{{action.displayName}}</span>
-            </span>
-          </div>
+          <rule-preview triggers="{{triggers}}" action="{{action}}">
         </template>
         <!-- Choose one or more triggers -->
         <div id="triggerBuilders">
@@ -63,7 +49,7 @@
         <core-collapse class="stepCollapse" id="ruleConfirmationCollapse">
           <step-count current="{{3 * triggers.length + 3}}" total="{{3 * triggers.length + 3}}"></step-count>
           <p>This is a preview of your rule. You can go back to previous steps if you want to make changes. Otherwise, click "Finish" to save this rule.</p>
-          <div class="ruleDesc">
+          <rule-preview triggers="{{triggers}}" action="{{action}}"></rule-preview>
             <template repeat="{{trigger, index in triggers}}">
               <span class="ifThenSection">
                 <template if="{{index == 0}}">
@@ -105,22 +91,7 @@
     </template>
     <!-- Display a read-only summary of the rule. -->
     <template if="{{mode == 'summary'}}">
-      <div class="ruleDesc">
-        <template repeat="{{trigger, index in triggers}}">
-          <span class="ifThenSection">
-            <template if="{{index == 0}}">
-              If
-            </template>
-            <template if="{{index != 0}}">
-              and
-            </template>
-            <span class="taChip">{{trigger.displayName}}</span>
-          </span>
-        </template>
-        <span class="ifThenSection">
-          then <span class="taChip">{{action.displayName}}</span>
-        </span>
-      </div>
+      <rule-preview triggers="{{triggers}}" action="{{action}}"></rule-preview>
       <p>{{name}}</p>
     </template>
   </template>

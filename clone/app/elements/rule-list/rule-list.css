@@ -18,7 +18,3 @@ rule-card {
 .summaryCard {
   cursor: pointer;
 }
-
-#openedRule {
-  margin: 40px 0px;
-}
