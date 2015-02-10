@@ -203,9 +203,11 @@
           this.triggers.splice(detail.index, 1);
         },
 
-        chooseAction: function(e, triggers) {
+        chooseAction: function(e, triggers, sender) {
           this.triggers = triggers.slice();
-          if (!this.validateTriggers()) {
+          var vr = sender.validate();
+          if (!vr.isValid) {
+            alert(vr.message);
             return;
           }
           this.async(function() {
