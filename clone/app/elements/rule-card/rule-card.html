@@ -80,11 +80,15 @@
             </span>
           </div>
           <paper-input-decorator label="Enter a name for this rule" floatingLabel class="nameInput">
-          <paper-autogrow-textarea id="nameArea">
-          <textarea id="nameInput" value="{{name}}" disabled="{{readOnly}}"></textarea>
+            <paper-autogrow-textarea id="nameArea">
+              <template if="{{readOnly}}">
+                <textarea id="nameInput" value="{{name}}" disabled="{{readOnly}}"></textarea>
+              </template>
+              <template if="{{!readOnly}}">
+                <textarea id="nameInput" value="{{name}}"></textarea>
+              </template>
             </paper-autogrow-textarea>
           </paper-input-decorator>
-          <!--paper-input floatingLabel class="nameInput" label="Enter a name for this rule" value="{{name}}"></paper-input-->
           <paper-button class="next" raised on-click="{{saveRule}}" title="Click to save your rule.">Finish</paper-button>
         </core-collapse>
         <div layout horizontal end-justified>
