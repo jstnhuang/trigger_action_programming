@@ -44,7 +44,7 @@
         <!-- Choose one or more triggers -->
         <div id="triggerBuilders">
           <template repeat="{{trigger, index in triggers}}">
-            <trigger-builder mode="{{mode}}" TRIGGERMODELS="{{TRIGGER_MODELS}}" trigger="{{trigger}}" triggerIndex="{{index}}" currentTriggers="{{triggers}}" on-add-trigger="{{addTrigger}}" on-choose-action="{{chooseAction}}" on-delete-trigger="{{deleteTrigger}}"></trigger-builder>
+            <trigger-builder mode="{{trigger.mode || mode}}" TRIGGERMODELS="{{TRIGGER_MODELS}}" trigger="{{trigger}}" triggerIndex="{{index}}" currentTriggers="{{triggers}}" on-add-trigger="{{addTrigger}}" on-choose-action="{{chooseAction}}" on-delete-trigger="{{deleteTrigger}}"></trigger-builder>
           </template>
         </div>
         <!-- Choose an action -->
@@ -180,7 +180,7 @@
 
         addTrigger: function(e, triggers) {
           this.triggers = triggers.slice();
-          this.triggers.push({});
+          this.triggers.push({mode: 'create'});
           // TODO: see if you can use onMutation throughout instead of async.
           this.onMutation(this.$.triggerBuilders, function() {
             this.chooseTrigger();
