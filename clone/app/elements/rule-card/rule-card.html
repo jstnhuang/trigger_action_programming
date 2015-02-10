@@ -20,16 +20,16 @@
         <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}">this</a> then that</span>
         <!-- Choose one or more triggers -->
         <div id="triggerBuilders">
-          <template repeat="{{trigger in triggers}}">
-          <trigger-builder TRIGGERMODELS="{{TRIGGER_MODELS}}" trigger="{{trigger}}" currentTriggers="{{triggers}}" on-add-trigger="{{addTrigger}}" on-choose-action="{{chooseAction}}"></trigger-builder>
+          <template repeat="{{trigger, index in triggers}}">
+          <trigger-builder TRIGGERMODELS="{{TRIGGER_MODELS}}" trigger="{{trigger}}" triggerIndex="{{index}}" currentTriggers="{{triggers}}" on-add-trigger="{{addTrigger}}" on-choose-action="{{chooseAction}}"></trigger-builder>
           </template>
         </div> <!-- Choose an action -->
         <core-collapse class="stepCollapse" id="chooseActionCollapse">
-          <step-count current="3" total="5"></step-count>
+        <step-count current="{{3 * triggers.length + 1}}" total="{{3 * triggers.length + 3}}"></step-count>
           <action-chooser actions="{{ACTION_MODELS}}" on-action-selected="{{customizeAction}}"></action-chooser>
         </core-collapse>
         <core-collapse class="stepCollapse" id="actionOptionsCollapse">
-          <step-count current="4" total="5"></step-count>
+          <step-count current="{{3 * triggers.length + 2}}" total="{{3 * triggers.length + 3}}"></step-count>
           <template if="{{actionKey == 'switch_lights'}}">
             <switch-lights-action id="actionOptions"></switch-lights-action>
           </template>
@@ -37,7 +37,7 @@
         </core-collapse>
         <!-- Confirm and save rule -->
         <core-collapse class="stepCollapse" id="ruleConfirmationCollapse">
-          <step-count current="5" total="5"></step-count>
+          <step-count current="{{3 * triggers.length + 3}}" total="{{3 * triggers.length + 3}}"></step-count>
           <div class="ruleDesc">
             <template repeat="{{trigger, index in triggers}}">
               <span class="ifThenSection">
@@ -126,8 +126,6 @@
         addTrigger: function(e, triggers) {
           this.triggers = triggers.slice();
           this.triggers.push({});
-          console.log('addTrigger');
-          console.log(this.triggers);
           // TODO: see if you can use onMutation throughout instead of async.
           this.onMutation(this.$.triggerBuilders, function() {
             this.chooseTrigger();
@@ -136,8 +134,6 @@
 
         chooseAction: function(e, triggers) {
           this.triggers = triggers.slice();
-          console.log('chooseAction');
-          console.log(this.triggers);
           if (!this.validateTriggers()) {
             return;
           }

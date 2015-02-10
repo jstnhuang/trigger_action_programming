@@ -24,23 +24,23 @@ another trigger-builder to be created.
 If the user decides to choose an action, then trigger-builder still passes the entire
 list back to rule-card, for the same reason as above.
 -->
-<polymer-element name="trigger-builder" attributes="TRIGGERMODELS trigger currentTriggers">
+<polymer-element name="trigger-builder" attributes="TRIGGERMODELS trigger currentTriggers triggerIndex">
   <template>
     <link rel="stylesheet" href="trigger-builder.css">
     <link rel="stylesheet" href="../creator.css">
     <core-collapse class="stepCollapse" id="triggerChooserCollapse">
-      <step-count current="1" total="5"></step-count>
+    <step-count current="{{3 * triggerIndex + 1}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
       <trigger-chooser triggers="{{TRIGGERMODELS}}" on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
     </core-collapse>
     <core-collapse class="stepCollapse" id="triggerOptionsCollapse">
-      <step-count current="2" total="5"></step-count>
+    <step-count current="{{3 * triggerIndex + 2}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
       <template if="{{selectedTriggerKey == 'daily_time'}}">
         <daily-time-trigger id="triggerOptions"></daily-time-trigger>
       </template>
       <paper-button raised on-click="{{checkAddTrigger}}">Next step</paper-button>
     </core-collapse>
     <core-collapse class="stepCollapse" id="addTriggerCollapse">
-      <step-count current="2" total="5"></step-count>
+      <step-count current="{{3 * triggerIndex + 3}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
       <p>
         If you are done selecting triggers, choose the first option.
         To add another trigger, choose the second option.
@@ -149,8 +149,7 @@ list back to rule-card, for the same reason as above.
         validate: function() {
           var trigger = this.$.triggerOptionsCollapse.querySelector('#triggerOptions');
           return trigger.validate();
-        }
-
+        },
       });
     })();
   </script>
