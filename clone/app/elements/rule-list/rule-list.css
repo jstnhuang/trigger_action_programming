@@ -10,6 +10,6 @@
   margin: 0;
 }
 
-rule-card + rule-card {
+rule-card {
   border-top: 1px solid rgba(0, 0, 0, 0.12);
 }
