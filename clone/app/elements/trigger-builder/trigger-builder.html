@@ -148,6 +148,12 @@ list back to rule-card, for the same reason as above.
 
         validate: function() {
           var trigger = this.$.triggerOptionsCollapse.querySelector('#triggerOptions');
+          if (trigger === null) {
+            return {
+              isValid: false,
+              message: 'Trigger #' + (this.triggerIndex + 1) + ' not finished.'
+            }
+          }
           return trigger.validate();
         },
       });
