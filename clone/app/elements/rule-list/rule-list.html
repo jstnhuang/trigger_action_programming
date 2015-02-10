@@ -8,16 +8,18 @@
       <template if="{{ rules.length == 0 }}">
         <p class="noRules">No rules have been created yet.</p>
       </template>
-      <template repeat="{{ rule, index in rules }}">
-        <template if="{{rule.mode == 'update' || rule.mode == 'create'}}">
-          <paper-shadow z="2">
-          <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" name="{{rule.name}}" on-delete-rule="{{deleteRule}}" readOnly="{{readOnly}}"></rule-card>
-          </paper-shadow>
+      <div id="ruleListWrapper">
+        <template repeat="{{ rule, index in rules }}">
+          <template if="{{rule.mode == 'update' || rule.mode == 'create'}}">
+            <paper-shadow z="2" id="openedRule">
+              <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" name="{{rule.name}}" on-delete-rule="{{deleteRule}}" readOnly="{{readOnly}}"></rule-card>
+            </paper-shadow>
+          </template>
+          <template if="{{rule.mode != 'update' && rule.mode != 'create'}}">
+            <rule-card class="summaryCard" index="{{index}}" mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" name="{{rule.name}}" on-click="{{updateRule}}" readOnly="{{readOnly}}" title="Click to edit this rule"></rule-card>
+          </template>
         </template>
-        <template if="{{rule.mode != 'update' && rule.mode != 'create'}}">
-          <rule-card class="summary" index="{{index}}" mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" name="{{rule.name}}" on-click="{{updateRule}}" readOnly="{{readOnly}}" title="Click to edit this rule"></rule-card>
-        </template>
-      </template>
+      </div>
     </paper-shadow>
   </template>
   <script>
@@ -26,6 +28,10 @@
         ready: function () {
         },
         newRule: function() {
+          var rules = this.$.ruleListWrapper.querySelectorAll('rule-card');    
+          for (var i=0; i<rules.length; ++i) {
+            rules[i].mode = 'summary';
+          }
           var newRule = {
             triggers: [{}],
             action: {},
@@ -38,6 +44,12 @@
           this.rules.splice(detail.index, 1);
         },
         updateRule: function(e, detail, sender) {
+          var rules = this.$.ruleListWrapper.querySelectorAll('rule-card');    
+          for (var i=0; i<rules.length; ++i) {
+            if (rules[i] != sender) {
+              rules[i].mode = 'summary';
+            }
+          }
           sender.mode = 'update';
         }
       });

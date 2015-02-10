@@ -17,3 +17,7 @@ rule-card {
 .summary {
   cursor: pointer;
 }
+
+#openedRule {
+  margin: 40px 0px;
+}
