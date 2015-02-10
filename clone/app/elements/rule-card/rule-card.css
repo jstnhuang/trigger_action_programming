@@ -8,9 +8,19 @@
   line-height: 150%;
 }
 
-paper-button {
+.next {
   background-color: #03a9f4;
   color: #fff;
   margin-left: 0px;
   text-transform: none;
+}
+
+.delete {
+  text-transform: none
+}
+
+.delete:hover {
+  color: #fff;
+  background-color: #ff5722;
+  transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
 }

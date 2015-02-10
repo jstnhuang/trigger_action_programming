@@ -45,42 +45,46 @@ list back to rule-card, for the same reason as above.
         If you are done selecting triggers, choose the first option.
         To add another trigger, choose the second option.
       </p>
-      <span class="preview">
-        <template repeat="{{trigger, index in triggers}}">
+      <core-selector valueattr="id" selected="">
+        <span class="preview" id="addActionPreview">
+          <template repeat="{{trigger, index in triggers}}">
+            <span class="ifThenSection">
+              <template if="{{index == 0}}">
+                If
+              </template>
+              <template if="{{index != 0}}">
+                and
+              </template>
+              <span class="taChip">{{trigger.displayName}}</span>
+            </span>
+          </template>
           <span class="ifThenSection">
-            <template if="{{index == 0}}">
-              If
-            </template>
-            <template if="{{index != 0}}">
-              and
-            </template>
-            <span class="taChip">{{trigger.displayName}}</span>
+            then <a class="changeable" on-click="{{chooseAction}}" title="Choose an action for this rule.">that</a>
           </span>
-        </template>
-        <span class="ifThenSection">
-          then <a class="changeable" on-click="{{chooseAction}}">that</a>
         </span>
-      </span>
-      <p>- OR -</p>
-      <span class="preview">
-        <template repeat="{{trigger, index in triggers}}">
+        <div layout horizontal center-justified>
+        <p class="or">OR</p>
+        </div>
+        <span class="preview" id="addTriggerPreview">
+          <template repeat="{{trigger, index in triggers}}">
+            <span class="ifThenSection">
+              <template if="{{index == 0}}">
+                If
+              </template>
+              <template if="{{index != 0}}">
+                and
+              </template>
+              <span class="taChip">{{trigger.displayName}}</span>
+            </span>
+          </template>
           <span class="ifThenSection">
-            <template if="{{index == 0}}">
-              If
-            </template>
-            <template if="{{index != 0}}">
-              and
-            </template>
-            <span class="taChip">{{trigger.displayName}}</span>
+            and <a class="changeable" on-click="{{addTrigger}}">this</a>
           </span>
-        </template>
-        <span class="ifThenSection">
-          and <a class="changeable" on-click="{{addTrigger}}">this</a>
+          <span class="ifThenSection">
+            then that
+          </span>
         </span>
-        <span class="ifThenSection">
-          then that
-        </span>
-      </span>
+      </core-selector>
     </core-collapse>
   </template>
   <script>

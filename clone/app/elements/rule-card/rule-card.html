@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="rule-card.css">
     <link rel="stylesheet" href="../creator.css">
     <!-- Display a create/update interface -->
-    <template if="{{mode == 'update'}}">
+    <template if="{{mode == 'create' || mode == 'update'}}">
       <core-collapse id="updateCollapse">
         <span class="preview">If <a class="changeable" on-click="{{chooseTrigger}}">this</a> then that</span>
         <!-- Choose one or more triggers -->
@@ -33,7 +33,7 @@
           <template if="{{actionKey == 'switch_lights'}}">
             <switch-lights-action id="actionOptions"></switch-lights-action>
           </template>
-          <paper-button raised on-click="{{confirmRule}}">Next step</paper-button>
+          <paper-button class="next" raised on-click="{{confirmRule}}">Next step</paper-button>
         </core-collapse>
         <!-- Confirm and save rule -->
         <core-collapse class="stepCollapse" id="ruleConfirmationCollapse">
@@ -55,8 +55,18 @@
             </span>
           </div>
           <p>You can go back to previous steps to make changes. Otherwise, click "Finish" to make this rule.</p>
-          <paper-button raised on-click="{{saveRule}}">Finish</paper-button>
+          <paper-button class="next" raised on-click="{{saveRule}}">Finish</paper-button>
         </core-collapse>
+        <div layout horizontal end-justified>
+          <paper-button raised class="delete" on-click="{{delete}}">
+            <template if="{{mode == 'create'}}">
+              Cancel
+            </template>
+            <template if="{{mode == 'update'}}">
+              Delete
+            </template>
+          </paper-button>
+        </div>
       </core-collapse>
     </template>
     <!-- Display a read-only summary of the rule. -->
@@ -217,6 +227,10 @@
             return false;
           }
           return true;
+        },
+
+        delete: function() {
+          this.fire('delete-rule');
         },
 
         TRIGGER_MODELS: [
