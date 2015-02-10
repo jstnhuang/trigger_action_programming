@@ -12,6 +12,7 @@
 .preview {
   opacity: 0.3;
   transition: opacity 0.25s ease-in-out;
+  text-align: center;
 }
 
 .preview:hover {
