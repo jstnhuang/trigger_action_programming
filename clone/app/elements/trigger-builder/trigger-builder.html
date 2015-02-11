@@ -25,23 +25,23 @@ another trigger-builder to be created.
 If the user decides to choose an action, then trigger-builder still passes the entire
 list back to rule-card, for the same reason as above.
 -->
-<polymer-element name="trigger-builder" attributes="mode TRIGGERMODELS trigger currentTriggers triggerIndex readOnly">
+<polymer-element name="trigger-builder" attributes="mode TRIGGERMODELS trigger triggers triggerIndex readOnly">
   <template>
     <link rel="stylesheet" href="trigger-builder.css">
     <link rel="stylesheet" href="../creator.css">
     <core-collapse class="stepCollapse" id="triggerChooserCollapse">
-      <step-count current="{{3 * triggerIndex + 1}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
+      <step-count current="{{3 * triggerIndex + 1}}" total="{{3 * triggers.length + 3}}"></step-count>
       <trigger-chooser readOnly="{{readOnly}}" triggers="{{TRIGGERMODELS}}" selected="{{trigger.key}}" on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
     </core-collapse>
     <core-collapse class="stepCollapse" id="triggerOptionsCollapse">
-      <step-count current="{{3 * triggerIndex + 2}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
+      <step-count current="{{3 * triggerIndex + 2}}" total="{{3 * triggers.length + 3}}"></step-count>
       <template if="{{trigger.key == 'daily_time'}}">
         <daily-time-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></daily-time-trigger>
       </template>
       <paper-button class="next" raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
     </core-collapse>
     <core-collapse class="stepCollapse" id="addTriggerCollapse">
-      <step-count current="{{3 * triggerIndex + 3}}" total="{{3 * currentTriggers.length + 3}}"></step-count>
+      <step-count current="{{3 * triggerIndex + 3}}" total="{{3 * triggers.length + 3}}"></step-count>
       <p>
         If you are done selecting triggers, and would like to add an action, choose the first option.
         To add another trigger, choose the second option.
@@ -69,7 +69,6 @@ list back to rule-card, for the same reason as above.
         triggers: [],
 
         domReady: function() {
-          this.triggers = this.currentTriggers.slice();
           if (this.mode == 'update') {
             this.async(function() {
               this.$.triggerChooserCollapse.opened = true;

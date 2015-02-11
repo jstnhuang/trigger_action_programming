@@ -6,20 +6,17 @@
     <link rel="stylesheet" href="../creator.css">
     <div class="ruleDesc">
       <template repeat="{{trigger, index in triggers}}">
-        <span class="ifThenSection">
-          <template if="{{index == 0}}">
-            If
-          </template>
-          <template if="{{index != 0}}">
-            and
-          </template>
-          <template if="{{trigger.displayName}}">
-            <span class="taChip">{{trigger.displayName}}</span>
-          </template>
-          <template if="{{!trigger.displayName}}">
-            this
-          </template>
-        </span>
+        <template if="{{trigger.displayName}}">
+          <span class="ifThenSection">
+            <template if="{{index == 0}}">
+              If
+            </template>
+            <template if="{{index != 0}}">
+              and
+            </template>
+              <span class="taChip">{{trigger.displayName}}</span>
+          </span>
+        </template>
       </template>
       <template if="{{makeTrigger}}">
         <span class="ifThenSection">

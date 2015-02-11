@@ -22,7 +22,7 @@
     <template if="{{mode == 'create' || mode == 'update'}}">
       <core-collapse id="updateCollapse">
         <template if="{{mode == 'create'}}">
-        <rule-preview triggers="{{[]}}" action="{{ {blank: 0} }}" makeTrigger="true" on-add-trigger="{{chooseTrigger}}"></rule-preview>
+          <span class="ruleDesc">If <a class="changeable" on-click="{{chooseTrigger}}" title="Click to start making this rule">this</a> then that</span>
         </template>
         <template if="{{mode == 'update'}}">
           <rule-preview triggers="{{triggers}}" action="{{action}}">
@@ -30,7 +30,7 @@
         <!-- Choose one or more triggers -->
         <div id="triggerBuilders">
           <template repeat="{{trigger, index in triggers}}">
-          <trigger-builder readOnly="{{readOnly}}" mode="{{trigger.mode || mode}}" TRIGGERMODELS="{{TRIGGER_MODELS}}" trigger="{{trigger}}" triggerIndex="{{index}}" currentTriggers="{{triggers}}" on-add-trigger="{{addTrigger}}" on-choose-action="{{chooseAction}}" on-delete-trigger="{{deleteTrigger}}"></trigger-builder>
+            <trigger-builder readOnly="{{readOnly}}" mode="{{trigger.mode || mode}}" TRIGGERMODELS="{{TRIGGER_MODELS}}" trigger="{{trigger}}" triggerIndex="{{index}}" triggers="{{triggers}}" on-add-trigger="{{addTrigger}}" on-choose-action="{{chooseAction}}" on-delete-trigger="{{deleteTrigger}}"></trigger-builder>
           </template>
         </div>
         <!-- Choose an action -->
@@ -140,7 +140,7 @@
         },
 
         addTrigger: function(e, triggers) {
-          this.triggers = triggers.slice();
+          this.$.chooseActionCollapse.opened = false;
           this.triggers.push({mode: 'create'});
           // TODO: see if you can use onMutation throughout instead of async.
           this.onMutation(this.$.triggerBuilders, function() {
@@ -164,8 +164,6 @@
         },
 
         chooseAction: function(e, triggers, sender) {
-          console.log(triggers);
-          this.triggers = triggers.slice();
           var vr = sender.validate();
           if (!vr.isValid) {
             alert(vr.message);
