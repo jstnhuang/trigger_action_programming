@@ -68,7 +68,12 @@
               </template>
             </paper-autogrow-textarea>
           </paper-input-decorator>
-          <paper-button class="next" raised on-click="{{saveRule}}" title="Click to save your rule.">Finish</paper-button>
+          <template if="{{readOnly}}">
+            <paper-button class="next" raised on-click="{{closeRule}}" title="Click to close this rule.">Close</paper-button>
+          </template>
+          <template if="{{!readOnly}}">
+            <paper-button class="next" raised on-click="{{saveRule}}" title="Click to save your rule.">Finish</paper-button>
+          </template>
         </core-collapse>
         <div layout horizontal end-justified>
           <paper-button raised class="deleteButton" on-click="{{delete}}" title="Click to delete this rule immediately.">
@@ -168,7 +173,6 @@
               builders[detail.index - 1].unselect();
             }
           }
-          this.triggers.splice(detail.index, 1);
         },
 
         chooseAction: function(e, triggers, sender) {
@@ -226,6 +230,10 @@
           this.mode = 'summary';
           this.fire('save-rule');
           return true;
+        },
+
+        closeRule: function() {
+          this.mode = 'summary';
         },
 
         // Returns the representation of this rule in a JSON-serializable format.
