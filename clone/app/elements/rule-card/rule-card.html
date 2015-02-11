@@ -9,6 +9,7 @@
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 
 <link rel="import" href="../action-chooser/action-chooser.html">
+<link rel="import" href="../brew-coffee-action/brew-coffee-action.html">
 <link rel="import" href="../rule-preview/rule-preview.html">
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../switch-lights-action/switch-lights-action.html">
@@ -41,7 +42,10 @@
         <core-collapse class="stepCollapse" id="actionOptionsCollapse">
           <step-count current="{{3 * triggers.length + 2}}" total="{{3 * triggers.length + 3}}"></step-count>
           <template if="{{action.key == 'switch_lights'}}">
-          <switch-lights-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></switch-lights-action>
+            <switch-lights-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></switch-lights-action>
+          </template>
+          <template if="{{action.key == 'brew_coffee'}}">
+            <brew-coffee-action id="actionOptions"></brew-coffee-action>
           </template>
           <paper-button class="next" raised on-click="{{confirmRule}}" title="You will have a chance to confirm your rule in the next step.">Next step</paper-button>
         </core-collapse>
