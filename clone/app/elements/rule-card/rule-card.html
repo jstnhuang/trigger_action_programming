@@ -193,17 +193,25 @@
           }, null, 50);
         },
 
-        saveRule: function() {
+        validate: function() {
           if (!this.validateTriggers()) {
-            return;
+            return false;
           }
           if (!this.validateAction()) {
-            return;
+            return false;
           }
           if (this.name == '') {
             alert('Enter a name for this rule.');
+            return false;
+          }
+          return true;
+        },
+
+        saveRule: function() {
+          if (!this.validate()) {
             return;
           }
+          
           this.action.params = this.$.actionOptionsCollapse.querySelector('#actionOptions').toJsonObject();
           console.log(this.toJsonObject());
           this.mode = 'summary';
