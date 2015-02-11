@@ -32,13 +32,14 @@
                 }
               ],
               action: {
-                key: 'switch_lights',
-                displayName: 'Switch lights',
+                key: 'set_thermostat',
+                displayName: 'Set thermostat',
                 params: {
-                  onOrOff: "on"
+                  onOrOff: "on",
+                  temperature: 72,
                 }
               },
-              name: 'If the temperature outside is 70 degrees, then switch the lights on'
+              name: 'If I am currently at home, then set the thermostat to 72 degrees'
             },
             {
               triggers: [

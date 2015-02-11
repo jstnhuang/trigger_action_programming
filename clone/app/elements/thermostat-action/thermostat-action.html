@@ -1,0 +1,89 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+
+<polymer-element name="thermostat-action" attributes="params readOnly">
+  <template>
+    <link rel="stylesheet" href="thermostat-action.css">
+    <link rel="stylesheet" href="../creator.css">
+    <p class="instructions">
+      This action sets your thermostat to some temperature, or turns it off.
+    </p>
+    <div class="label">Set thermostat</div>
+    <paper-radio-group selected="{{onOrOff}}">
+      <paper-radio-button disabled="{{readOnly}}" name="on" label="On"></paper-radio-button>
+      <paper-radio-button disabled="{{readOnly}}" name="off" label="Off"></paper-radio-button>
+      </paper-radio-button>
+    </paper-radio-group>
+    <div id="tempWrapper">
+      <template if="{{onOrOff == 'on'}}">
+        <div layout horizontal wrap>
+          <span class="label">Indoor temperature</span>
+          <paper-input-decorator id="temp" autoValidate error="Not a number">
+            <template if="{{readOnly}}">
+              <input is="core-input" disabled="{{readOnly}}" type="number" value="{{temperature}}" id="tempInput">
+            </template>
+            <template if="{{!readOnly}}">
+              <input is="core-input" type="number" value="{{temperature}}" id="tempInput">
+            </template>
+          </paper-input-decorator> 
+          <span class="label">&deg;F</span>
+        </div>
+      </template>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        onOrOff: 'on',
+        temperature: 65,
+
+        ready: function() {
+          if (this.params) {
+            this.onOrOff = this.params.onOrOff || 'on';
+            this.temperature = this.params.temperature || 65;
+          }
+        },
+          
+        validate: function() {
+          if (this.onOrOff !== 'on' && this.onOrOff !== 'off') {
+            return {
+              isValid: false,
+              message: 'Set thermostat: Choose "on" or "off"'
+            }
+          }
+          if (this.onOrOff === 'on') {
+            var temp = this.$.tempWrapper.querySelector('#temp');
+            if (temp.isInvalid) {
+              return {
+                isValid: false,
+                message: 'Set thermostat: invalid temperature'
+              };
+            }
+          }
+          return {
+            isValid: true
+          };
+        },
+
+        toJsonObject: function() {
+          return {
+            onOrOff: this.onOrOff,
+            temperature: this.temperature
+          }
+        },
+
+        generateDescription: function() {
+          if (this.onOrOff === 'off') {
+            return 'turn thermostat off';
+          }
+          return 'set thermostat to ' + this.temperature + ' degrees';
+        }
+      });
+    })();
+  </script>
+</polymer-element>
