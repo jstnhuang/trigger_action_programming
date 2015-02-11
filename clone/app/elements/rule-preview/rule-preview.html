@@ -13,11 +13,24 @@
           <template if="{{index != 0}}">
             and
           </template>
+          <template if="{{trigger.displayName}}">
+            <span class="taChip">{{trigger.displayName}}</span>
+          </template>
+          <template if="{{!trigger.displayName}}">
+            this
+          </template>
+        </span>
+      </template>
+      <template if="{{makeTrigger}}">
+        <span class="ifThenSection">
+          <template if="{{triggers.length == 0}}">
+            If
+          </template>
+          <template if="{{triggers.length != 0}}">
+            and
+          </template>
           <template if="{{makeTrigger}}">
             <a class="changeable" on-click="{{addTrigger}}" title="Click to add a trigger.">this</a>
-          </template>
-          <template if="{{trigger.displayName && trigger.displayName != ''}}">
-            <span class="taChip">{{trigger.displayName}}</span>
           </template>
         </span>
       </template>
@@ -40,10 +53,10 @@
   <script>
     (function () {
       Polymer({
-        addTrigger: function() {
+        addTrigger: function(e) {
           this.fire('add-trigger');
         },
-        chooseAction: function() {
+        chooseAction: function(e) {
           this.fire('choose-action');
         }
       });

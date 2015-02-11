@@ -22,7 +22,7 @@
     <template if="{{mode == 'create' || mode == 'update'}}">
       <core-collapse id="updateCollapse">
         <template if="{{mode == 'create'}}">
-        <rule-preview triggers="{{[{}]}}" action="{{{}}}" makeTrigger="true" on-add-trigger="{{chooseTrigger}}"></rule-preview>
+        <rule-preview triggers="{{[]}}" action="{{ {blank: 0} }}" makeTrigger="true" on-add-trigger="{{chooseTrigger}}"></rule-preview>
         </template>
         <template if="{{mode == 'update'}}">
           <rule-preview triggers="{{triggers}}" action="{{action}}">
@@ -50,21 +50,6 @@
           <step-count current="{{3 * triggers.length + 3}}" total="{{3 * triggers.length + 3}}"></step-count>
           <p>This is a preview of your rule. You can go back to previous steps if you want to make changes. Otherwise, click "Finish" to save this rule.</p>
           <rule-preview triggers="{{triggers}}" action="{{action}}"></rule-preview>
-            <template repeat="{{trigger, index in triggers}}">
-              <span class="ifThenSection">
-                <template if="{{index == 0}}">
-                  If
-                </template>
-                <template if="{{index != 0}}">
-                  and
-                </template>
-                <span class="taChip">{{trigger.displayName}}</span>
-              </span>
-            </template>
-            <span class="ifThenSection">
-              then <span class="taChip">{{action.displayName}}</span>
-            </span>
-          </div>
           <paper-input-decorator label="Enter a name for this rule" floatingLabel class="nameInput">
             <paper-autogrow-textarea id="nameArea">
               <template if="{{readOnly}}">
@@ -140,7 +125,7 @@
         },
 
         modeChanged: function() {
-          if (this.$.updateCollapse !== null) {
+          if (this.$.updateCollapse) {
             this.async(function() {
               this.$.updateCollapse.toggle();
             }, null, 50);
@@ -179,6 +164,7 @@
         },
 
         chooseAction: function(e, triggers, sender) {
+          console.log(triggers);
           this.triggers = triggers.slice();
           var vr = sender.validate();
           if (!vr.isValid) {

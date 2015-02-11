@@ -47,44 +47,11 @@ list back to rule-card, for the same reason as above.
         To add another trigger, choose the second option.
       </p>
       <core-selector valueattr="id" selected="" id="addTriggerSelector" notap>
-        <div class="preview ruleDesc" id="addActionPreview" flex>
-          <template repeat="{{trigger, index in triggers}}">
-            <span class="ifThenSection">
-              <template if="{{index == 0}}">
-                If
-              </template>
-              <template if="{{index != 0}}">
-                and
-              </template>
-              <span class="taChip">{{trigger.displayName}}</span>
-            </span>
-          </template>
-          <span class="ifThenSection">
-            then <a class="changeable" on-click="{{chooseAction}}" title="Click if you are done making triggers, and would like to add an action.">that</a>
-          </span>
-        </div>
+        <rule-preview class="preview" id="addActionPreview" triggers="{{triggers}}" action="{{ {blank:0} }}" makeAction="true" on-choose-action="{{chooseAction}}"></rule-preview>
         <div layout horizontal center-justified>
           <p class="or">OR</p>
         </div>
-        <div class="preview" id="addTriggerPreview" flex>
-          <template repeat="{{trigger, index in triggers}}">
-            <span class="ifThenSection">
-              <template if="{{index == 0}}">
-                If
-              </template>
-              <template if="{{index != 0}}">
-                and
-              </template>
-              <span class="taChip">{{trigger.displayName}}</span>
-            </span>
-          </template>
-          <span class="ifThenSection">
-            and <a class="changeable" on-click="{{addTrigger}}" title="Click to add another trigger.">this</a>
-          </span>
-          <span class="ifThenSection">
-            then that
-          </span>
-        </div>
+        <rule-preview class="preview" id="addTriggerPreview" triggers="{{triggers}}" action="{{ {blank: 0} }}" makeTrigger="true" on-add-trigger="{{addTrigger}}"></rule-preview>
       </core-selector>
     </core-collapse>
     <template if="{{triggerIndex > 0}}">
@@ -168,7 +135,8 @@ list back to rule-card, for the same reason as above.
           }, null, 50);
         },
 
-        addTrigger: function() {
+        addTrigger: function(e) {
+          e.stopPropagation();
           if (this.readOnly) {
             return;
           }
@@ -176,7 +144,8 @@ list back to rule-card, for the same reason as above.
           this.fire('add-trigger', this.triggers);
         },
 
-        chooseAction: function() {
+        chooseAction: function(e) {
+          e.stopPropagation();
           if (this.readOnly) {
             return;
           }
