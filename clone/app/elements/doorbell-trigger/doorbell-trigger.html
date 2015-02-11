@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="doorbell-trigger" attributes="">
+  <template>
+    <link rel="stylesheet" href="doorbell-trigger.css">
+    <link rel="stylesheet" href="../creator.css">
+    <p class="instructions">
+      This trigger fires as soon as the doorbell in the house rings.
+    </p>
+    <p>
+      There are no options for this trigger.
+    </p>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        validate: function() {
+          return {
+            isValid: true
+          }
+        },
+
+        toJsonObject: function() {
+          return {};
+        },
+
+        generateDescription: function() {
+          return 'the doorbell rings';
+        }
+      });
+    })();
+  </script>
+</polymer-element>

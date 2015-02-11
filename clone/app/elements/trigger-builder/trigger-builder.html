@@ -4,27 +4,16 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
 <link rel="import" href="../daily-time-trigger/daily-time-trigger.html">
+<link rel="import" href="../doorbell-trigger/doorbell-trigger.html">
 <link rel="import" href="../rule-preview/rule-preview.html">
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../trigger-chooser/trigger-chooser.html">
 <link rel="import" href="../weather-trigger/weather-trigger.html">
 
 <!--
-trigger-builder has a complicated contract with rule-card. trigger-builder represents
-the steps where the user chooses a trigger, sets its parameters, and decides whether to
-add another trigger or to move on. There is one trigger-builder for each trigger.
-
-rule-card sends trigger-builder the entire list of triggers so far, because
-trigger-builder needs the entire list to render the last step. rule-card makes a copy
-of this list so it doesn't mutate it in rule-card.
-
-If the user decides to add another trigger, then trigger-builder passes the entire list
-back to rule-card. rule-card makes a copy of it so it doesn't mutate the list in
-trigger-builder. Then rule-card adds a blank trigger to its trigger list, causing
-another trigger-builder to be created.
-
-If the user decides to choose an action, then trigger-builder still passes the entire
-list back to rule-card, for the same reason as above.
+trigger-builder represents the steps where the user chooses a trigger, sets its
+parameters, and decides whether to add another trigger or to move on. There is one
+trigger-builder for each trigger.
 -->
 <polymer-element name="trigger-builder" attributes="mode TRIGGERMODELS trigger triggers triggerIndex readOnly">
   <template>
@@ -40,7 +29,10 @@ list back to rule-card, for the same reason as above.
         <daily-time-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></daily-time-trigger>
       </template>
       <template if="{{trigger.key == 'weather'}}">
-        <weather-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></daily-time-trigger>
+        <weather-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></weather-trigger>
+      </template>
+      <template if="{{trigger.key == 'doorbell'}}">
+        <doorbell-trigger id="triggerOptions"></doorbell-trigger>
       </template>
       <paper-button class="next" raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
     </core-collapse>
