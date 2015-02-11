@@ -11,6 +11,7 @@
 <link rel="import" href="../action-chooser/action-chooser.html">
 <link rel="import" href="../brew-coffee-action/brew-coffee-action.html">
 <link rel="import" href="../rule-preview/rule-preview.html">
+<link rel="import" href="../send-email-action/send-email-action.html">
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../switch-lights-action/switch-lights-action.html">
 <link rel="import" href="../thermostat-action/thermostat-action.html">
@@ -50,6 +51,9 @@
           </template>
           <template if="{{action.key == 'set_thermostat'}}">
             <thermostat-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></thermostat-action>
+          </template>
+          <template if="{{action.key == 'send_email'}}">
+            <send-email-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></send-email-action>
           </template>
           <paper-button class="next" raised on-click="{{confirmRule}}" title="You will have a chance to confirm your rule in the next step.">Next step</paper-button>
         </core-collapse>

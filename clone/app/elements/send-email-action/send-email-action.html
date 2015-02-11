@@ -1,0 +1,65 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-autogrow-textarea.html">
+
+<polymer-element name="send-email-action" attributes="params readOnly">
+  <template>
+    <link rel="stylesheet" href="send-email-action.css">
+    <link rel="stylesheet" href="../creator.css">
+    <p class="instructions">This action will send an email to yourself.</p>
+    <div layout vertical>
+      <span class="label">Email to myself</span>
+      <paper-input-decorator label="Enter a name for this rule" floatingLabel>
+        <paper-autogrow-textarea id="contentArea">
+          <template if="{{readOnly}}">
+            <textarea id="contentInput" value="{{content}}" disabled="{{readOnly}}"></textarea>
+          </template>
+          <template if="{{!readOnly}}">
+            <textarea id="contentInput" value="{{content}}"></textarea>
+          </template>
+        </paper-autogrow-textarea>
+      </paper-input-decorator>
+    </div>
+
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        content: '',
+
+        ready: function() {
+          if (this.params) {
+            this.content = this.params.content || '';
+          }
+        },
+
+        domReady: function() {
+          var input = this.$.contentArea.querySelector('#contentInput');
+          this.$.contentArea.update(input);
+        },
+
+        validate: function() {
+          if (!this.content) {
+            return {
+              isValid: false,
+              message: 'Send email: Must enter text of the email'
+            };
+          } else {
+            return {
+              isValid: true
+            }
+          }
+        },
+
+        toJsonObject: function() {
+          return {
+            content: this.content
+          };
+        },
+
+        generateDescription: function() {
+          return 'send an email to myself';
+        }
+      });
+    })();
+  </script>
+</polymer-element>
