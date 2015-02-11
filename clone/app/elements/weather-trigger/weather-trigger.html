@@ -22,29 +22,29 @@
       </paper-radio-button>
     </paper-radio-group>
     <div id="tempWrapper">
-    <template if="{{condition == 'temperature'}}">
-      <div layout horizontal wrap>
-        <span class="label">Outdoor temperature</span>
-        <paper-dropdown-menu label="Choose is/is above/is below" disabled="{{readOnly}}">
-          <paper-dropdown class="dropdown" duration="200">
-            <core-selector valueattr="label" selected="{{isAboveBelow}}" class="menu">
-              <paper-item label="is">is</paper-item>
-              <paper-item label="is above">is above</paper-item>
-              <paper-item label="is below">is below</paper-item>
-            </core-selector>
-          </paper-dropdown>
-        </paper-dropdown-menu>
-        <paper-input-decorator id="temp" autoValidate error="Not a number">
-        <template if="{{readOnly}}">
-          <input is="core-input" disabled="{{readOnly}}" type="number" value="{{temperature}}" id="tempInput">
-        </template>
-        <template if="{{!readOnly}}">
-          <input is="core-input" type="number" value="{{temperature}}" id="tempInput">
-        </template>
-        </paper-input-decorator> 
-        <span class="label">&deg;F</span>
-      </div>
-    </template>
+      <template if="{{condition == 'temperature'}}">
+        <div layout horizontal wrap>
+          <span class="label">Outdoor temperature</span>
+          <paper-dropdown-menu label="Choose is/is above/is below" disabled="{{readOnly}}">
+            <paper-dropdown class="dropdown" duration="200">
+              <core-selector valueattr="label" selected="{{isAboveBelow}}" class="menu">
+                <paper-item label="is">is</paper-item>
+                <paper-item label="is above">is above</paper-item>
+                <paper-item label="is below">is below</paper-item>
+              </core-selector>
+            </paper-dropdown>
+          </paper-dropdown-menu>
+          <paper-input-decorator id="temp" autoValidate error="Not a number">
+          <template if="{{readOnly}}">
+            <input is="core-input" disabled="{{readOnly}}" type="number" value="{{temperature}}" id="tempInput">
+          </template>
+          <template if="{{!readOnly}}">
+            <input is="core-input" type="number" value="{{temperature}}" id="tempInput">
+          </template>
+          </paper-input-decorator> 
+          <span class="label">&deg;F</span>
+        </div>
+      </template>
     </div>
   </template>
   <script>
