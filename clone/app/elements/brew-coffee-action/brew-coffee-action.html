@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
+
+<polymer-element name="brew-coffee-action" attributes="">
+  <template>
+    <link rel="stylesheet" href="brew-coffee-action.css">
+    <link rel="stylesheet" href="../creator.css">
+    <p class="instructions">
+      This action brews a single pot of coffee.
+    </p>
+    <p>There are no options for this action.</p>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        validate: function() {
+          return {
+            isValid: true
+          }
+        },
+
+        toJsonObject: function() {
+          return {};
+        },
+
+        generateDescription: function() {
+          return 'brew a pot of coffee';
+        }
+      });
+    })();
+  </script>
+</polymer-element>

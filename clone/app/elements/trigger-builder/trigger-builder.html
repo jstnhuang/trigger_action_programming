@@ -36,7 +36,7 @@ trigger-builder for each trigger.
         <doorbell-trigger id="triggerOptions"></doorbell-trigger>
       </template>
       <template if="{{trigger.key == 'my_location'}}">
-        <my-location-trigger id="triggerOptions" readOnly="{{readOnly}}"></my-location-trigger>
+        <my-location-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></my-location-trigger>
       </template>
       <paper-button class="next" raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
     </core-collapse>
