@@ -216,6 +216,7 @@
           this.action.params = this.$.actionOptionsCollapse.querySelector('#actionOptions').toJsonObject();
           console.log(this.toJsonObject());
           this.mode = 'summary';
+          this.fire('save-rule');
           return true;
         },
 

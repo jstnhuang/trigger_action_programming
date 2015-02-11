@@ -13,7 +13,7 @@
     <template if="{{!readOnly}}">
       <paper-button raised id="createButton" on-click="{{createRule}}" title="Click to create a rule.">Create a rule</paper-button>
     </template>
-    <rule-list id="ruleList" readOnly="{{readOnly}}" rules="{{rules}}" on-delete-rule="{{ruleDeleted}}"></rule-list>
+    <rule-list id="ruleList" readOnly="{{readOnly}}" rules="{{rules}}" on-save-rule="{{ruleSaved}}" on-delete-rule="{{ruleDeleted}}"></rule-list>
   </template>
   <script>
     (function () {
@@ -52,6 +52,10 @@
         },
 
         ruleDeleted: function() {
+          this.$.createButton.disabled = false;
+        },
+
+        ruleSaved: function() {
           this.$.createButton.disabled = false;
         }
       });
