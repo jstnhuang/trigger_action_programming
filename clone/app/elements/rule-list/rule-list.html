@@ -46,11 +46,11 @@
         updateRule: function(e, detail, sender) {
           var rules = this.$.ruleListWrapper.querySelectorAll('rule-card');    
           for (var i=0; i<rules.length; ++i) {
-            if (rules[i] == sender) {
-              break;
-            }
-            if (rules[i].mode == 'create' && !rules[i].saveRule()) {
-              return;
+            if (rules[i].mode == 'create') {
+              var result = rules[i].saveRule();
+              if (!result) {
+                return;
+              }
             }
             rules[i].mode = 'summary';
           }

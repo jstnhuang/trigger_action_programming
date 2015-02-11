@@ -16,20 +16,87 @@
   <rule-list id="fixture"></rule-list>
 
   <script>
+    
     suite('rule-list', function() {
+      var RULES = [
+        {
+          triggers: [
+            {
+              key: 'daily_time',
+              displayName: 'Daily time',
+              params: {
+                endHour: 17,
+                endMinute: 0,
+                isOrBetween: "is",
+                startHour: 8,
+                startMinute: 0
+              }
+            }
+          ],
+          action: {
+            key: 'switch_lights',
+            displayName: 'Switch lights',
+            params: {
+              onOrOff: "on"
+            }
+          },
+          name: 'If the time is 08:00 AM, then switch the lights on'
+        },
+        {
+          triggers: [
+            {
+              key: 'daily_time',
+              displayName: 'Daily time',
+              params: {
+                endHour: 17,
+                endMinute: 0,
+                isOrBetween: "is",
+                startHour: 8,
+                startMinute: 0
+              }
+            }
+          ],
+          action: {
+            key: 'switch_lights',
+            displayName: 'Switch lights',
+            params: {
+              onOrOff: "on"
+            }
+          },
+          name: 'If the time is 08:00 AM, then switch the lights on'
+        }
+      ];
+
       test('Sentence should shown if no rules', function(done) {
-        // Test a property
         var el = document.querySelector('rule-list');
         el.rules = [];
-
-        // Data bindings will stamp out new DOM asynchronously
-        // so wait to check for updates
         flush(function() {
           var noRules = el.shadowRoot.querySelector('.noRules');
           assert.isNotNull(noRules);
           done();
         });
-      })
+      });
+
+      test('Only one rule should be in create or update mode at once', function(done) {
+        var el = document.querySelector('rule-list');
+        el.rules = RULES;
+        flush(function() {
+          var rules = el.shadowRoot.querySelectorAll('rule-card');
+          assert.equal(rules.length, 2);
+          rules[1].dispatchEvent(new Event('click'));
+          flush(function() {
+            assert.equal(rules[0].mode, 'summary');
+            assert.equal(rules[1].mode, 'update');
+            rules[0].dispatchEvent(new Event('click'));
+            flush(function() {
+              assert.equal(rules[0].mode, 'update');
+              assert.equal(rules[1].mode, 'summary');
+              done();
+            });
+          });
+        });
+      });
+
     });
   </script>
 
