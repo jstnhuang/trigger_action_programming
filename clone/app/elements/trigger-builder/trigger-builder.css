@@ -2,13 +2,6 @@
   display: block;
 }
 
-.next {
-  background-color: #03a9f4;
-  color: #fff;
-  margin-left: 0px;
-  text-transform: none;
-}
-
 .preview {
   opacity: 0.3;
   transition: opacity 0.25s ease-in-out;

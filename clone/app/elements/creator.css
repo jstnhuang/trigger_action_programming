@@ -73,3 +73,12 @@ paper-checkbox[checked] /deep/ #checkboxContainer > #checkbox {
   font-size: 2.5em;
   line-height: 150%;
 }
+
+/* Next button */
+.next {
+  background-color: #03a9f4;
+  color: #fff;
+  margin-left: 0px;
+  text-transform: none;
+  margin-top: 10px;
+}
