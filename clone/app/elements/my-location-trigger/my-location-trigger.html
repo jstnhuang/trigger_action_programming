@@ -1,0 +1,68 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
+<polymer-element name="my-location-trigger" attributes="params readOnly">
+  <template>
+    <link rel="stylesheet" href="my-location-trigger.css">
+    <link rel="stylesheet" href="../creator.css">
+    <p class="instructions">
+      This trigger fires based on your current location, home or work.
+    </p>
+    <div layout horizontal wrap>
+      <span class="label">I</span>
+      <paper-dropdown-menu label="Choose am at/arrive at/leave" disabled="{{readOnly}}">
+        <paper-dropdown class="dropdown" duration="200">
+          <core-selector valueattr="label" selected="{{verb}}" class="menu">
+            <paper-item label="am currently at">am currently at</paper-item>
+            <paper-item label="arrive at">arrive at</paper-item>
+            <paper-item label="leave">leave</paper-item>
+          </core-selector>
+        </paper-dropdown>
+      </paper-dropdown-menu>
+      <paper-dropdown-menu label="Choose home / work" disabled="{{readOnly}}">
+        <paper-dropdown class="dropdown" duration="200">
+          <core-selector valueattr="label" selected="{{location}}" class="menu">
+            <paper-item label="home">home</paper-item>
+            <paper-item label="work">work</paper-item>
+          </core-selector>
+        </paper-dropdown>
+      </paper-dropdown-menu>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        validate: function() {
+          if (!this.verb) {
+            return {
+              isValid: false,
+              message: 'My location: choose "am currently at", "arrive at," or "leave"'
+            };
+          }
+          if (!this.location) {
+            return {
+              isValid: false,
+              message: 'My location: choose a location'
+            };
+          }
+          return {
+            isValid: true
+          };
+        },
+
+        toJsonObject: function() {
+          return {
+            verb: this.verb,
+            location: this.location
+          };
+        },
+
+        generateDescription: function() {
+          return 'I ' + this.verb + ' ' + this.location;k
+        }
+      });
+    })();
+  </script>
+</polymer-element>
