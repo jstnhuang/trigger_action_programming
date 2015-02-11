@@ -7,6 +7,7 @@
 <link rel="import" href="../rule-preview/rule-preview.html">
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../trigger-chooser/trigger-chooser.html">
+<link rel="import" href="../weather-trigger/weather-trigger.html">
 
 <!--
 trigger-builder has a complicated contract with rule-card. trigger-builder represents
@@ -37,6 +38,9 @@ list back to rule-card, for the same reason as above.
       <step-count current="{{3 * triggerIndex + 2}}" total="{{3 * triggers.length + 3}}"></step-count>
       <template if="{{trigger.key == 'daily_time'}}">
         <daily-time-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></daily-time-trigger>
+      </template>
+      <template if="{{trigger.key == 'weather'}}">
+        <weather-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></daily-time-trigger>
       </template>
       <paper-button class="next" raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
     </core-collapse>

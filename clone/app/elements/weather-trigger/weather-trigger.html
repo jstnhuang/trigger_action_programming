@@ -1,0 +1,112 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+
+<polymer-element name="weather-trigger" attributes="params readOnly">
+  <template>
+    <link rel="stylesheet" href="weather-trigger.css">
+    <link rel="stylesheet" href="../creator.css">
+    <p class="instructions">
+      This trigger fires based on the current weather condition in your location.
+    </p>
+    <paper-radio-group selected="{{condition}}">
+      <paper-radio-button name="rain" label="It is raining"></paper-radio-button>
+      <paper-radio-button name="snow" label="It is snowing"></paper-radio-button>
+      <paper-radio-button name="temperature" label="Outdoor temperature">
+      </paper-radio-button>
+    </paper-radio-group>
+    <div id="tempWrapper">
+    <template if="{{condition == 'temperature'}}">
+      <div layout horizontal wrap>
+        <span class="label">Outdoor temperature</span>
+        <paper-dropdown-menu label="Choose is/is above/is below" disabled="{{readOnly}}">
+          <paper-dropdown class="dropdown" duration="200">
+            <core-selector valueattr="label" selected="{{isAboveBelow}}" class="menu">
+              <paper-item label="is">is</paper-item>
+              <paper-item label="is above">is above</paper-item>
+              <paper-item label="is below">is below</paper-item>
+            </core-selector>
+          </paper-dropdown>
+        </paper-dropdown-menu>
+        <paper-input-decorator id="temp" autoValidate error="Not a number">
+          <input is="core-input" type="number" value="{{temperature}}" id="tempInput">
+        </paper-input-decorator> 
+        <span class="label">&deg;F</span>
+      </div>
+    </template>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        isAboveBelow: 'Choose is/is above/is below',
+        temperature: 70,
+        condition: 'rain',
+
+        ready: function() {
+          if (this.params) {
+            this.isAboveBelow = this.params.isAboveBelow;
+            this.temperature = this.params.temperature;
+            this.condition = this.params.condition;
+          }
+        },
+
+        validate: function() {
+          if (!this.condition) {
+            return {
+              isValid: false,
+              message: 'Weather: no condition selected'
+            }
+          }
+          if (this.condition == 'temperature') {
+            if (!this.isAboveBelow || this.isAboveBelow == 'Choose is/is above/is below') {
+              return {
+                isValid: false,
+                message: 'Weather: choose "is", "is above," or "is below"'
+              };
+            }
+            var temp = this.$.tempWrapper.querySelector('#temp');
+            if (temp.isInvalid) {
+              return {
+                isValid: false,
+                message: 'Weather: invalid temperature'
+              };
+            }
+          }
+          return {
+            isValid: true
+          };
+        },
+
+        toJsonObject: function() {
+          return {
+            isAboveBelow: this.isAboveBelow,
+            temperature: this.temperature,
+            condition: this.condition
+          };
+        },
+
+        generateDescription: function() {
+          if (this.condition == 'rain') {
+            return 'it is raining';
+          }
+          if (this.condition == 'snow') {
+            return 'it is snowing';
+          }
+          if (this.condition == 'temperature') {
+            var result = 'the outside temperature ';
+            result += this.isAboveBelow + ' ';
+            result += this.temperature + ' degrees'; 
+            return result;
+          }
+        }
+      });
+    })();
+  </script>
+</polymer-element>
