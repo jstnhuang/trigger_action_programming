@@ -16,9 +16,9 @@
       This trigger fires based on the current weather condition in your location.
     </p>
     <paper-radio-group selected="{{condition}}">
-      <paper-radio-button name="rain" label="It is raining"></paper-radio-button>
-      <paper-radio-button name="snow" label="It is snowing"></paper-radio-button>
-      <paper-radio-button name="temperature" label="Outdoor temperature">
+      <paper-radio-button disabled="{{readOnly}}" name="rain" label="It is raining"></paper-radio-button>
+      <paper-radio-button disabled="{{readOnly}}" name="snow" label="It is snowing"></paper-radio-button>
+      <paper-radio-button disabled="{{readOnly}}" name="temperature" label="Outdoor temperature">
       </paper-radio-button>
     </paper-radio-group>
     <div id="tempWrapper">
@@ -35,7 +35,12 @@
           </paper-dropdown>
         </paper-dropdown-menu>
         <paper-input-decorator id="temp" autoValidate error="Not a number">
+        <template if="{{readOnly}}">
+          <input is="core-input" disabled="{{readOnly}}" type="number" value="{{temperature}}" id="tempInput">
+        </template>
+        <template if="{{!readOnly}}">
           <input is="core-input" type="number" value="{{temperature}}" id="tempInput">
+        </template>
         </paper-input-decorator> 
         <span class="label">&deg;F</span>
       </div>
@@ -100,7 +105,7 @@
             return 'it is snowing';
           }
           if (this.condition == 'temperature') {
-            var result = 'the outside temperature ';
+            var result = 'the temperature outside ';
             result += this.isAboveBelow + ' ';
             result += this.temperature + ' degrees'; 
             return result;

@@ -23,6 +23,27 @@
             {
               triggers: [
                 {
+                  key: 'weather',
+                  displayName: 'Weather',
+                  params: {
+                    condition: 'temperature',
+                    isAboveBelow: 'is',
+                    temperature: 70
+                  }
+                }
+              ],
+              action: {
+                key: 'switch_lights',
+                displayName: 'Switch lights',
+                params: {
+                  onOrOff: "on"
+                }
+              },
+              name: 'If the temperature outside is 70 degrees, then switch the lights on'
+            },
+            {
+              triggers: [
+                {
                   key: 'daily_time',
                   displayName: 'Daily time',
                   params: {
