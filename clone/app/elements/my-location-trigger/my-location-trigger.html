@@ -21,7 +21,7 @@
           </core-selector>
         </paper-dropdown>
       </paper-dropdown-menu>
-      <paper-dropdown-menu label="Choose home / work" disabled="{{readOnly}}">
+      <paper-dropdown-menu label="Choose home/work" disabled="{{readOnly}}">
         <paper-dropdown class="dropdown" duration="200">
           <core-selector valueattr="label" selected="{{location}}" class="menu">
             <paper-item label="home">home</paper-item>
@@ -34,6 +34,13 @@
   <script>
     (function () {
       Polymer({
+        ready: function() {
+          if (this.params) {
+            this.verb = this.params.verb || 'Choose am at/arrive at/leave';
+            this.location = this.params.location || 'Choose home/work';
+          }
+        },
+
         validate: function() {
           if (!this.verb) {
             return {
@@ -60,7 +67,7 @@
         },
 
         generateDescription: function() {
-          return 'I ' + this.verb + ' ' + this.location;k
+          return 'I ' + this.verb + ' ' + this.location;
         }
       });
     })();

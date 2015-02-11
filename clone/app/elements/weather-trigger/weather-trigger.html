@@ -56,9 +56,9 @@
 
         ready: function() {
           if (this.params) {
-            this.isAboveBelow = this.params.isAboveBelow;
-            this.temperature = this.params.temperature;
-            this.condition = this.params.condition;
+            this.isAboveBelow = this.params.isAboveBelow || 'Choose is/is above/is below';
+            this.temperature = this.params.temperature || 70;
+            this.condition = this.params.condition || 'rain';
           }
         },
 

@@ -38,11 +38,11 @@
 
         ready: function() {
           if(this.params) {
-            this.isOrBetween = this.params.isOrBetween;
-            this.startHour = this.params.startHour;
-            this.startMinute = this.params.startMinute;
-            this.endHour = this.params.endHour;
-            this.endMinute = this.params.endMinute;
+            this.isOrBetween = this.params.isOrBetween || 'Choose is/is between';
+            this.startHour = this.params.startHour || 8;
+            this.startMinute = this.params.startMinute || 0;
+            this.endHour = this.params.endHour || 17;
+            this.endMinute = this.params.endMinute || 0;
           }
         },
 
