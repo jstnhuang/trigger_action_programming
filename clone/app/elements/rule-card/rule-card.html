@@ -207,14 +207,16 @@
           return true;
         },
 
+        // Returns true if the rule was saved successfully.
         saveRule: function() {
           if (!this.validate()) {
-            return;
+            return false;
           }
           
           this.action.params = this.$.actionOptionsCollapse.querySelector('#actionOptions').toJsonObject();
           console.log(this.toJsonObject());
           this.mode = 'summary';
+          return true;
         },
 
         // Returns the representation of this rule in a JSON-serializable format.
@@ -258,6 +260,10 @@
 
         validateTriggers: function() {
           var builders = this.$.triggerBuilders.querySelectorAll('trigger-builder');
+          if (builders.length == 0) {
+            alert('There must be at least one trigger');
+            return false;
+          }
           for(var i=0; i<builders.length; ++i) {
             var trigger = builders[i];
             var vr = trigger.validate();
@@ -271,6 +277,10 @@
 
         validateAction: function() {
           var action = this.$.actionOptionsCollapse.querySelector('#actionOptions');
+          if (!action) {
+            alert('An action must be selected');
+            return;
+          }
           var vr = action.validate();
           if (!vr.isValid) {
             alert(vr.message);

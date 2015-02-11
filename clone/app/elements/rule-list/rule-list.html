@@ -49,7 +49,7 @@
             if (rules[i] == sender) {
               break;
             }
-            if (rules[i].mode == 'create' && !rules[i].validate()) {
+            if (rules[i].mode == 'create' && !rules[i].saveRule()) {
               return;
             }
             rules[i].mode = 'summary';
