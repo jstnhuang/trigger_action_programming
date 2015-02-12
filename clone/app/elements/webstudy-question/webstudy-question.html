@@ -1,0 +1,43 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+
+<polymer-element name="webstudy-question" attributes="type paragraphs options">
+  <template>
+    <link rel="stylesheet" href="webstudy-question.css">
+    <template for="{{paragraph in paragraphs}}">
+      <p>{{paragraph}}</p>
+    </template>
+    <template if="{{type == 'multiple_choice'}}">
+      <paper-radio-group selected="{{selectedOption}}">
+        <template for="{{option in options}}">
+          <paper-radio-button name="{{option}}" label="{{option}}"></paper-radio-button>
+        </template>
+      </paper-radio-group>
+    </template>
+    <template if="{{type == 'synthesis'}}">
+      <p>When you are done creating rules, click "Next question."</p>
+    </template>
+    <paper-button raised on-click="{{save}}">Next question</paper-button>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        type: '', // Either 'synthesis' or 'multiple_choice'
+        paragraphs: [], // A list of paragraphs describing the question.
+        options: [], // Multiple choice options, if any.
+        selectedOption: '', // The currently selected option.
+
+        save: function() {
+          this.fire('save-question', {
+            type: this.type,
+            paragraphs: this.paragraphs,
+            options: this.options,
+            selectedOption: this.selectedOption
+          });
+        },
+      });
+    })();
+  </script>
+</polymer-element>

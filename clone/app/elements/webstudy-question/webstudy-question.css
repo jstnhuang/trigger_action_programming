@@ -1,0 +1,11 @@
+:host {
+  display: block;
+  margin: 10px;
+}
+
+paper-button {
+  background-color: #4caf50;
+  color: #fff;
+  margin: 0;
+  text-transform: none;
+}

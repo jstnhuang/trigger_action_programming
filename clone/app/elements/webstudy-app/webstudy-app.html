@@ -9,14 +9,13 @@
     <core-scaffold drawerWidth="300px">
       <core-header-panel navigation flex mode="seamed">
         <core-toolbar id="navheader">Trigger-action programming</core-toolbar>
-        <webstudy-question></webstudy-question>
+        <webstudy-question type='synthesis' paragraphs="{{['Test question']}}"></webstudy-question>
       </core-header-panel>
       <div tool>Page <span id="questionNum">{{questionNum}}</span> of {{totalQuestions}}</div>
       <div class="content">
         <trigger-action-app rules="{{[]}}"></trigger-action-app>
       </div>
     </core-scaffold>
-
   </template>
   <script>
     (function () {
