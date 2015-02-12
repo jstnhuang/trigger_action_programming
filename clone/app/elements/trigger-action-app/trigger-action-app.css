@@ -4,6 +4,7 @@ paper-button {
 }
 
 #createButton {
+  text-transform: none;
   margin: 0;
   margin-top: 10px;
 }
