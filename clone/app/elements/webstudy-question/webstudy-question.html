@@ -6,12 +6,12 @@
 <polymer-element name="webstudy-question" attributes="type paragraphs options">
   <template>
     <link rel="stylesheet" href="webstudy-question.css">
-    <template for="{{paragraph in paragraphs}}">
+    <template repeat="{{paragraph in paragraphs}}">
       <p>{{paragraph}}</p>
     </template>
     <template if="{{type == 'multiple_choice'}}">
       <paper-radio-group selected="{{selectedOption}}">
-        <template for="{{option in options}}">
+        <template repeat="{{option in options}}">
           <paper-radio-button name="{{option}}" label="{{option}}"></paper-radio-button>
         </template>
       </paper-radio-group>
