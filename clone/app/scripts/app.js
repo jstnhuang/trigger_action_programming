@@ -17,7 +17,7 @@
         key: 'set_thermostat',
         displayName: 'Set thermostat',
         params: {
-          onOrOff: "on",
+          onOrOff: 'on',
           temperature: 72,
         }
       },
@@ -31,7 +31,7 @@
           params: {
             endHour: 17,
             endMinute: 0,
-            isOrBetween: "is",
+            isOrBetween: 'is',
             startHour: 8,
             startMinute: 0
           }
@@ -41,7 +41,7 @@
         key: 'send_email',
         displayName: 'Send email',
         params: {
-          content: "Test sentence 1. Test sentence 2."
+          content: 'Test sentence 1. Test sentence 2.'
         }
       },
       name: 'If the time is 08:00 AM, then send myself an email'
