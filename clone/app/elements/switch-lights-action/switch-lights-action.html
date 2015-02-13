@@ -11,7 +11,7 @@
     <p class="instructions">This action will turn all the lights in your house on or off.</p>
     <div layout horizontal wrap>
       <span class="label">Switch lights</span>
-      <paper-dropdown-menu label="Choose on/off" disabled="{{readOnly}}">
+      <paper-dropdown-menu label="{{onOrOff}}" disabled="{{readOnly}}">
         <paper-dropdown class="dropdown" duration="200">
           <core-selector valueattr="label" selected="{{onOrOff}}" class="menu">
             <paper-item label="on">on</paper-item>

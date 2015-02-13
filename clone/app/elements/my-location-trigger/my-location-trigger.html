@@ -12,7 +12,7 @@
     </p>
     <div layout horizontal wrap>
       <span class="label">I</span>
-      <paper-dropdown-menu label="Choose am at/arrive at/leave" disabled="{{readOnly}}">
+      <paper-dropdown-menu label="{{verb}}" disabled="{{readOnly}}">
         <paper-dropdown class="dropdown" duration="200">
           <core-selector valueattr="label" selected="{{verb}}" class="menu">
             <paper-item label="am currently at">am currently at</paper-item>
@@ -21,7 +21,7 @@
           </core-selector>
         </paper-dropdown>
       </paper-dropdown-menu>
-      <paper-dropdown-menu label="Choose home/work" disabled="{{readOnly}}">
+      <paper-dropdown-menu label="{{location}}" disabled="{{readOnly}}">
         <paper-dropdown class="dropdown" duration="200">
           <core-selector valueattr="label" selected="{{location}}" class="menu">
             <paper-item label="home">home</paper-item>
@@ -34,6 +34,9 @@
   <script>
     (function () {
       Polymer({
+        verb: 'Choose am at/arrive at/leave',
+        location: 'Choose home/work',
+
         ready: function() {
           if (this.params) {
             this.verb = this.params.verb || 'Choose am at/arrive at/leave';
@@ -42,13 +45,13 @@
         },
 
         validate: function() {
-          if (!this.verb) {
+          if (this.verb != 'am currently at' && this.verb != 'arrive at' && this.verb != 'leave') {
             return {
               isValid: false,
               message: 'My location: choose "am currently at", "arrive at," or "leave"'
             };
           }
-          if (!this.location) {
+          if (this.location != 'home' && this.location != 'work') {
             return {
               isValid: false,
               message: 'My location: choose a location'

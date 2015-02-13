@@ -25,7 +25,7 @@
       <template if="{{condition == 'temperature'}}">
         <div layout horizontal wrap>
           <span class="label">Outdoor temperature</span>
-          <paper-dropdown-menu label="Choose is/is above/is below" disabled="{{readOnly}}">
+          <paper-dropdown-menu label="{{isAboveBelow}}" disabled="{{readOnly}}">
             <paper-dropdown class="dropdown" duration="200">
               <core-selector valueattr="label" selected="{{isAboveBelow}}" class="menu">
                 <paper-item label="is">is</paper-item>
@@ -63,14 +63,14 @@
         },
 
         validate: function() {
-          if (!this.condition) {
+          if (this.condition != 'rain' && this.condition != 'snow' && this.condition != 'temperature') {
             return {
               isValid: false,
               message: 'Weather: no condition selected'
             }
           }
           if (this.condition == 'temperature') {
-            if (!this.isAboveBelow || this.isAboveBelow == 'Choose is/is above/is below') {
+            if (this.isAboveBelow != 'is' && this.isAboveBelow != 'is above' && this.isAboveBelow != 'is below') {
               return {
                 isValid: false,
                 message: 'Weather: choose "is", "is above," or "is below"'
