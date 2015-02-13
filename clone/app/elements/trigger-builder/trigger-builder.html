@@ -5,6 +5,7 @@
 
 <link rel="import" href="../daily-time-trigger/daily-time-trigger.html">
 <link rel="import" href="../doorbell-trigger/doorbell-trigger.html">
+<link rel="import" href="../motion-detector-trigger/motion-detector-trigger.html">
 <link rel="import" href="../my-location-trigger/my-location-trigger.html">
 <link rel="import" href="../rule-preview/rule-preview.html">
 <link rel="import" href="../step-count/step-count.html">
@@ -37,6 +38,9 @@ trigger-builder for each trigger.
       </template>
       <template if="{{trigger.key == 'my_location'}}">
         <my-location-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></my-location-trigger>
+      </template>
+      <template if="{{trigger.key == 'motion_detector'}}">
+        <motion-detector-trigger id="triggerOptions"></motion-detector-trigger>
       </template>
       <paper-button class="next" raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
     </core-collapse>

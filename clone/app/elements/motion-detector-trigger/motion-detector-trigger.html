@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="motion-detector-trigger" attributes="">
+  <template>
+    <link rel="stylesheet" href="motion-detector-trigger.css">
+    <link rel="stylesheet" href="../creator.css">
+    <p class="instructions">
+      This trigger fires as soon as an indoor motion detector senses a moving object in the room.
+    </p>
+    <p>
+      There are no options for this trigger.
+    </p>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        validate: function() {
+          return {
+            isValid: true
+          }
+        },
+
+        toJsonObject: function() {
+          return {};
+        },
+
+        generateDescription: function() {
+          return 'motion is detected';
+        }
+
+      });
+    })();
+  </script>
+</polymer-element>

@@ -5,12 +5,9 @@
     {
       triggers: [
         {
-          key: 'my_location',
-          displayName: 'My location',
-          params: {
-            verb: 'am currently at',
-            location: 'home'
-          }
+          key: 'motion_detector',
+          displayName: 'Motion detector',
+          params: { }
         }
       ],
       action: {
