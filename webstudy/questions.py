@@ -17,26 +17,29 @@ DEFAULT = [
         'rules': [
             {
                 'id': 'unknown',
+                'mode': 'summary',
                 'triggers': [
                     {
-                        'name': 'doorbell_rings',
+                        'key': 'doorbell',
+                        'displayName': 'Doorbell rings',
                         'params': {}
                     },
                     {
-                        'name': 'daily_time',
+                        'key': 'daily_time',
+                        'displayName': 'Daily time',
                         'params': {
                             'hour': 15,
                             'minute': 0,
-                            'beforeOrAfter': 'is'
+                            'isOrBetween': 'is'
                         }
                     }
                 ],
-                'actions': [
-                    {
-                        'name': 'switch_lights',
-                        'params': {'onOrOff': 'off'}
-                    }
-                ]
+                'action': {
+                    'key': 'switch_lights',
+                    'displayName': 'Switch lights',
+                    'params': {'onOrOff': 'off'}
+                },
+                'name': 'If the doorbell rings and it is 3:00 PM, then switch the lights off'
             }
         ],
         'options': [
