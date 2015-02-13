@@ -196,7 +196,10 @@
           this.triggers.splice(detail.index, 1);
         },
 
-        chooseAction: function(e, triggers, sender) {
+        chooseAction: function(e, detail, sender) {
+          if (detail.index >= 0) {
+            this.triggers.splice(detail.index + 1, this.triggers.length);
+          }
           var vr = sender.validate();
           if (!vr.isValid) {
             alert(vr.message);
