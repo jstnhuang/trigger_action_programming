@@ -54,7 +54,7 @@
         handleQuestionResponse: function(e, detail, sender) {
           var question = detail.response;
           if (!question) {
-            this.setQuestion('error', [], []);
+            this.setQuestion('error', [], [], []);
           } else {
             this.setQuestion(question.type, question.text, question.rules, question.options);
           }
