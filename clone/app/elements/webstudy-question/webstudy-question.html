@@ -16,7 +16,14 @@
     <template repeat="{{paragraph in text}}">
       <p>{{paragraph}}</p>
     </template>
-    <template if="{{type == 'multiple_choice'}}">
+    <template if="{{type == 'understanding'}}">
+      <p>
+        Take a look at this list of rules.
+        You can click on a rule to see more details about it. Click "Close" to hide the details.
+      </p>
+      <p>
+        Select the option that best explains what this list of rules does.
+      </p>
       <paper-radio-group selected="{{selectedOption}}">
         <template repeat="{{option in options}}">
           <paper-radio-button name="{{option}}" label="{{option}}"></paper-radio-button>

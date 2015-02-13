@@ -2,7 +2,10 @@
 <link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/core-header-panel/core-header-panel.html">
 <link rel="import" href="../../bower_components/core-scaffold/core-scaffold.html">
+<link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
 <link rel="import" href="../../bower_components/font-roboto/roboto.html">
+<link rel="import" href="../../elements/trigger-action-app/trigger-action-app.html">
+<link rel="import" href="../../elements/webstudy-question/webstudy-question.html">
 
 <polymer-element name="webstudy-app" attributes="participantId">
   <template>
@@ -46,46 +49,87 @@
         totalQuestions: 10,
         questionNum: 0,
         saveBody: '', // The body of the POST request to /save.
+        selectedOption: '', // The selected option of a multiple choice question.
 
         handleQuestionResponse: function(e, detail, sender) {
           var question = detail.response;
           if (!question) {
             this.setQuestion('error', [], []);
           } else {
-            this.setQuestion(question.type, question.text, question.options);
+            this.setQuestion(question.type, question.text, question.rules, question.options);
           }
         },
 
-        setQuestion: function(type, text, options) {
+        setQuestion: function(type, text, rules, options) {
           this.$.questionElement.type = type || 'error';
           this.$.questionElement.text = text || [];
           this.$.questionElement.options = options || [];
+          if (this.$.questionElement.type == 'understanding') {
+            this.$.txgapp.rules = rules || [];
+            this.$.txgapp.readOnly = true;
+          } else {
+            while(this.$.txgapp.rules.length) {
+              this.$.txgapp.rules.pop();
+            }
+            this.$.txgapp.readOnly = false;
+          }
         },
 
         validate: function() {
-          if (this.$.txgapp.rules.length == 0) {
+          var questionType = this.$.questionElement.type;
+          if (questionType == 'understanding') {
+            if (!this.selectedOption) {
+              return {
+                isValid: false,
+                message: 'Select one of the multiple choice options.'
+              };
+            }
             return {
-              isValid: false,
-              message: 'You must add at least one rule.'
+              isValid: true
             };
           }
-          var vr = this.$.txgapp.validate();
-          return vr;
+          if (questionType == 'synthesis') {
+            if (this.$.txgapp.rules.length == 0) {
+              return {
+                isValid: false,
+                message: 'You must add at least one rule.'
+              };
+            }
+            var vr = this.$.txgapp.validate();
+            return vr;
+          }
+          return {
+            isValid: false,
+            message: 'Unknown question type'
+          }
         },
 
         handleSaveQuestion: function(e, detail, sender) {
+          this.selectedOption = detail['selectedOption'];
           var vr = this.validate();
           if (!vr.isValid) {
             alert(vr.message);
             return;
           }
           var program = this.$.txgapp.toJsonObject();
-          var data = {
-            p: this.participantId,
-            q: this.questionNum,
-            rules: program,
-            selected: detail['selectedOption'] || ''
-          };
+          var data = {};
+          var questionType = this.$.questionElement.type;
+          if (questionType == 'synthesis') {
+            data = {
+              p: this.participantId,
+              q: this.questionNum,
+              rules: program,
+              selected: ''
+            };
+          }
+          if (questionType == 'understanding') {
+            data = {
+              p: this.participantId,
+              q: this.questionNum,
+              rules: program,
+              selected: this.selectedOption || ''
+            };
+          }
           this.saveBody = JSON.stringify(data);
           this.$.saveAjax.go()
         },
