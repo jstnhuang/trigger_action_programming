@@ -21,8 +21,8 @@ DEFAULT = [
         'type': 'synthesis',
         'text': [
             'Your work starts at 9:00 am.',
-            'Every day you get to work on time, you want to send an email to'
-            ' yourself saying, "I got to work on time!"'
+            'On days when you get to work on time, you want to send an email'
+            ' to yourself saying, "I got to work on time!"'
         ]
     },
     {
