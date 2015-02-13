@@ -31,14 +31,14 @@
           on-core-error="{{handleError}}"></core-ajax>
         <webstudy-question
           id="questionElement"
-          type='error'
-          text="{{[]}}"
-          options="{{[]}}"
+          type="{{questionType}}"
+          text="{{questionText}}"
+          options="{{questionOptions}}"
           on-save-question="{{handleSaveQuestion}}"></webstudy-question>
       </core-header-panel>
       <div tool>Page <span id="questionNum">{{questionNum + 1}}</span> of {{totalQuestions}}</div>
       <div class="content">
-        <trigger-action-app id="txgapp" rules="{{[]}}"></trigger-action-app>
+        <trigger-action-app id="txgapp" rules="{{rules}}"></trigger-action-app>
       </div>
     </core-scaffold>
   </template>
@@ -47,7 +47,11 @@
       Polymer({
         participantId: '',
         totalQuestions: 10,
-        questionNum: 0,
+        questionNum: 1,
+        rules: [],
+        questionType: 'error',
+        questionText: [],
+        questionOptions: [],
         saveBody: '', // The body of the POST request to /save.
         selectedOption: '', // The selected option of a multiple choice question.
 
@@ -61,23 +65,22 @@
         },
 
         setQuestion: function(type, text, rules, options) {
-          this.$.questionElement.type = type || 'error';
-          this.$.questionElement.text = text || [];
-          this.$.questionElement.options = options || [];
-          if (this.$.questionElement.type == 'understanding') {
-            this.$.txgapp.rules = rules || [];
+          this.questionType = type || 'error';
+          this.questionText = text || [];
+          this.questionOptions = options || [];
+          if (this.questionType == 'understanding') {
+            console.log(rules);
+            this.rules = rules || [];
+            console.log(this.rules);
             this.$.txgapp.readOnly = true;
           } else {
-            while(this.$.txgapp.rules.length) {
-              this.$.txgapp.rules.pop();
-            }
+            this.rules = [];
             this.$.txgapp.readOnly = false;
           }
         },
 
         validate: function() {
-          var questionType = this.$.questionElement.type;
-          if (questionType == 'understanding') {
+          if (this.questionType == 'understanding') {
             if (!this.selectedOption) {
               return {
                 isValid: false,
@@ -88,7 +91,7 @@
               isValid: true
             };
           }
-          if (questionType == 'synthesis') {
+          if (this.questionType == 'synthesis') {
             if (this.$.txgapp.rules.length == 0) {
               return {
                 isValid: false,
@@ -113,8 +116,7 @@
           }
           var program = this.$.txgapp.toJsonObject();
           var data = {};
-          var questionType = this.$.questionElement.type;
-          if (questionType == 'synthesis') {
+          if (this.questionType == 'synthesis') {
             data = {
               p: this.participantId,
               q: this.questionNum,
@@ -122,7 +124,7 @@
               selected: ''
             };
           }
-          if (questionType == 'understanding') {
+          if (this.questionType == 'understanding') {
             data = {
               p: this.participantId,
               q: this.questionNum,
@@ -141,7 +143,7 @@
           } else if (response.state == 'end') {
             window.location.href = '/end/' + response.code;
           } else {
-            this.setQuestion('error', [response.message], []);
+            this.setQuestion('error', [response.message], [], []);
           }
         },
 
@@ -149,7 +151,7 @@
           console.error(e);
           console.error(detail);
           console.error(sender);
-          this.setQuestion('error', [], []);
+          this.setQuestion('error', [], [], []);
         }
       });
     })();
