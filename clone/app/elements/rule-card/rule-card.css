@@ -19,3 +19,8 @@
   width: 100%;
   padding: 0;
 }
+
+/* Special rule that is not a rule-preview. */
+.titleRule {
+  margin: 10px;
+}
