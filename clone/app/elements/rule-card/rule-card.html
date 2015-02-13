@@ -110,32 +110,39 @@
         ready: function() {
           if (this.mode == 'update') {
             this.async(function() {
-              this.$.updateCollapse.opened = true;
+              this.$.updateWrapper.querySelector('#updateCollapse').opened = true;
             }, null, 100);
             this.async(function() {
-              this.$.chooseActionCollapse.opened = true;
+              this.$.updateWrapper.querySelector('#chooseActionCollapse').opened = true;
             }, null, 100);
             this.async(function() {
-              this.$.actionOptionsCollapse.opened = true;
+              this.$.updateWrapper.querySelector('#actionOptionsCollapse').opened = true;
             }, null, 100);
             this.async(function() {
-              this.$.ruleConfirmationCollapse.opened = true;
+              this.$.updateWrapper.querySelector('#ruleConfirmationCollapse').opened = true;
             }, null, 100);
-            this.$.nameArea.update(this.$.nameInput);
+            this.async(function() {
+              var nameArea = this.$.updateWrapper.querySelector('#nameArea');
+              var nameInput = this.$.updateWrapper.querySelector('#nameInput');
+              nameArea.update(nameInput);
+            }, null, 100);
           }
           // Core-collapse dynamically sets its overflow value to hidden. This interferes with
           // paper-dropdown, so we dynamically set the overflow to visible after the animation
           // for every core-collapse in the element.
-          
-          this.changeCollapseStyle(this.$.updateCollapse);
-          this.changeCollapseStyle(this.$.chooseActionCollapse);
-          this.changeCollapseStyle(this.$.actionOptionsCollapse);
-          this.changeCollapseStyle(this.$.ruleConfirmationCollapse);
+          var updateCollapse = this.$.updateWrapper.querySelector('#updateCollapse');
+          var chooseActionCollapse = this.$.updateWrapper.querySelector('#chooseActionCollapse');
+          var actionOptionsCollapse = this.$.updateWrapper.querySelector('#actionOptionsCollapse');
+          var ruleConfirmationCollapse = this.$.updateWrapper.querySelector('#ruleConfirmationCollapse');
+          this.changeCollapseStyle(updateCollapse);
+          this.changeCollapseStyle(chooseActionCollapse);
+          this.changeCollapseStyle(actionOptionsCollapse);
+          this.changeCollapseStyle(ruleConfirmationCollapse);
         },
 
         // Sets the given core-collapse's style to overflow: visible after it has finished opening.
         changeCollapseStyle: function(collapse) {
-          if (collapse === undefined) {
+          if (!collapse) {
             return;
           }
           collapse.addEventListener('core-resize', function() {
@@ -143,7 +150,10 @@
           });
         },
 
-        modeChanged: function() {
+        modeChanged: function(oldMode, newMode) {
+          if (newMode == 'update') {
+            this.ready();
+          }
           if (this.$.updateCollapse) {
             this.async(function() {
               this.$.updateCollapse.toggle();
