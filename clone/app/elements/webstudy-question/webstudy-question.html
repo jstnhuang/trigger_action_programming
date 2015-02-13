@@ -13,16 +13,16 @@
         We apologize for the inconvenience.
       </p>
     </template>
-    <template repeat="{{paragraph in text}}">
-      <p>{{paragraph}}</p>
-    </template>
     <template if="{{type == 'understanding'}}">
       <p>
         Take a look at this list of rules.
         You can click on a rule to see more details about it. Click "Close" to hide the details.
       </p>
+      <template repeat="{{paragraph in text}}">
+        <p>{{paragraph}}</p>
+      </template>
       <p>
-        Select the option that best explains what this list of rules does.
+        Select the option that best answers the question.
       </p>
       <paper-radio-group selected="{{selectedOption}}">
         <template repeat="{{option in options}}">
@@ -31,6 +31,9 @@
       </paper-radio-group>
     </template>
     <template if="{{type == 'synthesis'}}">
+      <template repeat="{{paragraph in text}}">
+        <p>{{paragraph}}</p>
+      </template>
       <p>
         Add one or more rules to make this behavior happen.
         When you are done creating rules, click "Next question."
