@@ -4,7 +4,7 @@
   <template>
     <link rel="stylesheet" href="rule-preview.css">
     <link rel="stylesheet" href="../creator.css">
-    <div class="ruleDesc">
+    <div class="ruleDesc" layout horizontal wrap>
       <template repeat="{{trigger, index in triggers}}">
         <template if="{{trigger.displayName}}">
           <span class="ifThenSection">
