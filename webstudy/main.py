@@ -62,17 +62,23 @@ def question(participant_key, question_id):
     return json.dumps(questions.DEFAULT[question_id])
 
 
-@app.route('/next', methods=['POST'])
-def next():
+@app.route('/save', methods=['POST'])
+def save():
     try:
         data = json.loads(request.data)
         participant_key = ndb.Key(urlsafe=data['p'])
         participant = participant_key.get()
         if participant is None:
-            return url_for('error', msg='Unknown participant.')
+            return json.dumps({
+                'state': 'error',
+                'message': 'Unknown participant.'
+            });
         question_id = int(data['q'])
         if question_id < 0 or question_id > len(questions.DEFAULT) - 1:
-            return url_for('error', msg='Unknown question.')
+            return json.dumps({
+                'state': 'error',
+                'message': 'Unknown question.'
+            });
         rules = data['rules'] if 'rules' in data else ''
         selected = data['selected'] if 'selected' in data else ''
 
@@ -97,19 +103,36 @@ def next():
                     code = random.randint(0, 1000000)
                     participant.completion_code = code
                     participant.put()
-                return url_for('end', code=code)
+                return json.dumps({
+                    'state': 'end',
+                    'code': code
+                })
             else:
-                return url_for('error', msg='The responses were incomplete.')
+                return json.dumps({
+                    'state': 'error',
+                    'message': 'Not all questions were completed.'
+                });
 
-        return '/txg/webstudy.html?p={}&q={}'.format(
-            participant_key.urlsafe(), question_id + 1)
+        return json.dumps({
+            'state': 'saved',
+            'next': question_id + 1
+        });
     except ValueError as e:
-        return url_for(
-            'error', msg='The wrong data was sent to the application.')
+        print e
+        return json.dumps({
+            'state': 'error',
+            'message': 'The wrong data was sent to the application.'
+        });
     except KeyError as e:
-        return url_for('error', msg='The response was incomplete.')
+        return json.dumps({
+            'state': 'error',
+            'message': 'The response was incomplete.'
+        });
     except Exception as e:
-        return url_for('error', msg='An unknown error occurred.')
+        return json.dumps({
+            'state': 'error',
+            'message': 'An unknown error occurred.'
+        });
 
 
 @app.route('/study')
