@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Robot web study</title>
+    <script src="/bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="bower_components/font-roboto/roboto.html">
+    <link rel="import" href="bower_components/paper-button/paper-button.html">
+    <style>
+      body {
+        color: rgba(0, 0, 0, 0.87);
+        font-family: 'Roboto', sans-serif;
+        margin: 0px auto;
+        max-width: 900px;
+      }
+      paper-button {
+        color: #fff;
+        background-color: #4CAF50;
+        margin-left: 0px;
+        text-transform: none;
+      }
+    </style>
+  </head>
+ 
+  <body>   
+    {% if not admin %}
+      <a href="{{login_url}}">Log in</a>
+    {% else %}
+      <h2>Last 10 responses</h2>
+      <table>
+        <tr><th>Participant Key</th><th>Question ID</th><th>Rules</th><th>Selected option</th><th>Submitted time</th></tr>
+        {% for response in responses %}
+          <tr>
+            <td>{{response.participant_key}}</td>
+            <td>{{response.question_id}}</td>
+            <td>{{response.rules}}</td>
+            <td>{{response.selected}}</td>
+            <td>{{response.submitted_time}}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </body>
+</html>

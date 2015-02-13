@@ -5,6 +5,7 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from functools import wraps
+from google.appengine.api import users
 from google.appengine.ext import ndb
 import json
 import questions
@@ -29,6 +30,7 @@ class Response(ndb.Model):
     question_id = ndb.IntegerProperty()
     rules = ndb.JsonProperty()
     selected = ndb.StringProperty()
+    submitted_time = ndb.DateTimeProperty(auto_now_add=True)
 
     @classmethod
     def has_entry(cls, exp_id, participant_key, qid):
@@ -150,3 +152,17 @@ def end(code):
 @app.route('/error/<msg>')
 def error(msg):
     return render_template('error.html', msg=msg)
+
+@app.route('/admin')
+def admin():
+    user = users.get_current_user()
+    if user and users.is_current_user_admin():
+        query = Response.query(
+            ancestor=experiment_key(DEFAULT_EXPERIMENT)
+        ).order(-Response.submitted_time)
+        responses = query.fetch(10)
+        return render_template('admin.html', admin=True, responses=responses)
+    else:
+        login_url = users.create_login_url('/admin')
+        return render_template('admin.html', admin=False, login_url=login_url)
+
