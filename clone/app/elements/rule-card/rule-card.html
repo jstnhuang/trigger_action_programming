@@ -27,7 +27,7 @@
     <template if="{{mode == 'create' || mode == 'update'}}">
       <core-collapse id="updateCollapse">
         <template if="{{mode == 'create'}}">
-          <span class="ruleDesc">If <a class="changeable" on-click="{{chooseTrigger}}" title="Click to start making this rule">this</a> then that</span>
+          <span class="ruleDesc" style="margin: 10px">If <a class="changeable" on-click="{{chooseTrigger}}" title="Click to start making this rule">this</a> then that</span>
         </template>
         <template if="{{mode == 'update'}}">
           <rule-preview triggers="{{triggers}}" action="{{action}}">
@@ -100,7 +100,7 @@
     <!-- Display a read-only summary of the rule. -->
     <template if="{{mode == 'summary'}}">
       <rule-preview triggers="{{triggers}}" action="{{action}}"></rule-preview>
-      <p>{{name}}</p>
+      <p class="ruleName">{{name}}</p>
     </template>
   </template>
   <script>
