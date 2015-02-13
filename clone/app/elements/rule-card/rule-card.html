@@ -15,6 +15,7 @@
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../switch-lights-action/switch-lights-action.html">
 <link rel="import" href="../thermostat-action/thermostat-action.html">
+<link rel="import" href="../set-door-lock-action/set-door-lock-action.html">
 <link rel="import" href="../trigger-builder/trigger-builder.html">
 
 <polymer-element name="rule-card" attributes="triggers action mode index name readOnly">
@@ -55,6 +56,9 @@
           </template>
           <template if="{{action.key == 'send_email'}}">
             <send-email-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></send-email-action>
+          </template>
+          <template if="{{action.key == 'set_door_lock'}}">
+            <set-door-lock-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></set-door-lock-action>
           </template>
           <paper-button class="next" raised on-click="{{confirmRule}}" title="You will have a chance to confirm your rule in the next step.">Next step</paper-button>
         </core-collapse>
@@ -396,6 +400,11 @@
             key: 'send_email',
             displayName: 'Send email',
             description: 'Sends an email notification to yourself.'
+          },
+          {
+            key: 'set_door_lock',
+            displayName: 'Set door lock',
+            description: 'Locks or unlocks the door. Can be set to only briefly unlock the door.'
           },
         ]
       });

@@ -1,0 +1,93 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+
+<polymer-element name="set-door-lock-action" attributes="params readOnly">
+  <template>
+    <link rel="stylesheet" href="set-door-lock-action.css">
+    <link rel="stylesheet" href="../creator.css">
+    <p class="instructions">
+      This action locks or unlocks your door.
+      Selecting "Briefly unlock" will unlock the door for a short amount of time, and then lock the door again.
+      Selecting "Lock" or "Unlock" will lock or unlock the door until further notice.
+    </p>
+    <div class="label">Set door lock</div>
+    <paper-radio-group selected="{{lockOption}}">
+      <paper-radio-button disabled="{{readOnly}}" name="timed_unlock" label="Briefly unlock"></paper-radio-button>
+      <paper-radio-button disabled="{{readOnly}}" name="lock" label="Lock"></paper-radio-button>
+      <paper-radio-button disabled="{{readOnly}}" name="unlock" label="Unlock"></paper-radio-button>
+      </paper-radio-button>
+    </paper-radio-group>
+    <div id="timeWrapper">
+      <template if="{{lockOption == 'timed_unlock'}}">
+        <div layout horizontal wrap>
+          <span class="label">Amount of time to be unlocked</span>
+          <paper-input-decorator id="time" autoValidate error="Not a number">
+            <template if="{{readOnly}}">
+              <input is="core-input" disabled="{{readOnly}}" type="number" value="{{seconds}}" id="timeInput">
+            </template>
+            <template if="{{!readOnly}}">
+              <input is="core-input" type="number" value="{{seconds}}" id="timeInput">
+            </template>
+          </paper-input-decorator> 
+          <span class="label">seconds</span>
+        </div>
+      </template>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        lockOption: 'timed_unlock',
+        seconds: 10,
+
+        ready: function() {
+          if (this.params) {
+            this.lockOption = this.params.lockOption || 'timed_unlock';
+            this.seconds = this.params.seconds || 10;
+          }
+        },
+          
+        validate: function() {
+          if (this.lockOption !== 'timed_unlock' && this.lockOption !== 'lock' && this.lockOption !== 'unlock') {
+            return {
+              isValid: false,
+              message: 'Door lock: Choose "Briefly unlock", "lock", or "unlock"'
+            }
+          }
+          if (this.lockOption === 'timed_unlock') {
+            var time = this.$.timeWrapper.querySelector('#time');
+            if (time.isInvalid) {
+              return {
+                isValid: false,
+                message: 'Door lock: invalid time'
+              };
+            }
+          }
+          return {
+            isValid: true
+          };
+        },
+
+        toJsonObject: function() {
+          return {
+            lockOption: this.lockOption,
+            seconds: this.seconds
+          }
+        },
+
+        generateDescription: function() {
+          if (this.lockOption === 'lock') {
+            return 'lock the door';
+          } else if (this.lockOption === 'unlock') {
+            return 'unlock the door';
+          } else {
+            return 'briefly unlock the door';
+          }
+        }
+      });
+    })();
+  </script>
+</polymer-element>

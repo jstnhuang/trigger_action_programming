@@ -11,14 +11,14 @@
         }
       ],
       action: {
-        key: 'set_thermostat',
-        displayName: 'Set thermostat',
+        key: 'set_door_lock',
+        displayName: 'Set door lock',
         params: {
-          onOrOff: 'on',
-          temperature: 72,
+          lockOption: 'timed_unlock',
+          seconds: 10,
         }
       },
-      name: 'If I am currently at home, then set the thermostat to 72 degrees'
+      name: 'If motion is detected, then briefly unlock the door.'
     },
     {
       triggers: [
