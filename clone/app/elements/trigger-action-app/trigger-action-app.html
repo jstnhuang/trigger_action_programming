@@ -29,6 +29,10 @@
 
         ruleSaved: function() {
           this.$.createButton.disabled = false;
+        },
+
+        toJsonObject: function() {
+          return this.$.ruleList.toJsonObject();
         }
       });
     })();

@@ -1,27 +1,53 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../bower_components/core-scaffold/core-scaffold.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
 <link rel="import" href="../../bower_components/core-header-panel/core-header-panel.html">
+<link rel="import" href="../../bower_components/core-scaffold/core-scaffold.html">
 <link rel="import" href="../../bower_components/font-roboto/roboto.html">
 
-<polymer-element name="webstudy-app" attributes="">
+<polymer-element name="webstudy-app" attributes="participantId">
   <template>
     <link rel="stylesheet" href="webstudy-app.css">
     <core-scaffold drawerWidth="300px">
       <core-header-panel navigation flex mode="seamed">
         <core-toolbar id="navheader">Trigger-action programming</core-toolbar>
-        <webstudy-question type='synthesis' paragraphs="{{['Test question']}}"></webstudy-question>
+        <core-ajax
+          auto
+          id="questionAjax"
+          url="/question/{{participantId}}/{{questionNum}}"
+          params='{}'
+          handleAs="json"
+          on-core-response="{{handleQuestionResponse}}"></core-ajax>
+        <webstudy-question
+          id="questionElement"
+          type='error'
+          text="{{[]}}"
+          options="{{[]}}"
+          on-save-question="{{handleSaveQuestion}}"></webstudy-question>
       </core-header-panel>
-      <div tool>Page <span id="questionNum">{{questionNum}}</span> of {{totalQuestions}}</div>
+      <div tool>Page <span id="questionNum">{{questionNum + 1}}</span> of {{totalQuestions}}</div>
       <div class="content">
-        <trigger-action-app rules="{{[]}}"></trigger-action-app>
+        <trigger-action-app id="txgapp" rules="{{[]}}"></trigger-action-app>
       </div>
     </core-scaffold>
   </template>
   <script>
     (function () {
       Polymer({
+        participantId: '',
         totalQuestions: 10,
-        questionNum: 1,
+        questionNum: 0,
+
+        handleQuestionResponse: function(e, detail, sender) {
+          var question = detail.response;
+          this.$.questionElement.type = question.type || 'error';
+          this.$.questionElement.text = question.text || [];
+          this.$.questionElement.options = question.options || [];
+        },
+
+        handleSaveQuestion: function(e, detail, sender) {
+          var program = this.$.txgapp.toJsonObject();
+          console.log(program);
+        }
       });
     })();
   </script>

@@ -3,36 +3,48 @@
 <link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
 <link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
 
-<polymer-element name="webstudy-question" attributes="type paragraphs options">
+<polymer-element name="webstudy-question" attributes="type text options">
   <template>
     <link rel="stylesheet" href="webstudy-question.css">
-    <template repeat="{{paragraph in paragraphs}}">
-      <p>{{paragraph}}</p>
+    <template if="{{type == 'error'}}">
+      <p>
+        There was an error getting the next question.
+        You may need to <a href="/start">restart</a>.
+        We apologize for the inconvenience.
+      </p>
     </template>
-    <template if="{{type == 'multiple_choice'}}">
-      <paper-radio-group selected="{{selectedOption}}">
-        <template repeat="{{option in options}}">
-          <paper-radio-button name="{{option}}" label="{{option}}"></paper-radio-button>
-        </template>
-      </paper-radio-group>
+    <template if="{{type != 'error'}}">
+      <template repeat="{{paragraph in text}}">
+        <p>{{paragraph}}</p>
+      </template>
+      <template if="{{type == 'multiple_choice'}}">
+        <paper-radio-group selected="{{selectedOption}}">
+          <template repeat="{{option in options}}">
+            <paper-radio-button name="{{option}}" label="{{option}}"></paper-radio-button>
+          </template>
+        </paper-radio-group>
+      </template>
+      <template if="{{type == 'synthesis'}}">
+        <p>
+          Add one or more rules to make this behavior happen.
+          When you are done creating rules, click "Next question."
+        </p>
+      </template>
+      <paper-button raised on-click="{{save}}">Next question</paper-button>
     </template>
-    <template if="{{type == 'synthesis'}}">
-      <p>When you are done creating rules, click "Next question."</p>
-    </template>
-    <paper-button raised on-click="{{save}}">Next question</paper-button>
   </template>
   <script>
     (function () {
       Polymer({
-        type: '', // Either 'synthesis' or 'multiple_choice'
-        paragraphs: [], // A list of paragraphs describing the question.
+        type: '', // Either 'synthesis', 'multiple_choice', or 'error'
+        text: [], // A list of paragraphs describing the question.
         options: [], // Multiple choice options, if any.
         selectedOption: '', // The currently selected option.
 
         save: function() {
           this.fire('save-question', {
             type: this.type,
-            paragraphs: this.paragraphs,
+            text: this.text,
             options: this.options,
             selectedOption: this.selectedOption
           });

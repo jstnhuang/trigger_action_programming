@@ -27,6 +27,7 @@
       Polymer({
         ready: function () {
         },
+
         newRule: function() {
           var rules = this.$.ruleListWrapper.querySelectorAll('rule-card');    
           for (var i=0; i<rules.length; ++i) {
@@ -40,9 +41,11 @@
           };
           this.rules.unshift(newRule);
         },
+
         deleteRule: function(e, detail, sender) {
           this.rules.splice(detail.index, 1);
         },
+
         updateRule: function(e, detail, sender) {
           var rules = this.$.ruleListWrapper.querySelectorAll('rule-card');    
           for (var i=0; i<rules.length; ++i) {
@@ -55,6 +58,14 @@
             rules[i].mode = 'summary';
           }
           sender.mode = 'update';
+        },
+
+        toJsonObject: function() {
+          var result = [];
+          for (var i=0; i<this.rules.length; ++i) {
+            result.push(this.rules[i].toJsonObject());
+          }
+          return result;
         }
       });
     })();

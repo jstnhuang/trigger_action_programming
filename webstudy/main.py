@@ -50,35 +50,19 @@ class Response(ndb.Model):
         return count == len(questions.DEFAULT)
 
 
-def allow_localhost(f):
-    """Allows cross-origin requests from localhost:8080.
-
-    Used for debugging the Dart app, which pub serves from that origin.
-    """
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        response = make_response(f(*args, **kwargs))
-        response.headers['Access-Control-Allow-Origin'] = (
-            'http://localhost:8080')
-        return response
-    return decorated_function
-
-
 @app.route('/')
 def home():
     return render_template('start.html')
 
 
 @app.route('/question/<participant_key>/<int:question_id>')
-@allow_localhost
 def question(participant_key, question_id):
     if question_id < 0 or question_id > len(questions.DEFAULT) - 1:
-        return redirect(url_for('error'))  # Unknown question
+        return json.dumps(questions.ERROR)  # Unknown question
     return json.dumps(questions.DEFAULT[question_id])
 
 
 @app.route('/next', methods=['POST'])
-@allow_localhost
 def next():
     try:
         data = json.loads(request.data)
@@ -128,11 +112,11 @@ def next():
         return url_for('error', msg='An unknown error occurred.')
 
 
-@app.route('/start')
+@app.route('/study')
 def start():
     participant = Participant(parent=experiment_key(DEFAULT_EXPERIMENT))
     key = participant.put()
-    return redirect('/txg/webstudy.html?p={}&q=0'.format(key.urlsafe()))
+    return render_template('webstudy.html', participantId=key.urlsafe())
 
 
 @app.route('/end/<code>')
