@@ -69,9 +69,7 @@
           this.questionText = text || [];
           this.questionOptions = options || [];
           if (this.questionType == 'understanding') {
-            console.log(rules);
             this.rules = rules || [];
-            console.log(this.rules);
             this.$.txgapp.readOnly = true;
           } else {
             this.rules = [];
