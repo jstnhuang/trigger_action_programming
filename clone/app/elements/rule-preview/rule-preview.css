@@ -1,3 +1,7 @@
 :host {
   display: block;
 }
+
+.rightSpace {
+  margin-right: 0.25em;
+}

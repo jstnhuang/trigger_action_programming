@@ -14,7 +14,7 @@
             <template if="{{index != 0}}">
               and
             </template>
-              <span class="taChip">{{trigger.displayName}}</span>&nbsp;
+            <span class="taChip rightSpace">{{trigger.displayName}}</span>
           </span>
         </template>
       </template>
@@ -27,7 +27,7 @@
             and
           </template>
           <template if="{{makeTrigger}}">
-            <a class="changeable" on-click="{{addTrigger}}" title="Click to add a trigger.">this</a>&nbsp;
+            <span class="rightSpace"><a class="changeable" on-click="{{addTrigger}}" title="Click to add a trigger.">this</a></span>
           </template>
         </span>
       </template>
