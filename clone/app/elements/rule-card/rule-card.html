@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="rule-card.css">
     <link rel="stylesheet" href="../creator.css">
     <!-- Display a create/update interface -->
+    <div id="updateWrapper">
     <template if="{{mode == 'create' || mode == 'update'}}">
       <core-collapse id="updateCollapse">
         <template if="{{mode == 'create'}}">
@@ -91,6 +92,7 @@
         </div>
       </core-collapse>
     </template>
+    </div>
     <!-- Display a read-only summary of the rule. -->
     <template if="{{mode == 'summary'}}">
       <rule-preview triggers="{{triggers}}" action="{{action}}"></rule-preview>
@@ -201,6 +203,7 @@
         confirmRule: function() {
           var vr = this.validateAction();
           if (!vr.isValid) {
+            alert(vr.message);
             return;
           }
           this.name = this.generateDescription();
@@ -211,6 +214,11 @@
         },
 
         validate: function() {
+          if (this.mode == 'summary') {
+            return {
+              isValid: true
+            };
+          }
           var vr = this.validateTriggers();
           if (!vr.isValid) {
             return vr;
@@ -234,6 +242,7 @@
         saveRule: function() {
           var vr = this.validate();
           if (!vr.isValid) {
+            alert(vr.message);
             return false;
           }
           
@@ -289,9 +298,8 @@
         },
 
         validateTriggers: function() {
-          var builders = this.$.triggerBuilders.querySelectorAll('trigger-builder');
+          var builders = this.$.updateWrapper.querySelectorAll('#triggerBuilders trigger-builder');
           if (builders.length == 0) {
-            //alert('There must be at least one trigger');
             return {
               isValid: false,
               message: 'There must be at least one trigger'
@@ -301,7 +309,6 @@
             var trigger = builders[i];
             var vr = trigger.validate();
             if (!vr.isValid) {
-              //alert(vr.message);
               return vr;
             }
           }
