@@ -1,0 +1,73 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../../bower_components/core-animated-pages/transitions/slide-from-right.html">
+<link rel="import" href="../../bower_components/core-animated-pages/transitions/cross-fade.html">
+<link rel="import" href="../../bower_components/font-roboto/roboto.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+<polymer-element name="webstudy-intro" attributes="">
+  <template>
+    <link rel="stylesheet" href="webstudy-intro.css">
+    <div flex horizontal layout center center-justified>
+      <div class="login-box" vertical layout center-justified>
+        <p>Page {{selected + 1}} of 3</p>
+        <core-animated-pages selected="{{selected}}" transitions="slide-from-right cross-fade-all" class="pages">
+          <section id="page1">
+            <p>Welcome to our study on programming rules for a smart home.</p>
+            <p>We are evaluating an interface for making smart home rules. In this study, you will be asked to either:
+              <ol>
+                <li>Create rules for a smart home, to achieve a desired behavior, or</li>
+                <li>Answer a question about an existing set of rules.</li>
+              </ol>
+            </p>
+            <paper-button class="nextButton" raised on-click="{{next}}">Next page</paper-button>
+          </section>
+          <section id="page2">
+            <p>Imagine you have a smart home.</p>
+            <p>
+              This smart home has computer-controlled devices like like automatic lights, an automatic coffee-brewer,
+              a computer-controlled front door lock, etc.
+            </p>
+            <p>
+              The smart home also has sensors, that allow it to know things like the current weather conditions,
+              your current location, and whether motion has been detected inside the house.
+            </p>
+            <p>
+              Assume that the smart home is capable of doing all the sensing and all the actions shown in the interface.
+            </p>
+            <paper-button class="nextButton" raised on-click="{{next}}">Next page</paper-button>
+          </section>
+          <section id="page3">
+            <p>
+              For some of the questions, there is not necessarily a "right" or "wrong" answer. However, for some questions, there is
+              only one correct answer. Getting these questions wrong might invalidate your HIT, so please answer carefully.
+            </p>
+            <p>
+              Once you finish a question, you can't go back to change it. Do not click the back button in your browser; otherwise,
+              you will have to start over.
+            </p>
+            <p>
+              When you finish all the questions, you will be given a survey code. Copy this survey code back into Mechanical Turk
+              to get credit for this HIT.
+            </p>
+            <p>
+              Thanks!
+            </p>
+            <a href="/study"><paper-button class="nextButton" raised>Start study</paper-button></a>
+          </section>
+
+        </core-animated-pages>
+      </div>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        selected: 0,
+        next: function() {
+          this.selected += 1;
+        }
+      });
+    })();
+  </script>
+</polymer-element>

@@ -54,7 +54,7 @@ class Response(ndb.Model):
 
 @app.route('/')
 def home():
-    return render_template('start.html')
+    return render_template('intro.html')
 
 
 @app.route('/question/<participant_key>/<int:question_id>')
