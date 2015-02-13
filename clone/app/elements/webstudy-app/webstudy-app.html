@@ -44,7 +44,23 @@
           this.$.questionElement.options = question.options || [];
         },
 
+        validate: function() {
+          if (this.$.txgapp.rules.length == 0) {
+            return {
+              isValid: false,
+              message: 'You must add at least one rule.'
+            };
+          }
+          var vr = this.$.txgapp.validate();
+          return vr;
+        },
+
         handleSaveQuestion: function(e, detail, sender) {
+          var vr = this.validate();
+          if (!vr.isValid) {
+            alert(vr.message);
+            return;
+          }
           var program = this.$.txgapp.toJsonObject();
           console.log(program);
         }

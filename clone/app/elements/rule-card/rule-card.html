@@ -199,7 +199,8 @@
         },
 
         confirmRule: function() {
-          if (!this.validateAction()) {
+          var vr = this.validateAction();
+          if (!vr.isValid) {
             return;
           }
           this.name = this.generateDescription();
@@ -210,27 +211,33 @@
         },
 
         validate: function() {
-          if (!this.validateTriggers()) {
-            return false;
+          var vr = this.validateTriggers();
+          if (!vr.isValid) {
+            return vr;
           }
-          if (!this.validateAction()) {
-            return false;
+          vr = this.validateAction();
+          if (!vr.isValid) {
+            return vr;
           }
           if (this.name == '') {
-            alert('Enter a name for this rule.');
-            return false;
+            return {
+              isValid: false,
+              message: 'Enter a name for this rule'
+            };
           }
-          return true;
+          return {
+            isValid: true
+          };
         },
 
         // Returns true if the rule was saved successfully.
         saveRule: function() {
-          if (!this.validate()) {
+          var vr = this.validate();
+          if (!vr.isValid) {
             return false;
           }
           
           this.action.params = this.$.actionOptionsCollapse.querySelector('#actionOptions').toJsonObject();
-          console.log(this.toJsonObject());
           this.mode = 'summary';
           this.fire('save-rule');
           return true;
@@ -252,12 +259,14 @@
         //   action: {
         //     name: 'switch_lights',
         //     params: { ... }
-        //   }
+        //   },
+        //   name: 'If the time is ...'
         // }
         toJsonObject: function() {
           return {
             triggers: this.triggers,
-            action: this.action
+            action: this.action,
+            name: this.name
           };
         },
 
@@ -282,32 +291,40 @@
         validateTriggers: function() {
           var builders = this.$.triggerBuilders.querySelectorAll('trigger-builder');
           if (builders.length == 0) {
-            alert('There must be at least one trigger');
-            return false;
+            //alert('There must be at least one trigger');
+            return {
+              isValid: false,
+              message: 'There must be at least one trigger'
+            };
           }
           for(var i=0; i<builders.length; ++i) {
             var trigger = builders[i];
             var vr = trigger.validate();
             if (!vr.isValid) {
-              alert(vr.message);
-              return false;
+              //alert(vr.message);
+              return vr;
             }
           }
-          return true;
+          return {
+            isValid: true
+          };
         },
 
         validateAction: function() {
           var action = this.$.actionOptionsCollapse.querySelector('#actionOptions');
           if (!action) {
-            alert('An action must be selected');
-            return;
+            return {
+              isValid: false,
+              message: 'An action must be selected'
+            };
           }
           var vr = action.validate();
           if (!vr.isValid) {
-            alert(vr.message);
-            return false;
+            return vr;
           }
-          return true;
+          return {
+            isValid: true
+          };
         },
 
         delete: function() {

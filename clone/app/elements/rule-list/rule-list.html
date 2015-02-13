@@ -29,9 +29,9 @@
         },
 
         newRule: function() {
-          var rules = this.$.ruleListWrapper.querySelectorAll('rule-card');    
-          for (var i=0; i<rules.length; ++i) {
-            rules[i].mode = 'summary';
+          var ruleElems = this.$.ruleListWrapper.querySelectorAll('rule-card');    
+          for (var i=0; i<ruleElems.length; ++i) {
+            ruleElems[i].mode = 'summary';
           }
           var newRule = {
             triggers: [{}],
@@ -47,23 +47,37 @@
         },
 
         updateRule: function(e, detail, sender) {
-          var rules = this.$.ruleListWrapper.querySelectorAll('rule-card');    
-          for (var i=0; i<rules.length; ++i) {
-            if (rules[i].mode == 'create') {
-              var result = rules[i].saveRule();
+          var ruleElems = this.$.ruleListWrapper.querySelectorAll('rule-card');    
+          for (var i=0; i<ruleElems.length; ++i) {
+            if (ruleElems[i].mode == 'create') {
+              var result = ruleElems[i].saveRule();
               if (!result) {
                 return;
               }
             }
-            rules[i].mode = 'summary';
+            ruleElems[i].mode = 'summary';
           }
           sender.mode = 'update';
         },
 
+        validate: function() {
+          var ruleElems = this.$.ruleListWrapper.querySelectorAll('rule-card');    
+          for (var i=0; i<ruleElems.length; ++i) {
+            var vr = ruleElems[i].validate();
+            if (!vr.isValid) {
+              return vr;
+            }
+          }
+          return {
+            isValid: true
+          };
+        },
+
         toJsonObject: function() {
           var result = [];
-          for (var i=0; i<this.rules.length; ++i) {
-            result.push(this.rules[i].toJsonObject());
+          var ruleElems = this.$.ruleListWrapper.querySelectorAll('rule-card');    
+          for (var i=0; i<ruleElems.length; ++i) {
+            result.push(ruleElems[i].toJsonObject());
           }
           return result;
         }
