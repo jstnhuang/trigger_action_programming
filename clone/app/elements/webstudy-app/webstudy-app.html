@@ -75,6 +75,7 @@
             this.rules = [];
             this.$.txgapp.readOnly = false;
           }
+          this.selectedOption = '';
         },
 
         validate: function() {
@@ -131,7 +132,7 @@
             };
           }
           this.saveBody = JSON.stringify(data);
-          this.$.saveAjax.go()
+          this.$.saveAjax.go();
         },
 
         handleSaveResponse: function(e, detail, sender) {
