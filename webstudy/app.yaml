@@ -21,10 +21,6 @@ handlers:
   static_dir: txg
   secure: always
 
-- url: /bower_components
-  static_dir: bower_components
-  secure: always
-
 - url: /roslibjs
   static_dir: roslibjs
   secure: always

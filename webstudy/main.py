@@ -149,10 +149,6 @@ def end(code):
     return render_template('end.html', code=code)
 
 
-@app.route('/error/<msg>')
-def error(msg):
-    return render_template('error.html', msg=msg)
-
 @app.route('/admin')
 def admin():
     user = users.get_current_user()
