@@ -1,0 +1,159 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../../bower_components/paper-input/paper-autogrow-textarea.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input-decorator.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
+<polymer-element name="webstudy-survey" attributes="participantId">
+  <template>
+    <link rel="stylesheet" href="webstudy-survey.css">
+    <link rel="stylesheet" href="../creator.css">
+    <div layout horizontal wrap>
+      <span class="label">Your age</span>
+      <paper-input-decorator id="age" autoValidate error="Not a number">
+        <input is="core-input" type="number" value="{{age}}" id="ageInput">
+      </paper-input-decorator> 
+    </div>
+    <div layout horizontal wrap>
+      <span class="label">Your gender</span>
+      <paper-dropdown-menu label="{{gender}}">
+        <paper-dropdown class="dropdown" duration="200">
+          <core-selector valueattr="label" selected="{{gender}}" class="menu">
+            <paper-item label="Male">Male</paper-item>
+            <paper-item label="Female">Female</paper-item>
+            <paper-item label="Other">Other</paper-item>
+          </core-selector>
+        </paper-dropdown>
+      </paper-dropdown-menu>
+    </div>
+    <div layout horizontal wrap>
+      <span class="label">Do you know how to program computers?</span>
+      <paper-dropdown-menu label="{{programming}}">
+        <paper-dropdown class="dropdown" duration="200">
+          <core-selector valueattr="label" selected="{{programming}}" class="menu">
+            <paper-item label="No">No</paper-item>
+            <paper-item label="Yes, a little">Yes, a little</paper-item>
+            <paper-item label="Yes">Yes</paper-item>
+          </core-selector>
+        </paper-dropdown>
+      </paper-dropdown-menu>
+    </div>
+    <div layout horizontal wrap>
+      <span class="label">Do you know know about the service called IFTTT?</span>
+      <paper-dropdown-menu label="{{ifttt}}">
+        <paper-dropdown class="dropdown" duration="200">
+          <core-selector valueattr="label" selected="{{ifttt}}" class="menu">
+            <paper-item label="No">No</paper-item>
+            <paper-item label="Yes, I've heard of it">Yes, I've heard of it</paper-item>
+            <paper-item label="Yes, I've used it before">Yes, I've used it before</paper-item>
+          </core-selector>
+        </paper-dropdown>
+      </paper-dropdown-menu>
+    </div>
+    <paper-input-decorator label="Other comments about the study" floatingLabel class="otherInput">
+      <paper-autogrow-textarea id="otherArea">
+        <textarea id="otherInput" value="{{otherComments}}"></textarea>
+      </paper-autogrow-textarea>
+    </paper-input-decorator>
+    <paper-button raised on-click="{{submit}}" id="surveySubmit">Submit</paper-button>
+    <core-ajax
+      id="submitAjax"
+      method="POST"
+      url="/savesurvey"
+      handleAs="json"
+      contentType="application/json"
+      body="{{submitBody}}"
+      on-core-response="{{handleSubmitResponse}}"
+      on-core-error="{{handleError}}"></core-ajax>
+
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        participantId: '',
+        gender: 'Choose an option',
+        programming: 'Choose an option',
+        ifttt: 'Choose an option',
+        otherComments: '',
+        saveBody: '',
+
+        validate: function() {
+          if(this.$.age.isInvalid) {
+            return {
+              isValid: false,
+              message: 'Age: enter a valid age.'
+            };
+          }
+          if (!this.age) {
+            return {
+              isValid: false,
+              message: 'Age: enter a valid age.'
+            };
+          }
+          if (this.age < 1) {
+            return {
+              isValid: false,
+              message: 'Age: enter a valid age.'
+            };
+          }
+          if (this.gender !== 'Male' && this.gender != 'Female' && this.gender != 'Other') {
+            return {
+              isValid: false,
+              message: 'Gender: choose "Male," "Female," or "Other"'
+            };
+          }
+          if (this.programming !== 'No' && this.programming !== 'Yes, a little' && this.programming !== 'Yes') {
+            return {
+              isValid: false,
+              message: 'Do you know how to program computers? Select an option.'
+            };
+          }
+          if (this.ifttt !== 'No' && this.ifttt !== 'Yes, I\'ve heard of it' && this.ifttt !== 'Yes, I\'ve used it before') {
+            return {
+              isValid: false,
+              message: 'Do you know about the service called IFTTT? Select an option.'
+            };
+          }
+          return {
+            isValid: true
+          };
+        },
+
+        submit: function() {
+          var vr = this.validate();
+          if (!vr.isValid) {
+            alert(vr.message);
+            return;
+          }
+          var data = {
+            p: this.participantId,
+            age: this.age,
+            gender: this.gender,
+            programming: this.programming,
+            ifttt: this.ifttt,
+            otherComments: this.otherComments
+          };
+          this.submitBody = JSON.stringify(data);
+          this.$.submitAjax.go();
+        },
+
+        handleSubmitResponse: function(e, detail, sender) {
+          var response = detail.response;
+          if (response.state == 'end') {
+            window.location.href = '/end/' + response.code;
+          } else {
+            this.handleError(null, {message: response.message}, null);
+          }
+        },
+
+        handleError: function(e, detail, sender) {
+          var message = detail.message || 'Unknown error.';
+          alert('There was an error with the form: ' + message + ' Please try again.');
+        }
+      });
+    })();
+  </script>
+</polymer-element>

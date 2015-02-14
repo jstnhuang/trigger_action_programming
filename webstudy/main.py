@@ -23,6 +23,11 @@ def experiment_key(experiment_id):
 
 class Participant(ndb.Model):
     completion_code = ndb.IntegerProperty()
+    age = ndb.IntegerProperty()
+    gender = ndb.StringProperty()
+    ifttt_experience = ndb.StringProperty()
+    programming_experience = ndb.StringProperty()
+    study_comments = ndb.TextProperty()
 
 
 class Response(ndb.Model):
@@ -95,32 +100,73 @@ def save():
             response.put()
 
         if question_id == len(questions.DEFAULT) - 1:
-            complete = Response.check_responses_complete(
-                DEFAULT_EXPERIMENT, participant_key)
-            if complete:
-                code = None
-                if participant.completion_code is not None:
-                    code = participant.completion_code
-                else:
-                    code = random.randint(0, 1000000)
-                    participant.completion_code = code
-                    participant.put()
-                return json.dumps({
-                    'state': 'end',
-                    'code': code
-                })
-            else:
-                return json.dumps({
-                    'state': 'error',
-                    'message': 'Not all questions were completed.'
-                });
-
+            return json.dumps({
+                'state': 'survey'
+            })
+            
         return json.dumps({
             'state': 'saved',
             'next': question_id + 1
         });
     except ValueError as e:
-        print e
+        return json.dumps({
+            'state': 'error',
+            'message': 'The wrong data was sent to the application.'
+        });
+    except KeyError as e:
+        return json.dumps({
+            'state': 'error',
+            'message': 'The response was incomplete.'
+        });
+    except Exception as e:
+        return json.dumps({
+            'state': 'error',
+            'message': 'An unknown error occurred.'
+        });
+
+
+@app.route('/survey/<participant_key>')
+def survey(participant_key):
+    return render_template('survey.html', participant=participant_key)
+
+
+@app.route('/savesurvey', methods=['POST'])
+def savesurvey():
+    try:
+        data = json.loads(request.data)
+        participant_key = ndb.Key(urlsafe=data['p'])
+        participant = participant_key.get()
+        if participant is None:
+            return json.dumps({
+                'state': 'error',
+                'message': 'Unknown participant.'
+            });
+
+        complete = Response.check_responses_complete(
+            DEFAULT_EXPERIMENT, participant_key)
+        if complete:
+            code = None
+            if participant.completion_code is not None:
+                code = participant.completion_code
+            else:
+                code = random.randint(0, 1000000)
+                participant.age = int(data['age'])
+                participant.gender = data['gender']
+                participant.ifttt_experience = data['ifttt']
+                participant.programming_experience = data['programming']
+                participant.study_comments = data['otherComments']
+                participant.completion_code = code
+                participant.put()
+            return json.dumps({
+                'state': 'end',
+                'code': code
+            })
+        else:
+            return json.dumps({
+                'state': 'error',
+                'message': 'Not all questions were completed.'
+            });
+    except ValueError as e:
         return json.dumps({
             'state': 'error',
             'message': 'The wrong data was sent to the application.'

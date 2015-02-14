@@ -139,8 +139,8 @@
           var response = detail.response;
           if (response.state == 'saved') {
             this.questionNum = response.next;
-          } else if (response.state == 'end') {
-            window.location.href = '/end/' + response.code;
+          } else if (response.state == 'survey') {
+            window.location.href = '/survey/' + this.participantId;
           } else {
             this.setQuestion('error', [response.message], [], []);
           }
