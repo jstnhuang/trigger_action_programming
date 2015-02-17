@@ -14,16 +14,12 @@
       <core-header-panel navigation flex mode="seamed">
         <core-toolbar>Admin</core-toolbar>
         <core-menu selected="{{selectedPage}}" valueattr="label" theme="core-light-theme">
-          <core-item label="Dashboard"></core-item>
           <core-item label="Participants"></core-item>
         </core-menu>
       </core-header-panel>
       <div tool>{{selectedPage}}</div>
       <div class="content">
         <core-pages selected="{{selectedPage}}" valueattr='data-page'>
-          <section data-page="Dashboard">
-            <h1>Dashboard</h1>
-          </section>
           <section data-page="Participants">
             <admin-participants></admin-participants>
           </section>
@@ -34,7 +30,7 @@
   <script>
     (function () {
       Polymer({
-        selectedPage: 'Dashboard'
+        selectedPage: 'Participants'
       });
     })();
   </script>
