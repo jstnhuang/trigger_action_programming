@@ -277,7 +277,7 @@ def get_all_participants(experiment_id):
     stddev_age = math.sqrt(stddev_age / num_participants)
 
     return json.dumps({
-        'num_participants': num_participants,
+        'numParticipants': num_participants,
         'averageAge': mean_age,
         'stdDevAge': stddev_age,
         'numMales': males,
