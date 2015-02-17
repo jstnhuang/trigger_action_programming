@@ -15,9 +15,11 @@ class MainTest(unittest.TestCase):
         self.context = main.app.test_request_context()
         self.context.push()
         self.testbed = testbed.Testbed()
+        self.testbed.setup_env(USER_EMAIL='usermail@gmail.com', USER_ID='1', USER_IS_ADMIN='1')
         self.testbed.activate()
         self.testbed.init_datastore_v3_stub()
         self.testbed.init_memcache_stub()
+        self.testbed.init_user_stub()
 
     def tearDown(self):
         self.testbed.deactivate()
@@ -117,6 +119,96 @@ class MainTest(unittest.TestCase):
         self.assertEqual(0, main.Participant.query().count(1))
         self.app.get('/start')
         self.assertEqual(1, main.Participant.query().count(1))
+
+    def testGetResponsesExcludesIncomplete(self):
+        e_key = main.experiment_key('test_experiment')
+        p1 = main.Participant(completion_code=123456, parent=e_key)
+        p2 = main.Participant(parent=e_key)
+        p1_key = p1.put()
+        p2_key = p2.put()
+        response1 = main.Response(participant_key=p1_key, question_id=5, selected='valid', parent=e_key)
+        response2 = main.Response(participant_key=p2_key, question_id=5, selected='invalid', parent=e_key)
+        r1_key = response1.put()
+        r2_key = response2.put()
+        response = self.app.get('/admin_api/get_responses/test_experiment')
+        data = json.loads(response.data)
+        self.assertDictEqual({'valid': 1}, data[5])
+
+    def testGetResponsesJsonSort(self):
+        e_key = main.experiment_key('test_experiment')
+        p1 = main.Participant(completion_code=123456, parent=e_key)
+        p2 = main.Participant(completion_code=234567, parent=e_key)
+        p1_key = p1.put()
+        p2_key = p2.put()
+        rules1 = [
+            {
+                'triggers': [
+                    {
+                        'key': 'weather',
+                        'displayName': 'Daily time',
+                        'params': {
+                            'endHour': 10,
+                            'endMinute': 0,
+                            'isOrBetween': 'is between',
+                            'startHour': 7,
+                            'startMinute': 0
+                        }
+                    },
+                    {
+                        'key': 'my_location',
+                        'displayName': 'My location',
+                        'params': {
+                            'verb': 'arrive at',
+                            'location': 'home'
+                        }
+                    },
+                ],
+                'action': {
+                    'key': 'brew_coffee',
+                    'displayName': 'Brew coffee',
+                    'params': {}
+                }
+            }
+        ]
+        rules2 = [
+            {
+                'triggers': [
+                    {
+                        'key': 'my_location',
+                        'displayName': 'My location',
+                        'params': {
+                            'verb': 'arrive at',
+                            'location': 'home'
+                        }
+                    },
+                    {
+                        'key': 'weather',
+                        'displayName': 'Daily time',
+                        'params': {
+                            'endHour': 10,
+                            'endMinute': 0,
+                            'isOrBetween': 'is between',
+                            'startHour': 7,
+                            'startMinute': 0
+                        }
+                    },
+                ],
+                'action': {
+                    'key': 'brew_coffee',
+                    'displayName': 'Brew coffee',
+                    'params': {}
+                }
+            }
+        ]
+        json_rules1 = json.dumps(rules1, sort_keys=True)
+        json_rules2 = json.dumps(rules2, sort_keys=True)
+        response1 = main.Response(participant_key=p1_key, rules=json_rules1, question_id=1, parent=e_key)
+        response2 = main.Response(participant_key=p2_key, rules=json_rules2, question_id=1, parent=e_key)
+        r1_key = response1.put()
+        r2_key = response2.put()
+        response = self.app.get('/admin_api/get_responses/test_experiment')
+        data = json.loads(response.data)
+        self.assertDictEqual({json_rules1: 2}, data[1])
 
 
 if __name__ == '__main__':

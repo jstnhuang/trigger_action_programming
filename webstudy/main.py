@@ -1,5 +1,6 @@
 from __future__ import division
 
+from collections import Counter
 from flask import Flask
 from flask import make_response
 from flask import redirect
@@ -300,3 +301,54 @@ def get_all_participants(experiment_id):
         'programmerYesPercent': programmer_yes / (programmer_no + programmer_little + programmer_yes),
         'codes': completion_codes
     });
+
+@app.route('/admin_api/get_responses/<experiment_id>')
+def get_responses(experiment_id):
+    user = users.get_current_user()
+    if not user or not users.is_current_user_admin():
+        return json.dumps({
+            'state': 'error',
+            'message': 'You must be logged in as an administrator to call this API.'
+        });
+
+    query = Participant.query(
+        Participant.completion_code != None,
+        ancestor=experiment_key(experiment_id)
+    )
+    participants_query = query.fetch()
+    participant_keys = set()
+    for participant in participants_query:
+        participant_keys.add(participant.key)
+
+    query = Response.query(
+        ancestor=experiment_key(experiment_id)
+    )
+    responses = query.fetch()
+    questions = [Counter() for x in range(10)]
+    for response in responses:
+        if response.participant_key not in participant_keys:
+            continue
+        if response.question_id <= 4:
+            counter = questions[response.question_id]
+            rules = json.dumps(sort_json(json.loads(response.rules)), sort_keys=True)
+            counter[rules] += 1
+        else:
+            counter = questions[response.question_id]
+            counter[response.selected] += 1
+    return json.dumps(questions);
+
+    
+def sort_json(json_obj):
+    """A rudimentary JSON sorter that sorts every list in the object."""
+    if type(json_obj) == type([]):
+        for item in json_obj:
+            item = sort_json(item)
+        json_obj = sorted(json_obj)
+        return json_obj
+    elif type(json_obj) == type({}):
+        for key in json_obj:
+            json_obj[key] = sort_json(json_obj[key])
+        return json_obj
+    else:
+        return json_obj
+    
