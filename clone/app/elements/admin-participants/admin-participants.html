@@ -37,29 +37,29 @@
       <h1>Valid codes</h1>
       <div layout horizontal wrap>
         <div flex>
-          <template repeat="{{code, index in codes}}">
-            <template if="{{index < codes.length / 4}}">
+          <template repeat="{{code, index in data.codes}}">
+            <template if="{{index < data.codes.length / 4}}">
               {{code}}<br />
             </template>
           </template>
         </div>
         <div flex>
-          <template repeat="{{code, index in codes}}">
-            <template if="{{index >= codes.length / 4 && index < 2*codes.length / 4}}">
+          <template repeat="{{code, index in data.codes}}">
+            <template if="{{index >= data.codes.length / 4 && index < 2*data.codes.length / 4}}">
               {{code}}<br />
             </template>
           </template>
         </div>
         <div flex>
-          <template repeat="{{code, index in codes}}">
-            <template if="{{index >= 2*codes.length / 4 && index < 3*codes.length / 4}}">
+          <template repeat="{{code, index in data.codes}}">
+            <template if="{{index >= 2*data.codes.length / 4 && index < 3*data.codes.length / 4}}">
               {{code}}<br />
             </template>
           </template>
         </div>
         <div flex>
-          <template repeat="{{code, index in codes}}">
-            <template if="{{index >= 3*codes.length / 4}}">
+          <template repeat="{{code, index in data.codes}}">
+            <template if="{{index >= 3*data.codes.length / 4}}">
               {{code}}<br />
             </template>
           </template>
@@ -71,12 +71,10 @@
     (function () {
       Polymer({
         data: {},
-        codes: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
         experimentId: 'default_experiment',
 
         handleAllParticipantsResponse: function(e, detail, sender) {
           this.data = detail.response;
-          console.log(this.data.codes);
         },
       });
     })();
