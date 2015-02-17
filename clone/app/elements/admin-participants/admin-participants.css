@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+paper-shadow {
+  background-color: #fff;
+  padding: 10px;
+}
+
+paper-shadow + paper-shadow {
+  margin-top: 10px;
+}
+
+h1, h2 {
+  margin: 0;
+}
+
+.data-heading {
+  font-size: 1.25em;
+  color: rgba(0, 0, 0, 0.54);
+  padding-top: 10px;
+}

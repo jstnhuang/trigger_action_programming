@@ -1,0 +1,84 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../../bower_components/paper-shadow/paper-shadow.html">
+
+<polymer-element name="admin-participants" attributes="">
+  <template>
+    <link rel="stylesheet" href="admin-participants.css">
+    <core-ajax
+      auto
+      id="participantAjax"
+      url="/admin_api/get_all_participants/{{experimentId}}"
+      handleAs="json"
+      on-core-response="{{handleAllParticipantsResponse}}">
+    </core-ajax>
+
+    <paper-shadow z="1">
+      <h1>Demographics</h1>
+      <h2 class="data-heading">Number of participants</h2>
+      {{data.numParticipants}}
+      <h2 class="data-heading">Age</h2>
+      Average: {{data.averageAge}}<br />
+      Standard deviation: {{data.stdDevAge}}
+      <h2 class="data-heading">Gender</h2>
+      Males: {{data.numMales}} ({{data.malePercent}}%)<br />
+      Females: {{data.numFemales}} ({{data.femalePercent}}%)
+      Other: {{data.numOtherGender}} ({{data.otherGenderPercent}}%)
+      <h2 class="data-heading">IFTTT experience</h2>
+      No: {{data.iftttNos}} ({{data.iftttNosPercent}}%)<br />
+      Yes, I've heard of it: {{data.iftttHeardOfs}} ({{data.iftttHeardOfsPercent}}%)<br />
+      Yes, I've used it before: {{data.iftttUsedBefores}} ({{data.iftttUsedBeforesPercent}}%)
+      <h2 class="data-heading">Programming experience</h2>
+      No: {{data.programmerNos}} ({{data.programmerNosPercent}}%)<br />
+      Yes, a little: {{data.programmerLittles}} ({{data.programmerLittlesPercent}}%)<br />
+      Yes: {{data.programmerYes}} ({{data.programmerYesPercent}}%)
+    </paper-shadow>
+    <paper-shadow z="1">
+      <h1>Valid codes</h1>
+      <div layout horizontal wrap>
+        <div flex>
+          <template repeat="{{code, index in codes}}">
+            <template if="{{index < codes.length / 4}}">
+              {{code}}<br />
+            </template>
+          </template>
+        </div>
+        <div flex>
+          <template repeat="{{code, index in codes}}">
+            <template if="{{index >= codes.length / 4 && index < 2*codes.length / 4}}">
+              {{code}}<br />
+            </template>
+          </template>
+        </div>
+        <div flex>
+          <template repeat="{{code, index in codes}}">
+            <template if="{{index >= 2*codes.length / 4 && index < 3*codes.length / 4}}">
+              {{code}}<br />
+            </template>
+          </template>
+        </div>
+        <div flex>
+          <template repeat="{{code, index in codes}}">
+            <template if="{{index >= 3*codes.length / 4}}">
+              {{code}}<br />
+            </template>
+          </template>
+        </div>
+      </div>
+    </paper-shadow>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        data: {},
+        codes: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
+        experimentId: 'default_experiment',
+
+        handleAllParticipantsResponse: function(e, detail, sender) {
+          this.data = detail.response;
+          console.log(this.data.codes);
+        },
+      });
+    })();
+  </script>
+</polymer-element>

@@ -1,3 +1,5 @@
+from __future__ import division
+
 from flask import Flask
 from flask import make_response
 from flask import redirect
@@ -8,6 +10,7 @@ from functools import wraps
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import json
+import math
 import questions
 import random
 
@@ -204,3 +207,89 @@ def admin():
         login_url = users.create_login_url('/admin')
         return render_template('admin-login.html', login_url=login_url)
 
+
+@app.route('/admin_api/get_all_participants/<experiment_id>')
+def get_all_participants(experiment_id):
+    query = Participant.query(
+        Participant.completion_code != None,
+        ancestor=experiment_key(experiment_id)
+    ).order(Participant.completion_code)
+    participants = query.fetch()
+
+    num_participants = 0
+    mean_age = 0
+    ages = []
+    males = 0
+    females = 0
+    other_genders = 0
+    ifttt_none = 0
+    ifttt_heard_of = 0
+    ifttt_used_before = 0
+    programmer_no = 0
+    programmer_little = 0
+    programmer_yes = 0
+    completion_codes = []
+
+    for participant in participants:
+        num_participants += 1
+        mean_age += participant.age
+        ages.append(participant.age)
+        if participant.gender == 'Male':
+            males += 1
+        elif participant.gender == 'Female':
+            females += 1
+        elif participant.gender == 'Other':
+            other_genders += 1
+        else:
+            pass
+
+        if participant.ifttt_experience == 'No':
+            ifttt_none += 1
+        elif participant.ifttt_experience == 'Yes, I\'ve heard of it':
+            ifttt_heard_of += 1
+        elif participant.ifttt_experience == 'Yes, I\'ve used it before':
+            ifttt_used_before += 1
+        else:
+            pass
+
+        if participant.programming_experience == 'No':
+            programmer_no += 1
+        elif participant.programming_experience == 'Yes, a little':
+            programmer_little += 1
+        elif participant.programming_experience == 'Yes':
+            programmer_yes += 1
+        else:
+            pass
+        
+        completion_codes.append(participant.completion_code)
+
+    mean_age /= num_participants
+    stddev_age = 0
+    for age in ages:
+        stddev_age += (age - mean_age)**2
+    stddev_age = math.sqrt(stddev_age / num_participants)
+
+    return json.dumps({
+        'num_participants': num_participants,
+        'averageAge': mean_age,
+        'stdDevAge': stddev_age,
+        'numMales': males,
+        'numFemales': females,
+        'numOtherGender': other_genders,
+        'malePercent': males / (males + females + other_genders),
+        'femalePercent': females / (males + females + other_genders),
+        'otherGenderPercent': other_genders / (males + females + other_genders),
+        'iftttNos': ifttt_none,
+        'iftttHeardOfs': ifttt_heard_of,
+        'iftttUsedBefores': ifttt_used_before,
+        'iftttNosPercent': ifttt_none / (ifttt_none + ifttt_heard_of + ifttt_used_before),
+        'iftttHeardOfsPercent': ifttt_heard_of / (ifttt_none + ifttt_heard_of + ifttt_used_before),
+        'iftttUsedBeforesPercent': ifttt_used_before / (ifttt_none + ifttt_heard_of + ifttt_used_before),
+        'programmerNos': programmer_no,
+        'programmerLittles': programmer_little,
+        'programmerYes': programmer_yes,
+        'programmerNosPercent': programmer_no / (programmer_no + programmer_little + programmer_yes),
+        'programmerLittlesPercent': programmer_little / (programmer_no + programmer_little + programmer_yes),
+        'programmerYesPercent': programmer_yes / (programmer_no + programmer_little + programmer_yes),
+        'codes': completion_codes
+    });
