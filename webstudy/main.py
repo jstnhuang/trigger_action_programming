@@ -210,6 +210,13 @@ def admin():
 
 @app.route('/admin_api/get_all_participants/<experiment_id>')
 def get_all_participants(experiment_id):
+    user = users.get_current_user()
+    if not user or not users.is_current_user_admin():
+        return json.dumps({
+            'state': 'error',
+            'message': 'You must be logged in as an administrator to call this API.'
+        });
+
     query = Participant.query(
         Participant.completion_code != None,
         ancestor=experiment_key(experiment_id)
