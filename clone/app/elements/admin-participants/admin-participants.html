@@ -18,20 +18,20 @@
       <h2 class="data-heading">Number of participants</h2>
       {{data.numParticipants}}
       <h2 class="data-heading">Age</h2>
-      Average: {{data.averageAge}}<br />
-      Standard deviation: {{data.stdDevAge}}
+      Average: {{data.averageAge | toFixedPrecision(2)}}<br />
+      Standard deviation: {{data.stdDevAge | toFixedPrecision(2)}}
       <h2 class="data-heading">Gender</h2>
-      Males: {{data.numMales}} ({{data.malePercent}}%)<br />
-      Females: {{data.numFemales}} ({{data.femalePercent}}%)<br />
-      Other: {{data.numOtherGender}} ({{data.otherGenderPercent}}%)
+      Males: {{data.numMales}} ({{data.malePercent | toPercentage | toFixedPrecision(2)}}%)<br />
+      Females: {{data.numFemales}} ({{data.femalePercent | toPercentage | toFixedPrecision(2)}}%)<br />
+      Other: {{data.numOtherGender}} ({{data.otherGenderPercent | toPercentage | toFixedPrecision(2)}}%)
       <h2 class="data-heading">IFTTT experience</h2>
-      No: {{data.iftttNos}} ({{data.iftttNosPercent}}%)<br />
-      Yes, I've heard of it: {{data.iftttHeardOfs}} ({{data.iftttHeardOfsPercent}}%)<br />
-      Yes, I've used it before: {{data.iftttUsedBefores}} ({{data.iftttUsedBeforesPercent}}%)
+      No: {{data.iftttNos}} ({{data.iftttNosPercent | toPercentage | toFixedPrecision(2)}}%)<br />
+      Yes, I've heard of it: {{data.iftttHeardOfs}} ({{data.iftttHeardOfsPercent | toPercentage | toFixedPrecision(2)}}%)<br />
+      Yes, I've used it before: {{data.iftttUsedBefores}} ({{data.iftttUsedBeforesPercent | toPercentage | toFixedPrecision(2)}}%)
       <h2 class="data-heading">Programming experience</h2>
-      No: {{data.programmerNos}} ({{data.programmerNosPercent}}%)<br />
-      Yes, a little: {{data.programmerLittles}} ({{data.programmerLittlesPercent}}%)<br />
-      Yes: {{data.programmerYes}} ({{data.programmerYesPercent}}%)
+      No: {{data.programmerNos}} ({{data.programmerNosPercent | toPercentage | toFixedPrecision(2)}}%)<br />
+      Yes, a little: {{data.programmerLittles}} ({{data.programmerLittlesPercent | toPercentage | toFixedPrecision(2)}}%)<br />
+      Yes: {{data.programmerYes}} ({{data.programmerYesPercent | toPercentage | toFixedPrecision(2)}}%)
     </paper-shadow>
     <paper-shadow z="1">
       <h1>Valid codes</h1>
@@ -76,6 +76,14 @@
         handleAllParticipantsResponse: function(e, detail, sender) {
           this.data = detail.response;
         },
+
+        toPercentage: function(val) {
+          return val * 100;
+        },
+
+        toFixedPrecision: function(val, precision) {
+          return Number(val).toFixed(precision);
+        }
       });
     })();
   </script>
