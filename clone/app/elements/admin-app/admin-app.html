@@ -1,0 +1,40 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-header-panel/core-header-panel.html">
+<link rel="import" href="../../bower_components/core-item/core-item.html">
+<link rel="import" href="../../bower_components/core-menu/core-menu.html">
+<link rel="import" href="../../bower_components/core-pages/core-pages.html">
+<link rel="import" href="../../bower_components/core-scaffold/core-scaffold.html">
+<link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
+
+<polymer-element name="admin-app" attributes="">
+  <template>
+    <link rel="stylesheet" href="admin-app.css">
+    <core-scaffold>
+      <core-header-panel navigation flex mode="seamed">
+        <core-toolbar>Admin</core-toolbar>
+        <core-menu selected="{{selectedPage}}" valueattr="label" theme="core-light-theme">
+          <core-item label="Dashboard"></core-item>
+          <core-item label="Participants"></core-item>
+        </core-menu>
+      </core-header-panel>
+      <div tool>{{selectedPage}}</div>
+      <div class="content">
+        <core-pages selected="{{selectedPage}}" valueattr='data-page'>
+          <section data-page="Dashboard">
+            <h1>Dashboard</h1>
+          </section>
+          <section data-page="Participants">
+            <h1>Participants</h1>
+          </section>
+        </core-pages>
+      </div>
+    </core-scaffold>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        selectedPage: 'Dashboard'
+      });
+    })();
+  </script>
+</polymer-element>

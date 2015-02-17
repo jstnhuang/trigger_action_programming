@@ -199,12 +199,8 @@ def end(code):
 def admin():
     user = users.get_current_user()
     if user and users.is_current_user_admin():
-        query = Response.query(
-            ancestor=experiment_key(DEFAULT_EXPERIMENT)
-        ).order(-Response.submitted_time)
-        responses = query.fetch(10)
-        return render_template('admin.html', admin=True, responses=responses)
+        return render_template('admin.html')
     else:
         login_url = users.create_login_url('/admin')
-        return render_template('admin.html', admin=False, login_url=login_url)
+        return render_template('admin-login.html', login_url=login_url)
 
