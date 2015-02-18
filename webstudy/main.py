@@ -1,6 +1,5 @@
 from __future__ import division
 
-from collections import Counter
 from flask import Flask
 from flask import make_response
 from flask import redirect
@@ -10,6 +9,7 @@ from flask import url_for
 from functools import wraps
 from google.appengine.api import users
 from google.appengine.ext import ndb
+import copy
 import json
 import math
 import questions
@@ -325,30 +325,43 @@ def get_responses(experiment_id):
         ancestor=experiment_key(experiment_id)
     )
     responses = query.fetch()
-    questions = [Counter() for x in range(10)]
+    questions = [{} for x in range(10)]
     for response in responses:
         if response.participant_key not in participant_keys:
             continue
         if response.question_id <= 4:
-            counter = questions[response.question_id]
-            rules = json.dumps(sort_json(response.rules), sort_keys=True)
-            counter[rules] += 1
+            histogram = questions[response.question_id]
+            example_rules = copy.deepcopy(response.rules)
+            rule_key = json.dumps(normalize_json(response.rules), sort_keys=True)
+            if rule_key in histogram:
+                histogram[rule_key]['count'] += 1
+            else:
+                histogram[rule_key] = {'count': 1, 'example': example_rules}
         else:
             counter = questions[response.question_id]
-            counter[response.selected] += 1
+            if response.selected in counter:
+                counter[response.selected] += 1
+            else:
+                counter[response.selected] = 1
     return json.dumps(questions);
 
     
-def sort_json(json_obj):
+def normalize_json(json_obj):
     """A rudimentary JSON sorter that sorts every list in the object."""
     if type(json_obj) == type([]):
         for item in json_obj:
-            item = sort_json(item)
+            item = normalize_json(item)
         json_obj = sorted(json_obj)
         return json_obj
     elif type(json_obj) == type({}):
+        if 'mode' in json_obj:
+            del json_obj['mode']
+        if 'name' in json_obj:
+            del json_obj['name']
+        if 'content' in json_obj:
+            json_obj['content'] = '(User input removed by txgstudy)'
         for key in json_obj:
-            json_obj[key] = sort_json(json_obj[key])
+            json_obj[key] = normalize_json(json_obj[key])
         return json_obj
     else:
         return json_obj

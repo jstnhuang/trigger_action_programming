@@ -42,18 +42,20 @@
           var keys = Object.keys(val);
           var total = 0;
           for (var i=0; i<keys.length; ++i) {
-            total += Number(val[keys[i]]);
+            var data = val[keys[i]];
+            total += Number(data.count);
           }
           var items = [];
           for (var i=0; i<keys.length; ++i) {
-            var rules = JSON.parse(keys[i]);
-            var count = Number(val[keys[i]]);
-            var names = rules.map(function(currentValue) {
+            var data = val[keys[i]];
+            var example_rules = data.example;
+            var count = Number(data.count);
+            var names = example_rules.map(function(currentValue) {
               return currentValue.name;
             });
 
             var name = names.join('; ');
-            items.push([encodeURIComponent(keys[i]), name, count, Number(100 * count / total).toFixed(2)]); 
+            items.push([encodeURIComponent(JSON.stringify(example_rules)), name, count, Number(100 * count / total).toFixed(2)]); 
           }
 
           items = items.sort(function(a, b) {
@@ -77,7 +79,7 @@
             return b[1] - a[1];
           });
           return items;
-        }
+        },
       });
     })();
   </script>

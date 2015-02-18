@@ -167,7 +167,8 @@ class MainTest(unittest.TestCase):
                     'key': 'brew_coffee',
                     'displayName': 'Brew coffee',
                     'params': {}
-                }
+                },
+                'name': 'If time is between 7:00 AM and 10:00 AM and I arrive at home, then brew a pot of coffee'
             }
         ]
         rules2 = [
@@ -197,18 +198,18 @@ class MainTest(unittest.TestCase):
                     'key': 'brew_coffee',
                     'displayName': 'Brew coffee',
                     'params': {}
-                }
+                },
+                'name': 'If I arrive at home and the time is between 7:00 AM and 10:00 AM, then brew a pot of coffee'
             }
         ]
-        json_rules1 = json.dumps(rules1, sort_keys=True)
-        json_rules2 = json.dumps(rules2, sort_keys=True)
-        response1 = main.Response(participant_key=p1_key, rules=json_rules1, question_id=1, parent=e_key)
-        response2 = main.Response(participant_key=p2_key, rules=json_rules2, question_id=1, parent=e_key)
+        clean_rules1 = json.dumps(main.normalize_json(rules1), sort_keys=True)
+        response1 = main.Response(participant_key=p1_key, rules=rules1, question_id=1, parent=e_key)
+        response2 = main.Response(participant_key=p2_key, rules=rules2, question_id=1, parent=e_key)
         r1_key = response1.put()
         r2_key = response2.put()
         response = self.app.get('/admin_api/get_responses/test_experiment')
         data = json.loads(response.data)
-        self.assertDictEqual({json_rules1: 2}, data[1])
+        self.assertDictEqual({clean_rules1: {'count': 2, 'example': rules1}}, data[1])
 
 
 if __name__ == '__main__':
