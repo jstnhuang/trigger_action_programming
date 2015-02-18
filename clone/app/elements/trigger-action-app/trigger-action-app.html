@@ -18,6 +18,12 @@
   <script>
     (function () {
       Polymer({
+        ready: function() {
+          if (typeof this.rules === 'string') {
+            this.rules = JSON.parse(this.rules);
+          }
+        },
+
         createRule: function() {
           this.$.ruleList.newRule();
           this.$.createButton.disabled = true;

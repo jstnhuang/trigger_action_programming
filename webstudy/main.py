@@ -14,6 +14,7 @@ import json
 import math
 import questions
 import random
+import urllib
 
 app = Flask(__name__)
 
@@ -330,7 +331,7 @@ def get_responses(experiment_id):
             continue
         if response.question_id <= 4:
             counter = questions[response.question_id]
-            rules = json.dumps(sort_json(json.loads(response.rules)), sort_keys=True)
+            rules = json.dumps(sort_json(response.rules), sort_keys=True)
             counter[rules] += 1
         else:
             counter = questions[response.question_id]
@@ -352,3 +353,9 @@ def sort_json(json_obj):
     else:
         return json_obj
     
+
+@app.route('/readonly/<rules>')
+def read_only(rules):
+    rules = urllib.unquote(rules)
+    json_obj = json.loads(rules)
+    return render_template('readonly.html', rules=json_obj)

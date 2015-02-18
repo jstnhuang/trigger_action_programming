@@ -6,6 +6,7 @@
 <link rel="import" href="../../bower_components/core-scaffold/core-scaffold.html">
 <link rel="import" href="../../bower_components/core-toolbar/core-toolbar.html">
 <link rel="import" href="../../elements/admin-participants/admin-participants.html">
+<link rel="import" href="../../elements/admin-responses/admin-responses.html">
 
 <polymer-element name="admin-app" attributes="">
   <template>
@@ -15,6 +16,7 @@
         <core-toolbar>Admin</core-toolbar>
         <core-menu selected="{{selectedPage}}" valueattr="label" theme="core-light-theme">
           <core-item label="Participants"></core-item>
+          <core-item label="Responses"></core-item>
         </core-menu>
       </core-header-panel>
       <div tool>{{selectedPage}}</div>
@@ -22,6 +24,9 @@
         <core-pages selected="{{selectedPage}}" valueattr='data-page'>
           <section data-page="Participants">
             <admin-participants></admin-participants>
+          </section>
+          <section data-page="Responses">
+            <admin-responses></admin-responses>
           </section>
         </core-pages>
       </div>

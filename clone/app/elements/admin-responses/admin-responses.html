@@ -1,0 +1,84 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../../bower_components/paper-shadow/paper-shadow.html">
+
+<polymer-element name="admin-responses" attributes="">
+  <template>
+    <link rel="stylesheet" href="admin-responses.css">
+    <core-ajax
+      auto
+      id="responseAjax"
+      url="/admin_api/get_responses/{{experimentId}}"
+      handleAs="json"
+      on-core-response="{{handleResponse}}">
+    </core-ajax>
+    <template repeat="{{question, index in data}}">
+      <paper-shadow>
+        <h1 class="response-heading">Question {{index + 1}}</h1>
+        <template if="{{index <= 4}}">
+          <template repeat="{{ruleData in data[index] | getRuleItems}}">
+          <a href="/readonly/{{ruleData[0]}}" target="_blank">{{ruleData[1]}}</a>: {{ruleData[2]}} ({{ruleData[3]}}%)<br />
+          </template>
+        </template>
+        <template if="{{index > 4}}">
+          <template repeat="{{mcData in data[index] | getMultipleChoiceItems}}">
+            {{mcData[0]}}: {{mcData[1]}} ({{mcData[2]}}%)<br />
+          </template>
+        </template>
+      </paper-shadow>
+    </template>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        data: [],
+        experimentId: 'default_experiment',
+        
+        handleResponse: function(e, detail, sender) {
+          this.data = detail.response;
+        },
+
+        getRuleItems: function(val) {
+          var keys = Object.keys(val);
+          var total = 0;
+          for (var i=0; i<keys.length; ++i) {
+            total += Number(val[keys[i]]);
+          }
+          var items = [];
+          for (var i=0; i<keys.length; ++i) {
+            var rules = JSON.parse(keys[i]);
+            var count = Number(val[keys[i]]);
+            var names = rules.map(function(currentValue) {
+              return currentValue.name;
+            });
+
+            var name = names.join('; ');
+            items.push([encodeURIComponent(keys[i]), name, count, Number(100 * count / total).toFixed(2)]); 
+          }
+
+          items = items.sort(function(a, b) {
+            return b[2] - a[2];
+          });
+          return items;
+        },
+
+        getMultipleChoiceItems: function(val) {
+          var keys = Object.keys(val);
+          var items = [];
+          var total = 0;
+          for (var i=0; i<keys.length; ++i) {
+            total += Number(val[keys[i]]);
+          }
+          for (var i=0; i<keys.length; ++i) {
+            var count = Number(val[keys[i]]);
+            items.push([keys[i], count, Number(100 * count / total).toFixed(2)]);
+          }
+          items = items.sort(function(a, b) {
+            return b[1] - a[1];
+          });
+          return items;
+        }
+      });
+    })();
+  </script>
+</polymer-element>
