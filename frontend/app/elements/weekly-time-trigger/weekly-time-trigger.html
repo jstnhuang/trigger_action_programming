@@ -1,0 +1,176 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-selector/core-selector.html">
+<link rel="import" href="../../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../../bower_components/paper-dropdown/paper-dropdown.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../time-picker/time-picker.html">
+
+<polymer-element name="weekly-time-trigger" attributes="params readOnly">
+  <template>
+    <link rel="stylesheet" href="../creator.css">
+    <style>
+      :host {
+        display: block;
+      }
+      .day-box + .day-box {
+        margin-left: 10px;
+      }
+    </style>
+    <p class="instructions">This trigger fires at a given time each day. Repeats weekly.</p>
+    <div layout horizontal id="wrapper">
+      <span class="label">Time is</span>
+      <time-picker id="startTimePicker" hour="{{startHour}}" minute="{{startMinute}}" disabled="{{readOnly}}"></time-picker>
+    </div>
+    <div layout horizontal>
+      <div layout vertical center class="day-box">
+        <paper-checkbox checked="{{sunday}}"></paper-checkbox>
+        Sunday
+      </div>
+      <div layout vertical center class="day-box">
+        <paper-checkbox checked="{{monday}}"></paper-checkbox>
+        Monday
+      </div>
+      <div layout vertical center class="day-box">
+        <paper-checkbox checked="{{tuesday}}"></paper-checkbox>
+        Tuesday
+      </div>
+      <div layout vertical center class="day-box">
+        <paper-checkbox checked="{{wednesday}}"></paper-checkbox>
+        Wednesday
+      </div>
+      <div layout vertical center class="day-box">
+        <paper-checkbox checked="{{thursday}}"></paper-checkbox>
+        Thursday
+      </div>
+      <div layout vertical center class="day-box">
+        <paper-checkbox checked="{{friday}}"></paper-checkbox>
+        Friday
+      </div>
+      <div layout vertical center class="day-box">
+        <paper-checkbox checked="{{saturday}}"></paper-checkbox>
+        Saturday
+      </div>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        startHour: 10,
+        startMinute: 30,
+        sunday: false,
+        monday: true,
+        tuesday: true,
+        wednesday: true,
+        thursday: true,
+        friday: true,
+        saturday: false,
+
+        ready: function() {
+          if (this.params) {
+            this.startHour = this.params.startHour || 10;
+            this.startMinute = this.params.startMinute || 30;
+            if (this.params.sunday === undefined) {
+              this.sunday = false;
+            } else {
+              this.sunday = this.params.sunday;
+            }
+            if (this.params.monday === undefined) {
+              this.monday = false;
+            } else {
+              this.monday = this.params.monday;
+            }
+            if (this.params.tuesday === undefined) {
+              this.tuesday = false;
+            } else {
+              this.tuesday = this.params.tuesday;
+            }
+            if (this.params.wednesday === undefined) {
+              this.wednesday = false;
+            } else {
+              this.wednesday = this.params.wednesday;
+            }
+            if (this.params.thursday === undefined) {
+              this.thursday = false;
+            } else {
+              this.thursday = this.params.thursday;
+            }
+            if (this.params.friday === undefined) {
+              this.friday = false;
+            } else {
+              this.friday = this.params.friday;
+            }
+            if (this.params.saturday === undefined) {
+              this.saturday = false;
+            } else {
+              this.saturday = this.params.saturday;
+            }
+          }
+        },
+
+        validate: function() {
+          var vr = this.$.startTimePicker.validate();
+          if (!vr.isValid) {
+            vr.message = 'Start time: ' + vr.message;
+            return vr;
+          }
+          if (!(this.sunday || this.monday || this.tuesday || this.wednesday ||
+                this.thursday || this.friday || this.saturday)) {
+            return {
+              isValid: false,
+              message: 'Weekly time: must select at least one day.'
+            }
+          }
+          return {
+            isValid: true
+          }
+        },
+
+        toJsonObject: function() {
+          return {
+            startHour: this.startHour,
+            startMinute: this.startMinute,
+            sunday: this.sunday,
+            monday: this.monday,
+            tuesday: this.tuesday,
+            wednesday: this.wednesday,
+            thursday: this.thursday,
+            friday: this.friday,
+            saturday: this.saturday,
+          }
+        },
+
+        generateDescription: function() {
+          var result = 'the time is ';
+          result += this.$.startTimePicker.generateDescription();
+          result += ' on ';
+          var days = [];
+          if (this.sunday) { days.push('Sundays'); }
+          if (this.monday) { days.push('Mondays'); }
+          if (this.tuesday) { days.push('Tuesdays'); }
+          if (this.wednesday) { days.push('Wednesdays'); }
+          if (this.thursday) { days.push('Thursdays'); }
+          if (this.friday) { days.push('Fridays'); }
+          if (this.saturday) { days.push('Saturdays'); }
+          if (days.length === 1) {
+            return result + days[0];
+          } else if (this.sunday && this.saturday) {
+            return result + 'weekends';
+          } else if (this.monday && this.tuesday && this.wednesday && this.thursday &&
+                     this.friday) {
+            return result + 'weekdays';
+          } else if (days.length === 2) {
+            return result + days[0] + ' and ' + days[1];
+          } else {
+            result += days[0];
+            for (var i=1; i<days.length-1; ++i) {
+              result += ', ' + days[i];
+            }
+            result += ', and ' + days[days.length-1];
+            return result;
+          }
+        },
+      });
+    })();
+  </script>
+</polymer-element>
