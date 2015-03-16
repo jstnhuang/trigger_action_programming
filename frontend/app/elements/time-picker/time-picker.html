@@ -29,8 +29,8 @@
   <script>
     (function () {
       Polymer({
-        hour: 9, // The hour, from [0, 23]
-        minute: 30,
+        hour: undefined, // The hour, from [0, 23]
+        minute: undefined,
         disabled: false,
         hourView: '', // How the hour is displayed.
         minuteView: '',
@@ -39,6 +39,15 @@
         isValid: true,
         errorMsg: '', // The error message, if any.
         isFocused: false, // Whether the input field has focus.
+
+        ready: function() {
+          if (this.hour === undefined) {
+            this.hour = 9;
+          }
+          if (this.minute === undefined) {
+            this.minute = 30;
+          }
+        },
 
         hourChanged: function() {
           if (this.hour == 0) {
