@@ -68,8 +68,16 @@
 
         ready: function() {
           if (this.params) {
-            this.startHour = this.params.startHour || 10;
-            this.startMinute = this.params.startMinute || 30;
+            if (this.params.startHour === undefined) {
+              this.startHour = 10;
+            } else {
+              this.startHour = this.params.startHour;
+            }
+            if (this.params.startMinute === undefined) {
+              this.startMinute = 10;
+            } else {
+              this.startMinute = this.params.startMinute;
+            }
             if (this.params.sunday === undefined) {
               this.sunday = false;
             } else {
