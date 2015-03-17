@@ -7,9 +7,9 @@ def build(action_msg, is_mock=False):
     json_params = action_msg.params
     if name == 'say_something':
         params = json.loads(json_params)
-        if 'speech' not in params:
-            raise ValueError('"speech" parameter required for say_something.')
-        speech = params['speech']
+        if 'content' not in params:
+            raise ValueError('"content" parameter required for say_something.')
+        speech = params['content']
         if is_mock:
             trigger = say_something.MockSaySomething(speech)
             return trigger
