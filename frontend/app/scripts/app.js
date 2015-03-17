@@ -5,44 +5,30 @@
     {
       triggers: [
         {
-          key: 'motion_detector',
-          displayName: 'Motion detector',
-          params: { }
-        }
-      ],
-      action: {
-        key: 'set_door_lock',
-        displayName: 'Set door lock',
-        params: {
-          lockOption: 'timed_unlock',
-          seconds: 10,
-        }
-      },
-      name: 'If motion is detected, then briefly unlock the door.'
-    },
-    {
-      triggers: [
-        {
-          key: 'daily_time',
-          displayName: 'Daily time',
+          key: 'weekly_time',
+          displayName: 'Weekly time',
           params: {
-            endHour: 17,
-            endMinute: 0,
-            isOrBetween: 'is',
-            startHour: 8,
-            startMinute: 0
+            startHour: 15,
+            startMinute: 0,
+            sunday: false,
+            monday: false,
+            tuesday: false,
+            wednesday: true,
+            thursday: false,
+            friday: false,
+            saturday: false
           }
         }
       ],
       action: {
-        key: 'send_email',
-        displayName: 'Send email',
+        key: 'say_something',
+        displayName: 'Say something',
         params: {
-          content: 'Test sentence 1. Test sentence 2.'
+          content: 'Time for the lab meeting!',
         }
       },
-      name: 'If the time is 08:00 AM, then send myself an email'
-    }              
+      name: 'If the time is 03:00 PM on Wednesdays, then say something.'
+    },
   ];
 
   document.addEventListener('polymer-ready', function () {

@@ -9,13 +9,9 @@
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 
 <link rel="import" href="../action-chooser/action-chooser.html">
-<link rel="import" href="../brew-coffee-action/brew-coffee-action.html">
 <link rel="import" href="../rule-preview/rule-preview.html">
 <link rel="import" href="../say-something-action/say-something-action.html">
-<link rel="import" href="../set-door-lock-action/set-door-lock-action.html">
 <link rel="import" href="../step-count/step-count.html">
-<link rel="import" href="../switch-lights-action/switch-lights-action.html">
-<link rel="import" href="../thermostat-action/thermostat-action.html">
 <link rel="import" href="../trigger-builder/trigger-builder.html">
 
 <polymer-element name="rule-card" attributes="triggers action mode index name readOnly">
@@ -45,20 +41,8 @@
         </core-collapse>
         <core-collapse class="stepCollapse" id="actionOptionsCollapse">
           <step-count current="{{3 * triggers.length + 2}}" total="{{3 * triggers.length + 3}}"></step-count>
-          <template if="{{action.key == 'switch_lights'}}">
-            <switch-lights-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></switch-lights-action>
-          </template>
-          <template if="{{action.key == 'brew_coffee'}}">
-            <brew-coffee-action id="actionOptions"></brew-coffee-action>
-          </template>
-          <template if="{{action.key == 'set_thermostat'}}">
-            <thermostat-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></thermostat-action>
-          </template>
           <template if="{{action.key == 'say_something'}}">
             <say-something-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></say-something-action>
-          </template>
-          <template if="{{action.key == 'set_door_lock'}}">
-            <set-door-lock-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></set-door-lock-action>
           </template>
           <paper-button class="next" raised on-click="{{confirmRule}}" title="You will have a chance to confirm your rule in the next step.">Next step</paper-button>
         </core-collapse>
@@ -358,61 +342,16 @@
 
         TRIGGER_MODELS: [
           {
-            key: 'daily_time',
-            displayName: 'Daily time',
-            description: 'Makes your rule run every day at a certain time, or between two times.'
-          },
-          {
             key: 'weekly_time',
             displayName: 'Weekly time',
             description: 'Makes your rule run at a certain time on certain days of the week.'
           },
-          {
-            key: 'weather',
-            displayName: 'Weather',
-            description: 'Makes your rule run when the outside temperature is in some range, or if some condition like rain occurs.'
-          },
-          {
-            key: 'doorbell',
-            displayName: 'Doorbell rings',
-            description: 'Makes your rule run when the doorbell rings in your house.'
-          },
-          {
-            key: 'my_location',
-            displayName: 'My location',
-            description: 'Makes your rule run when you arrive, leave, or are currently at home or work.'
-          },
-          {
-            key: 'motion_detector',
-            displayName: 'Motion detector',
-            description: 'Makes your rule run when an moving object is detected in your house.'
-          },
         ],
         ACTION_MODELS: [
-          {
-            key: 'switch_lights',
-            displayName: 'Switch lights',
-            description: 'Switches the lights in your house on or off.'
-          },
-          {
-            key: 'brew_coffee',
-            displayName: 'Brew coffee',
-            description: 'Brews one or more pots of coffee.'
-          },
-          {
-            key: 'set_thermostat',
-            displayName: 'Set thermostat',
-            description: 'Sets the thermostat to some temperature.'
-          },
           {
             key: 'say_something',
             displayName: 'Say something',
             description: 'Makes the robot say something aloud.'
-          },
-          {
-            key: 'set_door_lock',
-            displayName: 'Set door lock',
-            description: 'Locks or unlocks the door. Can be set to only briefly unlock the door.'
           },
         ]
       });
