@@ -1,0 +1,53 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="robot-ros" attributes="websocketUrl">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+  </template>
+  <script src="../../scripts/vendor/roslibjs/eventemitter2.min.js"></script>
+  <script src="../../scripts/vendor/roslibjs/roslib.min.js"></script>
+  <script>
+    (function () {
+      Polymer({
+        ros: null, // The roslibjs ROS object.
+
+        ready: function() {
+          this.ros = new ROSLIB.Ros({
+            url: this.websocketUrl
+          });
+
+          var that = this;
+
+          this.ros.on('connection', function() {
+            console.log('Connected to websocket server.');
+            that.fire('connection');
+          });
+
+          this.ros.on('error', function(error) {
+            console.error('Error connecting to websocket server: ', error);
+            that.fire('error');
+          });
+
+          this.ros.on('close', function() {
+            console.log('Connection to websocket server closed.');
+            that.fire('close');
+          });
+        },
+
+        callService: function(name, serviceType, request, callback, failureCallback) {
+          var client = new ROSLIB.Service({
+            ros: this.ros,
+            name: name,
+            serviceType: serviceType
+          });
+          var request = new ROSLIB.ServiceRequest(request);
+          client.callService(request, callback, failureCallback);
+        },
+      });
+    })();
+  </script>
+</polymer-element>

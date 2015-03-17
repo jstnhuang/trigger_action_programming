@@ -94,6 +94,7 @@
         triggers: [], // A list of trigger models for this rule, as JSON objects.
         action: {}, // The action as a JSON object.
         readOnly: false, // Whether the contents should be read only in update mode.
+        id: '', // The ID of this rule in the database (blank if not added yet).
 
         ready: function() {
           if (this.mode == 'update') {
@@ -261,6 +262,7 @@
         // Returns the representation of this rule in a JSON-serializable format.
         // Format:
         // {
+        //   id: '0',
         //   triggers: [
         //     {
         //       name: 'daily_time',
@@ -271,13 +273,23 @@
         //     name: 'switch_lights',
         //     params: { ... }
         //   },
-        //   name: 'If the time is ...'
         // }
         toJsonObject: function() {
+          var triggers = [];
+          for (var i=0; i<this.triggers.length; i++) {
+            triggers.push({
+              name: this.triggers[i].key,
+              params: JSON.stringify(this.triggers[i].params)
+            });
+          }
+          var actions = [{
+            name: this.action.key,
+            params: JSON.stringify(this.action.params)
+          }];
           return {
-            triggers: this.triggers,
-            action: this.action,
-            name: this.name
+            id: this.id,
+            triggers: triggers,
+            actions: actions
           };
         },
 

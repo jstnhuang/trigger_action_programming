@@ -2,7 +2,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../rule-list/rule-list.html">
 
-<polymer-element name="trigger-action-app" attributes="rules readOnly">
+<polymer-element name="trigger-action-app" attributes="websocketUrl rules readOnly">
   <style>
     paper-action-dialog {
       width: 100%;
@@ -13,11 +13,14 @@
     <template if="{{!readOnly}}">
       <paper-button raised id="createButton" on-click="{{createRule}}" title="Click to create a rule.">Create a rule</paper-button>
     </template>
-    <rule-list id="ruleList" readOnly="{{readOnly}}" rules="{{rules}}" on-save-rule="{{ruleSaved}}" on-delete-rule="{{ruleDeleted}}"></rule-list>
+    <rule-list id="ruleList" websocketUrl="{{websocketUrl}}" readOnly="{{readOnly}}" rules="{{rules}}" on-save-rule="{{ruleSaved}}" on-delete-rule="{{ruleDeleted}}"></rule-list>
   </template>
   <script>
     (function () {
       Polymer({
+        websocketUrl: 'ws://localhost:9090',
+        rules: [],
+
         ready: function() {
           if (typeof this.rules === 'string') {
             this.rules = JSON.parse(this.rules);

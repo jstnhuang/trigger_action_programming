@@ -1,9 +1,12 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-shadow/paper-shadow.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../robot-ros/robot-ros.html">
 
-<polymer-element name="rule-list" attributes="rules readOnly">
+<polymer-element name="rule-list" attributes="websocketUrl rules readOnly">
   <template>
     <link rel="stylesheet" href="rule-list.css">
+    <robot-ros id="ros" websocketUrl="{{websocketUrl}}"></robot-ros>
     <paper-shadow class="listContainer">
       <template if="{{ rules.length == 0 }}">
         <p class="noRules">No rules have been created yet.</p>
@@ -12,7 +15,7 @@
         <template repeat="{{ rule, index in rules }}">
           <template if="{{rule.mode == 'update' || rule.mode == 'create'}}">
             <paper-shadow z="2" id="openedRule">
-              <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" name="{{rule.name}}" on-delete-rule="{{deleteRule}}" readOnly="{{readOnly}}"></rule-card>
+            <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" name="{{rule.name}}" on-delete-rule="{{deleteRule}}" on-save-rule="{{saveRule}}" readOnly="{{readOnly}}"></rule-card>
             </paper-shadow>
           </template>
           <template if="{{rule.mode != 'update' && rule.mode != 'create'}}">
@@ -21,10 +24,13 @@
         </template>
       </div>
     </paper-shadow>
+    <paper-toast id="toast"></paper-toast>
   </template>
   <script>
     (function () {
       Polymer({
+        rules: [],
+
         ready: function () {
         },
 
@@ -44,6 +50,30 @@
 
         deleteRule: function(e, detail, sender) {
           this.rules.splice(detail.index, 1);
+        },
+
+        saveRule: function(e, detail, sender) {
+          var that = this;
+          console.log(sender.toJsonObject());
+          this.$.ros.callService(
+            '/add_rule',
+            'trigger_action_programming/AddRule',
+            {rule: sender.toJsonObject()},
+            function(response) { return that.saveRuleResponse(response, sender); },
+            function(error) { return that.saveRuleError(error, sender); }
+          );
+        },
+
+        saveRuleResponse: function(response, sender) {
+          console.log(typeof(response)); 
+          console.log(response); 
+          console.log(sender); 
+          sender.id = response.id;
+          this.toast('Rule saved successfully');
+        },
+
+        saveRuleError: function(error, sender) {
+          alert('Unexpected error: rule could not be saved.');
         },
 
         updateRule: function(e, detail, sender) {
@@ -80,7 +110,12 @@
             result.push(ruleElems[i].toJsonObject());
           }
           return result;
-        }
+        },
+
+        toast: function(text) {
+          this.$.toast.text = text;
+          this.$.toast.show();
+        },
       });
     })();
   </script>
