@@ -11,11 +11,12 @@
 <link rel="import" href="../action-chooser/action-chooser.html">
 <link rel="import" href="../brew-coffee-action/brew-coffee-action.html">
 <link rel="import" href="../rule-preview/rule-preview.html">
+<link rel="import" href="../say-something-action/say-something-action.html">
 <link rel="import" href="../send-email-action/send-email-action.html">
+<link rel="import" href="../set-door-lock-action/set-door-lock-action.html">
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../switch-lights-action/switch-lights-action.html">
 <link rel="import" href="../thermostat-action/thermostat-action.html">
-<link rel="import" href="../set-door-lock-action/set-door-lock-action.html">
 <link rel="import" href="../trigger-builder/trigger-builder.html">
 
 <polymer-element name="rule-card" attributes="triggers action mode index name readOnly">
@@ -56,6 +57,9 @@
           </template>
           <template if="{{action.key == 'send_email'}}">
             <send-email-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></send-email-action>
+          </template>
+          <template if="{{action.key == 'say_something'}}">
+            <say-something-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></say-something-action>
           </template>
           <template if="{{action.key == 'set_door_lock'}}">
             <set-door-lock-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></set-door-lock-action>
@@ -408,6 +412,11 @@
             key: 'send_email',
             displayName: 'Send email',
             description: 'Sends an email notification to yourself.'
+          },
+          {
+            key: 'say_something',
+            displayName: 'Say something',
+            description: 'Makes the robot say something aloud.'
           },
           {
             key: 'set_door_lock',

@@ -1,0 +1,69 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-input/paper-autogrow-textarea.html">
+
+<polymer-element name="say-something-action" attributes="params readOnly">
+  <template>
+    <link rel="stylesheet" href="../creator.css">
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <p class="instructions">This action will make the robot say something aloud.</p>
+    <div layout vertical>
+      <span class="label">What to say</span>
+      <paper-input-decorator label="Enter what the robot should say" floatingLabel>
+        <paper-autogrow-textarea id="contentArea">
+          <template if="{{readOnly}}">
+            <textarea id="contentInput" value="{{content}}" disabled="{{readOnly}}"></textarea>
+          </template>
+          <template if="{{!readOnly}}">
+            <textarea id="contentInput" value="{{content}}"></textarea>
+          </template>
+        </paper-autogrow-textarea>
+      </paper-input-decorator>
+    </div>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        content: '',
+
+        ready: function() {
+          if (this.params) {
+            this.content = this.params.content || '';
+          }
+        },
+
+        domReady: function() {
+          var input = this.$.contentArea.querySelector('#contentInput');
+          this.$.contentArea.update(input);
+        },
+
+        validate: function() {
+          if (!this.content) {
+            return {
+              isValid: false,
+              message: 'Say something: Must enter something to say'
+            };
+          } else {
+            return {
+              isValid: true
+            }
+          }
+        },
+
+        toJsonObject: function() {
+          return {
+            content: this.content
+          };
+        },
+
+        generateDescription: function() {
+          return 'say something';
+        }
+
+      });
+    })();
+  </script>
+</polymer-element>
