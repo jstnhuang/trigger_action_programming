@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
+<link rel="import" href="../person-detected-trigger/person-detected-trigger.html">
 <link rel="import" href="../rule-preview/rule-preview.html">
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../trigger-chooser/trigger-chooser.html">
@@ -25,6 +26,9 @@ trigger-builder for each trigger.
       <step-count current="{{3 * triggerIndex + 2}}" total="{{3 * triggers.length + 3}}"></step-count>
       <template if="{{trigger.key == 'weekly_time'}}">
         <weekly-time-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></weekly-time-trigger>
+      </template>
+      <template if="{{trigger.key == 'person_detected'}}">
+        <person-detected-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></person-detected-trigger>
       </template>
       <paper-button class="next" raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
     </core-collapse>

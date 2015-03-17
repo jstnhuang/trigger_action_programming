@@ -1,0 +1,37 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<polymer-element name="person-detected-trigger" attributes="">
+  <template>
+    <link rel="stylesheet" href="../creator.css">
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <p class="instructions">
+      This trigger fires as soon as a person's face is seen.
+    </p>
+    <p>
+      There are no options for this trigger.
+    </p>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        validate: function() {
+          return {
+            isValid: true
+          }
+        },
+
+        toJsonObject: function() {
+          return {};
+        },
+
+        generateDescription: function() {
+          return 'a person is detected';
+        }
+      });
+    })();
+  </script>
+</polymer-element>
