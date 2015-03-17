@@ -1,6 +1,7 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../rule-list/rule-list.html">
+<link rel="import" href="../robot-ros/robot-ros.html">
 
 <polymer-element name="trigger-action-app" attributes="websocketUrl rules readOnly">
   <style>
@@ -14,6 +15,7 @@
       <paper-button raised id="createButton" on-click="{{createRule}}" title="Click to create a rule.">Create a rule</paper-button>
     </template>
     <rule-list id="ruleList" websocketUrl="{{websocketUrl}}" readOnly="{{readOnly}}" rules="{{rules}}" on-save-rule="{{ruleSaved}}" on-delete-rule="{{ruleDeleted}}"></rule-list>
+    <robot-ros id="ros" websocketUrl="{{websocketUrl}}"></robot-ros>
   </template>
   <script>
     (function () {
@@ -25,6 +27,42 @@
           if (typeof this.rules === 'string') {
             this.rules = JSON.parse(this.rules);
           }
+          var that = this;
+          this.$.ros.callService(
+            '/get_all_rules',
+            'trigger_action_programming/GetAllRules',
+            {},
+            function(response) { that.getAllRulesResponse(that, response); },
+            that.getAllRulesError
+          );
+        },
+
+        getAllRulesResponse: function(that, response) {
+          // ROS messages don't have arbitrary dict-like objects, so the params dict is
+          // serialized to JSON. We need to deserialize it on the frontend.
+          that.rules.splice();
+          var rules = response.rules;
+          for (var i=0; i<rules.length; i++) {
+            var rule = rules[i];
+            var triggers = rules[i].triggers;
+            for (var j=0; j<triggers.length; j++) {
+              var trigger = triggers[j];
+              trigger.params = JSON.parse(trigger.params);
+            }
+            // Only expect one action -- for now.
+            var action = rules[i].actions[0];
+            action.params = JSON.parse(action.params);
+
+            that.rules.push({
+              mode: 'summary',
+              triggers: triggers,
+              action: action,
+            });
+          }
+        },
+
+        getAllRulesError: function() {
+          alert('Unexpected error: could not get rules.');
         },
 
         createRule: function() {

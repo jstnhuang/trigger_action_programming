@@ -20,14 +20,14 @@ trigger-builder for each trigger.
     <link rel="stylesheet" href="../creator.css">
     <core-collapse class="stepCollapse" id="triggerChooserCollapse">
       <step-count current="{{3 * triggerIndex + 1}}" total="{{3 * triggers.length + 3}}"></step-count>
-      <trigger-chooser readOnly="{{readOnly}}" triggers="{{TRIGGERMODELS}}" selected="{{trigger.key}}" on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
+      <trigger-chooser readOnly="{{readOnly}}" triggers="{{TRIGGERMODELS}}" selected="{{trigger.name}}" on-trigger-selected="{{customizeTrigger}}"></trigger-chooser>
     </core-collapse>
     <core-collapse class="stepCollapse" id="triggerOptionsCollapse">
       <step-count current="{{3 * triggerIndex + 2}}" total="{{3 * triggers.length + 3}}"></step-count>
-      <template if="{{trigger.key == 'weekly_time'}}">
+      <template if="{{trigger.name == 'weekly_time'}}">
         <weekly-time-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></weekly-time-trigger>
       </template>
-      <template if="{{trigger.key == 'person_detected'}}">
+      <template if="{{trigger.name == 'person_detected'}}">
         <person-detected-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></person-detected-trigger>
       </template>
       <paper-button class="next" raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
@@ -102,10 +102,10 @@ trigger-builder for each trigger.
         },
 
         customizeTrigger: function(e, detail) {
-          this.trigger.key = detail['key'];
+          this.trigger.name = detail['name'];
           this.trigger.displayName = detail['displayName'];
           var lastTrigger = this.triggers[this.triggers.length-1];
-          lastTrigger.key = this.trigger.key;
+          lastTrigger.name = this.trigger.name;
           lastTrigger.displayName = this.trigger.displayName;
           this.async(function() {
             this.$.triggerOptionsCollapse.opened = true;

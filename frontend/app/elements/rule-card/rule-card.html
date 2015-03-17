@@ -37,11 +37,11 @@
         <!-- Choose an action -->
         <core-collapse class="stepCollapse" id="chooseActionCollapse">
           <step-count current="{{3 * triggers.length + 1}}" total="{{3 * triggers.length + 3}}"></step-count>
-          <action-chooser selected="{{action.key}}" actions="{{ACTION_MODELS}}" on-action-selected="{{customizeAction}}" readOnly="{{readOnly}}"></action-chooser>
+          <action-chooser selected="{{action.name}}" actions="{{ACTION_MODELS}}" on-action-selected="{{customizeAction}}" readOnly="{{readOnly}}"></action-chooser>
         </core-collapse>
         <core-collapse class="stepCollapse" id="actionOptionsCollapse">
           <step-count current="{{3 * triggers.length + 2}}" total="{{3 * triggers.length + 3}}"></step-count>
-          <template if="{{action.key == 'say_something'}}">
+          <template if="{{action.name == 'say_something'}}">
             <say-something-action id="actionOptions" params="{{action.params}}" readOnly="{{readOnly}}"></say-something-action>
           </template>
           <paper-button class="next" raised on-click="{{confirmRule}}" title="You will have a chance to confirm your rule in the next step.">Next step</paper-button>
@@ -196,7 +196,7 @@
         },
 
         customizeAction: function(e, detail) {
-          this.action.key = detail['key'];
+          this.action.name = detail['name'];
           this.action.displayName = detail['displayName'];
           this.async(function() {
             this.$.actionOptionsCollapse.opened = true;
@@ -278,12 +278,12 @@
           var triggers = [];
           for (var i=0; i<this.triggers.length; i++) {
             triggers.push({
-              name: this.triggers[i].key,
+              name: this.triggers[i].name,
               params: JSON.stringify(this.triggers[i].params)
             });
           }
           var actions = [{
-            name: this.action.key,
+            name: this.action.name,
             params: JSON.stringify(this.action.params)
           }];
           return {
@@ -352,21 +352,55 @@
           this.fire('delete-rule', {index: this.index});
         },
 
+        // Handle triggers changing.
+        // Currently just checks if the displayName is missing, and fills it in
+        // based on the key if so.
+        // TODO(jstn): Index the display names by trigger name.
+        triggersChanged: function() {
+          for (var i=0; i<this.triggers.length; i++) {
+            var trigger = this.triggers[i];
+            
+            if (!trigger.displayName) {
+              for (var j=0; j<this.TRIGGER_MODELS.length; ++j) {
+                var model = this.TRIGGER_MODELS[j];
+                if (model.name === trigger.name) {
+                  trigger.displayName = model.displayName;
+                }
+              }
+            }
+          }
+        },
+
+        // Handle action changing.
+        // Currently just checks if the displayName is missing, and fills it in
+        // based on the key if so.
+        // TODO(jstn): Index the display names by action name.
+        actionChanged: function() {
+          if (!this.action.displayName) {
+            for (var j=0; j<this.ACTION_MODELS.length; ++j) {
+              var model = this.ACTION_MODELS[j];
+              if (model.name === this.action.name) {
+                this.action.displayName = model.displayName;
+              }
+            }
+          }
+        },
+
         TRIGGER_MODELS: [
           {
-            key: 'weekly_time',
+            name: 'weekly_time',
             displayName: 'Weekly time',
             description: 'Makes your rule run at a certain time on certain days of the week.'
           },
           {
-            key: 'person_detected',
+            name: 'person_detected',
             displayName: 'Person detected',
             description: 'Makes your rule run whenever a person\'s face is seen.'
           },
         ],
         ACTION_MODELS: [
           {
-            key: 'say_something',
+            name: 'say_something',
             displayName: 'Say something',
             description: 'Makes the robot say something aloud.'
           },

@@ -13,7 +13,7 @@
     <core-selector valueattr="data-label" selected="{{selected}}" notap>
       <template repeat="{{trigger in triggers}}">
         <paper-button raised
-            data-label="{{trigger.key}}"
+            data-label="{{trigger.name}}"
             data-displayname="{{trigger.displayName}}"
             title="{{trigger.description}}"
             on-click="{{select}}">
@@ -32,7 +32,7 @@
           }
           this.selected = sender.dataset['label'];
           this.fire('trigger-selected', {
-            key: sender.dataset['label'],
+            name: sender.dataset['label'],
             displayName: sender.dataset['displayname']
           });
         }
