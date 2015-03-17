@@ -15,7 +15,7 @@
         <template repeat="{{ rule, index in rules }}">
           <template if="{{rule.mode == 'update' || rule.mode == 'create'}}">
             <paper-shadow z="2" id="openedRule">
-            <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" name="{{rule.name}}" on-delete-rule="{{deleteRule}}" on-save-rule="{{saveRule}}" readOnly="{{readOnly}}"></rule-card>
+            <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" ruleid="{{rule.id}}" name="{{rule.name}}" on-delete-rule="{{deleteRule}}" on-save-rule="{{saveRule}}" readOnly="{{readOnly}}"></rule-card>
             </paper-shadow>
           </template>
           <template if="{{rule.mode != 'update' && rule.mode != 'create'}}">
@@ -54,26 +54,45 @@
 
         saveRule: function(e, detail, sender) {
           var that = this;
+          console.log(sender.ruleid);
           console.log(sender.toJsonObject());
-          this.$.ros.callService(
-            '/add_rule',
-            'trigger_action_programming/AddRule',
-            {rule: sender.toJsonObject()},
-            function(response) { return that.saveRuleResponse(response, sender); },
-            function(error) { return that.saveRuleError(error, sender); }
-          );
+          if (!sender.ruleid) {
+            this.$.ros.callService(
+              '/add_rule',
+              'trigger_action_programming/AddRule',
+              {rule: sender.toJsonObject()},
+              function(response) { return that.saveRuleResponse(that, response, sender); },
+              that.saveRuleError
+            );
+          } else {
+            this.$.ros.callService(
+              '/update_rule',
+              'trigger_action_programming/UpdateRule',
+              {
+                id: sender.ruleid,
+                rule: sender.toJsonObject(),
+              },
+              function(response) { that.updateRuleResponse(that) },
+              that.updateRuleError
+            );
+          }
         },
 
-        saveRuleResponse: function(response, sender) {
-          console.log(typeof(response)); 
-          console.log(response); 
-          console.log(sender); 
-          sender.id = response.id;
-          this.toast('Rule saved successfully');
+        saveRuleResponse: function(that, response, sender) {
+          sender.ruleid = response.id;
+          that.toast('Rule saved successfully');
         },
 
         saveRuleError: function(error, sender) {
           alert('Unexpected error: rule could not be saved.');
+        },
+
+        updateRuleResponse: function(that) {
+          that.toast('Rule updated successfully');
+        },
+
+        updateRuleError: function() {
+          alert('Unexpected error: rule could not be updated.');
         },
 
         updateRule: function(e, detail, sender) {

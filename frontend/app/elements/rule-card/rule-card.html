@@ -14,7 +14,7 @@
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../trigger-builder/trigger-builder.html">
 
-<polymer-element name="rule-card" attributes="triggers action mode index name readOnly">
+<polymer-element name="rule-card" attributes="triggers action mode index name readOnly ruleid">
   <template>
     <link rel="stylesheet" href="rule-card.css">
     <link rel="stylesheet" href="../creator.css">
@@ -94,7 +94,8 @@
         triggers: [], // A list of trigger models for this rule, as JSON objects.
         action: {}, // The action as a JSON object.
         readOnly: false, // Whether the contents should be read only in update mode.
-        id: '', // The ID of this rule in the database (blank if not added yet).
+        ruleid: '', // The ID of this rule in the database (blank if not added yet).
+        name: '', // The textual description of this rule.
 
         ready: function() {
           if (this.mode == 'update') {
@@ -115,6 +116,10 @@
               var nameInput = this.$.updateWrapper.querySelector('#nameInput');
               nameArea.update(nameInput);
             }, null, 100);
+
+            // When a card is opened, generate a description if it doesn't exist
+            // already.
+            this.name = this.generateDescription();
           }
           // Core-collapse dynamically sets its overflow value to hidden. This interferes with
           // paper-dropdown, so we dynamically set the overflow to visible after the animation
@@ -287,7 +292,7 @@
             params: JSON.stringify(this.action.params)
           }];
           return {
-            id: this.id,
+            id: this.ruleid,
             triggers: triggers,
             actions: actions
           };
@@ -295,6 +300,10 @@
 
         // Generates the human-readable description of this rule.
         generateDescription: function() {
+          if (!this.$.triggerBuilders) {
+            console.warn('Trigger builders not ready.');
+            return;
+          }
           var result = '';
           var builders = this.$.triggerBuilders.querySelectorAll('trigger-builder');
           for (var i=0; i<builders.length; ++i) {

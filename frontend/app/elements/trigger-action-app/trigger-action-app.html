@@ -54,6 +54,7 @@
             action.params = JSON.parse(action.params);
 
             that.rules.push({
+              id: rule.id,
               mode: 'summary',
               triggers: triggers,
               action: action,
