@@ -224,7 +224,8 @@ module.exports = function (grunt) {
             'elements/**',
             '!elements/**/*.css',
             'images/{,*/}*.{webp,gif}',
-            'bower_components/**'
+            'bower_components/**',
+            'scripts/vendor/**/*.js'
           ]
         }]
       },
