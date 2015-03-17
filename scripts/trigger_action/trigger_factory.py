@@ -15,7 +15,7 @@ def build(trigger_msg, is_mock=False):
         else:
             trigger = person_detected.PersonDetected()
             return trigger
-    elif name == 'time_of_day':
+    elif name == 'weekly_time':
         if ('startHour' not in params or
                 'startMinute' not in params or
                 'sunday' not in params or
@@ -31,7 +31,7 @@ def build(trigger_msg, is_mock=False):
         minute = int(params['startMinute'])
         day_list = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
             'friday', 'saturday']
-        days = set([day in day_list if params[day]);
+        days = set([day for day in day_list if params[day]])
         trigger = time_of_day.TimeOfDay(hour, minute, days)
         return trigger
     else:
