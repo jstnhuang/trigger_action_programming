@@ -50,6 +50,14 @@
 
         deleteRule: function(e, detail, sender) {
           this.rules.splice(detail.index, 1);
+          var that = this;
+          this.$.ros.callService(
+            '/delete_rule',
+            'trigger_action_programming/DeleteRule',
+            {id: detail.ruleid},
+            function() { that.deleteRuleResponse(that); },
+            that.deleteRuleError
+          );
         },
 
         saveRule: function(e, detail, sender) {
@@ -93,6 +101,14 @@
 
         updateRuleError: function() {
           alert('Unexpected error: rule could not be updated.');
+        },
+
+        deleteRuleResponse: function(that) {
+          that.toast('Rule deleted successfully');
+        },
+
+        deleteRuleError: function() {
+          alert('Unexpected error: rule could not be deleted.');
         },
 
         updateRule: function(e, detail, sender) {

@@ -358,7 +358,7 @@
         },
 
         delete: function() {
-          this.fire('delete-rule', {index: this.index});
+          this.fire('delete-rule', {index: this.index, ruleid: this.ruleid});
         },
 
         // Handle triggers changing.
