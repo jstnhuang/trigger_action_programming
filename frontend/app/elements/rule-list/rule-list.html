@@ -1,12 +1,10 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../../bower_components/paper-shadow/paper-shadow.html">
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
-<link rel="import" href="../robot-ros/robot-ros.html">
 
-<polymer-element name="rule-list" attributes="websocketUrl rules readOnly">
+<polymer-element name="rule-list" attributes="websocketUrl rules readOnly ros">
   <template>
     <link rel="stylesheet" href="rule-list.css">
-    <robot-ros id="ros" websocketUrl="{{websocketUrl}}"></robot-ros>
     <paper-shadow class="listContainer">
       <template if="{{ rules.length == 0 }}">
         <p class="noRules">No rules have been created yet.</p>
@@ -51,7 +49,7 @@
         deleteRule: function(e, detail, sender) {
           this.rules.splice(detail.index, 1);
           var that = this;
-          this.$.ros.callService(
+          this.ros.callService(
             '/delete_rule',
             'trigger_action_programming/DeleteRule',
             {id: detail.ruleid},
@@ -62,10 +60,8 @@
 
         saveRule: function(e, detail, sender) {
           var that = this;
-          console.log(sender.ruleid);
-          console.log(sender.toJsonObject());
           if (!sender.ruleid) {
-            this.$.ros.callService(
+            this.ros.callService(
               '/add_rule',
               'trigger_action_programming/AddRule',
               {rule: sender.toJsonObject()},
@@ -73,7 +69,7 @@
               that.saveRuleError
             );
           } else {
-            this.$.ros.callService(
+            this.ros.callService(
               '/update_rule',
               'trigger_action_programming/UpdateRule',
               {

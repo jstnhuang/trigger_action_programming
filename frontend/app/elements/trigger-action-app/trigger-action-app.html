@@ -14,7 +14,7 @@
     <template if="{{!readOnly}}">
       <paper-button raised id="createButton" on-click="{{createRule}}" title="Click to create a rule.">Create a rule</paper-button>
     </template>
-    <rule-list id="ruleList" websocketUrl="{{websocketUrl}}" readOnly="{{readOnly}}" rules="{{rules}}" on-save-rule="{{ruleSaved}}" on-delete-rule="{{ruleDeleted}}"></rule-list>
+    <rule-list id="ruleList" websocketUrl="{{websocketUrl}}" readOnly="{{readOnly}}" rules="{{rules}}" on-save-rule="{{ruleSaved}}" on-delete-rule="{{ruleDeleted}}" ros="{{ros}}"></rule-list>
     <robot-ros id="ros" websocketUrl="{{websocketUrl}}"></robot-ros>
   </template>
   <script>
@@ -22,12 +22,14 @@
       Polymer({
         websocketUrl: 'ws://localhost:9090',
         rules: [],
+        ros: null,
 
         ready: function() {
           if (typeof this.rules === 'string') {
             this.rules = JSON.parse(this.rules);
           }
           var that = this;
+          this.ros = this.$.ros;
           this.$.ros.callService(
             '/get_all_rules',
             'trigger_action_programming/GetAllRules',
