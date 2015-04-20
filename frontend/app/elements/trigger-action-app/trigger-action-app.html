@@ -3,7 +3,17 @@
 <link rel="import" href="../rule-list/rule-list.html">
 <link rel="import" href="../robot-ros/robot-ros.html">
 
-<polymer-element name="trigger-action-app" attributes="websocketUrl rules readOnly">
+<!--
+  websocketUrl: String. The ROS websocket URL to connect to.
+  rules: Array of objects. A list of pre-existing rules to render.
+  readOnly: Boolean. Whether or not the rules are read-only.
+  triggerSet: Array of strings. The list of trigger IDs that can be used in this
+    interface.
+  actionSet: Array of strings. The list of action IDs that can be used in this
+    interface.
+-->
+<polymer-element name="trigger-action-app"
+    attributes="websocketUrl rules readOnly triggerSet actionSet">
   <style>
     paper-action-dialog {
       width: 100%;
@@ -12,9 +22,13 @@
   <template>
     <link rel="stylesheet" href="trigger-action-app.css">
     <template if="{{!readOnly}}">
-      <paper-button raised id="createButton" on-click="{{createRule}}" title="Click to create a rule.">Create a rule</paper-button>
+      <paper-button raised id="createButton" on-click="{{createRule}}"
+        title="Click to create a rule.">Create a rule</paper-button>
     </template>
-    <rule-list id="ruleList" websocketUrl="{{websocketUrl}}" readOnly="{{readOnly}}" rules="{{rules}}" on-save-rule="{{ruleSaved}}" on-delete-rule="{{ruleDeleted}}" ros="{{ros}}"></rule-list>
+    <rule-list id="ruleList" websocketUrl="{{websocketUrl}}"
+      readOnly="{{readOnly}}" rules="{{rules}}" on-save-rule="{{ruleSaved}}"
+      on-delete-rule="{{ruleDeleted}}" ros="{{ros}}"
+      triggerSet="{{triggerSet}}" actionSet="{{actionSet}}"></rule-list>
     <robot-ros id="ros" websocketUrl="{{websocketUrl}}"></robot-ros>
   </template>
   <script>
@@ -40,8 +54,9 @@
         },
 
         getAllRulesResponse: function(that, response) {
-          // ROS messages don't have arbitrary dict-like objects, so the params dict is
-          // serialized to JSON. We need to deserialize it on the frontend.
+          // ROS messages don't have arbitrary dict-like objects, so the params
+          // dict is serialized to JSON. We need to deserialize it on the
+          // frontend.
           that.rules.splice();
           var rules = response.rules;
           for (var i=0; i<rules.length; i++) {
