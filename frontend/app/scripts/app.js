@@ -21,8 +21,8 @@
         }
       ],
       action: {
-        name: 'say_something',
-        displayName: 'Say something',
+        name: 'send_email',
+        displayName: 'Send email',
         params: {
           content: 'Time for the lab meeting!',
         }
