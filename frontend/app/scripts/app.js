@@ -5,7 +5,7 @@
     {
       triggers: [
         {
-          key: 'weekly_time',
+          name: 'weekly_time',
           displayName: 'Weekly time',
           params: {
             startHour: 15,
@@ -21,7 +21,7 @@
         }
       ],
       action: {
-        key: 'say_something',
+        name: 'say_something',
         displayName: 'Say something',
         params: {
           content: 'Time for the lab meeting!',
@@ -33,7 +33,7 @@
 
   document.addEventListener('polymer-ready', function () {
     var app = document.querySelector('trigger-action-app');
-    //app.rules = rules;
+    app.rules = rules;
     app.triggerSet = ['weekly_time', 'weather', 'doorbell', 'my_location', 
       'motion_detector'];
     app.actionSet = ['brew_coffee', 'send_email', 'set_door_lock', 'switch_lights',
