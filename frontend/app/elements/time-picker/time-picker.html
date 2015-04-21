@@ -93,8 +93,11 @@
         
         canonicalize: function() {
           this.isFocused = false;
+
           if (this.validateInternal(this.value)) {
             this.value = this.hourView + ':' + this.minuteView + ' ' + this.amPmView;
+          } else {
+            console.error(this.errorMsg);
           }
         },
 
@@ -197,6 +200,9 @@
         },
 
         generateDescription: function() {
+          this.hourChanged();
+          this.minuteChanged();
+          this.canonicalize();
           return this.value;
         }
       });
