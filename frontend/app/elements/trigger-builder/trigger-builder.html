@@ -3,10 +3,14 @@
 <link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
+<link rel="import" href="../doorbell-trigger/doorbell-trigger.html">
+<link rel="import" href="../motion-detector-trigger/motion-detector-trigger.html">
+<link rel="import" href="../my-location-trigger/my-location-trigger.html">
 <link rel="import" href="../person-detected-trigger/person-detected-trigger.html">
 <link rel="import" href="../rule-preview/rule-preview.html">
 <link rel="import" href="../step-count/step-count.html">
 <link rel="import" href="../trigger-chooser/trigger-chooser.html">
+<link rel="import" href="../weather-trigger/weather-trigger.html">
 <link rel="import" href="../weekly-time-trigger/weekly-time-trigger.html">
 
 <!--
@@ -29,6 +33,18 @@ trigger-builder for each trigger.
       </template>
       <template if="{{trigger.name == 'person_detected'}}">
         <person-detected-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></person-detected-trigger>
+      </template>
+      <template if="{{trigger.name == 'weather'}}">
+        <weather-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></weather-trigger>
+      </template>
+      <template if="{{trigger.name == 'doorbell'}}">
+        <doorbell-trigger id="triggerOptions"></doorbell-trigger>
+      </template>
+      <template if="{{trigger.name == 'my_location'}}">
+        <my-location-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></my-location-trigger>
+      </template>
+      <template if="{{trigger.name == 'motion_detector'}}">
+        <motion-detector-trigger id="triggerOptions"></motion-detector-trigger>
       </template>
       <paper-button class="next" raised on-click="{{checkAddTrigger}}" title="Click to add another trigger, or to add a rule.">Next step</paper-button>
     </core-collapse>
