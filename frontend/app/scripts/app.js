@@ -33,7 +33,11 @@
 
   document.addEventListener('polymer-ready', function () {
     var app = document.querySelector('trigger-action-app');
-    app.rules = rules;
+    //app.rules = rules;
+    app.triggerSet = ['weekly_time', 'weather', 'doorbell', 'my_location', 
+      'motion_detector'];
+    app.actionSet = ['brew_coffee', 'send_email', 'set_door_lock', 'switch_lights',
+      'set_thermostat'];
   });
 
 // wrap document so it plays nice with other libraries

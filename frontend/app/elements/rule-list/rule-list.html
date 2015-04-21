@@ -2,7 +2,7 @@
 <link rel="import" href="../../bower_components/paper-shadow/paper-shadow.html">
 <link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
 
-<polymer-element name="rule-list" attributes="websocketUrl rules readOnly ros">
+<polymer-element name="rule-list" attributes="websocketUrl rules readOnly ros triggerSet actionSet">
   <template>
     <link rel="stylesheet" href="rule-list.css">
     <paper-shadow class="listContainer">
@@ -13,7 +13,7 @@
         <template repeat="{{ rule, index in rules }}">
           <template if="{{rule.mode == 'update' || rule.mode == 'create'}}">
             <paper-shadow z="2" id="openedRule">
-            <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" ruleid="{{rule.id}}" name="{{rule.name}}" on-delete-rule="{{deleteRule}}" on-save-rule="{{saveRule}}" readOnly="{{readOnly}}"></rule-card>
+            <rule-card mode="{{rule.mode}}" triggers="{{rule.triggers}}" action="{{rule.action}}" ruleid="{{rule.id}}" name="{{rule.name}}" on-delete-rule="{{deleteRule}}" on-save-rule="{{saveRule}}" readOnly="{{readOnly}}" triggerSet="{{triggerSet}}" actionSet="{{actionSet}}"></rule-card>
             </paper-shadow>
           </template>
           <template if="{{rule.mode != 'update' && rule.mode != 'create'}}">

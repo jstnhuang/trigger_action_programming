@@ -19,7 +19,7 @@
 <link rel="import" href="../thermostat-action/thermostat-action.html">
 <link rel="import" href="../trigger-builder/trigger-builder.html">
 
-<polymer-element name="rule-card" attributes="triggers action mode index name readOnly ruleid">
+<polymer-element name="rule-card" attributes="triggers action mode index name readOnly ruleid triggerSet actionSet">
   <template>
     <link rel="stylesheet" href="rule-card.css">
     <link rel="stylesheet" href="../creator.css">
@@ -152,6 +152,19 @@
           this.changeCollapseStyle(chooseActionCollapse);
           this.changeCollapseStyle(actionOptionsCollapse);
           this.changeCollapseStyle(ruleConfirmationCollapse);
+
+          // Prune trigger and action models to triggerSet and actionSet.
+          this.TRIGGER_MODELS = this.pruneModels(this.TRIGGER_MODELS, this.triggerSet);
+          this.ACTION_MODELS = this.pruneModels(this.ACTION_MODELS, this.actionSet);
+        },
+
+        pruneModels: function(models, subset) {
+          return models.filter(function(model) {
+            if (!subset) {
+              return true;
+            }
+            return subset.indexOf(model.name) !== -1;
+          });
         },
 
         // Sets the given core-collapse's style to overflow: visible after it has finished opening.
@@ -469,9 +482,9 @@
             description: 'Sets the thermostat to some temperature.'
           },
           {
-            name: 'say_something',
-            displayName: 'Say something',
-            description: 'Makes the robot say something aloud.'
+            name: 'send_email',   
+            displayName: 'Send email',   
+            description: 'Sends an email notification to yourself.'    
           },
           {
             name: 'set_door_lock',
