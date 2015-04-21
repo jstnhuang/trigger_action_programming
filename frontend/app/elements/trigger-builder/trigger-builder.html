@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/core-collapse/core-collapse.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
+<link rel="import" href="../daily-time-trigger/daily-time-trigger.html">
 <link rel="import" href="../doorbell-trigger/doorbell-trigger.html">
 <link rel="import" href="../motion-detector-trigger/motion-detector-trigger.html">
 <link rel="import" href="../my-location-trigger/my-location-trigger.html">
@@ -28,6 +29,9 @@ trigger-builder for each trigger.
     </core-collapse>
     <core-collapse class="stepCollapse" id="triggerOptionsCollapse">
       <step-count current="{{3 * triggerIndex + 2}}" total="{{3 * triggers.length + 3}}"></step-count>
+      <template if="{{trigger.name == 'daily_time'}}">
+        <daily-time-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></daily-time-trigger>
+      </template>
       <template if="{{trigger.name == 'weekly_time'}}">
         <weekly-time-trigger id="triggerOptions" params="{{trigger.params}}" readOnly="{{readOnly}}"></weekly-time-trigger>
       </template>

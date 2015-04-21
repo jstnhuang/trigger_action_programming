@@ -5,11 +5,14 @@
     {
       triggers: [
         {
-          name: 'weekly_time',
-          displayName: 'Weekly time',
+          name: 'daily_time',
+          displayName: 'Daily time',
           params: {
             startHour: 15,
             startMinute: 0,
+            isOrBetween: 'is',
+            endHour: 15,
+            endMinute: 0,
             sunday: false,
             monday: false,
             tuesday: false,
@@ -34,7 +37,7 @@
   document.addEventListener('polymer-ready', function () {
     var app = document.querySelector('trigger-action-app');
     app.rules = rules;
-    app.triggerSet = ['weekly_time', 'weather', 'doorbell', 'my_location', 
+    app.triggerSet = ['daily_time', 'weather', 'doorbell', 'my_location', 
       'motion_detector'];
     app.actionSet = ['brew_coffee', 'send_email', 'set_door_lock', 'switch_lights',
       'set_thermostat'];
