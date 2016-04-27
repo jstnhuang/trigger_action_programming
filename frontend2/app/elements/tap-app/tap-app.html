@@ -9,6 +9,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/carbon-route/carbon-location.html">
+<link rel="import" href="../../bower_components/carbon-route/carbon-route.html">
+<link rel="import" href="../../bower_components/iron-pages/iron-pages.html">
 
 <dom-module id="tap-app">
   <template>
@@ -17,7 +20,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
-    <div>Hello from <span>{{foo}}</span></div>
+    <carbon-location route="{{route}}" use-hash-as-path></carbon-location>
+    <carbon-route route="{{route}}" pattern="/:rule_id" data="{{data}}"></carbon-route>
+    <iron-pages selected="{{page}}">
+      <section>
+        <h1>List of rules</h1>
+        <a href="#/1">Edit rule 1</a>
+      </section>
+      <section>
+        <h1>Rule editor for rule {{data.rule_id}}</h1>
+        <a href="#/">Back to the list</a>
+      </section>
+    </iron-pages>
   </template>
   <script>
   (function() {
@@ -27,12 +41,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'tap-app',
 
       properties: {
-        foo: {
-          type: String,
-          value: 'tap-app',
-          notify: true
+        route: {
+          type: Object
+        },
+        data: {
+          type: Object
+        },
+        page: {
+          type: Number,
+          computed: '_computePage(data)',
         }
-      }
+      },
+
+      _computePage: function(data) {
+        if (data.rule_id) {
+          return 1;
+        } else {
+          return 0;
+        }
+      },
     });
   })();
   </script>
